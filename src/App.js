@@ -1,10 +1,9 @@
 import "./App.css";
-import Bloop from "./Components/Bloop/Bloop";
 
 function App() {
   return (
     <div className="App">
-      <Bloop />
+      <div>Hello world</div>
     </div>
   );
 }
