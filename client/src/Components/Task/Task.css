@@ -1,0 +1,13 @@
+
+
+.taskCont {
+    border: 1px red solid;
+}
+
+.taskRow {
+    border: 1px blue solid;
+}
+
+.taskCol {
+    border: 1px green solid;
+}
