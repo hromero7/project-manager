@@ -19,7 +19,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors({ origin: "http://localhost:3001" }));
 app.use(express.static(__dirname));
-app.use(express.static(path.join(__dirname, "build")));
+
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
 app.get("/ping", function (req, res) {
   return res.send("pong");
 });
@@ -41,6 +46,6 @@ mongoose
   .catch((err) => console.log(err));
 
 //renders home page
-app.get("/*", cors(), (req, res) => {
-  res.sendFile(path.resolve(__dirname, "build", "index.html"));
+app.get("*", cors(), (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
