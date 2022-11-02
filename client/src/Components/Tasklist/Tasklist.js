@@ -1,11 +1,46 @@
-import React from "react";
-import { Container, Row, Col, Table } from "react-bootstrap";
+import { React, useEffect, useState } from "react";
+import axios from "axios";
+import { Container, Row, Col, Table, Button } from "react-bootstrap";
 
 export default function Tasklist() {
+  const taskArr = [];
+  const [dbItems, setDbItems] = useState();
+  const [getData, setGetData] = useState(false);
+  useEffect(() => {
+    axios
+      .get(`/api/alert/`)
+      .then((res) => {
+        // console.log("res.data: ", res.data);
+        setDbItems(res.data);
+        setGetData(true);
+      })
+      .catch((err) => {
+        console.log("error", err);
+        setGetData(false);
+      });
+  });
+
   return (
     <Container>
       <Row>
         <Col>
+          <Row>
+            <Col></Col>
+            <Col></Col>
+            <Col>
+              <Button
+                onClick={() => {
+                  axios.get(`/api/alert/`).then((res) => {
+                    console.log("res: ", res);
+                    console.log("taskArr: ", taskArr);
+                    console.log("DbItem: ", dbItems);
+                  });
+                }}
+              >
+                GET
+              </Button>
+            </Col>
+          </Row>
           <Table striped bordered hover>
             <thead>
               <tr className="titleRow">
@@ -18,17 +53,20 @@ export default function Tasklist() {
               </tr>
             </thead>
             <tbody>
-              {/* this information is a placeholder. a loop will create each item with its respective classnames */}
-              <tr>
-                <td>1</td>
-                <td>
-                  The task here is to dynamically assign numbers to this table.
-                </td>
-                <td>ASAP</td>
-                <td>11/1/22</td>
-                <td>Marc</td>
-                <td>Important</td>
-              </tr>
+              {getData ? (
+                dbItems.map((item) => (
+                  <tr key={item._id}>
+                    <td>{item._id.slice(-5)}</td>
+                    <td>{item.task}</td>
+                    <td>{item.due}</td>
+                    <td>{item.assignedAt}</td>
+                    <td>{item.assignedBy}</td>
+                    <td>{item.priorityLevel}</td>
+                  </tr>
+                ))
+              ) : (
+                <div>Loading</div>
+              )}
             </tbody>
           </Table>
         </Col>
