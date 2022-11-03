@@ -5,7 +5,7 @@ import axios from "axios";
 export default function Bloop() {
   const sendData = () => {
     axios.post(`/api/alert/post`, {
-      test: "this is a test to see if mongo is connected",
+      test: "this is a test to see if mongo is connected.",
     });
   };
 
