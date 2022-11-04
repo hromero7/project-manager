@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import { Container, Col, Row, Button, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function Loginform() {
@@ -8,10 +9,6 @@ export default function Loginform() {
 
   const authInfo = (e) => {
     e.preventDefault();
-    console.log("username: ", username);
-    console.log("password: ", password);
-    // 11/3/22 login route returns 401 error. I suspect formatting issues with the object.
-
     axios
       .post(`/api/user/login/`, { username: username, password: password })
       .then((res) => {
@@ -57,6 +54,9 @@ export default function Loginform() {
                 />
               </Form.Group>
             </Col>
+            <Form.Text className="newUser">
+              <Link to={`/registration`}>Register new account </Link>
+            </Form.Text>
             <Col>
               <Button
                 variant="primary"
