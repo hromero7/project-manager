@@ -10,7 +10,7 @@ export default function NewUser() {
   const [password, setPassword] = useState();
 
   const submitBtn = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     axios
       .post(`/api/user/register`, {
         firstName: firstname,
@@ -20,7 +20,16 @@ export default function NewUser() {
         password: password,
       })
       .then((res) => {
-        console.log("res:", res);
+        console.log(res.status);
+        if (res.status === 200) {
+          console.log("lets gooooooooo");
+        }
+        if (res.status === 500) {
+          console.log("big problem");
+        }
+        if (res.status === 400) {
+          console.log("Username already exists");
+        }
       })
       .catch((err) => {
         console.log("err: ", err);

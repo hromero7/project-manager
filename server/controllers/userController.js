@@ -22,6 +22,12 @@ module.exports = {
       else return res.status(200).json(users);
     });
   },
+  findbyid: (req, res) => {
+    console.log(req.body);
+    db.User.findById(req.params.id)
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
   createUser: (req, res) => {
     let username = req.body.username;
 
