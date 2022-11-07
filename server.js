@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-// const favicon = require('express-favicon');
 const cors = require("cors");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
@@ -11,7 +10,6 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
 app.use(cookieParser());
-// app.use(favicon(__dirname + '/build/favicon.ico'));
 // the __dirname is the current directory from where the script is running
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -47,7 +45,6 @@ mongoose
 app.get("*", cors(), (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
-
 
 app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);

@@ -18,7 +18,10 @@ module.exports = {
       if (err)
         return res
           .status(500)
-          .json({ message: { msgBody: "Error has occured", msgError: true } });
+          .json({
+            message: { msgBody: "Error has occured", msgError: true },
+          })
+          .sendStatus(500);
       else return res.status(200).json(users);
     });
   },
@@ -30,12 +33,11 @@ module.exports = {
   },
   createUser: (req, res) => {
     let username = req.body.username;
-
     db.User.findOne({ username }, (err, user) => {
       if (err)
-        res
-          .status(500)
-          .json({ message: { msgBody: "Error has occured", msgError: true } });
+        res.sendStatus(500).json({
+          message: { msgBody: "Error has occured!", msgError: true },
+        });
       if (user)
         res.status(400).json({
           message: { msgBody: "Username is already taken", msgError: true },
@@ -51,7 +53,7 @@ module.exports = {
         newUser.save((err, savedUser) => {
           if (err)
             return res.status(500).json({
-              message: { msgBody: "Error has occured", msgError: true },
+              message: { msgBody: "Error has occured!", msgError: true },
             });
           else
             return res.status(200).json({
