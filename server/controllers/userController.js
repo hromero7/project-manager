@@ -53,7 +53,11 @@ module.exports = {
         newUser.save((err, savedUser) => {
           if (err)
             return res.status(500).json({
-              message: { msgBody: "Error has occured!", msgError: true },
+              message: {
+                msgBody: "Existing account!",
+                msgError: true,
+                statusNum: 500,
+              },
             });
           else
             return res.status(200).json({

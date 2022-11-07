@@ -1,17 +1,17 @@
 import { React, useState } from "react";
-import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import { Container, Row, Col, Button, Form, Alert } from "react-bootstrap";
 import axios from "axios";
 
 export default function NewUser() {
-  const [firstname, setFirstname] = useState("marc");
-  const [lastname, setLastname] = useState("salaver");
-  const [email, setEmail] = useState("marcsalaver@gmail.com");
-  const [username, setUsername] = useState("marc");
-  const [password, setPassword] = useState("password");
-  const [error, setError] = useState();
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
   const submitBtn = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     axios
       .post(`/api/user/register`, {
         firstName: firstname,
@@ -25,15 +25,11 @@ export default function NewUser() {
         if (res.status === 200) {
           console.log("lets gooooooooo");
         }
-        if (res.status === 500) {
-          console.log("big problem!");
-        }
-        if (res.status === 400) {
-          console.log("Username already exists");
-        }
       })
       .catch((err) => {
-        setError(err);
+        if (err.response.data.message.statusNum === 500) {
+          setError(true);
+        }
       });
   };
 
@@ -112,11 +108,17 @@ export default function NewUser() {
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
               {/* <Form.Check type="checkbox" label="Check me out" /> */}
             </Form.Group>
+            {error ? (
+              <Alert variant={"danger"}>Username or email already exists</Alert>
+            ) : (
+              ""
+            )}
+
             <Button
               variant="primary"
-              type="submit"
+              type="button"
               onClick={(e) => {
-                submitBtn();
+                submitBtn(e);
               }}
             >
               Submit
