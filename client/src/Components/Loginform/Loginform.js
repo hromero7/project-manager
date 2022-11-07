@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { Container, Col, Row, Button, Form } from "react-bootstrap";
+import { Container, Col, Row, Button, Form, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -7,6 +7,7 @@ export default function Loginform() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [auth, setAuth] = useState(false);
+  const [error, setError] = useState(false);
 
   const authInfo = (e) => {
     e.preventDefault();
@@ -23,6 +24,7 @@ export default function Loginform() {
         }
       })
       .catch((err) => {
+        setError(true);
         console.log("err", err);
         if (err.resposne.status === 401) {
           console.log("invalid username or password");
@@ -79,6 +81,13 @@ export default function Loginform() {
                     >
                       Submit
                     </Button>
+                    {error ? (
+                      <Alert variant={"danger"}>
+                        Invalid username or password!
+                      </Alert>
+                    ) : (
+                      ""
+                    )}
                   </Col>
                 </Row>
               </Row>
