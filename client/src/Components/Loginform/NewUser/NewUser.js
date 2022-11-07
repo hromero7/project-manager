@@ -1,13 +1,14 @@
 import { React, useState } from "react";
-import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import { Container, Row, Col, Button, Form, Alert } from "react-bootstrap";
 import axios from "axios";
 
 export default function NewUser() {
-  const [firstname, setFirstname] = useState();
-  const [lastname, setLastname] = useState();
-  const [email, setEmail] = useState();
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
   const submitBtn = (e) => {
     e.preventDefault();
@@ -20,19 +21,15 @@ export default function NewUser() {
         password: password,
       })
       .then((res) => {
-        console.log(res.status);
+        console.log("res", res);
         if (res.status === 200) {
           console.log("lets gooooooooo");
         }
-        if (res.status === 500) {
-          console.log("big problem");
-        }
-        if (res.status === 400) {
-          console.log("Username already exists");
-        }
       })
       .catch((err) => {
-        console.log("err: ", err);
+        if (err.response.data.message.statusNum === 500) {
+          setError(true);
+        }
       });
   };
 
@@ -76,6 +73,7 @@ export default function NewUser() {
                   setEmail(e.target.value);
                 }}
                 placeholder="Enter email"
+                autoComplete="email"
               />
               <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
@@ -91,6 +89,7 @@ export default function NewUser() {
                   setUsername(e.target.value);
                 }}
                 placeholder="Username"
+                autoComplete="username"
               />
             </Form.Group>
             {/* Password */}
@@ -103,16 +102,23 @@ export default function NewUser() {
                   setPassword(e.target.value);
                 }}
                 placeholder="Password"
+                autoComplete="current-password"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
               {/* <Form.Check type="checkbox" label="Check me out" /> */}
             </Form.Group>
+            {error ? (
+              <Alert variant={"danger"}>Username or email already exists</Alert>
+            ) : (
+              ""
+            )}
+
             <Button
               variant="primary"
-              type="submit"
+              type="button"
               onClick={(e) => {
-                submitBtn();
+                submitBtn(e);
               }}
             >
               Submit

@@ -30,19 +30,6 @@ export default function Tasklist() {
             <Col>
               <Loginform />
             </Col>
-            <Col>
-              <Button
-                onClick={() => {
-                  axios.get(`/api/alert/`).then((res) => {
-                    console.log("res: ", res);
-                    console.log("taskArr: ", taskArr);
-                    console.log("DbItem: ", dbItems);
-                  });
-                }}
-              >
-                GET
-              </Button>
-            </Col>
           </Row>
           <Table striped bordered hover>
             <thead>
