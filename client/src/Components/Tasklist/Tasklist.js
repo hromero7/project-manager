@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Row, Col, Table, Button } from "react-bootstrap";
+import Loginform from "../Loginform/Loginform";
 
 export default function Tasklist() {
   const taskArr = [];
@@ -26,7 +27,9 @@ export default function Tasklist() {
         <Col>
           <Row>
             <Col></Col>
-            <Col></Col>
+            <Col>
+              <Loginform />
+            </Col>
             <Col>
               <Button
                 onClick={() => {
