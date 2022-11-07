@@ -6,7 +6,6 @@ import axios from "axios";
 export default function Loginform() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [auth, setAuth] = useState(false);
   const [error, setError] = useState(false);
 
   const authInfo = (e) => {
