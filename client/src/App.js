@@ -1,21 +1,35 @@
 import "./App.css";
-import { React } from "react";
+import { React, useContext } from "react";
 import { Container } from "react-bootstrap";
 import { Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Tasklist from "./Components/Tasklist/Tasklist";
-import Loginform from "./Components/Loginform/Loginform";
-import NewUser from "./Components/Loginform/NewUser/NewUser";
+import { AuthContext } from "./Context/AuthContext";
+import PrivateRoute from "./Utils/PrivateRoute";
+import PublicRoute from "./Utils/PublicRoute";
+import LandingPage from "./Pages/Landing/Landing";
+import Dashboard from "./Pages/Dashboard/Dashboard";
+import LoginPage from "./Pages/Login/Login";
+import NavBar from "./Components/Navbar/Navbar";
 
 function App() {
+  const { user, isAuthenticated } = useContext(AuthContext);
+  console.log(user);
+
   return (
+
     <Container className="App">
+      <NavBar />
       <Routes>
-        <Route path="/" element={<Loginform />} />
-        <Route path="/home" element={<Tasklist />} />
-        <Route path="/registration" element={<NewUser />} />
+        <Route element={<PublicRoute />}>
+          <Route exact path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
       </Routes>
     </Container>
+
   );
 }
 
