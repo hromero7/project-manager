@@ -1,54 +1,39 @@
 import { React, useState } from "react";
 import { Container, Row, Col, Button, Form, Alert } from "react-bootstrap";
-import axios from "axios";
+import { Link } from "react-router-dom";
+import UserAPI from "../../../Utils/UserAPI";
+import "./NewUser.css";
 
 export default function NewUser() {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
+  const [user, setUser] = useState({firstName: "", lastName: "", email: "", username: "", password: ""});
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const submitBtn = (e) => {
+  const submitBtn = async (e) => {
     e.preventDefault();
-    axios
-      .post(`/api/user/register`, {
-        firstName: firstname,
-        lastName: lastname,
-        email: email,
-        username: username,
-        password: password,
-      })
-      .then((res) => {
-        console.log("res", res);
-        if (res.status === 200) {
-          console.log("lets gooooooooo");
-        }
-      })
-      .catch((err) => {
-        if (err.response.data.message.statusNum === 500) {
-          setError(true);
-        }
-      });
+    const registerRes = await UserAPI.register(user);
+    if (registerRes.data.message.msgError) setErrorMessage(registerRes.data.message.msgBody);
+    else console.log(registerRes.data);
   };
+
+  const handleFormChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value })
+  }
 
   return (
     <Container>
-      <Row>
         <Col></Col>
         <Col>
+        <p>Get Started in less than 30 seconds</p>
           <Form>
             {/* Firstname */}
             <Form.Group className="mb-3" controlId="formBasicFirst">
               <Form.Label>First name</Form.Label>
               <Form.Control
                 type="name"
-                value={firstname}
-                onChange={(e) => {
-                  setFirstname(e.target.value);
-                }}
-                placeholder="First name"
+                name="firstName"
+                value={user.firstName}
+                onChange={handleFormChange}
+                placeholder="First Name"
               />
             </Form.Group>
             {/* Lastname */}
@@ -56,11 +41,10 @@ export default function NewUser() {
               <Form.Label>Last name</Form.Label>
               <Form.Control
                 type="name"
-                value={lastname}
-                onChange={(e) => {
-                  setLastname(e.target.value);
-                }}
-                placeholder="Last name"
+                name="lastName"
+                value={user.lastName}
+                onChange={handleFormChange}
+                placeholder="Last Name"
               />
             </Form.Group>
             {/* Email */}
@@ -68,10 +52,9 @@ export default function NewUser() {
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 type="email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
+                name="email"
+                value={user.email}
+                onChange={handleFormChange}
                 placeholder="Enter email"
                 autoComplete="email"
               />
@@ -84,10 +67,9 @@ export default function NewUser() {
               <Form.Label>Username</Form.Label>
               <Form.Control
                 type="name"
-                value={username}
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
+                name="username"
+                value={user.username}
+                onChange={handleFormChange}
                 placeholder="Username"
                 autoComplete="username"
               />
@@ -97,10 +79,9 @@ export default function NewUser() {
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
+                name="password"
+                value={user.password}
+                onChange={handleFormChange}
                 placeholder="Password"
                 autoComplete="current-password"
               />
@@ -108,8 +89,8 @@ export default function NewUser() {
             <Form.Group className="mb-3" controlId="formBasicCheckbox">
               {/* <Form.Check type="checkbox" label="Check me out" /> */}
             </Form.Group>
-            {error ? (
-              <Alert variant={"danger"}>Username or email already exists</Alert>
+            {errorMessage ? (
+              <Alert variant={"danger"}>{errorMessage}</Alert>
             ) : (
               ""
             )}
@@ -123,10 +104,16 @@ export default function NewUser() {
             >
               Submit
             </Button>
+
+            <div className="login-form">
+                <p>Already have an account?</p>
+                <Link to={`/login`}>Sign In</Link>
+            </div>    
+
           </Form>
+
         </Col>
         <Col></Col>
-      </Row>
     </Container>
   );
 }

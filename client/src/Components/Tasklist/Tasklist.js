@@ -1,12 +1,12 @@
 import { React, useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Row, Col, Table, Button } from "react-bootstrap";
-import Loginform from "../Loginform/Loginform";
 
 export default function Tasklist() {
   const taskArr = [];
   const [dbItems, setDbItems] = useState();
   const [getData, setGetData] = useState(false);
+  
   useEffect(() => {
     axios
       .get(`/api/alert/`)
@@ -27,9 +27,9 @@ export default function Tasklist() {
         <Col>
           <Row>
             <Col></Col>
-            <Col>
-              <Loginform />
-            </Col>
+            <div>
+              you are logged in, welcome!
+            </div>
           </Row>
           <Table striped bordered hover>
             <thead>

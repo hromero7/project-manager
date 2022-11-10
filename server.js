@@ -13,7 +13,7 @@ app.use(cookieParser());
 // the __dirname is the current directory from where the script is running
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors({ origin: "http://localhost:3001" }));
+app.use(cors());
 app.use(express.static(__dirname));
 
 // Serve up static assets (usually on heroku)
