@@ -90,6 +90,10 @@ module.exports = {
   logout: (req, res) => {
     //logout user route, removes jwt token from user
     res.clearCookie("access_token");
-    res.json({ user: { username: "" }, success: true });
+    res.status(200).json({
+      isAuthenticated: false,
+      user: { username: "" },
+      success: true,
+    });
   },
 };

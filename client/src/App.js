@@ -13,10 +13,10 @@ import NavBar from "./Components/Navbar/Navbar";
 
 function App() {
   const { user, isAuthenticated } = useContext(AuthContext);
-  console.log(user);
+  // console.log("user: ", user);
+  console.log("isAuthenticated, app.js: ", isAuthenticated);
 
   return (
-
     <Container className="App">
       <NavBar />
       <Routes>
@@ -29,7 +29,6 @@ function App() {
         </Route>
       </Routes>
     </Container>
-
   );
 }
 
