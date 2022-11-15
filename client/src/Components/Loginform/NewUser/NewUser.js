@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { Container, Row, Col, Button, Form, Alert } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserAPI from "../../../Utils/UserAPI";
 import "./NewUser.css";
 
@@ -13,13 +13,15 @@ export default function NewUser() {
     password: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
+  const nav = useNavigate();
 
   const submitBtn = async (e) => {
     e.preventDefault();
     const registerRes = await UserAPI.register(user);
+    console.log("registerRes: ", registerRes);
     if (registerRes.data.message.msgError) {
       setErrorMessage(registerRes.data.message.msgBody);
-    } else console.log(registerRes.data);
+    } else nav("/login");
   };
 
   const handleFormChange = (e) => {

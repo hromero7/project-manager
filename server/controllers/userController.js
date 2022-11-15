@@ -64,6 +64,7 @@ module.exports = {
               message: {
                 msgBody: "Account successfully created",
                 msgError: false,
+                statusNum: 200,
               },
             });
         });
