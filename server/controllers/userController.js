@@ -36,11 +36,19 @@ module.exports = {
     db.User.findOne({ username }, (err, user) => {
       if (err)
         res.sendStatus(500).json({
-          message: { msgBody: "Error has occured!", msgError: true },
+          message: {
+            msgBody: "Error has occured!",
+            msgError: true,
+            statusNum: 500,
+          },
         });
       if (user)
         res.status(400).json({
-          message: { msgBody: "Username is already taken", msgError: true },
+          message: {
+            msgBody: "Username is already taken",
+            msgError: true,
+            statusNum: 400,
+          },
         });
       else {
         let newUser = new db.User();
@@ -64,6 +72,7 @@ module.exports = {
               message: {
                 msgBody: "Account successfully created",
                 msgError: false,
+                statusNum: 200,
               },
             });
         });
@@ -90,6 +99,10 @@ module.exports = {
   logout: (req, res) => {
     //logout user route, removes jwt token from user
     res.clearCookie("access_token");
-    res.json({ user: { username: "" }, success: true });
+    res.status(200).json({
+      isAuthenticated: false,
+      user: { username: "" },
+      success: true,
+    });
   },
 };
