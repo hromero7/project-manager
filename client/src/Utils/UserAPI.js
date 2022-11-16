@@ -51,6 +51,7 @@ export default {
         password: user.password,
       })
       .then((res) => {
+        console.log("res.status", res.status);
         if (res.status === 200) {
           return res;
         }

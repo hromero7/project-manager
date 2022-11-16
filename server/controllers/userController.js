@@ -36,11 +36,19 @@ module.exports = {
     db.User.findOne({ username }, (err, user) => {
       if (err)
         res.sendStatus(500).json({
-          message: { msgBody: "Error has occured!", msgError: true },
+          message: {
+            msgBody: "Error has occured!",
+            msgError: true,
+            statusNum: 500,
+          },
         });
       if (user)
         res.status(400).json({
-          message: { msgBody: "Username is already taken", msgError: true },
+          message: {
+            msgBody: "Username is already taken",
+            msgError: true,
+            statusNum: 400,
+          },
         });
       else {
         let newUser = new db.User();

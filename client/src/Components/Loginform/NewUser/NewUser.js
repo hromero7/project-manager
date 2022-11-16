@@ -1,5 +1,5 @@
-import { React, useState } from "react";
-import { Container, Row, Col, Button, Form, Alert } from "react-bootstrap";
+import { React, useState, useEffect } from "react";
+import { Container, Col, Button, Form, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import UserAPI from "../../../Utils/UserAPI";
 import "./NewUser.css";
@@ -13,7 +13,14 @@ export default function NewUser() {
     password: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
+  const [acctCreateStatus, setAcctCreateStatus] = useState(false);
   const nav = useNavigate();
+
+  useEffect(() => {
+    if (acctCreateStatus === true) {
+      nav("/login");
+    }
+  });
 
   const submitBtn = async (e) => {
     e.preventDefault();
@@ -21,7 +28,9 @@ export default function NewUser() {
     console.log("registerRes: ", registerRes);
     if (registerRes.data.message.msgError) {
       setErrorMessage(registerRes.data.message.msgBody);
-    } else nav("/login");
+    } else if (registerRes.data.message.statusNum === 200) {
+      setAcctCreateStatus(true);
+    }
   };
 
   const handleFormChange = (e) => {
