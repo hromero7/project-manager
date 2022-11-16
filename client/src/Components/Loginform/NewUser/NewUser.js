@@ -25,7 +25,7 @@ export default function NewUser() {
   const submitBtn = async (e) => {
     e.preventDefault();
     const registerRes = await UserAPI.register(user);
-    console.log("registerRes: ", registerRes);
+    // console.log("registerRes: ", registerRes);
     if (registerRes.data.message.msgError) {
       setErrorMessage(registerRes.data.message.msgBody);
     } else if (registerRes.data.message.statusNum === 200) {
