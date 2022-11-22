@@ -18,11 +18,10 @@ export default function Loginform() {
   }, [localStorage.authenticated]);
 
   const authInfo = async (e) => {
-    // e.preventDefault(e);
+    e.preventDefault(e);
     const loginRes = await UserAPI.login(user);
     if (!loginRes.isAuthenticated) setErrorMessage(loginRes.message);
     if (loginRes.isAuthenticated) {
-      // console.log("loginRes ", loginRes);
       localStorage.setItem("authenticated", true);
       return redirect("/dashboard");
     }
