@@ -22,7 +22,7 @@ export default function Loginform() {
     const loginRes = await UserAPI.login(user);
     if (!loginRes.isAuthenticated) setErrorMessage(loginRes.message);
     if (loginRes.isAuthenticated) {
-      console.log("loginRes ", loginRes);
+      // console.log("loginRes ", loginRes);
       localStorage.setItem("authenticated", true);
       return redirect("/dashboard");
     }
