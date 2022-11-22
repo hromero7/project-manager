@@ -6,7 +6,7 @@ import UserAPI from "../../Utils/UserAPI";
 import axios from "axios";
 
 export default function Loginform() {
-  const [user, setUser] = useState({ username: "", password: "" });
+  const [user, setUser] = useState({ username: "Marc", password: "password" });
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,6 +18,7 @@ export default function Loginform() {
   }, [localStorage.authenticated]);
 
   const authInfo = async (e) => {
+    // e.preventDefault(e);
     const loginRes = await UserAPI.login(user);
     if (!loginRes.isAuthenticated) setErrorMessage(loginRes.message);
     if (loginRes.isAuthenticated) {
@@ -36,7 +37,7 @@ export default function Loginform() {
       <Row>
         <Row>
           <Col>
-            <Form onSubmit={authInfo}>
+            <Form onSubmit={authInfo} action="/api/user/login" method="post">
               <Col>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Username</Form.Label>
