@@ -9,7 +9,11 @@ export default {
       })
       .then((res) => {
         if (res.status === 200) {
-          return res.data;
+          return (
+            res.data,
+            { isAuthenticated: true },
+            localStorage.setItem("authenticated", true)
+          );
         }
         if (res.status === 500) {
           console.log("res: ", res);

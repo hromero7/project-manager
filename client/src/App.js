@@ -1,4 +1,3 @@
-import "./App.css";
 import {
   React,
   //  useContext
@@ -13,7 +12,7 @@ import LandingPage from "./Pages/Landing/Landing";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import LoginPage from "./Pages/Login/Login";
 import NavBar from "./Components/Navbar/Navbar";
-
+import "./App.css";
 function App() {
   // const { user, isAuthenticated } = useContext(AuthContext);
   // console.log("user: ", user);

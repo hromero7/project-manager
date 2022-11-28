@@ -1,12 +1,11 @@
 import { React, useState, useEffect } from "react";
 import { Container, Col, Row, Button, Form, Alert } from "react-bootstrap";
 import { redirect, useNavigate, useLocation } from "react-router";
-
 import UserAPI from "../../Utils/UserAPI";
 import axios from "axios";
 
 export default function Loginform() {
-  const [user, setUser] = useState({ username: "Marc", password: "password" });
+  const [user, setUser] = useState({ username: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,11 +17,9 @@ export default function Loginform() {
   }, [localStorage.authenticated]);
 
   const authInfo = async (e) => {
-    e.preventDefault(e);
     const loginRes = await UserAPI.login(user);
     if (!loginRes.isAuthenticated) setErrorMessage(loginRes.message);
     if (loginRes.isAuthenticated) {
-      localStorage.setItem("authenticated", true);
       return redirect("/dashboard");
     }
   };
