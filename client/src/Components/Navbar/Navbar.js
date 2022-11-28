@@ -26,8 +26,8 @@ const NavBar = () => {
       <Container fluid>
         <Nav className="me-auto">
           <Nav.Link href="/dashboard">Home</Nav.Link>
-          <Nav.Link href="#features">Features</Nav.Link>
-          <Nav.Link href="#pricing">Pricing</Nav.Link>
+          {/* <Nav.Link href="#features">Features</Nav.Link>
+          <Nav.Link href="#pricing">Pricing</Nav.Link> */}
         </Nav>
         <Nav>
           <Nav.Item className="navbar-right">
