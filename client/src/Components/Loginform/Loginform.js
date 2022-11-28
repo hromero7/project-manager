@@ -2,7 +2,6 @@ import { React, useState, useEffect } from "react";
 import { Container, Col, Row, Button, Form, Alert } from "react-bootstrap";
 import { redirect, useNavigate, useLocation } from "react-router";
 import UserAPI from "../../Utils/UserAPI";
-import axios from "axios";
 
 export default function Loginform() {
   const [user, setUser] = useState({ username: "", password: "" });

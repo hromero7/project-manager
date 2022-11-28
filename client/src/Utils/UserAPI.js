@@ -68,6 +68,7 @@ export default {
     return axios.get(`/api/user/logout`).then((res) => {
       return {
         isAuthenticated: false,
+
         user: { username: "" },
         message: "logged out",
         payload: res,
