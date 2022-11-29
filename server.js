@@ -42,8 +42,8 @@ mongoose
   .catch((err) => console.log(err));
 
 //renders home page
-app.get("*", cors(), (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+app.get("/*", cors(), (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./client/build/index.html"));
 });
 
 app.listen(PORT, function () {

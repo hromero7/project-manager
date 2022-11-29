@@ -1,9 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { Container, Col, Row, Button, Form, Alert } from "react-bootstrap";
 import { redirect, useNavigate, useLocation } from "react-router";
-
 import UserAPI from "../../Utils/UserAPI";
-import axios from "axios";
 
 export default function Loginform() {
   const [user, setUser] = useState({ username: "", password: "" });
@@ -21,8 +19,6 @@ export default function Loginform() {
     const loginRes = await UserAPI.login(user);
     if (!loginRes.isAuthenticated) setErrorMessage(loginRes.message);
     if (loginRes.isAuthenticated) {
-      console.log("loginRes ", loginRes);
-      localStorage.setItem("authenticated", true);
       return redirect("/dashboard");
     }
   };
@@ -36,7 +32,7 @@ export default function Loginform() {
       <Row>
         <Row>
           <Col>
-            <Form onSubmit={authInfo}>
+            <Form onSubmit={authInfo} action="/api/user/login" method="post">
               <Col>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Username</Form.Label>
