@@ -9,18 +9,13 @@ export default function Loginform() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    if (localStorage.authenticated === true) {
-      navigate("/dashboard");
-    }
-  }, [localStorage.authenticated]);
+  useEffect(() => {});
 
   const authInfo = async (e) => {
     const loginRes = await UserAPI.login(user);
+    console.log("loginRes.message: ", loginRes.message);
+    console.log("loginRes: ", loginRes);
     if (!loginRes.isAuthenticated) setErrorMessage(loginRes.message);
-    if (loginRes.isAuthenticated) {
-      return redirect("/dashboard");
-    }
   };
 
   const handleFormChange = (e) => {

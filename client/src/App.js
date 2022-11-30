@@ -3,7 +3,7 @@ import {
   //  useContext
 } from "react";
 import { Container } from "react-bootstrap";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import { AuthContext } from "./Context/AuthContext";
 import PrivateRoute from "./Utils/PrivateRoute";

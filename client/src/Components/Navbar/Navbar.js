@@ -10,10 +10,11 @@ const NavBar = () => {
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
 
+  console.log("auth: ", auth);
+
   const handleLogout = (e) => {
     UserAPI.logout().then((res) => {
       if (res.isAuthenticated === false) {
-        localStorage.removeItem("authenticated");
         auth.isAuthenticated = false;
         navigate("/");
       }
@@ -31,7 +32,7 @@ const NavBar = () => {
         </Nav>
         <Nav>
           <Nav.Item className="navbar-right">
-            {localStorage.authenticated ? (
+            {auth.isAuthenticated ? (
               <NavDropdown align="end" id="collasible-nav-dropdown">
                 <NavDropdown.Item>Action</NavDropdown.Item>
                 <NavDropdown.Item>

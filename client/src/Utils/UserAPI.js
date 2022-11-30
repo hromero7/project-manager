@@ -9,24 +9,19 @@ export default {
       })
       .then((res) => {
         if (res.status === 200) {
-          return (
-            res.data,
-            { isAuthenticated: true },
-            localStorage.setItem("authenticated", true)
-          );
+          return res.data, { isAuthenticated: true };
         }
         if (res.status === 500) {
-          console.log("res: ", res);
-          console.log("500 error");
+          console.log("500 res: ", res);
           return {
             isAuthenticated: false,
             user: { username: "" },
-            message: "Something went wrong",
+            message: "Incorrect username or password",
           };
         }
       })
       .catch((err) => {
-        console.log("err", err);
+        console.log("401 err", err);
         if (err.response.status === 401) {
           return {
             isAuthenticated: false,
