@@ -9,11 +9,7 @@ export default {
       })
       .then((res) => {
         if (res.status === 200) {
-          return (
-            res.data,
-            { isAuthenticated: true },
-            localStorage.setItem("authenticated", true)
-          );
+          return res.data;
         }
         if (res.status === 500) {
           console.log("res: ", res);
@@ -66,13 +62,7 @@ export default {
   },
   logout: () => {
     return axios.get(`/api/user/logout`).then((res) => {
-      return {
-        isAuthenticated: false,
-
-        user: { username: "" },
-        message: "logged out",
-        payload: res,
-      };
+      return res.data;
     });
   },
   isAuthenticated: () => {

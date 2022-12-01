@@ -8,16 +8,14 @@ import "./Navbar.css";
 const NavBar = () => {
   const [name, setName] = useState("");
   const navigate = useNavigate();
-  const auth = useContext(AuthContext);
+  const { isAuthenticated, setIsAuthenticated, setUser } = useContext(AuthContext);
 
-  const handleLogout = (e) => {
-    UserAPI.logout().then((res) => {
-      if (res.isAuthenticated === false) {
-        localStorage.removeItem("authenticated");
-        auth.isAuthenticated = false;
-        navigate("/");
-      }
-    });
+  const handleLogout = async () => {
+    const data = await UserAPI.logout();
+    if (data.success){
+        setUser(data.user);
+        setIsAuthenticated(false);
+    }
   };
 
   return (
@@ -31,7 +29,7 @@ const NavBar = () => {
         </Nav>
         <Nav>
           <Nav.Item className="navbar-right">
-            {localStorage.authenticated ? (
+            {isAuthenticated? (
               <NavDropdown align="end" id="collasible-nav-dropdown">
                 <NavDropdown.Item>Action</NavDropdown.Item>
                 <NavDropdown.Item>

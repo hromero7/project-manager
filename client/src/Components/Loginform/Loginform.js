@@ -1,25 +1,30 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import { Container, Col, Row, Button, Form, Alert } from "react-bootstrap";
 import { redirect, useNavigate, useLocation } from "react-router";
 import UserAPI from "../../Utils/UserAPI";
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function Loginform() {
   const [user, setUser] = useState({ username: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+  const authContext = useContext(AuthContext);
 
-  useEffect(() => {
-    if (localStorage.authenticated === true) {
-      navigate("/dashboard");
-    }
-  }, [localStorage.authenticated]);
+  // useEffect(() => {
+  //   if (localStorage.authenticated === true) {
+  //     navigate("/dashboard");
+  //   }
+  // }, [localStorage.authenticated]);
 
   const authInfo = async (e) => {
+    e.preventDefault();
     const loginRes = await UserAPI.login(user);
     if (!loginRes.isAuthenticated) setErrorMessage(loginRes.message);
     if (loginRes.isAuthenticated) {
-      return redirect("/dashboard");
+      authContext.setUser(loginRes.user);
+      authContext.setIsAuthenticated(loginRes.isAuthenticated);
+      navigate("/dashboard");
     }
   };
 
