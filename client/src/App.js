@@ -1,7 +1,4 @@
-import {
-  React,
-  //  useContext
-} from "react";
+import React from "react";
 import { Container } from "react-bootstrap";
 import { Routes, Route, Navigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,6 +11,7 @@ import LoginPage from "./Pages/Login/Login";
 import NavBar from "./Components/Navbar/Navbar";
 import Whoops from "./Pages/PNF/Whoops";
 import "./App.css";
+
 function App() {
   // const { user, isAuthenticated } = useContext(AuthContext);
   // console.log("user: ", user);

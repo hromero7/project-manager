@@ -9,18 +9,7 @@ export default {
       })
       .then((res) => {
         if (res.status === 200) {
-          return res.data, { isAuthenticated: true };
-        }
-        if (res.status === 500) {
-          console.log("500 res: ", res);
-          return (
-            res.data,
-            {
-              isAuthenticated: false,
-              user: { username: "" },
-              message: "Incorrect username or password",
-            }
-          );
+          return res.data;
         }
       })
       .catch((err) => {
@@ -43,7 +32,7 @@ export default {
             {
               isAuthenticated: false,
               user: { username: "" },
-              message: "Something went wrong. whoops.",
+              message: "Whoops. Invalid username or password.",
             }
           );
         }
@@ -69,14 +58,8 @@ export default {
       });
   },
   logout: () => {
-    return axios.get(`/api/user/logout/`).then((res) => {
-      return {
-        isAuthenticated: false,
-
-        user: { username: "" },
-        message: "logged out",
-        payload: res,
-      };
+    return axios.get(`/api/user/logout`).then((res) => {
+      return res.data;
     });
   },
   isAuthenticated: () => {

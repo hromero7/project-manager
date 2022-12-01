@@ -93,10 +93,7 @@ module.exports = {
       const { _id, username } = req.user;
       const token = signToken(_id);
       res.cookie("access_token", token, { httpOnly: true, sameSite: true });
-      res.redirect("/dashboard");
-      res.status(200);
-      // .json({ isAuthenticated: true, user: { username } });
-      res.end();
+      res.status(200).json({ isAuthenticated: true, user: { username } });
     }
   },
   logout: (req, res) => {
