@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { Container, Col, Row, Button, Form, Alert } from "react-bootstrap";
-import { redirect, useNavigate, useLocation } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import UserAPI from "../../Utils/UserAPI";
 
 export default function Loginform() {
@@ -12,6 +12,7 @@ export default function Loginform() {
   useEffect(() => {});
 
   const authInfo = async (e) => {
+    // e.preventDefault();
     const loginRes = await UserAPI.login(user);
     console.log("loginRes.message: ", loginRes.message);
     console.log("loginRes: ", loginRes);

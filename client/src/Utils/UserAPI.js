@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   login: (user) => {
     return axios
-      .post(`/api/user/login`, {
+      .post(`/api/user/login/`, {
         username: user.username,
         password: user.password,
       })
@@ -13,36 +13,45 @@ export default {
         }
         if (res.status === 500) {
           console.log("500 res: ", res);
-          return {
-            isAuthenticated: false,
-            user: { username: "" },
-            message: "Incorrect username or password",
-          };
+          return (
+            res.data,
+            {
+              isAuthenticated: false,
+              user: { username: "" },
+              message: "Incorrect username or password",
+            }
+          );
         }
       })
       .catch((err) => {
         console.log("401 err", err);
         if (err.response.status === 401) {
-          return {
-            isAuthenticated: false,
-            user: { username: "" },
-            message: "Invalid username or password",
-          };
+          return (
+            err.data,
+            {
+              isAuthenticated: false,
+              user: { username: "" },
+              message: "Invalid username or password",
+            }
+          );
         }
         if (err.response.status === 500) {
-          console.log("res: ", err);
+          console.log("err: ", err);
           console.log("500 error");
-          return {
-            isAuthenticated: false,
-            user: { username: "" },
-            message: "Something went wrong",
-          };
+          return (
+            err.data,
+            {
+              isAuthenticated: false,
+              user: { username: "" },
+              message: "Something went wrong. whoops.",
+            }
+          );
         }
       });
   },
   register: (user) => {
     return axios
-      .post(`/api/user/register`, {
+      .post(`/api/user/register/`, {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
@@ -60,7 +69,7 @@ export default {
       });
   },
   logout: () => {
-    return axios.get(`/api/user/logout`).then((res) => {
+    return axios.get(`/api/user/logout/`).then((res) => {
       return {
         isAuthenticated: false,
 
@@ -71,7 +80,7 @@ export default {
     });
   },
   isAuthenticated: () => {
-    return axios.get(`/api/user/authenticated`).then((res) => {
+    return axios.get(`/api/user/authenticated/`).then((res) => {
       if (res.status !== 401) return res.data;
       else return { isAuthenticated: false, user: { username: "" } };
     });

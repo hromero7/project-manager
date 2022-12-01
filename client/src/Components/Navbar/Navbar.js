@@ -10,8 +10,6 @@ const NavBar = () => {
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
 
-  console.log("auth: ", auth);
-
   const handleLogout = (e) => {
     UserAPI.logout().then((res) => {
       if (res.isAuthenticated === false) {
