@@ -20,6 +20,7 @@ passport.use(
     },
     (payload, done) => {
       db.User.findById({ _id: payload.sub }, (err, user) => {
+        console.log(" JWT:", { _id: payload.sub, err: err, user: user });
         if (err) return done(err, false);
         if (user) return done(null, user, { message: "fail" });
         else return done(null, done);
@@ -30,13 +31,20 @@ passport.use(
 
 //authenticating using username and password
 passport.use(
-  new localStrategy((username, password, cb) => {
+  new localStrategy((username, password, done) => {
+    console.log("outside:", { username: username, password: password });
+
     db.User.findOne({ username }, (err, user) => {
-      if (err) return cb(err);
-      if (!user)
-        return cb(null, false, { message: "Incorrect username or password" }); //no user exists
-      //validate password credentials
-      user.comparePassword(password, cb);
+      console.log("inside", { username: username, err: err, user: user });
+      if (err) {
+        return done(err);
+      }
+      if (user !== username) {
+        return done(null, false, { message: "Incorrect username or password" }); //no user exists
+        //validate password credentials
+      }
+
+      user.comparePassword(password, done);
     });
   })
 );

@@ -16,6 +16,7 @@ router.route("/login").post(
   passport.authenticate("local", {
     session: false,
     failureRedirect: "/login-fail",
+    failureFlash: "Login error",
     // failureMessage: true,
   }),
   login
