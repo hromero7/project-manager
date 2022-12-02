@@ -15,9 +15,8 @@ router.route("/register").post(createUser); //register new user route
 router.route("/login").post(
   passport.authenticate("local", {
     session: false,
-    failureRedirect: "/login-fail",
-    failureFlash: "Login error",
-    // failureMessage: true,
+    // failureRedirect: "/login-fail",
+    failureMessage: true,
   }),
   login
 ); //login user route

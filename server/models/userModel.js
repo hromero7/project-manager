@@ -60,8 +60,8 @@ UserSchema.methods.comparePassword = function (password, cb) {
 
     if (err) {
       return cb(err);
-    } else if (isMatch === false) {
-      return cb(null, isMatch, { message: "bad password?" });
+    } else if (!isMatch) {
+      return cb(null, isMatch);
     } else {
       return cb(null, this);
     }

@@ -36,14 +36,9 @@ passport.use(
 
     db.User.findOne({ username }, (err, user) => {
       console.log("inside", { username: username, err: err, user: user });
-      if (err) {
-        return done(err);
-      }
-      if (user !== username) {
-        return done(null, false, { message: "Incorrect username or password" }); //no user exists
-        //validate password credentials
-      }
-
+      if (err) return done(err);
+      if (!user) return done(null, false); //no user exists
+      //validate password credentials
       user.comparePassword(password, done);
     });
   })
