@@ -13,7 +13,6 @@ export default {
         }
       })
       .catch((err) => {
-        console.log("401 err", err);
         if (err.response.status === 401) {
           return (
             err.data,
@@ -25,8 +24,6 @@ export default {
           );
         }
         if (err.response.status === 500) {
-          console.log("err: ", err);
-          console.log("500 error");
           return (
             err.data,
             {

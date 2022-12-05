@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useContext } from "react";
+import { React, useContext } from "react";
 import { Nav, Navbar, Button, Container, NavDropdown } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import UserAPI from "../../Utils/UserAPI";
@@ -6,7 +6,6 @@ import { AuthContext } from "../../Context/AuthContext";
 import "./Navbar.css";
 
 const NavBar = () => {
-  const [name, setName] = useState("");
   const navigate = useNavigate();
   const { isAuthenticated, setIsAuthenticated, setUser } =
     useContext(AuthContext);
