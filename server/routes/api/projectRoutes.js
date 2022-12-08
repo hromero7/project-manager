@@ -11,9 +11,12 @@ const {
 } = require("../../controllers/projectController");
 
 router.route("/all").get(findAll); // find all route
-router
-  .route("/:project_id")
-  .get(passport.authenticate("jwt", { session: false }, findAllLeaderProjects)); //finds all projects relevant to user.
+router.route("/:userId").get(
+  // passport.authenticate("jwt", { session: false },
+  findAllLeaderProjects
+);
+// );
+//finds all projects relevant to user.
 router
   .route("/create")
   .post(passport.authenticate("jwt", { session: false }), createProject);

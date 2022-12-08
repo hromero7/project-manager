@@ -16,7 +16,7 @@ export default function Tasklist() {
   const [dbItems, setDbItems] = useState();
   const [getData, setGetData] = useState(false);
   const [projectTitle, setProjectTitle] = useState("");
-  // console.log("auth: ", auth);
+  console.log("auth: ", auth);
 
   useEffect(() => {
     // getTasks();
@@ -24,7 +24,7 @@ export default function Tasklist() {
 
   const getTasks = () => {
     axios
-      .get(`/api/project/${auth.user._id}`)
+      .get(`/api/project/${auth.user._id} `)
       .then((res) => {
         console.log("res ", res);
         setDbItems(res.data);
@@ -88,18 +88,8 @@ export default function Tasklist() {
             </Col>
             <Col>
               <Button
-                onClick={() => {
-                  axios
-                    .get(`/api/project/${auth.user._id}`)
-                    .then((res) => {
-                      console.log("res ", res);
-                      // setDbItems(res.data);
-                      // setGetData(true);
-                    })
-                    .catch((err) => {
-                      console.log("error", err);
-                      setGetData(false);
-                    });
+                onClick={(e) => {
+                  getTasks(e);
                 }}
               >
                 get list

@@ -2,6 +2,7 @@ const db = require("../models");
 
 module.exports = {
   findAll: (req, res) => {
+    // console.log("req: ", req);
     db.Project.find({}, function (err, docs) {
       if (err)
         return res
@@ -10,18 +11,12 @@ module.exports = {
       else return res.status(200).json(docs);
     });
   },
-  findAllLeaderProjects: async (req, res) => {
-    const leaderProjects = await db.Project.find({ userId: res._id });
-    console.log("leaderProjects: ", leaderProjects);
-    //the following breaks the app. need to get the json to the front
-
-    if (!leaderProjects) {
-      return res
-        .status(404)
-        .json({ message: { msgBody: "No projects found.", msgError: true } });
-    } else {
-      return res.status(200).json(leaderProjects);
-    }
+  findAllLeaderProjects: (req, res) => {
+    db.Project.find({ userId: req.params.userId })
+      .then((dbModel) => res.status(200).json(dbModel))
+      .catch((err) => {
+        err.send(400);
+      });
   },
   findOne: async (req, res) => {
     const project = await db.Project.findById(req.params.project_id);
