@@ -14,10 +14,10 @@ export default function Loginform() {
   const authInfo = async (e) => {
     e.preventDefault();
     const loginRes = await UserAPI.login(user);
-    // console.log("loginRes: ", loginRes);
     if (!loginRes.isAuthenticated) setErrorMessage(loginRes.message);
     if (loginRes.isAuthenticated) {
       authContext.setUser(loginRes.user);
+      authContext.setUserId(loginRes._id._id);
       authContext.setIsAuthenticated(loginRes.isAuthenticated);
       navigate("/dashboard");
     }

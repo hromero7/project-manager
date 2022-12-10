@@ -15,7 +15,7 @@ module.exports = {
     db.Project.find({ userId: req.params.userId })
       .then((dbModel) => res.status(200).json(dbModel))
       .catch((err) => {
-        err.send(400);
+        console.log(err);
       });
   },
   findOne: async (req, res) => {

@@ -95,7 +95,7 @@ module.exports = {
       res.cookie("access_token", token, { httpOnly: true, sameSite: true });
       res
         .status(200)
-        .json({ isAuthenticated: true, user: { username }, _id: _id });
+        .json({ isAuthenticated: true, user: { username }, _id: { _id } });
       res.redirect("/dashboard");
     }
   },

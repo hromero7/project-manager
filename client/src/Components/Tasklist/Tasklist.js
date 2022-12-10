@@ -7,6 +7,7 @@ import {
   Dropdown,
   Form,
   Button,
+  Card,
 } from "react-bootstrap";
 import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
@@ -16,15 +17,14 @@ export default function Tasklist() {
   const [dbItems, setDbItems] = useState();
   const [getData, setGetData] = useState(false);
   const [projectTitle, setProjectTitle] = useState("");
-  console.log("auth: ", auth);
 
   useEffect(() => {
-    // getTasks();
+    getTasks();
   }, []);
 
   const getTasks = () => {
     axios
-      .get(`/api/project/${auth.user._id} `)
+      .get(`/api/project/${auth.userId}`)
       .then((res) => {
         console.log("res ", res);
         setDbItems(res.data);
@@ -35,6 +35,8 @@ export default function Tasklist() {
         setGetData(false);
       });
   };
+
+  const getUserInfo = () => {};
 
   const projectAdd = (e) => {
     console.log("auth: ", auth);
@@ -82,18 +84,12 @@ export default function Tasklist() {
       <Row>
         <Col>
           <Row>
-            {/* <Col></Col> */}
-            <Col>
+            <Col
+              onClick={() => {
+                console.log("dbItems onclick name", dbItems);
+              }}
+            >
               <div>Hello {auth.user.username}!</div>
-            </Col>
-            <Col>
-              <Button
-                onClick={(e) => {
-                  getTasks(e);
-                }}
-              >
-                get list
-              </Button>
             </Col>
             <Col>
               <Dropdown>
@@ -103,7 +99,6 @@ export default function Tasklist() {
                 >
                   Add Project
                 </Dropdown.Toggle>
-
                 <Dropdown.Menu as={CustomMenu}>
                   <Dropdown.Item eventKey="1">
                     <Button
@@ -118,34 +113,25 @@ export default function Tasklist() {
               </Dropdown>
             </Col>
           </Row>
-          <Table striped bordered hover>
-            <thead>
-              <tr className="titleRow">
-                <th className="taskNumber">#</th>
-                <th className="taskColumn">Task:</th>
-                <th className="dueTime">Due:</th>
-                <th className="assignedTimeColumn">Assigned at: </th>
-                <th className="assignedByColumn">Assigned by: </th>
-                <th className="priorityLevel">Priority Level</th>
-              </tr>
-            </thead>
-            <tbody>
-              {getData ? (
-                dbItems.map((item) => (
-                  <tr key={item._id}>
-                    <td>{item._id.slice(-5)}</td>
-                    <td>{item.task}</td>
-                    <td>{item.due}</td>
-                    <td>{item.assignedAt}</td>
-                    <td>{item.assignedBy}</td>
-                    <td>{item.priorityLevel}</td>
-                  </tr>
-                ))
-              ) : (
-                <div>Loading</div>
-              )}
-            </tbody>
-          </Table>
+          <Row>
+            {getData ? (
+              dbItems.map((item) => (
+                <Col>
+                  <Card
+                    style={{ width: "18rem", height: "200px" }}
+                    key={item._id}
+                  >
+                    <Card.Body>
+                      <Card.Title>{item.title}</Card.Title>
+                      <Card.Text>{item._id.slice(-5)}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))
+            ) : (
+              <div>Loading</div>
+            )}
+          </Row>
         </Col>
       </Row>
     </Container>

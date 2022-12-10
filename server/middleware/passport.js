@@ -1,3 +1,6 @@
+const {
+  getNextKeyDef,
+} = require("@testing-library/user-event/dist/keyboard/getNextKeyDef");
 const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
 const jwtStrategy = require("passport-jwt").Strategy;
@@ -20,9 +23,15 @@ passport.use(
     },
     (payload, done) => {
       db.User.findById({ _id: payload.sub }, (err, user) => {
-        // console.log(" JWT:", { _id: payload.sub, err: err, user: user });
+        // console.log("JWT:", {
+        //   _id: payload.sub,
+        //   err: err,
+        //   user: user,
+        //   payload: payload,
+        //   done: done,
+        // });
         if (err) return done(err, false);
-        if (user) return done(null, user, { message: "fail" });
+        if (!user) return done(null, user);
         else return done(null, done);
       });
     }
