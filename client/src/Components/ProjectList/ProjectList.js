@@ -3,20 +3,20 @@ import {
   Container,
   Row,
   Col,
-  Table,
   Dropdown,
   Form,
   Button,
   Card,
 } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 
-export default function Tasklist() {
+export default function Projectlist() {
   const auth = useContext(AuthContext);
+  const navigate = useNavigate();
   const [dbItems, setDbItems] = useState();
   const [getData, setGetData] = useState(false);
-  const [btnState, setBtnState] = useState(false);
   const [projectTitle, setProjectTitle] = useState("");
 
   useEffect(() => {
@@ -37,10 +37,8 @@ export default function Tasklist() {
       });
   };
 
-  const getUserInfo = () => {};
-
   const projectAdd = (e) => {
-    console.log("auth: ", auth);
+    // console.log("auth: ", auth);
     axios
       .post(`/api/project/create/`, { title: projectTitle })
       .then((res) => {
@@ -87,7 +85,7 @@ export default function Tasklist() {
           <Row>
             <Col
               onClick={() => {
-                console.log("dbItems onclick name", dbItems);
+                getTasks();
               }}
             >
               <div>Hello {auth.user.username}!</div>
@@ -128,12 +126,21 @@ export default function Tasklist() {
                   >
                     <Card.Body
                       onClick={() => {
-                        console.log("item: ", item._id);
+                        axios
+                          .get(`/api/project/p/${item._id}`)
+                          .then((res) => {
+                            navigate(`/project/${res.data._id}`);
+                          })
+                          .catch((err) => {
+                            console.log("err: ", err);
+                          });
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       <Card.Title>{item.title}</Card.Title>
                       <Card.Text>{item._id.slice(-5)}</Card.Text>
                     </Card.Body>
+
                     <Card.Footer>
                       <Button>. . .</Button>
                     </Card.Footer>

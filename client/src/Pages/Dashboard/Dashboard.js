@@ -1,11 +1,11 @@
 import { React } from "react";
 import { Container } from "react-bootstrap";
-import Tasklist from "../../Components/Tasklist/Tasklist";
+import ProjectList from "../../Components/ProjectList/ProjectList";
 
 const Dashboard = () => {
   return (
     <Container>
-      <Tasklist />
+      <ProjectList />
     </Container>
   );
 };

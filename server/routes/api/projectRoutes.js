@@ -5,7 +5,7 @@ const {
   findAll,
   findAllLeaderProjects,
   createProject,
-  findByUser,
+  navToProject,
   deleteProject,
   addMember,
 } = require("../../controllers/projectController");
@@ -18,8 +18,8 @@ router
   .route("/create")
   .post(passport.authenticate("jwt", { session: false }), createProject);
 router
-  .route("/user_project/:user_id")
-  .get(passport.authenticate("jwt", { session: false }), findByUser);
+  .route("/p/:project_id")
+  .get(passport.authenticate("jwt", { session: false }), navToProject);
 router
   .route("/delete/:project_id")
   .delete(passport.authenticate("jwt", { session: false }), deleteProject);

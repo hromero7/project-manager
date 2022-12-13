@@ -26,6 +26,14 @@ module.exports = {
         .json({ message: { msgBody: "Project Not Found", msgError: true } });
     else return res.status(200).json(project);
   },
+  navToProject: async (req, res) => {
+    const project = await db.Project.findById(req.params.project_id);
+    if (!project)
+      return res
+        .status(404)
+        .json({ message: { msgBody: "Project Not Found", msgError: true } });
+    else return res.status(200).json(project);
+  },
   createProject: async (req, res) => {
     // console.log(req.body);
     let { title } = req.body;

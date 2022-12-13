@@ -1,6 +1,3 @@
-const {
-  getNextKeyDef,
-} = require("@testing-library/user-event/dist/keyboard/getNextKeyDef");
 const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
 const jwtStrategy = require("passport-jwt").Strategy;
@@ -23,13 +20,6 @@ passport.use(
     },
     (payload, done) => {
       db.User.findById({ _id: payload.sub }, (err, user) => {
-        // console.log("JWT:", {
-        //   _id: payload.sub,
-        //   err: err,
-        //   user: user,
-        //   payload: payload,
-        //   done: done,
-        // });
         if (err) return done(err, false);
         if (!user) return done(null, user);
         else return done(null, done);
@@ -41,9 +31,7 @@ passport.use(
 //authenticating using username and password
 passport.use(
   new localStrategy((username, password, done) => {
-    // console.log("outside:", { username: username, password: password });
     db.User.findOne({ username }, (err, user) => {
-      // console.log("inside", { username: username, err: err, user: user });
       if (err) return done(err);
       if (!user) return done(null, false); //no user exists
       //validate password credentials

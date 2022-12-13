@@ -29,7 +29,7 @@ function App() {
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/Project/:ID" element={<ProjectPage />} />
+          <Route path="/project/:ID" element={<ProjectPage />} />
         </Route>
       </Routes>
     </Container>
