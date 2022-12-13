@@ -7,6 +7,7 @@ import PrivateRoute from "./Utils/PrivateRoute";
 import PublicRoute from "./Utils/PublicRoute";
 import LandingPage from "./Pages/Landing/Landing";
 import Dashboard from "./Pages/Dashboard/Dashboard";
+import ProjectPage from "./Pages/ProjectPage/ProjectPage";
 import LoginPage from "./Pages/Login/Login";
 import NavBar from "./Components/Navbar/Navbar";
 import Whoops from "./Pages/PNF/Whoops";
@@ -28,6 +29,7 @@ function App() {
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/Project/:ID" element={<ProjectPage />} />
         </Route>
       </Routes>
     </Container>

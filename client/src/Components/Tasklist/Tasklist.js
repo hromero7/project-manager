@@ -16,6 +16,7 @@ export default function Tasklist() {
   const auth = useContext(AuthContext);
   const [dbItems, setDbItems] = useState();
   const [getData, setGetData] = useState(false);
+  const [btnState, setBtnState] = useState(false);
   const [projectTitle, setProjectTitle] = useState("");
 
   useEffect(() => {
@@ -118,13 +119,24 @@ export default function Tasklist() {
               dbItems.map((item) => (
                 <Col>
                   <Card
-                    style={{ width: "18rem", height: "200px" }}
+                    style={{
+                      width: "18rem",
+                      height: "200px",
+                      margin: "15px",
+                    }}
                     key={item._id}
                   >
-                    <Card.Body>
+                    <Card.Body
+                      onClick={() => {
+                        console.log("item: ", item._id);
+                      }}
+                    >
                       <Card.Title>{item.title}</Card.Title>
                       <Card.Text>{item._id.slice(-5)}</Card.Text>
                     </Card.Body>
+                    <Card.Footer>
+                      <Button>. . .</Button>
+                    </Card.Footer>
                   </Card>
                 </Col>
               ))
