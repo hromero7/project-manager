@@ -20,10 +20,22 @@ const NavBar = () => {
 
   return (
     <Navbar bg="light" variant="light" fixed="top">
-      <Navbar.Brand href="/dashboard">Project Manager</Navbar.Brand>
+      <Navbar.Brand
+        onClick={(e) => {
+          navigate("/dashboard");
+        }}
+      >
+        Project Manager
+      </Navbar.Brand>
       <Container fluid>
         <Nav className="me-auto">
-          <Nav.Link href="/dashboard">Home</Nav.Link>
+          <Nav.Link
+            onClick={(e) => {
+              navigate("/dashboard");
+            }}
+          >
+            Home
+          </Nav.Link>
           {/* <Nav.Link href="#features">Features</Nav.Link>
           <Nav.Link href="#pricing">Pricing</Nav.Link> */}
         </Nav>

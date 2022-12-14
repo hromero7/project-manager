@@ -5,7 +5,7 @@ import UserAPI from "../../Utils/UserAPI";
 import { AuthContext } from "../../Context/AuthContext";
 
 export default function Loginform() {
-  const [user, setUser] = useState({ username: "", password: "" });
+  const [user, setUser] = useState({ username: "Marc", password: "password" });
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
