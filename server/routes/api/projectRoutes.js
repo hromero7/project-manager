@@ -21,7 +21,7 @@ router
   .route("/p/:project_id")
   .get(passport.authenticate("jwt", { session: false }), navToProject);
 router
-  .route("/delete/:project_id")
+  .route("/delete/")
   .delete(passport.authenticate("jwt", { session: false }), deleteProject);
 router
   .route("/add_member/:project_id")

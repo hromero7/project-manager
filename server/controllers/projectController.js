@@ -73,12 +73,12 @@ module.exports = {
       return res.status(200).json({ projects: projects, authenticated: true });
   },
   deleteProject: async (req, res) => {
-    const project = await db.Project.findById(req.params.project_id);
+    const project = await db.Project.findById(req.query.project_id);
     if (!project)
       return res
         .status(404)
         .json({ message: { msgBody: "No Project Found", msgError: true } });
-    if (project.userId.toString() !== req.user.id.toString()) {
+    if (project.userId.toString() !== req.query.user) {
       return res
         .status(401)
         .json({ message: { msgBody: "Not Authorized", msgError: true } });

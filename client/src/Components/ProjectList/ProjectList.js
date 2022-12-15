@@ -4,12 +4,18 @@ import {
   Row,
   Col,
   Dropdown,
+  DropdownButton,
   Form,
   Button,
   Card,
 } from "react-bootstrap";
+import {
+  FontAwesomeIcon,
+  FontAwesomeIconProps,
+} from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
+
 import axios from "axios";
 
 export default function Projectlist() {
@@ -17,6 +23,7 @@ export default function Projectlist() {
   const navigate = useNavigate();
   const [dbItems, setDbItems] = useState();
   const [getData, setGetData] = useState(false);
+  const [alertState, setAlertState] = useState(false);
   const [projectTitle, setProjectTitle] = useState("");
 
   useEffect(() => {
@@ -57,7 +64,8 @@ export default function Projectlist() {
       }}
     >
       {children}
-      &#x25bc;
+      &nbsp;
+      <i class="fa-sharp fa-solid fa-plus"></i>
     </a>
   ));
 
@@ -73,6 +81,47 @@ export default function Projectlist() {
             value={projectTitle}
           />
           <ul className="list-unstyled">{React.Children.toArray(children)}</ul>
+        </div>
+      );
+    }
+  );
+
+  const OptionToggle = React.forwardRef(({ children, onClick }, ref) => (
+    <a
+      href={
+        <FontAwesomeIcon
+          icon="fa-sharp fa-5x fa-solid fa-fire fa-beat"
+          style={{ color: "black" }}
+        />
+      }
+      ref={ref}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick(e);
+      }}
+    >
+      {children}
+      <i class="fa-sharp fa-solid fa-fire"></i>
+    </a>
+  ));
+
+  const OptionMenu = React.forwardRef(
+    ({ children, style, className, "aria-labelledby": labeledBy }, ref) => {
+      const [value, setValue] = useState("");
+
+      return (
+        <div
+          ref={ref}
+          style={style}
+          className={className}
+          aria-labelledby={labeledBy}
+        >
+          <ul className="list-unstyled">
+            {React.Children.toArray(children).filter(
+              (child) =>
+                !value || child.props.children.toLowerCase().startsWith(value)
+            )}
+          </ul>
         </div>
       );
     }
@@ -115,7 +164,7 @@ export default function Projectlist() {
           <Row>
             {getData ? (
               dbItems.map((item) => (
-                <Col>
+                <Col key={item._id}>
                   <Card
                     style={{
                       width: "18rem",
@@ -142,7 +191,33 @@ export default function Projectlist() {
                     </Card.Body>
 
                     <Card.Footer>
-                      <Button>. . .</Button>
+                      <Dropdown>
+                        <Dropdown.Toggle
+                          as={OptionToggle}
+                          id="dropdown-custom-components"
+                        ></Dropdown.Toggle>
+
+                        <Dropdown.Menu as={OptionMenu}>
+                          <Dropdown.Item
+                            eventKey="1"
+                            onClick={(e) => {
+                              axios
+                                .delete(`/api/project/delete/`, {
+                                  params: {
+                                    project_id: item._id,
+                                    user: auth.userId,
+                                  },
+                                })
+                                .then((res) => {
+                                  console.log("res: ", res);
+                                })
+                                .catch((err) => console.log(err));
+                            }}
+                          >
+                            Delete Project
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
                     </Card.Footer>
                   </Card>
                 </Col>
