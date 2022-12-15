@@ -12,8 +12,18 @@ const {
 router.route("/all").get(findAll); // findAll route
 // router.route("/:id").get(findAll); // findbyid route (commented out for now, breaks logout and authenticated route)
 router.route("/register").post(createUser); //register new user route
-router.route("/login").post(passport.authenticate("local", { session: false }), login); //login user route
-router.route("/logout").get(passport.authenticate("jwt", { session: false }), logout); //logout user route
-router.route("/authenticated").get(passport.authenticate("jwt", { session: false }), authenticateUser); //verifys user is authenticated
+router.route("/login").post(
+  passport.authenticate("local", {
+    session: false,
+    failureMessage: true,
+  }),
+  login
+); //login user route
+router
+  .route("/logout")
+  .get(passport.authenticate("jwt", { session: false }), logout); //logout user route
+router
+  .route("/authenticated")
+  .get(passport.authenticate("jwt", { session: false }), authenticateUser); //verifys user is authenticated
 
 module.exports = router;

@@ -4,21 +4,32 @@ import UserAPI from "../Utils/UserAPI";
 export const AuthContext = createContext();
 
 export default ({ children }) => {
-    const [user, setUser] = useState();
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState();
+  const [userId, setUserId] = useState();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    useEffect(() => {
-        UserAPI.isAuthenticated().then(res => {
-            setUser(res.user);
-            setIsAuthenticated(res.isAuthenticated);
-        });
-    }, []);
+  useEffect(() => {
+    UserAPI.isAuthenticated().then((res) => {
+      setUser(res.user);
 
-    return (
-        <div>
-            <AuthContext.Provider value={{user, setUser, isAuthenticated, setIsAuthenticated }}>
-                { children }
-            </AuthContext.Provider>
-        </div>
-    )
-}
+      setIsAuthenticated(res.isAuthenticated);
+    });
+  }, []);
+
+  return (
+    <div>
+      <AuthContext.Provider
+        value={{
+          user,
+          setUser,
+          isAuthenticated,
+          setIsAuthenticated,
+          userId,
+          setUserId,
+        }}
+      >
+        {children}
+      </AuthContext.Provider>
+    </div>
+  );
+};

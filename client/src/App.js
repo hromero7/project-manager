@@ -1,14 +1,16 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import { AuthContext } from "./Context/AuthContext";
 import PrivateRoute from "./Utils/PrivateRoute";
 import PublicRoute from "./Utils/PublicRoute";
 import LandingPage from "./Pages/Landing/Landing";
 import Dashboard from "./Pages/Dashboard/Dashboard";
+import ProjectPage from "./Pages/ProjectPage/ProjectPage";
 import LoginPage from "./Pages/Login/Login";
 import NavBar from "./Components/Navbar/Navbar";
+import Whoops from "./Pages/PNF/Whoops";
 import "./App.css";
 
 function App() {
@@ -23,9 +25,11 @@ function App() {
         <Route element={<PublicRoute />}>
           <Route exact path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/login-fail" element={<Whoops />} />
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/project/:ID" element={<ProjectPage />} />
         </Route>
       </Routes>
     </Container>
