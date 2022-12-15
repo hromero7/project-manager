@@ -21,7 +21,7 @@ passport.use(
     (payload, done) => {
       db.User.findById({ _id: payload.sub }, (err, user) => {
         if (err) return done(err, false);
-        if (!user) return done(null, user);
+        if (user) return done(null, user);
         else return done(null, done);
       });
     }
