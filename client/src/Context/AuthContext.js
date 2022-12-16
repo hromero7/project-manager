@@ -5,13 +5,11 @@ export const AuthContext = createContext();
 
 export default ({ children }) => {
   const [user, setUser] = useState();
-  const [userId, setUserId] = useState();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     UserAPI.isAuthenticated().then((res) => {
       setUser(res.user);
-
       setIsAuthenticated(res.isAuthenticated);
     });
   }, []);
@@ -24,8 +22,6 @@ export default ({ children }) => {
           setUser,
           isAuthenticated,
           setIsAuthenticated,
-          userId,
-          setUserId,
         }}
       >
         {children}

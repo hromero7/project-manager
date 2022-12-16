@@ -17,7 +17,6 @@ export default function Loginform() {
     if (!loginRes.isAuthenticated) setErrorMessage(loginRes.message);
     if (loginRes.isAuthenticated) {
       authContext.setUser(loginRes.user);
-      authContext.setUserId(loginRes._id._id);
       authContext.setIsAuthenticated(loginRes.isAuthenticated);
       navigate("/dashboard");
     }

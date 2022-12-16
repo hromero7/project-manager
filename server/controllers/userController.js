@@ -90,12 +90,19 @@ module.exports = {
   login: (req, res) => {
     //login user route, assigns jwt token to user
     if (req.isAuthenticated()) {
-      const { _id, username } = req.user;
+      const { _id, username, email, firstName, lastName } = req.user;
       const token = signToken(_id);
       res.cookie("access_token", token, { httpOnly: true, sameSite: true });
-      res
-        .status(200)
-        .json({ isAuthenticated: true, user: { username }, _id: { _id } });
+      res.status(200).json({
+        isAuthenticated: true,
+        user: {
+          username: username,
+          email: email,
+          firstName: firstName,
+          lastName: lastName,
+          _id: _id,
+        },
+      });
       res.redirect("/dashboard");
     }
   },

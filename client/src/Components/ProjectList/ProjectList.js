@@ -28,35 +28,21 @@ export default function Projectlist() {
   const [projectTitle, setProjectTitle] = useState("");
 
   useEffect(() => {
+    console.log("auth: ", auth);
     getTasks();
   }, []);
 
   const getTasks = () => {
-    if (auth.userId === undefined) {
-      axios
-        .get(`/api/project/${auth.user._id}`)
-        .then((res) => {
-          console.log("res ", res);
-          setDbItems(res.data);
-          setGetData(true);
-        })
-        .catch((err) => {
-          console.log("error", err);
-          setGetData(false);
-        });
-    } else {
-      axios
-        .get(`/api/project/${auth.userId}`)
-        .then((res) => {
-          console.log("res ", res);
-          setDbItems(res.data);
-          setGetData(true);
-        })
-        .catch((err) => {
-          console.log("error", err);
-          setGetData(false);
-        });
-    }
+    axios
+      .get(`/api/project/${auth.user._id}`)
+      .then((res) => {
+        setDbItems(res.data);
+        setGetData(true);
+      })
+      .catch((err) => {
+        console.log("error", err);
+        setGetData(false);
+      });
   };
 
   const projectAdd = (e) => {
@@ -64,7 +50,7 @@ export default function Projectlist() {
       .post(`/api/project/create/`, { title: projectTitle })
       .then((res) => {
         axios
-          .get(`/api/project/${auth.userId}`)
+          .get(`/api/project/${auth.user._id}`)
           .then((res) => {
             setDbItems(res.data);
             setGetData(true);
@@ -222,12 +208,12 @@ export default function Projectlist() {
                                 .delete(`/api/project/delete/`, {
                                   params: {
                                     project_id: item._id,
-                                    user: auth.userId,
+                                    user: auth.user._id,
                                   },
                                 })
                                 .then((res) => {
                                   axios
-                                    .get(`/api/project/${auth.user._Id}`)
+                                    .get(`/api/project/${auth.user._id}`)
                                     .then((res) => {
                                       setDbItems(res.data);
                                       setGetData(true);
