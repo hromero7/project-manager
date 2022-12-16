@@ -103,7 +103,6 @@ module.exports = {
           _id: _id,
         },
       });
-      res.redirect("/dashboard");
     }
   },
   logout: (req, res) => {
