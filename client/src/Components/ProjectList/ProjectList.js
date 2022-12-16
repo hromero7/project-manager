@@ -32,21 +32,34 @@ export default function Projectlist() {
   }, []);
 
   const getTasks = () => {
-    axios
-      .get(`/api/project/${auth.userId}`)
-      .then((res) => {
-        console.log("res ", res);
-        setDbItems(res.data);
-        setGetData(true);
-      })
-      .catch((err) => {
-        console.log("error", err);
-        setGetData(false);
-      });
+    if (auth.userId === undefined) {
+      axios
+        .get(`/api/project/${auth.user._id}`)
+        .then((res) => {
+          console.log("res ", res);
+          setDbItems(res.data);
+          setGetData(true);
+        })
+        .catch((err) => {
+          console.log("error", err);
+          setGetData(false);
+        });
+    } else {
+      axios
+        .get(`/api/project/${auth.userId}`)
+        .then((res) => {
+          console.log("res ", res);
+          setDbItems(res.data);
+          setGetData(true);
+        })
+        .catch((err) => {
+          console.log("error", err);
+          setGetData(false);
+        });
+    }
   };
 
   const projectAdd = (e) => {
-    // console.log("auth: ", auth);
     axios
       .post(`/api/project/create/`, { title: projectTitle })
       .then((res) => {
@@ -214,7 +227,7 @@ export default function Projectlist() {
                                 })
                                 .then((res) => {
                                   axios
-                                    .get(`/api/project/${auth.userId}`)
+                                    .get(`/api/project/${auth.user._Id}`)
                                     .then((res) => {
                                       setDbItems(res.data);
                                       setGetData(true);

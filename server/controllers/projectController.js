@@ -2,7 +2,6 @@ const db = require("../models");
 
 module.exports = {
   findAll: (req, res) => {
-    // console.log("req: ", req);
     db.Project.find({}, function (err, docs) {
       if (err)
         return res
