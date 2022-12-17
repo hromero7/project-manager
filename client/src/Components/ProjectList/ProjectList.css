@@ -1,0 +1,9 @@
+
+
+.fa-sharp, .fa-solid, .fa-fire {
+    font-size: 25px;
+    border: 1px solid black;
+    border-radius:  100%;
+    padding: 4px;
+    justify-content: center;
+}

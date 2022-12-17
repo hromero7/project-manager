@@ -15,6 +15,7 @@ import {
 } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
+import "./ProjectList.css";
 
 import axios from "axios";
 
@@ -27,14 +28,14 @@ export default function Projectlist() {
   const [projectTitle, setProjectTitle] = useState("");
 
   useEffect(() => {
+    console.log("auth: ", auth);
     getTasks();
   }, []);
 
   const getTasks = () => {
     axios
-      .get(`/api/project/${auth.userId}`)
+      .get(`/api/project/${auth.user._id}`)
       .then((res) => {
-        console.log("res ", res);
         setDbItems(res.data);
         setGetData(true);
       })
@@ -45,18 +46,25 @@ export default function Projectlist() {
   };
 
   const projectAdd = (e) => {
-    // console.log("auth: ", auth);
     axios
       .post(`/api/project/create/`, { title: projectTitle })
       .then((res) => {
-        console.log("res: ", res);
+        axios
+          .get(`/api/project/${auth.user._id}`)
+          .then((res) => {
+            setDbItems(res.data);
+            setGetData(true);
+          })
+          .catch((err) => {
+            console.log("error", err);
+            setGetData(false);
+          });
       })
       .catch((err) => console.log(err));
   };
 
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
-      href=""
       ref={ref}
       onClick={(e) => {
         e.preventDefault();
@@ -88,20 +96,15 @@ export default function Projectlist() {
 
   const OptionToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
-      href={
-        <FontAwesomeIcon
-          icon="fa-sharp fa-5x fa-solid fa-fire fa-beat"
-          style={{ color: "black" }}
-        />
-      }
       ref={ref}
       onClick={(e) => {
         e.preventDefault();
         onClick(e);
       }}
+      style={{ cursor: "pointer" }}
     >
       {children}
-      <i class="fa-sharp fa-solid fa-fire"></i>
+      <i class="fa-sharp fa-solid fa-fire "></i>
     </a>
   ));
 
@@ -191,7 +194,7 @@ export default function Projectlist() {
                     </Card.Body>
 
                     <Card.Footer>
-                      <Dropdown>
+                      <Dropdown align="end" className="dropdown">
                         <Dropdown.Toggle
                           as={OptionToggle}
                           id="dropdown-custom-components"
@@ -205,11 +208,20 @@ export default function Projectlist() {
                                 .delete(`/api/project/delete/`, {
                                   params: {
                                     project_id: item._id,
-                                    user: auth.userId,
+                                    user: auth.user._id,
                                   },
                                 })
                                 .then((res) => {
-                                  console.log("res: ", res);
+                                  axios
+                                    .get(`/api/project/${auth.user._id}`)
+                                    .then((res) => {
+                                      setDbItems(res.data);
+                                      setGetData(true);
+                                    })
+                                    .catch((err) => {
+                                      console.log("error", err);
+                                      setGetData(false);
+                                    });
                                 })
                                 .catch((err) => console.log(err));
                             }}
