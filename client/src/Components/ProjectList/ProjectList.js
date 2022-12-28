@@ -9,10 +9,6 @@ import {
   Button,
   Card,
 } from "react-bootstrap";
-import {
-  FontAwesomeIcon,
-  FontAwesomeIconProps,
-} from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import "./ProjectList.css";
@@ -199,7 +195,6 @@ export default function Projectlist() {
                           as={OptionToggle}
                           id="dropdown-custom-components"
                         ></Dropdown.Toggle>
-
                         <Dropdown.Menu as={OptionMenu}>
                           <Dropdown.Item
                             eventKey="1"
