@@ -43,6 +43,7 @@ export default function ProjectPage() {
     axios
       .get(`/api/project/p/${pathname}`)
       .then((res) => {
+        console.log("res: ", res);
         setProjectData({
           date: res.data.date,
           members: res.data.members,
@@ -202,18 +203,23 @@ export default function ProjectPage() {
                         </tr>
                       </thead>
                       <tbody>
-                        {projectData.tasks.map((taskItems) => (
-                          <tr>
-                            <td>{taskItems._id.slice(-5)}</td>
-                            <td>{taskItems.taskTitle}</td>
-                            <td>{taskItems.startDate}</td>
-                            <td>{taskItems.dueDate}</td>
-                            <td>assigned</td>
-                            <td>{taskItems.priority}</td>
-                            <td>{taskItems.status}</td>
-                            <td>{taskItems.userId}</td>
-                          </tr>
-                        ))}
+                        {projectData.tasks.map((projId) => {
+                          console.log("projectData: ", projectData);
+                          return (
+                            <tr key={projId._id}>
+                              <td>{projId._id.slice(-5)}</td>
+                              <td>{projId.taskTitle}</td>
+                              <td>{projId.startDate}</td>
+                              <td>{projId.dueDate}</td>
+                              <td>assigned</td>
+                              <td>{projId.priority}</td>
+                              <td>{projId.status}</td>
+                              <td colSpan={2}>
+                                {projectData.members[0].username}
+                              </td>
+                            </tr>
+                          );
+                        })}
                       </tbody>
                     </Table>
                   </Tab.Pane>

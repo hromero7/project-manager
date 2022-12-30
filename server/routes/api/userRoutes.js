@@ -7,10 +7,11 @@ const {
   login,
   logout,
   authenticateUser,
+  findbyid,
 } = require("../../controllers/userController");
 
 router.route("/all").get(findAll); // findAll route
-// router.route("/:id").get(findAll); // findbyid route (commented out for now, breaks logout and authenticated route)
+router.route("/find/:id").get(findbyid); // findbyid route (commented out for now, breaks logout and authenticated route)
 router.route("/register").post(createUser); //register new user route
 router.route("/login").post(
   passport.authenticate("local", {
