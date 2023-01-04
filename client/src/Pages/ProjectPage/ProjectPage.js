@@ -9,18 +9,17 @@ import {
   Button,
   Table,
   Form,
-  InputGroup,
   Modal,
+  Dropdown,
 } from "react-bootstrap";
 import DateTimePicker from "react-datetime-picker";
 import "./ProjectPage.css";
 
 export default function ProjectPage() {
   let pathname = window.location.pathname.slice(9);
-  const [isClicked, setIsClicked] = useState(true);
-  const [newProjectTask, setNewProjectTask] = useState();
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
+  const [value, setValue] = useState("");
   const [taskValues, setTaskValues] = useState({
     taskTitle: "",
     startTime: startTime,
@@ -36,14 +35,20 @@ export default function ProjectPage() {
   });
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    getProjData();
+  };
   const handleShow = () => setShow(true);
 
   useEffect((e) => {
+    getProjData();
+  }, []);
+
+  const getProjData = () => {
     axios
       .get(`/api/project/p/${pathname}`)
       .then((res) => {
-        console.log("res: ", res);
         setProjectData({
           date: res.data.date,
           members: res.data.members,
@@ -55,7 +60,7 @@ export default function ProjectPage() {
       .catch((err) => {
         console.log("err: ", err);
       });
-  }, []);
+  };
 
   const addTask = () => {
     console.log("taskValues: ", taskValues);
@@ -77,6 +82,36 @@ export default function ProjectPage() {
   const handleTaskFormChange = (e) => {
     setTaskValues({ ...taskValues, [e.target.name]: e.target.value });
   };
+
+  const CustomUserAddToggle = React.forwardRef(({ children, onClick }, ref) => (
+    <a
+      href=""
+      ref={ref}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick(e);
+      }}
+    >
+      {children}
+      &#x25bc;
+    </a>
+  ));
+
+  const taskMenu = React.forwardRef(
+    ({ children, style, className, "aria-labelledby": labeledBy }, ref) => {
+      return (
+        <div
+          ref={ref}
+          style={style}
+          className={className}
+          aria-labelledby={labeledBy}
+        >
+          <ul className="list-unstyled"></ul>
+          {children}
+        </div>
+      );
+    }
+  );
 
   return (
     <Container>
@@ -149,6 +184,7 @@ export default function ProjectPage() {
                                       placeholder="Enter title"
                                       value={taskValues.taskTitle}
                                       onChange={handleTaskFormChange}
+                                      autocomplete="off"
                                       required
                                     />
                                   </Form.Group>
@@ -183,6 +219,7 @@ export default function ProjectPage() {
                                       placeholder="Proiority"
                                       value={taskValues.priority}
                                       onChange={handleTaskFormChange}
+                                      autocomplete="off"
                                     />
                                   </Form.Group>
                                 </Form>
@@ -204,14 +241,45 @@ export default function ProjectPage() {
                       </thead>
                       <tbody>
                         {projectData.tasks.map((projId) => {
-                          console.log("projectData: ", projectData);
                           return (
                             <tr key={projId._id}>
                               <td>{projId._id.slice(-5)}</td>
                               <td>{projId.taskTitle}</td>
                               <td>{projId.startDate}</td>
                               <td>{projId.dueDate}</td>
-                              <td>assigned</td>
+                              <td>
+                                <Dropdown>
+                                  <Dropdown.Toggle
+                                    as={CustomUserAddToggle}
+                                    id="dropdown-custom-components"
+                                  >
+                                    View/add users:
+                                  </Dropdown.Toggle>
+
+                                  <Dropdown.Menu as={taskMenu}>
+                                    <Form.Control
+                                      autoFocus
+                                      className="mx-3 my-2 w-auto"
+                                      placeholder="Search to add..."
+                                      autocomplete="off"
+                                      onChange={(e) => {
+                                        axios
+                                          .get(
+                                            `/api/user/finduser/${e.target.value}`
+                                          )
+                                          .then((res) => {
+                                            console.log("res: ", res);
+                                          });
+                                        setValue(e.target.value);
+                                      }}
+                                      value={value}
+                                    />
+                                    <Dropdown.Item eventKey="1">
+                                      Red
+                                    </Dropdown.Item>
+                                  </Dropdown.Menu>
+                                </Dropdown>
+                              </td>
                               <td>{projId.priority}</td>
                               <td>{projId.status}</td>
                               <td colSpan={2}>

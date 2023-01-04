@@ -83,6 +83,7 @@ export default function Projectlist() {
             placeholder="New project title:"
             onChange={(e) => setProjectTitle(e.target.value)}
             value={projectTitle}
+            autocomplete="off"
           />
           <ul className="list-unstyled">{React.Children.toArray(children)}</ul>
         </div>

@@ -30,6 +30,13 @@ module.exports = {
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
+  findbyusername: (req, res) => {
+    db.User.find({
+      username: { $regex: `.*${req.params.username}*`, $options: "i" },
+    })
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
   createUser: (req, res) => {
     let username = req.body.username;
     db.User.findOne({ username }, (err, user) => {
