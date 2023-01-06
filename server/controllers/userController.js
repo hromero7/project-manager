@@ -26,8 +26,14 @@ module.exports = {
     });
   },
   findbyid: (req, res) => {
-    console.log(req.body);
     db.User.findById(req.params.id)
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+  findbyusername: (req, res) => {
+    db.User.find({
+      username: { $regex: `.*${req.params.username}*`, $options: "i" },
+    })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },

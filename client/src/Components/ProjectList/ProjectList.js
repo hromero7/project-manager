@@ -9,22 +9,16 @@ import {
   Button,
   Card,
 } from "react-bootstrap";
-import {
-  FontAwesomeIcon,
-  FontAwesomeIconProps,
-} from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import "./ProjectList.css";
 import ProjectAPI from "../../Utils/ProjectAPI";
-import axios from "axios";
 
 export default function Projectlist() {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const [dbItems, setDbItems] = useState();
   const [getData, setGetData] = useState(false);
-  const [alertState, setAlertState] = useState(false);
   const [projectTitle, setProjectTitle] = useState("");
 
   useEffect(() => {
@@ -54,7 +48,7 @@ export default function Projectlist() {
     } else {
       console.log(response);
     }
-  }
+  };
 
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
@@ -80,6 +74,7 @@ export default function Projectlist() {
             placeholder="New project title:"
             onChange={(e) => setProjectTitle(e.target.value)}
             value={projectTitle}
+            autocomplete="off"
           />
           <ul className="list-unstyled">{React.Children.toArray(children)}</ul>
         </div>
@@ -166,19 +161,19 @@ export default function Projectlist() {
                       width: "18rem",
                       height: "200px",
                       margin: "15px",
-                      color: "black"
+                      color: "black",
                     }}
                     key={item._id}
                   >
-                      <Card.Body
-                        onClick={() => {
-                          navigate(`/project/${item._id}`); 
-                        }}
-                        style={{ cursor: "pointer" }}
-                      >
-                        <Card.Title>{item.title}</Card.Title>
-                        <Card.Text>{item._id.slice(-5)}</Card.Text>
-                      </Card.Body>
+                    <Card.Body
+                      onClick={() => {
+                        navigate(`/project/${item._id}`);
+                      }}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <Card.Title>{item.title}</Card.Title>
+                      <Card.Text>{item._id.slice(-5)}</Card.Text>
+                    </Card.Body>
 
                     <Card.Footer>
                       <Dropdown align="end" className="dropdown">
@@ -186,13 +181,13 @@ export default function Projectlist() {
                           as={OptionToggle}
                           id="dropdown-custom-components"
                         ></Dropdown.Toggle>
-
                         <Dropdown.Menu as={OptionMenu}>
                           <Dropdown.Item
                             eventKey="1"
                             onClick={(e) => {
                               deleteProject(item._id, auth.user._id);
-                            }}>
+                            }}
+                          >
                             Delete Project
                           </Dropdown.Item>
                         </Dropdown.Menu>

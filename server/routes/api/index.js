@@ -7,6 +7,6 @@ const taskRoutes = require("./taskRoutes");
 router.use("/user", userRoutes);
 router.use("/alert", alertRoutes);
 router.use("/project", projectRoutes);
-router.use("/project/task", taskRoutes);
+router.use("/task", taskRoutes);
 
 module.exports = router;
