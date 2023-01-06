@@ -1,5 +1,5 @@
 import axios from "axios";
-import { React, useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Container,
   Row,
@@ -43,15 +43,16 @@ export default function ProjectPage() {
   const [searchList, setSearchList] = useState("");
   const [checked, setChecked] = useState(false);
 
+  useEffect((e) => {
+    console.log("ID: ", ID);
+    getProjData();
+  }, []);
+
   const handleClose = () => {
     setShow(false);
     getProjData();
   };
   const handleShow = () => setShow(true);
-
-  useEffect((e) => {
-    getProjData();
-  }, []);
 
   const getProjData = () => {
     ProjectAPI.getOneProject(ID).then((response) => {
@@ -252,7 +253,7 @@ export default function ProjectPage() {
                               <td>{projId.startDate}</td>
                               <td>{projId.dueDate}</td>
                               <td>
-                                {/* <Dropdown
+                                <Dropdown
                                 // onToggle={() => setOpen(!open)}
                                 // show={open}
                                 >
@@ -328,7 +329,7 @@ export default function ProjectPage() {
                                       </Dropdown.Item>
                                     )}
                                   </Dropdown.Menu>
-                                </Dropdown> */}
+                                </Dropdown>
                               </td>
                               <td>{projId.priority}</td>
                               <td>{projId.status}</td>

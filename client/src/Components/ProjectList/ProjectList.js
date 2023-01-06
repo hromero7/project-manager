@@ -13,7 +13,6 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import "./ProjectList.css";
 import ProjectAPI from "../../Utils/ProjectAPI";
-import axios from "axios";
 
 export default function Projectlist() {
   const auth = useContext(AuthContext);
