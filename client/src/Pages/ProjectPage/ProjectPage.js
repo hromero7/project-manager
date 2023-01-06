@@ -253,7 +253,7 @@ export default function ProjectPage() {
                               <td>{projId.startDate}</td>
                               <td>{projId.dueDate}</td>
                               <td>
-                                <Dropdown
+                                {/* <Dropdown
                                 // onToggle={() => setOpen(!open)}
                                 // show={open}
                                 >
@@ -283,7 +283,7 @@ export default function ProjectPage() {
                                               `/api/user/finduser/${e.target.value}`
                                             )
                                             .then((res) => {
-                                              console.log("res: ", res.data);
+                                              // console.log("res: ", res.data);
                                               setSearchList(res.data);
                                               setGetSearchData(true);
                                             })
@@ -329,7 +329,7 @@ export default function ProjectPage() {
                                       </Dropdown.Item>
                                     )}
                                   </Dropdown.Menu>
-                                </Dropdown>
+                                </Dropdown> */}
                               </td>
                               <td>{projId.priority}</td>
                               <td>{projId.status}</td>
