@@ -59,6 +59,7 @@ export default function Loginform() {
               <Row>
                 <Col>
                   <Button
+                    className="loginBtn"
                     variant="primary"
                     type="submit"
                     onClick={(e) => {
@@ -68,7 +69,7 @@ export default function Loginform() {
                       }
                     }}
                   >
-                    Submit
+                    Log In
                   </Button>
                   {errorMessage ? (
                     <Alert variant={"danger"}>{errorMessage}</Alert>

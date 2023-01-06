@@ -1,9 +1,12 @@
-import axios from "axios";
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
 import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
+import ProjectAPI from "../../Utils/ProjectAPI";
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function ProjectPage() {
-  let pathname = window.location.pathname.slice(9);
+  const { user } = useContext(AuthContext);
+  const { ID } = useParams();
   const [projectData, setProjectData] = useState({
     date: "",
     members: [],
@@ -11,22 +14,17 @@ export default function ProjectPage() {
     title: "",
     userId: "",
   });
-  useEffect((e) => {
-    axios
-      .get(`/api/project/p/${pathname}`)
-      .then((res) => {
-        console.log("res: ", res);
-        setProjectData({
-          date: res.data.date,
-          members: res.data.members,
-          tasks: res.data.tasks,
-          title: res.data.title,
-          userId: res.data.userId,
-        });
-      })
-      .catch((err) => {
-        console.log("err: ", err);
+  useEffect(() => {
+    ProjectAPI.getOneProject(ID).then(response => {
+      setProjectData({
+        date: response.date,
+        members: response.members,
+        tasks: response.tasks,
+        title: response.title,
+        userId: response.userId,
       });
+    });
+    
   }, []);
 
   return (

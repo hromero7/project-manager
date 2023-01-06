@@ -19,8 +19,8 @@ const NavBar = () => {
   };
 
   return (
-    <Navbar bg="light" variant="light" fixed="top">
-      <Navbar.Brand
+    <Navbar className="navbar" variant="light" fixed="top">
+      <Navbar.Brand className="navbar-title"
         onClick={(e) => {
           navigate("/dashboard");
         }}
@@ -58,6 +58,7 @@ const NavBar = () => {
               </NavDropdown>
             ) : (
               <Button
+                className="loginBtn"
                 variant="primary"
                 type="submit"
                 onClick={(e) => {
