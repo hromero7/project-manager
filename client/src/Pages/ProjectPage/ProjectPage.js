@@ -253,7 +253,7 @@ export default function ProjectPage() {
                               <td>{projId.startDate}</td>
                               <td>{projId.dueDate}</td>
                               <td>
-                                {/* <Dropdown
+                                <Dropdown
                                 // onToggle={() => setOpen(!open)}
                                 // show={open}
                                 >
@@ -329,7 +329,7 @@ export default function ProjectPage() {
                                       </Dropdown.Item>
                                     )}
                                   </Dropdown.Menu>
-                                </Dropdown> */}
+                                </Dropdown>
                               </td>
                               <td>{projId.priority}</td>
                               <td>{projId.status}</td>
