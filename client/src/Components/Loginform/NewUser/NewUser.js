@@ -76,7 +76,7 @@ export default function NewUser() {
               placeholder="Enter email"
               autoComplete="email"
             />
-            <Form.Text className="text-muted">
+            <Form.Text style={{color: "white"}}>
               We'll never share your email with anyone else.
             </Form.Text>
           </Form.Group>
@@ -110,19 +110,16 @@ export default function NewUser() {
           {errorMessage ? <Alert variant={"danger"}>{errorMessage}</Alert> : ""}
 
           <Button
+            className="signup-btn"
             variant="primary"
             type="button"
             onClick={(e) => {
               submitBtn(e);
             }}
           >
-            Submit
+            Create Account
           </Button>
 
-          <div className="login-form">
-            <p>Already have an account?</p>
-            <Link to={`/login`}>Sign In</Link>
-          </div>
         </Form>
       </Col>
       <Col></Col>
