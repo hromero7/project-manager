@@ -20,6 +20,8 @@ export default function ProjectPage() {
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   const [value, setValue] = useState("");
+  const [getSearchData, setGetSearchData] = useState(false);
+  const [open, setOpen] = useState(false);
   const [taskValues, setTaskValues] = useState({
     taskTitle: "",
     startTime: startTime,
@@ -34,6 +36,8 @@ export default function ProjectPage() {
     userId: "",
   });
   const [show, setShow] = useState(false);
+  const [searchList, setSearchList] = useState("");
+  const [checked, setChecked] = useState(false);
 
   const handleClose = () => {
     setShow(false);
@@ -241,6 +245,7 @@ export default function ProjectPage() {
                       </thead>
                       <tbody>
                         {projectData.tasks.map((projId) => {
+                          console.log("projectData: ", projectData);
                           return (
                             <tr key={projId._id}>
                               <td>{projId._id.slice(-5)}</td>
@@ -248,7 +253,10 @@ export default function ProjectPage() {
                               <td>{projId.startDate}</td>
                               <td>{projId.dueDate}</td>
                               <td>
-                                <Dropdown>
+                                {/* <Dropdown
+                                // onToggle={() => setOpen(!open)}
+                                // show={open}
+                                >
                                   <Dropdown.Toggle
                                     as={CustomUserAddToggle}
                                     id="dropdown-custom-components"
@@ -257,28 +265,71 @@ export default function ProjectPage() {
                                   </Dropdown.Toggle>
 
                                   <Dropdown.Menu as={taskMenu}>
+                                    <Dropdown.Header>
+                                      Add a member:
+                                    </Dropdown.Header>
+
                                     <Form.Control
                                       autoFocus
                                       className="mx-3 my-2 w-auto"
                                       placeholder="Search to add..."
                                       autocomplete="off"
                                       onChange={(e) => {
-                                        axios
-                                          .get(
-                                            `/api/user/finduser/${e.target.value}`
-                                          )
-                                          .then((res) => {
-                                            console.log("res: ", res);
-                                          });
+                                        if (e.target.value.length <= 1) {
+                                          setGetSearchData(false);
+                                        } else {
+                                          axios
+                                            .get(
+                                              `/api/user/finduser/${e.target.value}`
+                                            )
+                                            .then((res) => {
+                                              console.log("res: ", res.data);
+                                              setSearchList(res.data);
+                                              setGetSearchData(true);
+                                            })
+                                            .catch((err) =>
+                                              console.log("err: ", err)
+                                            );
+                                        }
+
                                         setValue(e.target.value);
                                       }}
                                       value={value}
                                     />
-                                    <Dropdown.Item eventKey="1">
-                                      Red
-                                    </Dropdown.Item>
+                                    <Dropdown.Divider />
+                                    {getSearchData ? (
+                                      searchList.map((searchItem) => {
+                                        return (
+                                          <Dropdown.Item key={searchItem._id}>
+                                            <Form>
+                                              <Form.Check
+                                                type="switch"
+                                                id="checkbox"
+                                                checked={checked}
+                                                onChange={() =>
+                                                  setChecked(!checked)
+                                                }
+                                                label={searchItem.username}
+                                                feedback
+                                              />
+                                            </Form>
+                                            {}
+                                          </Dropdown.Item>
+                                        );
+                                      })
+                                    ) : (
+                                      <Dropdown.Item
+                                        eventKey="1"
+                                        // onClick={console.log(
+                                        //   "searchList",
+                                        //   searchList
+                                        // )}
+                                      >
+                                        Bleep
+                                      </Dropdown.Item>
+                                    )}
                                   </Dropdown.Menu>
-                                </Dropdown>
+                                </Dropdown> */}
                               </td>
                               <td>{projId.priority}</td>
                               <td>{projId.status}</td>

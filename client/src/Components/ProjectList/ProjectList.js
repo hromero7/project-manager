@@ -20,11 +20,9 @@ export default function Projectlist() {
   const navigate = useNavigate();
   const [dbItems, setDbItems] = useState();
   const [getData, setGetData] = useState(false);
-  const [alertState, setAlertState] = useState(false);
   const [projectTitle, setProjectTitle] = useState("");
 
   useEffect(() => {
-    console.log("auth: ", auth);
     getTasks();
   }, []);
 
