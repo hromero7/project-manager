@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import {
   Container,
   Row,
@@ -14,9 +14,11 @@ import {
 } from "react-bootstrap";
 import DateTimePicker from "react-datetime-picker";
 import "./ProjectPage.css";
+import { useParams } from "react-router-dom";
+import ProjectAPI from "../../Utils/ProjectAPI";
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function ProjectPage() {
-  let pathname = window.location.pathname.slice(9);
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   const [value, setValue] = useState("");
@@ -28,6 +30,8 @@ export default function ProjectPage() {
     endTime: endTime,
     priority: "",
   });
+  const { user } = useContext(AuthContext);
+  const { ID } = useParams();
   const [projectData, setProjectData] = useState({
     date: "",
     members: [],
@@ -50,26 +54,21 @@ export default function ProjectPage() {
   }, []);
 
   const getProjData = () => {
-    axios
-      .get(`/api/project/p/${pathname}`)
-      .then((res) => {
-        setProjectData({
-          date: res.data.date,
-          members: res.data.members,
-          tasks: res.data.tasks,
-          title: res.data.title,
-          userId: res.data.userId,
-        });
-      })
-      .catch((err) => {
-        console.log("err: ", err);
+    ProjectAPI.getOneProject(ID).then((response) => {
+      setProjectData({
+        date: response.date,
+        members: response.members,
+        tasks: response.tasks,
+        title: response.title,
+        userId: response.userId,
       });
+    });
   };
 
   const addTask = () => {
     console.log("taskValues: ", taskValues);
     axios
-      .post(`/api/task/create/${pathname}`, {
+      .post(`/api/task/create/${ID}`, {
         taskTitle: taskValues.taskTitle,
         startDate: taskValues.startTime,
         dueDate: taskValues.endTime,

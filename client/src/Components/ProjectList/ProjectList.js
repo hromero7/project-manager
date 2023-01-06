@@ -12,7 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import "./ProjectList.css";
-
+import ProjectAPI from "../../Utils/ProjectAPI";
 import axios from "axios";
 
 export default function Projectlist() {
@@ -23,38 +23,32 @@ export default function Projectlist() {
   const [projectTitle, setProjectTitle] = useState("");
 
   useEffect(() => {
-    getTasks();
+    console.log("auth: ", auth);
+    getProjects();
   }, []);
 
-  const getTasks = () => {
-    axios
-      .get(`/api/project/${auth.user._id}`)
-      .then((res) => {
-        setDbItems(res.data);
-        setGetData(true);
-      })
-      .catch((err) => {
-        console.log("error", err);
-        setGetData(false);
-      });
+  const getProjects = async () => {
+    const projectData = await ProjectAPI.getProjects(auth.user._id);
+    setDbItems(projectData);
+    setGetData(true);
   };
 
-  const projectAdd = (e) => {
-    axios
-      .post(`/api/project/create/`, { title: projectTitle })
-      .then((res) => {
-        axios
-          .get(`/api/project/${auth.user._id}`)
-          .then((res) => {
-            setDbItems(res.data);
-            setGetData(true);
-          })
-          .catch((err) => {
-            console.log("error", err);
-            setGetData(false);
-          });
-      })
-      .catch((err) => console.log(err));
+  const addProject = async () => {
+    const newProject = await ProjectAPI.createProject(projectTitle);
+    if (!newProject.message.msgError) {
+      getProjects();
+    } else {
+      console.log(newProject);
+    }
+  };
+
+  const deleteProject = async (projectId, userId) => {
+    const response = await ProjectAPI.deleteProject(projectId, userId);
+    if (!response.message.msgError) {
+      getProjects();
+    } else {
+      console.log(response);
+    }
   };
 
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -132,7 +126,7 @@ export default function Projectlist() {
           <Row>
             <Col
               onClick={() => {
-                getTasks();
+                getProjects();
               }}
             >
               <div>Hello {auth.user.username}!</div>
@@ -149,7 +143,7 @@ export default function Projectlist() {
                   <Dropdown.Item eventKey="1">
                     <Button
                       onClick={(e) => {
-                        projectAdd();
+                        addProject();
                       }}
                     >
                       Submit
@@ -168,19 +162,13 @@ export default function Projectlist() {
                       width: "18rem",
                       height: "200px",
                       margin: "15px",
+                      color: "black",
                     }}
                     key={item._id}
                   >
                     <Card.Body
                       onClick={() => {
-                        axios
-                          .get(`/api/project/p/${item._id}`)
-                          .then((res) => {
-                            navigate(`/project/${res.data._id}`);
-                          })
-                          .catch((err) => {
-                            console.log("err: ", err);
-                          });
+                        navigate(`/project/${item._id}`);
                       }}
                       style={{ cursor: "pointer" }}
                     >
@@ -198,26 +186,7 @@ export default function Projectlist() {
                           <Dropdown.Item
                             eventKey="1"
                             onClick={(e) => {
-                              axios
-                                .delete(`/api/project/delete/`, {
-                                  params: {
-                                    project_id: item._id,
-                                    user: auth.user._id,
-                                  },
-                                })
-                                .then((res) => {
-                                  axios
-                                    .get(`/api/project/${auth.user._id}`)
-                                    .then((res) => {
-                                      setDbItems(res.data);
-                                      setGetData(true);
-                                    })
-                                    .catch((err) => {
-                                      console.log("error", err);
-                                      setGetData(false);
-                                    });
-                                })
-                                .catch((err) => console.log(err));
+                              deleteProject(item._id, auth.user._id);
                             }}
                           >
                             Delete Project
