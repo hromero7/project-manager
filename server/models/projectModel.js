@@ -43,9 +43,17 @@ const ProjectSchema = new Schema({
         type: Date,
         required: true,
       },
-      assignee: {
-        type: String,
-      },
+      assignee: [
+        {
+          id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+          },
+          username: {
+            type: String,
+          }
+        },
+      ],
       priority: {
         type: String,
         required: true,
