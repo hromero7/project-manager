@@ -11,7 +11,9 @@ import ProjectPage from "./Pages/ProjectPage/ProjectPage";
 import LoginPage from "./Pages/Login/Login";
 import NavBar from "./Components/Navbar/Navbar";
 import Whoops from "./Pages/PNF/Whoops";
+import TaskPage from "./Pages/TaskPage/TaskPage";
 import "./App.css";
+
 
 function App() {
   // const { user, isAuthenticated } = useContext(AuthContext);
@@ -31,7 +33,8 @@ function App() {
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/project/:ID" element={<ProjectPage />} />
+          {/* <Route path="/project/:ID" element={<ProjectPage />} /> */}
+          <Route path="/project/:ID" element={<TaskPage />} />
         </Route>
       </Routes>
     </Container>

@@ -62,7 +62,9 @@ export default {
   isAuthenticated: () => {
     return axios.get(`/api/user/authenticated/`).then((res) => {
       if (res.status !== 401) return res.data;
-      else return { isAuthenticated: false, user: { username: "" } };
+    })
+    .catch((err) => {
+      return { isAuthenticated: false, user: { username: "" } };
     });
   },
 };
