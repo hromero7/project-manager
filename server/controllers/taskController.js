@@ -48,7 +48,7 @@ module.exports = {
     }
 
     //filter out task that is being deleted
-    const filteredTasks = project.tasks.find(
+    const filteredTasks = project.tasks.filter(
       (task) => task._id.toString() !== req.params.task_id.toString()
     );
 
@@ -62,7 +62,7 @@ module.exports = {
       else
         return res.status(200).json({
           project: project,
-          message: { msgBody: "Task successfully created.", msgError: false },
+          message: { msgBody: "Task successfully deleted.", msgError: false },
         });
     });
   },

@@ -4,7 +4,9 @@ import { useParams } from "react-router-dom";
 import ProjectAPI from "../../Utils/ProjectAPI";
 import { AuthContext } from "../../Context/AuthContext";
 import TaskModal from "../../Components/TaskModal/TaskModal";
+import TaskActionMenu from "../../Components/TaskActionMenu/TaskActionMenu";
 import "./TaskPage.css";
+import TaskAssignee from "../../Components/TaskAssignee/TaskAssignee";
 
 const TaskPage = () => {
     const { ID } = useParams();
@@ -14,6 +16,7 @@ const TaskPage = () => {
         tasks: [],
         title: "",
         userId: "",
+        id: ""
     });
 
     useEffect(() => {
@@ -30,6 +33,7 @@ const TaskPage = () => {
             tasks: response.tasks,
             title: response.title,
             userId: response.userId,
+            id: response._id
             });
         });
     };
@@ -46,6 +50,7 @@ const TaskPage = () => {
             <th>Assignee</th>
             <th>Due date</th>
             <th>Priority</th>
+            <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -55,10 +60,12 @@ const TaskPage = () => {
                         <td>{i + 1}</td>
                         <td>{task.taskTitle}</td>
                         <td>{task.status}</td>
-                        <td>{task.assignee}
-                            <button>
-                                <i className="fa-solid fa-circle-plus"></i>
-                            </button>
+                        <td>{task.assignee.map(assignee => {
+                            return (
+                                <div>{assignee.username}</div>
+                            )
+                        })}
+                            <TaskAssignee projectId={projectData.id} taskId={task._id} assignee={task.assignee} getProjectData={getProjData}/>
                         </td>
                         <td>{task.dueDate}</td>
                         <td>
@@ -67,6 +74,9 @@ const TaskPage = () => {
                                 "priority-low"}`}>
                                     {task.priority}
                             </span>
+                        </td>
+                        <td>
+                            <TaskActionMenu projectId={projectData.id} taskId={task._id} getProjectData={getProjData}/>
                         </td>
                     </tr>
                 )
