@@ -1,0 +1,28 @@
+.task-container {
+    margin-top: 100px;
+    background-color: white;
+}
+
+.fa-circle-plus {
+    font-size: 28px;
+    color: rgb(103, 58, 183);
+}
+
+.task-priority {
+    color: white;
+    padding: .2rem 1rem;
+    text-transform: uppercase;
+}
+
+.priority-high {
+    background-color: red;
+}
+
+.priority-medium {
+    background-color: yellow;
+}
+
+.priority-low {
+    background-color: green;
+    
+}

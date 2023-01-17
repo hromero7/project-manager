@@ -5,7 +5,6 @@ import { AuthContext } from "../Context/AuthContext";
 
 const PublicRoute = (props) => {
     const { isAuthenticated } = useContext(AuthContext);
-
     if (isAuthenticated) return <Navigate to={{ pathname: "/dashboard", state: { from: props.location }}} />
     else return <Outlet {...props}/>
 
