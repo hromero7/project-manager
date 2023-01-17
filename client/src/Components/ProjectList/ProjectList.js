@@ -22,7 +22,6 @@ export default function Projectlist() {
   const [projectTitle, setProjectTitle] = useState("");
 
   useEffect(() => {
-    console.log("auth: ", auth);
     getProjects();
   }, []);
 

@@ -23,7 +23,6 @@ export default function ProjectPage() {
   const [endTime, setEndTime] = useState(new Date());
   const [value, setValue] = useState("");
   const [getSearchData, setGetSearchData] = useState(false);
-  const [open, setOpen] = useState(false);
   const [taskValues, setTaskValues] = useState({
     taskTitle: "",
     startTime: startTime,
@@ -38,13 +37,14 @@ export default function ProjectPage() {
     tasks: [],
     title: "",
     userId: "",
+    extras: {},
   });
+  const [dropdownHelpers, setDropdownHelpers] = useState([]);
   const [show, setShow] = useState(false);
   const [searchList, setSearchList] = useState("");
   const [checked, setChecked] = useState(false);
 
   useEffect((e) => {
-    console.log("ID: ", ID);
     getProjData();
   }, []);
 
@@ -67,7 +67,6 @@ export default function ProjectPage() {
   };
 
   const addTask = () => {
-    console.log("taskValues: ", taskValues);
     axios
       .post(`/api/task/create/${ID}`, {
         taskTitle: taskValues.taskTitle,
@@ -76,7 +75,16 @@ export default function ProjectPage() {
         priority: taskValues.priority,
       })
       .then((res) => {
-        console.log("res: ", res);
+        // console.log("res.data: ", res.data);
+        if (res.data.message.msgError === false) {
+          handleClose();
+          setTaskValues({
+            taskTitle: "",
+            startTime: startTime,
+            endTime: endTime,
+            priority: "",
+          });
+        }
       })
       .catch((err) => {
         console.log("err: ", err);
@@ -137,22 +145,8 @@ export default function ProjectPage() {
               <Col sm={3}>
                 <Nav variant="pills" className="flex-column">
                   <Nav.Item>
-                    <Nav.Link
-                      eventKey="1"
-                      onClick={() => {
-                        console.log("taskValues: ", taskValues);
-                      }}
-                    >
-                      My Tasks
-                    </Nav.Link>
-                    <Nav.Link
-                      eventKey="2"
-                      onClick={() => {
-                        console.log("projectData: ", projectData);
-                      }}
-                    >
-                      Collaborative Projects
-                    </Nav.Link>
+                    <Nav.Link eventKey="1">My Tasks</Nav.Link>
+                    <Nav.Link eventKey="2">Collaborative Projects</Nav.Link>
                   </Nav.Item>
                 </Nav>
               </Col>
@@ -246,6 +240,8 @@ export default function ProjectPage() {
                       <tbody>
                         {projectData.tasks.map((projId) => {
                           console.log("projectData: ", projectData);
+                          // console.log("dropdownHelpers: ", dropdownHelpers);
+
                           return (
                             <tr key={projId._id}>
                               <td>{projId._id.slice(-5)}</td>
@@ -291,7 +287,6 @@ export default function ProjectPage() {
                                               console.log("err: ", err)
                                             );
                                         }
-
                                         setValue(e.target.value);
                                       }}
                                       value={value}
