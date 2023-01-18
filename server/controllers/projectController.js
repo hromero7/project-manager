@@ -98,28 +98,48 @@ module.exports = {
     }
   },
   addMember: async (req, res) => {
+    console.log("req.body: ", req.body);
+    console.log("req.params: ", req.params);
     const project = await db.Project.findById(req.params.project_id);
     if (!project)
       return res
         .status(404)
         .json({ message: { msgBody: "No Project Found", msgError: true } });
     else {
-      let userId = req.body.userId;
-      let username = req.body.username;
-      project.members.push({ id: userId, username: username });
-      project.save((err) => {
-        if (err)
-          return res.status(500).json({
-            message: { msgBody: "Error has occured", msgError: true },
-          });
-        else
-          return res.status(200).json({
-            message: {
-              msgBody: `${username} has been successfully added to ${project.title}.`,
-              msgError: false,
-            },
-          });
-      });
+      // console.log("project: ", project);
+      const checkIfExists = await db.Project.find(
+        {
+          _id: req.params.project_id,
+        },
+        { members: { $elemMatch: { id: req.body.userId } } }
+      );
+      // console.log("project: ", project.members);
+      console.log("checkIfExists: ", checkIfExists[0].members.length);
+      if (checkIfExists[0].members.length === 1) {
+        return res.status(400).json({
+          message: {
+            msgBody: "User exists in this area already",
+            msgError: true,
+          },
+        });
+      } else if (checkIfExists[0].members.length === 0) {
+        let userId = req.body.userId;
+        let username = req.body.username;
+        project.members.push({ id: userId, username: username });
+        project.save((err) => {
+          if (err)
+            return res.status(500).json({
+              message: { msgBody: "Error has occured", msgError: true },
+            });
+          else
+            return res.status(200).json({
+              message: {
+                msgBody: `${username} has been successfully added to ${project.title}.`,
+                msgError: false,
+              },
+            });
+        });
+      }
     }
   },
 };

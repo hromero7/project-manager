@@ -16,6 +16,7 @@ import TaskActionMenu from "../../Components/TaskActionMenu/TaskActionMenu";
 import "./TaskPage.css";
 import TaskAssignee from "../../Components/TaskAssignee/TaskAssignee";
 import axios from "axios";
+import DropdownItem from "react-bootstrap/esm/DropdownItem";
 
 const TaskPage = () => {
   const { ID } = useParams();
@@ -73,7 +74,7 @@ const TaskPage = () => {
                       <Form.Control
                         autoFocus
                         className="mx-3 my-2 w-auto"
-                        placeholder="Search to add..."
+                        placeholder="Search by username"
                         autoComplete="off"
                         onChange={(e) => {
                           if (e.target.value.length <= 1) {
@@ -97,14 +98,38 @@ const TaskPage = () => {
                   </Dropdown.Item>
                   {searchList.map((item) => {
                     return (
-                      <Dropdown.Item href="#/action-2">
+                      <Dropdown.Item
+                        onClick={() => {
+                          console.log("item: ", item);
+                          axios
+                            .put(`/api/project/add_member/${ID}`, {
+                              username: item.username,
+                              userId: item._id,
+                            })
+                            .then((res) => {
+                              console.log("res: ", res);
+                              getProjData();
+                            })
+                            .catch((err) => {
+                              console.log("err: ", err);
+                            });
+                        }}
+                      >
                         {item.firstName}
                       </Dropdown.Item>
                     );
                   })}
                   <Dropdown.Divider />
-                  <Dropdown.Header>Members:</Dropdown.Header>
-                  <Dropdown.Item href="#/action-3">Member pool</Dropdown.Item>
+                  <Dropdown.Header
+                    onClick={() => {
+                      console.log("projectData: ", projectData);
+                    }}
+                  >
+                    Members:
+                  </Dropdown.Header>
+                  {projectData.members.map((member) => {
+                    return <DropdownItem>{member.username}</DropdownItem>;
+                  })}
                 </Dropdown.Menu>
               </Dropdown>
             </Col>
