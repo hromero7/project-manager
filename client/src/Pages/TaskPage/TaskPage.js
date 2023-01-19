@@ -1,16 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Table,
-  Button,
-  Dropdown,
-  Form,
-} from "react-bootstrap";
+import { Container, Row, Col, Table, Dropdown, Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import ProjectAPI from "../../Utils/ProjectAPI";
-import { AuthContext } from "../../Context/AuthContext";
 import TaskModal from "../../Components/TaskModal/TaskModal";
 import TaskActionMenu from "../../Components/TaskActionMenu/TaskActionMenu";
 import "./TaskPage.css";
@@ -128,7 +119,35 @@ const TaskPage = () => {
                     Members:
                   </Dropdown.Header>
                   {projectData.members.map((member) => {
-                    return <DropdownItem>{member.username}</DropdownItem>;
+                    // console.log("member: ", member);
+                    return (
+                      <DropdownItem>
+                        <Row>
+                          <Col>{member.username}</Col>
+                          <Col>
+                            <i
+                              onClick={() => {
+                                axios
+                                  .delete(`/api/project/delete_member/${ID}`, {
+                                    data: {
+                                      userId: member.id,
+                                      username: member.username,
+                                      docId: member._id,
+                                    },
+                                  })
+                                  .then((res) => {
+                                    getProjData();
+                                  })
+                                  .catch((err) => {
+                                    console.log("err: ", err);
+                                  });
+                              }}
+                              className="dropIcon fa-sharp fa-solid fa-xmark"
+                            ></i>
+                          </Col>
+                        </Row>
+                      </DropdownItem>
+                    );
                   })}
                 </Dropdown.Menu>
               </Dropdown>

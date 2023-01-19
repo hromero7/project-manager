@@ -98,23 +98,18 @@ module.exports = {
     }
   },
   addMember: async (req, res) => {
-    console.log("req.body: ", req.body);
-    console.log("req.params: ", req.params);
     const project = await db.Project.findById(req.params.project_id);
     if (!project)
       return res
         .status(404)
         .json({ message: { msgBody: "No Project Found", msgError: true } });
     else {
-      // console.log("project: ", project);
       const checkIfExists = await db.Project.find(
         {
           _id: req.params.project_id,
         },
         { members: { $elemMatch: { id: req.body.userId } } }
       );
-      // console.log("project: ", project.members);
-      console.log("checkIfExists: ", checkIfExists[0].members.length);
       if (checkIfExists[0].members.length === 1) {
         return res.status(400).json({
           message: {
@@ -141,5 +136,17 @@ module.exports = {
         });
       }
     }
+  },
+  deleteUser: async (req, res) => {
+    const checkIfExists = await db.Project.findOneAndUpdate(
+      {
+        _id: req.params.project_id,
+      },
+      { $pull: { members: { id: req.body.userId } } }
+    )
+      .then((dbModel) => res.status(200).json(dbModel))
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };

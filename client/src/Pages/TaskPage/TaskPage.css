@@ -24,5 +24,14 @@
 
 .priority-low {
     background-color: green;
-    
+
+}
+.dropIcon:hover {
+    color: rgb(99, 99, 99);
+}
+.dropIcon {
+    color: rgb(180, 180, 180);
+    border-radius: 0px;
+    border: none;
+    float: right;
 }
