@@ -1,64 +1,43 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Form, Dropdown } from "react-bootstrap";
+import { Form, Dropdown, Row, Col } from "react-bootstrap";
 import TaskAPI from "../../Utils/TaskAPI";
 
 const TaskAssignee = (props) => {
-  const [value, setValue] = useState("");
-  const [getSearchData, setGetSearchData] = useState(false);
+  const { ID } = useParams();
   const [show, setShow] = useState(false);
-  const [searchList, setSearchList] = useState("");
-  const [checked, setChecked] = useState([]);
+  const [memberList, setMemberList] = useState();
+  const [activeList, setActiveList] = useState();
+  const [toggle, setToggle] = useState(true);
+  const activeArray = [];
 
   useEffect(() => {
-    if (searchList.length > 1 && props.assignee.length > 1) {
-      for (let i = 0; i < searchList.length; i++) {
-        const verifyChecked = props.assignee.find(
-          (user) => user.username === searchList[i].username
-        );
-        if (verifyChecked) checked[i] = true;
-        console.log(checked[i], i);
+    getMemberList();
+    // getActiveList();
+  }, []);
+
+  const getMemberList = () => {
+    axios
+      .get(`/api/project/${ID}`)
+      .then((res) => {
+        if (res.status === 200) {
+          setMemberList(res.data.members.map((v) => ({ ...v, isActive: "" })));
+          setShow(true);
+        }
+      })
+      .catch((err) => console.log("err: ", err));
+  };
+
+  const getActiveList = () => {
+    for (let i = 0; i < memberList.length; i++) {
+      for (let j = 0; j < props.assignee.length; j++) {
+        if (memberList[i].id === props.assignee[j].id) {
+          // setActiveList()
+          memberList[i].isActive = true;
+        }
       }
-    } else if (searchList.length === 1) {
-      const verifyChecked = props.assignee.find(
-        (user) => user.username === searchList[0].username
-      );
-      if (verifyChecked) setChecked([true]);
-      console.log(checked);
     }
-  }, [searchList]);
-
-  const handleAssignTask = async (e, index) => {
-    const user = {
-      id: e.target.attributes["userId"].value,
-      username: e.target.attributes["username"].value,
-    };
-    if (!checked[index]) {
-      const res = await TaskAPI.addAssignee(
-        props.projectId,
-        props.taskId,
-        user
-      );
-      const updatedChecked = checked.map((item, i) =>
-        i === index ? !item : item
-      );
-      setChecked(updatedChecked);
-      console.log(res);
-    } else {
-      const userId = e.target.attributes["userId"].value;
-      const res = await TaskAPI.removeAssignee(
-        props.projectId,
-        props.taskId,
-        userId
-      );
-
-      const updatedChecked = checked.map((item, i) =>
-        i === index ? !item : item
-      );
-      setChecked(updatedChecked);
-      console.log(res);
-    }
-    props.getProjectData();
   };
 
   const CustomUserAddToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -67,6 +46,9 @@ const TaskAssignee = (props) => {
       ref={ref}
       onClick={(e) => {
         e.preventDefault();
+        // getMemberList();
+        console.log("memberList: ", memberList);
+        getActiveList();
         onClick(e);
       }}
     >
@@ -89,58 +71,61 @@ const TaskAssignee = (props) => {
       );
     }
   );
+
   return (
     <Dropdown autoClose="outside">
       <Dropdown.Toggle as={CustomUserAddToggle} id="dropdown-custom-components">
         <i className="fa-solid fa-circle-plus"></i>
       </Dropdown.Toggle>
-
       <Dropdown.Menu as={taskMenu}>
-        <Dropdown.Header>Add a member:</Dropdown.Header>
-        <Form.Control
-          autoFocus
-          className="mx-3 my-2 w-auto"
-          placeholder="Search to add..."
-          autoComplete="off"
-          onChange={(e) => {
-            if (e.target.value.length <= 1) {
-              setGetSearchData(false);
-            } else {
-              axios
-                .get(`/api/user/finduser/${e.target.value}`)
-                .then((res) => {
-                  setSearchList(res.data);
-                  setGetSearchData(true);
-                })
-                .catch((err) => console.log("err: ", err));
-            }
-
-            setValue(e.target.value);
-          }}
-          value={value}
-        />
-        <Dropdown.Divider />
-        {getSearchData ? (
-          searchList.map((searchItem, i) => {
-            return (
-              <Dropdown.Item as="form" key={searchItem._id}>
-                <Form>
-                  <Form.Check
-                    type="switch"
-                    checked={checked[i]}
-                    id="custom-switch"
-                    username={searchItem.username}
-                    userId={searchItem._id}
-                    onChange={(e) => handleAssignTask(e, i)}
-                    label={searchItem.username}
-                  ></Form.Check>
-                </Form>
-              </Dropdown.Item>
-            );
-          })
-        ) : (
-          <Dropdown.Item eventKey="1">List All Members</Dropdown.Item>
-        )}
+        <Dropdown.Header>Assign tasks:</Dropdown.Header>
+        {show
+          ? memberList.map((item) => {
+              getActiveList();
+              return (
+                <Dropdown.Item>
+                  <Row>
+                    <Col>
+                      <Form.Check
+                        onClick={(e) => {
+                          // console.log("e.target.checked: ", e.target.checked);
+                          console.log("item: ", item);
+                          setToggle(!toggle);
+                          if (item.isActive === false || item.isActive === "") {
+                            item.isActive = true;
+                            axios
+                              .put(
+                                `/api/task/add_assignee/${props.projectId}/${props.taskId}`,
+                                { id: item.id, username: item.username }
+                              )
+                              .then(() => {
+                                item.isActive = true;
+                              })
+                              .catch((err) => console.log("err: ", err));
+                          } else if (item.isActive === true) {
+                            item.isActive = false;
+                            axios
+                              .put(
+                                `/api/task/remove_assignee/${props.projectId}/${props.taskId}/${item.id}`,
+                                { id: item.id, username: item.username }
+                              )
+                              .then(() => {
+                                item.isActive = true;
+                              })
+                              .catch((err) => console.log("err: ", err));
+                          }
+                        }}
+                        type="switch"
+                        checked={item.isActive}
+                      />
+                    </Col>
+                    <Col>{item.username}</Col>
+                  </Row>
+                </Dropdown.Item>
+              );
+            })
+          : "Loading"}
+        {/* <Dropdown.Divider /> */}
       </Dropdown.Menu>
     </Dropdown>
   );

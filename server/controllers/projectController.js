@@ -137,7 +137,7 @@ module.exports = {
       }
     }
   },
-  deleteUser: async (req, res) => {
+  deleteMember: async (req, res) => {
     const checkIfExists = await db.Project.findOneAndUpdate(
       {
         _id: req.params.project_id,

@@ -1,8 +1,16 @@
 .task-container {
     margin-top: 100px;
     background-color: white;
+    height: 800px;
 }
 
+.task-col{
+    border: black 1px solid;
+    /* height: 600px; */
+}
+.table {
+    margin-bottom: 400px;
+}
 .fa-circle-plus {
     font-size: 28px;
     color: rgb(103, 58, 183);

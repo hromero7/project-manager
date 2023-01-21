@@ -29,7 +29,6 @@ const TaskPage = () => {
 
   const getProjData = () => {
     ProjectAPI.getOneProject(ID).then((response) => {
-      // console.log("line 27", response)
       setProjectData({
         date: response.date,
         members: response.members,
@@ -40,9 +39,10 @@ const TaskPage = () => {
       });
     });
   };
+
   return (
     <Container className="task-container">
-      <Row>
+      <Row className="task-row">
         <Col>
           <Row>
             <Col>
@@ -80,7 +80,6 @@ const TaskPage = () => {
                               })
                               .catch((err) => console.log("err: ", err));
                           }
-                          console.log("searchList: ", searchList);
                           setValue(e.target.value);
                         }}
                         value={value}
@@ -91,7 +90,6 @@ const TaskPage = () => {
                     return (
                       <Dropdown.Item
                         onClick={() => {
-                          console.log("item: ", item);
                           axios
                             .put(`/api/project/add_member/${ID}`, {
                               username: item.username,
@@ -153,63 +151,67 @@ const TaskPage = () => {
               </Dropdown>
             </Col>
           </Row>
-
-          <Table striped hover responsive>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Title</th>
-                <th>Status</th>
-                <th>Assignee</th>
-                <th>Due date</th>
-                <th>Priority</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {projectData.tasks.map((task, i) => {
-                return (
-                  <tr key={i}>
-                    <td>{i + 1}</td>
-                    <td>{task.taskTitle}</td>
-                    <td>{task.status}</td>
-                    <td>
-                      {task.assignee.map((assignee) => {
-                        return <div>{assignee.username}</div>;
-                      })}
-                      <TaskAssignee
-                        projectId={projectData.id}
-                        taskId={task._id}
-                        assignee={task.assignee}
-                        getProjectData={getProjData}
-                      />
-                    </td>
-                    <td>{task.dueDate}</td>
-                    <td>
-                      <span
-                        className={`task-priority ${
-                          task.priority === "High"
-                            ? "priority-high"
-                            : task.priority === "Medium"
-                            ? "priority-medium"
-                            : "priority-low"
-                        }`}
-                      >
-                        {task.priority}
-                      </span>
-                    </td>
-                    <td>
-                      <TaskActionMenu
-                        projectId={projectData.id}
-                        taskId={task._id}
-                        getProjectData={getProjData}
-                      />
-                    </td>
+          <Row>
+            <Col>
+              <Table className="task-col" striped hover responsive>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Assignee</th>
+                    <th>Due date</th>
+                    <th>Priority</th>
+                    <th>Action</th>
                   </tr>
-                );
-              })}
-            </tbody>
-          </Table>
+                </thead>
+                <tbody>
+                  {projectData.tasks.map((task, i) => {
+                    // console.log("projectData.tasks: ", projectData.tasks);
+                    return (
+                      <tr key={i}>
+                        <td>{i + 1}</td>
+                        <td>{task.taskTitle}</td>
+                        <td>{task.status}</td>
+                        <td>
+                          {task.assignee.map((assignee) => {
+                            return <div>{assignee.username}</div>;
+                          })}
+                          <TaskAssignee
+                            projectId={projectData.id}
+                            taskId={task._id}
+                            assignee={task.assignee}
+                            getProjectData={getProjData}
+                          />
+                        </td>
+                        <td>{task.dueDate}</td>
+                        <td>
+                          <span
+                            className={`task-priority ${
+                              task.priority === "High"
+                                ? "priority-high"
+                                : task.priority === "Medium"
+                                ? "priority-medium"
+                                : "priority-low"
+                            }`}
+                          >
+                            {task.priority}
+                          </span>
+                        </td>
+                        <td>
+                          <TaskActionMenu
+                            projectId={projectData.id}
+                            taskId={task._id}
+                            getProjectData={getProjData}
+                          />
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
+            </Col>
+          </Row>
         </Col>
       </Row>
     </Container>

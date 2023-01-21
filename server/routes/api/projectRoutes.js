@@ -7,8 +7,9 @@ const {
   findOne,
   createProject,
   deleteProject,
+  getMembers,
   addMember,
-  deleteUser,
+  deleteMember,
 } = require("../../controllers/projectController");
 
 router.route("/all").get(findAll); // find all route
@@ -29,6 +30,6 @@ router
   .put(passport.authenticate("jwt", { session: false }), addMember);
 router
   .route("/delete_member/:project_id")
-  .delete(passport.authenticate("jwt", { session: false }), deleteUser);
+  .delete(passport.authenticate("jwt", { session: false }), deleteMember);
 
 module.exports = router;
