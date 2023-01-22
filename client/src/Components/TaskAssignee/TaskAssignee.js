@@ -89,7 +89,7 @@ const TaskAssignee = (props) => {
                       <Form.Check
                         onClick={(e) => {
                           // console.log("e.target.checked: ", e.target.checked);
-                          console.log("item: ", item);
+                          // console.log("item: ", item);
                           setToggle(!toggle);
                           if (item.isActive === false || item.isActive === "") {
                             item.isActive = true;
@@ -100,6 +100,8 @@ const TaskAssignee = (props) => {
                               )
                               .then(() => {
                                 item.isActive = true;
+                                getActiveList();
+                                console.log("item: ", item);
                               })
                               .catch((err) => console.log("err: ", err));
                           } else if (item.isActive === true) {
@@ -110,7 +112,9 @@ const TaskAssignee = (props) => {
                                 { id: item.id, username: item.username }
                               )
                               .then(() => {
-                                item.isActive = true;
+                                item.isActive = false;
+                                getActiveList();
+                                console.log("item: ", item);
                               })
                               .catch((err) => console.log("err: ", err));
                           }
