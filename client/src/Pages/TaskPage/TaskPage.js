@@ -117,7 +117,6 @@ const TaskPage = () => {
                     Members:
                   </Dropdown.Header>
                   {projectData.members.map((member) => {
-                    // console.log("member: ", member);
                     return (
                       <DropdownItem>
                         <Row>
@@ -174,15 +173,22 @@ const TaskPage = () => {
                         <td>{task.taskTitle}</td>
                         <td>{task.status}</td>
                         <td>
-                          {task.assignee.map((assignee) => {
-                            return <div>{assignee.username}</div>;
-                          })}
-                          <TaskAssignee
-                            projectId={projectData.id}
-                            taskId={task._id}
-                            assignee={task.assignee}
-                            getProjectData={getProjData}
-                          />
+                          <Row>
+                            <Col>
+                              <TaskAssignee
+                                projectId={projectData.id}
+                                taskId={task._id}
+                                assignee={task.assignee}
+                                getProjectData={getProjData}
+                              />
+                            </Col>
+                            <Col>
+                              {task.assignee.map((assignee) => {
+                                // console.log("assignee: ", assignee);
+                                return <div>{assignee.username}</div>;
+                              })}
+                            </Col>
+                          </Row>
                         </td>
                         <td>{task.dueDate}</td>
                         <td>

@@ -2,19 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Form, Dropdown, Row, Col } from "react-bootstrap";
-import TaskAPI from "../../Utils/TaskAPI";
 
 const TaskAssignee = (props) => {
   const { ID } = useParams();
   const [show, setShow] = useState(false);
   const [memberList, setMemberList] = useState();
-  const [activeList, setActiveList] = useState();
-  const [toggle, setToggle] = useState(true);
-  const activeArray = [];
 
   useEffect(() => {
     getMemberList();
-    // getActiveList();
   }, []);
 
   const getMemberList = () => {
@@ -33,7 +28,6 @@ const TaskAssignee = (props) => {
     for (let i = 0; i < memberList.length; i++) {
       for (let j = 0; j < props.assignee.length; j++) {
         if (memberList[i].id === props.assignee[j].id) {
-          // setActiveList()
           memberList[i].isActive = true;
         }
       }
@@ -46,9 +40,7 @@ const TaskAssignee = (props) => {
       ref={ref}
       onClick={(e) => {
         e.preventDefault();
-        // getMemberList();
-        console.log("memberList: ", memberList);
-        getActiveList();
+
         onClick(e);
       }}
     >
@@ -88,11 +80,8 @@ const TaskAssignee = (props) => {
                     <Col>
                       <Form.Check
                         onClick={(e) => {
-                          // console.log("e.target.checked: ", e.target.checked);
-                          // console.log("item: ", item);
-                          setToggle(!toggle);
+                          e.stopPropagation();
                           if (item.isActive === false || item.isActive === "") {
-                            item.isActive = true;
                             axios
                               .put(
                                 `/api/task/add_assignee/${props.projectId}/${props.taskId}`,
@@ -100,12 +89,11 @@ const TaskAssignee = (props) => {
                               )
                               .then(() => {
                                 item.isActive = true;
-                                getActiveList();
-                                console.log("item: ", item);
+
+                                props.getProjectData();
                               })
                               .catch((err) => console.log("err: ", err));
                           } else if (item.isActive === true) {
-                            item.isActive = false;
                             axios
                               .put(
                                 `/api/task/remove_assignee/${props.projectId}/${props.taskId}/${item.id}`,
@@ -113,8 +101,7 @@ const TaskAssignee = (props) => {
                               )
                               .then(() => {
                                 item.isActive = false;
-                                getActiveList();
-                                console.log("item: ", item);
+                                props.getProjectData();
                               })
                               .catch((err) => console.log("err: ", err));
                           }
@@ -129,7 +116,6 @@ const TaskAssignee = (props) => {
               );
             })
           : "Loading"}
-        {/* <Dropdown.Divider /> */}
       </Dropdown.Menu>
     </Dropdown>
   );
