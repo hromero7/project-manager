@@ -75,7 +75,7 @@ const TaskAssignee = (props) => {
           ? memberList.map((item) => {
               getActiveList();
               return (
-                <Dropdown.Item>
+                <Dropdown.Item key={item._id}>
                   <Row>
                     <Col>
                       <Form.Check

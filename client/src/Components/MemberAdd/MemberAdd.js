@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Row, Col, Dropdown, Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import "./MemberAdd.css";
 
 const MemberAdd = (props) => {
   const { ID } = useParams();
@@ -10,8 +11,12 @@ const MemberAdd = (props) => {
   const [searchList, setSearchList] = useState([]);
 
   return (
-    <Dropdown autoClose="outside">
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
+    <Dropdown className="memAddDD" autoClose="outside">
+      <Dropdown.Toggle
+        className="toggleDD"
+        variant="primary"
+        id="dropdown-basic"
+      >
         Add members:
       </Dropdown.Toggle>
       <Dropdown.Menu>
@@ -68,7 +73,7 @@ const MemberAdd = (props) => {
 
         {props.projectData.members.map((member) => {
           return (
-            <Dropdown.Item>
+            <Dropdown.Item key={member._id}>
               <Row>
                 <Col>{member.username}</Col>
                 <Col>

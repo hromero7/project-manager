@@ -2,14 +2,18 @@
     margin-top: 100px;
     background-color: white;
     height: 800px;
+    border-radius: 15px;
 }
 
 .task-col{
-    border: black 1px solid;
+    border: rgb(209, 209, 209) 1px solid;
+
     /* height: 600px; */
 }
 .table {
     margin-bottom: 400px;
+    border-radius: 15px;
+
 }
 .fa-circle-plus {
     font-size: 28px;
@@ -43,3 +47,29 @@
     border: none;
     float: right;
 }
+
+.toggleDD {
+    border: none;
+    border-radius: 25px;
+    background-color: rgb(13, 110, 253) ;
+}
+.toggleDD:hover {
+    border: none;
+    border-radius: 25px;
+    background-color: rgb(13, 110, 253) ;
+}
+.toggleDD:after {
+    border: none;
+    border-radius: 25px;
+    background-color: rgb(13, 110, 253) ;
+}
+.toggleDD:focus {
+    border: none;
+    border-radius: 25px;
+    background-color: rgb(13, 110, 253) ;
+}
+
+.dropdown-menu.show {
+    border-radius: 25px;
+}
+
