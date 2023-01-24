@@ -6,8 +6,7 @@ import TaskModal from "../../Components/TaskModal/TaskModal";
 import TaskActionMenu from "../../Components/TaskActionMenu/TaskActionMenu";
 import "./TaskPage.css";
 import TaskAssignee from "../../Components/TaskAssignee/TaskAssignee";
-import axios from "axios";
-import DropdownItem from "react-bootstrap/esm/DropdownItem";
+import MemberAdd from "../../Components/MemberAdd/MemberAdd";
 
 const TaskPage = () => {
   const { ID } = useParams();
@@ -19,9 +18,6 @@ const TaskPage = () => {
     userId: "",
     id: "",
   });
-  const [value, setValue] = useState();
-  const [getSearchData, setGetSearchData] = useState();
-  const [searchList, setSearchList] = useState([]);
 
   useEffect(() => {
     getProjData();
@@ -54,100 +50,10 @@ const TaskPage = () => {
               <TaskModal projectId={ID} getProjData={getProjData} />
             </Col>
             <Col>
-              <Dropdown autoClose="outside">
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  Add members:
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1">
-                    <Dropdown.Header>Add members:</Dropdown.Header>
-                    <Form>
-                      <Form.Control
-                        autoFocus
-                        className="mx-3 my-2 w-auto"
-                        placeholder="Search by username"
-                        autoComplete="off"
-                        onChange={(e) => {
-                          if (e.target.value.length <= 1) {
-                            setSearchList([]);
-                            setGetSearchData(false);
-                          } else {
-                            axios
-                              .get(`/api/user/finduser/${e.target.value}`)
-                              .then((res) => {
-                                setSearchList(res.data);
-                                setGetSearchData(true);
-                              })
-                              .catch((err) => console.log("err: ", err));
-                          }
-                          setValue(e.target.value);
-                        }}
-                        value={value}
-                      />
-                    </Form>
-                  </Dropdown.Item>
-                  {searchList.map((item) => {
-                    return (
-                      <Dropdown.Item
-                        onClick={() => {
-                          axios
-                            .put(`/api/project/add_member/${ID}`, {
-                              username: item.username,
-                              userId: item._id,
-                            })
-                            .then((res) => {
-                              console.log("res: ", res);
-                              getProjData();
-                            })
-                            .catch((err) => {
-                              console.log("err: ", err);
-                            });
-                        }}
-                      >
-                        {item.firstName}
-                      </Dropdown.Item>
-                    );
-                  })}
-                  <Dropdown.Divider />
-                  <Dropdown.Header
-                    onClick={() => {
-                      console.log("projectData: ", projectData);
-                    }}
-                  >
-                    Members:
-                  </Dropdown.Header>
-                  {projectData.members.map((member) => {
-                    return (
-                      <DropdownItem>
-                        <Row>
-                          <Col>{member.username}</Col>
-                          <Col>
-                            <i
-                              onClick={() => {
-                                axios
-                                  .delete(`/api/project/delete_member/${ID}`, {
-                                    data: {
-                                      userId: member.id,
-                                      username: member.username,
-                                      docId: member._id,
-                                    },
-                                  })
-                                  .then((res) => {
-                                    getProjData();
-                                  })
-                                  .catch((err) => {
-                                    console.log("err: ", err);
-                                  });
-                              }}
-                              className="dropIcon fa-sharp fa-solid fa-xmark"
-                            ></i>
-                          </Col>
-                        </Row>
-                      </DropdownItem>
-                    );
-                  })}
-                </Dropdown.Menu>
-              </Dropdown>
+              <MemberAdd
+                getProjectData={getProjData}
+                projectData={projectData}
+              />
             </Col>
           </Row>
           <Row>
@@ -184,7 +90,6 @@ const TaskPage = () => {
                             </Col>
                             <Col>
                               {task.assignee.map((assignee) => {
-                                // console.log("assignee: ", assignee);
                                 return <div>{assignee.username}</div>;
                               })}
                             </Col>
