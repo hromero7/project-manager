@@ -3,7 +3,7 @@ import { Row, Col, Dropdown, Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-export default function MemberAdd(props) {
+const MemberAdd = (props) => {
   const { ID } = useParams();
   const [value, setValue] = useState();
   const [getSearchData, setGetSearchData] = useState();
@@ -51,8 +51,8 @@ export default function MemberAdd(props) {
                     username: item.username,
                     userId: item._id,
                   })
-                  .then((res) => {
-                    props.getProjData();
+                  .then(() => {
+                    props.getProjectData();
                   })
                   .catch((err) => {
                     console.log("err: ", err);
@@ -67,7 +67,6 @@ export default function MemberAdd(props) {
         <Dropdown.Header>Members:</Dropdown.Header>
 
         {props.projectData.members.map((member) => {
-          console.log("member: ", member);
           return (
             <Dropdown.Item>
               <Row>
@@ -76,15 +75,18 @@ export default function MemberAdd(props) {
                   <i
                     onClick={() => {
                       axios
-                        .delete(`/api/project/delete_member/${ID}`, {
-                          data: {
-                            userId: member.id,
-                            username: member.username,
-                            docId: member._id,
-                          },
-                        })
-                        .then((res) => {
-                          props.getProjData();
+                        .delete(
+                          `/api/project/delete_member/${props.projectId}`,
+                          {
+                            data: {
+                              userId: member.id,
+                              username: member.username,
+                              docId: member._id,
+                            },
+                          }
+                        )
+                        .then(() => {
+                          props.getProjectData();
                         })
                         .catch((err) => {
                           console.log("err: ", err);
@@ -100,4 +102,6 @@ export default function MemberAdd(props) {
       </Dropdown.Menu>
     </Dropdown>
   );
-}
+};
+
+export default MemberAdd;

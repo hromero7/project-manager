@@ -51,8 +51,9 @@ const TaskPage = () => {
             </Col>
             <Col>
               <MemberAdd
-                getProjectData={getProjData}
                 projectData={projectData}
+                projectId={ID}
+                getProjectData={getProjData}
               />
             </Col>
           </Row>
