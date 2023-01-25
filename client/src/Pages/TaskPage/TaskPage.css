@@ -1,8 +1,20 @@
 .task-container {
     margin-top: 100px;
     background-color: white;
+    height: 800px;
+    border-radius: 15px;
 }
 
+.task-col{
+    border: rgb(209, 209, 209) 1px solid;
+
+    /* height: 600px; */
+}
+.table {
+    margin-bottom: 400px;
+    border-radius: 15px;
+
+}
 .fa-circle-plus {
     font-size: 28px;
     color: rgb(103, 58, 183);
@@ -24,5 +36,40 @@
 
 .priority-low {
     background-color: green;
-    
+
 }
+.dropIcon:hover {
+    color: rgb(99, 99, 99);
+}
+.dropIcon {
+    color: rgb(180, 180, 180);
+    border-radius: 0px;
+    border: none;
+    float: right;
+}
+
+.toggleDD {
+    border: none;
+    border-radius: 25px;
+    background-color: rgb(13, 110, 253) ;
+}
+.toggleDD:hover {
+    border: none;
+    border-radius: 25px;
+    background-color: rgb(13, 110, 253) ;
+}
+.toggleDD:after {
+    border: none;
+    border-radius: 25px;
+    background-color: rgb(13, 110, 253) ;
+}
+.toggleDD:focus {
+    border: none;
+    border-radius: 25px;
+    background-color: rgb(13, 110, 253) ;
+}
+
+.dropdown-menu.show {
+    border-radius: 25px;
+}
+

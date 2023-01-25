@@ -6,7 +6,7 @@ import "./TaskModal.css";
 
 const TaskModal = (props) => {
   const [show, setShow] = useState(false);
-  const [message, setMessage] = useState({body: "", error: false});
+  const [message, setMessage] = useState({ body: "", error: false });
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   const [taskValues, setTaskValues] = useState({
@@ -20,16 +20,16 @@ const TaskModal = (props) => {
     setTimeout(() => {
       setMessage({ body: "", error: false });
     }, 4000);
-  }
+  };
   const resetForm = () => {
     setTaskValues({
       taskTitle: "",
       startTime: new Date(),
       endTime: new Date(),
-      priority: ""
+      priority: "",
     });
     clearMessage();
-  }
+  };
   const handleClose = () => {
     setShow(false);
   };
@@ -37,12 +37,14 @@ const TaskModal = (props) => {
 
   const addTask = async () => {
     if (taskValues.taskTitle === "" || taskValues.priority === "") {
-      setMessage({body: "Please fill out all fields.", error: true});
+      setMessage({ body: "Please fill out all fields.", error: true });
       clearMessage();
-    }
-    else {
+    } else {
       const createTask = await TaskAPI.createTask(props.projectId, taskValues);
-      setMessage({ body: createTask.message.msgBody, error: createTask.message.msgError })
+      setMessage({
+        body: createTask.message.msgBody,
+        error: createTask.message.msgError,
+      });
       resetForm();
       setShow(false);
       props.getProjData();
@@ -56,29 +58,27 @@ const TaskModal = (props) => {
   return (
     <div className="modal-container">
       <Button onClick={handleShow}>Add New</Button>
-      {message.body && message.error === false? (
+      {message.body && message.error === false ? (
         <Alert key="success" variant="success">
-          { message.body }
+          {message.body}
         </Alert>
       ) : (
         ""
       )}
-      <Modal show={show} onHide={handleClose} style={{"color": "black"}}>
+      <Modal show={show} onHide={handleClose} style={{ color: "black" }}>
         <Modal.Header closeButton>
           <Modal.Title>Task details:</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        {message.error? (
-          <Alert key="danger" variant="danger">
-            { message.body }
-          </Alert> 
-        ) : (
-          ""
-        )}
+          {message.error ? (
+            <Alert key="danger" variant="danger">
+              {message.body}
+            </Alert>
+          ) : (
+            ""
+          )}
           <Form>
-            <Form.Group
-              className="mb-3"
-              controlId="formTaskTitle">
+            <Form.Group className="mb-3" controlId="formTaskTitle">
               <Form.Label>Task title:</Form.Label>
               <Form.Control
                 name="taskTitle"
@@ -86,30 +86,21 @@ const TaskModal = (props) => {
                 value={taskValues.taskTitle}
                 onChange={handleTaskFormChange}
                 autocomplete="off"
-                required />
+                required
+              />
             </Form.Group>
 
-            <Form.Group
-              className="mb-3"
-              controlId="formStartDate">
+            <Form.Group className="mb-3" controlId="formStartDate">
               <Form.Label>Start:</Form.Label>
-              <DateTimePicker
-                value={startTime}
-                onChange={setStartTime}/>
+              <DateTimePicker value={startTime} onChange={setStartTime} />
             </Form.Group>
 
-            <Form.Group
-              className="mb-3"
-              controlId="formEndDate">
+            <Form.Group className="mb-3" controlId="formEndDate">
               <Form.Label>End:</Form.Label>
-              <DateTimePicker
-                value={endTime}
-                onChange={setEndTime}/>
+              <DateTimePicker value={endTime} onChange={setEndTime} />
             </Form.Group>
 
-            <Form.Group
-              className="mb-3"
-              controlId="formEndDate">
+            <Form.Group className="mb-3" controlId="formEndDate">
               <Form.Label>Priority:</Form.Label>
               <Form.Control
                 type="text"
@@ -117,24 +108,22 @@ const TaskModal = (props) => {
                 placeholder="Proiority"
                 value={taskValues.priority}
                 onChange={handleTaskFormChange}
-                autocomplete="off"/>
+                autocomplete="off"
+              />
             </Form.Group>
-
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={handleClose}>
+          <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
           <Button variant="primary" onClick={addTask}>
             Save Changes
           </Button>
         </Modal.Footer>
-    </Modal>
-  </div>
+      </Modal>
+    </div>
   );
-}
+};
 
 export default TaskModal;

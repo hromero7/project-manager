@@ -76,23 +76,24 @@ module.exports = {
       let userId = req.body.id;
       let username = req.body.username;
 
-      //find task 
-    
+      //find task
+
       const task = project.tasks.find(
         (task) => req.params.task_id.toString() === task._id.toString()
-        );
+      );
 
       //check if user has already been added
       const userExists = task.assignee.find(
         (user) => user.id.toString() === userId.toString()
       );
 
-      if (userExists) return res.status(500).json({
-        message: { msgBody: `${username} has already been assigned to this task`}
-      });
-
+      if (userExists)
+        return res.status(500).json({
+          message: {
+            msgBody: `${username} has already been assigned to this task`,
+          },
+        });
       else {
-
         task.assignee.push({ id: userId, username: username });
 
         project.save((err) => {
@@ -118,34 +119,32 @@ module.exports = {
         .status(404)
         .json({ message: { msgBody: "No Project Found", msgError: true } });
     else {
+      //find task
 
-      //find task 
-    
       const task = project.tasks.find(
         (task) => req.params.task_id.toString() === task._id.toString()
-        );
+      );
 
       //filter out assignee
       const filteredAssignee = task.assignee.filter(
         (user) => user.id.toString() !== req.params.user_id.toString()
       );
 
-        task.assignee = filteredAssignee;
+      task.assignee = filteredAssignee;
 
-        project.save((err) => {
-          if (err)
-            return res.status(500).json({
-              message: { msgBody: "Error has occured", msgError: true },
-            });
-          else
-            return res.status(200).json({
-              message: {
-                msgBody: `User has been successfully removed from ${task.taskTitle}.`,
-                msgError: false,
-              },
-            });
-        });
-      
+      project.save((err) => {
+        if (err)
+          return res.status(500).json({
+            message: { msgBody: "Error has occured", msgError: true },
+          });
+        else
+          return res.status(200).json({
+            message: {
+              msgBody: `User has been successfully removed from ${task.taskTitle}.`,
+              msgError: false,
+            },
+          });
+      });
     }
-  }
+  },
 };

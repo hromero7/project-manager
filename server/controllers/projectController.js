@@ -104,22 +104,49 @@ module.exports = {
         .status(404)
         .json({ message: { msgBody: "No Project Found", msgError: true } });
     else {
-      let userId = req.body.userId;
-      let username = req.body.username;
-      project.members.push({ id: userId, username: username });
-      project.save((err) => {
-        if (err)
-          return res.status(500).json({
-            message: { msgBody: "Error has occured", msgError: true },
-          });
-        else
-          return res.status(200).json({
-            message: {
-              msgBody: `${username} has been successfully added to ${project.title}.`,
-              msgError: false,
-            },
-          });
-      });
+      const checkIfExists = await db.Project.find(
+        {
+          _id: req.params.project_id,
+        },
+        { members: { $elemMatch: { id: req.body.userId } } }
+      );
+      if (checkIfExists[0].members.length === 1) {
+        return res.status(400).json({
+          message: {
+            msgBody: "User exists in this area already",
+            msgError: true,
+          },
+        });
+      } else if (checkIfExists[0].members.length === 0) {
+        let userId = req.body.userId;
+        let username = req.body.username;
+        project.members.push({ id: userId, username: username });
+        project.save((err) => {
+          if (err)
+            return res.status(500).json({
+              message: { msgBody: "Error has occured", msgError: true },
+            });
+          else
+            return res.status(200).json({
+              message: {
+                msgBody: `${username} has been successfully added to ${project.title}.`,
+                msgError: false,
+              },
+            });
+        });
+      }
     }
+  },
+  deleteMember: async (req, res) => {
+    const checkIfExists = await db.Project.findOneAndUpdate(
+      {
+        _id: req.params.project_id,
+      },
+      { $pull: { members: { id: req.body.userId } } }
+    )
+      .then((dbModel) => res.status(200).json(dbModel))
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };

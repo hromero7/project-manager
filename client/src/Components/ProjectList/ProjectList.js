@@ -22,7 +22,6 @@ export default function Projectlist() {
   const [projectTitle, setProjectTitle] = useState("");
 
   useEffect(() => {
-    console.log("auth: ", auth);
     getProjects();
   }, []);
 
@@ -60,7 +59,7 @@ export default function Projectlist() {
     >
       {children}
       &nbsp;
-      <i class="fa-sharp fa-solid fa-plus"></i>
+      <i className="fa-sharp fa-solid fa-plus"></i>
     </a>
   ));
 
@@ -92,7 +91,7 @@ export default function Projectlist() {
       style={{ cursor: "pointer" }}
     >
       {children}
-      <i class="fa-sharp fa-solid fa-fire "></i>
+      <i className="fa-sharp fa-solid fa-fire "></i>
     </a>
   ));
 
