@@ -28,3 +28,8 @@
     color: black;
 
 }
+
+.test {
+    border: black 1px solid;
+    margin: 25px;
+}

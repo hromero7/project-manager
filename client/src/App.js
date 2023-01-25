@@ -13,7 +13,6 @@ import Whoops from "./Pages/PNF/Whoops";
 import TaskPage from "./Pages/TaskPage/TaskPage";
 import "./App.css";
 
-
 function App() {
   // const { user, isAuthenticated } = useContext(AuthContext);
   // console.log("app context obj: ", {

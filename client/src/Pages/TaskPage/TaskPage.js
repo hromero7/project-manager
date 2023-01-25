@@ -38,7 +38,7 @@ const TaskPage = () => {
 
   return (
     <Container className="task-container">
-      <Row className="task-row">
+      <Row className="taskRow">
         <Col>
           <Row>
             <Col>
@@ -57,9 +57,9 @@ const TaskPage = () => {
               />
             </Col>
           </Row>
-          <Row>
+          <Row className="taskTable">
             <Col>
-              <Table className="task-col" striped hover responsive>
+              <Table striped hover responsive>
                 <thead>
                   <tr>
                     <th>#</th>

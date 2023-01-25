@@ -5,9 +5,15 @@
     border-radius: 15px;
 }
 
-.task-col{
-    border: rgb(209, 209, 209) 1px solid;
+.taskRow {
+  margin: 25px;
+  padding: 25px;
+}
 
+.taskTable{
+    border: rgb(209, 209, 209) 1px solid;
+    margin: 5px;
+    border-radius: 25px;
     /* height: 600px; */
 }
 .table {
