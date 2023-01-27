@@ -13,3 +13,8 @@
     transform: none  !important;
     border: none !important;
 }
+
+#projectLeadText {
+    font-size: small;
+    color: rgb(163, 161, 161)
+}

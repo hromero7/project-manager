@@ -71,37 +71,42 @@ const MemberAdd = (props) => {
         {props.projectData.members.map((member) => {
           return (
             <Dropdown.Item key={member._id}>
-              <Row>
-                <Col>{member.username}</Col>
-                <Col>
-                  <i
-                    onClick={() => {
-                      console.log("member: ", member);
-                      console.log("props.projectId: ", props.projectId);
-                      axios
-                        .delete(
-                          `/api/project/delete_member/${props.projectId}`,
-                          {
-                            data: {
-                              userId: member.id,
-                              username: member.username,
-                              docId: member._id,
-                              projectId: props.projectId,
-                            },
-                          }
-                        )
-                        .then((res) => {
-                          // console.log("res.data: ", res.data);
-                          props.getProjectData();
-                        })
-                        .catch((err) => {
-                          console.log("err: ", err);
-                        });
-                    }}
-                    className="dropIcon fa-sharp fa-solid fa-xmark"
-                  ></i>
-                </Col>
-              </Row>
+              {member.id === props.projectData.userId ? (
+                <Row>
+                  <Col>{member.username}</Col>
+                  <Col id="projectLeadText">Project Leader</Col>
+                </Row>
+              ) : (
+                <Row>
+                  <Col>{member.username}</Col>
+                  <Col>
+                    <i
+                      onClick={() => {
+                        axios
+                          .delete(
+                            `/api/project/delete_member/${props.projectId}`,
+                            {
+                              data: {
+                                userId: member.id,
+                                username: member.username,
+                                docId: member._id,
+                                projectId: props.projectId,
+                              },
+                            }
+                          )
+                          .then((res) => {
+                            // console.log("res.data: ", res.data);
+                            props.getProjectData();
+                          })
+                          .catch((err) => {
+                            console.log("err: ", err);
+                          });
+                      }}
+                      className="dropIcon fa-sharp fa-solid fa-xmark"
+                    ></i>
+                  </Col>
+                </Row>
+              )}
             </Dropdown.Item>
           );
         })}
