@@ -1,35 +1,15 @@
 .memAddDD {
     float:right;
-}
 
-.dropdown-menu {
-    border: rgb(209, 209, 209) 1px solid;
-    -webkit-box-shadow: 21px 24px 18px -13px rgba(156,156,156,0.79);
-    -moz-box-shadow: 21px 24px 18px -13px rgba(156,156,156,0.79);
-    box-shadow: 21px 24px 18px -13px rgba(156,156,156,0.79);
-}
-
-.dropdown-item  {
-    padding: 0px 15px;
-
-}
-.dropdown-item:first-child:hover{
-    background: none;
-}
-
-.dropdown-item:hover  {
-    border-radius: 10px;
-    font-size: 17px;
-
-}
-.dropdown-item:focus  {
-    border-radius: 10px;
-    background-color: rgb(229, 226, 226);
-    color: black;
 
 }
 
 .test {
     border: black 1px solid;
     margin: 25px;
+}
+
+#memAddSearch:hover {
+    transform: none  !important;
+    border: none !important;
 }

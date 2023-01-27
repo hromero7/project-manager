@@ -84,6 +84,7 @@ const TaskPage = () => {
                             <Col>
                               <TaskAssignee
                                 projectId={projectData.id}
+                                projectData={projectData}
                                 taskId={task._id}
                                 assignee={task.assignee}
                                 getProjectData={getProjData}

@@ -7,7 +7,6 @@ import "./MemberAdd.css";
 const MemberAdd = (props) => {
   const { ID } = useParams();
   const [value, setValue] = useState();
-  const [getSearchData, setGetSearchData] = useState();
   const [searchList, setSearchList] = useState([]);
 
   return (
@@ -20,7 +19,7 @@ const MemberAdd = (props) => {
         Add members:
       </Dropdown.Toggle>
       <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">
+        <Dropdown.Item href="#/action-1" id="memAddSearch">
           <Dropdown.Header>Add members:</Dropdown.Header>
           <Form>
             <Form.Control
@@ -31,13 +30,11 @@ const MemberAdd = (props) => {
               onChange={(e) => {
                 if (e.target.value.length <= 1) {
                   setSearchList([]);
-                  setGetSearchData(false);
                 } else {
                   axios
                     .get(`/api/user/finduser/${e.target.value}`)
                     .then((res) => {
                       setSearchList(res.data);
-                      setGetSearchData(true);
                     })
                     .catch((err) => console.log("err: ", err));
                 }
@@ -79,6 +76,8 @@ const MemberAdd = (props) => {
                 <Col>
                   <i
                     onClick={() => {
+                      console.log("member: ", member);
+                      console.log("props.projectId: ", props.projectId);
                       axios
                         .delete(
                           `/api/project/delete_member/${props.projectId}`,
@@ -87,10 +86,12 @@ const MemberAdd = (props) => {
                               userId: member.id,
                               username: member.username,
                               docId: member._id,
+                              projectId: props.projectId,
                             },
                           }
                         )
-                        .then(() => {
+                        .then((res) => {
+                          // console.log("res.data: ", res.data);
                           props.getProjectData();
                         })
                         .catch((err) => {
