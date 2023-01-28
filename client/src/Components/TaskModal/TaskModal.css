@@ -1,4 +1,24 @@
 
+.addNewBtnCont {
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    /* height: 32px; */
+
+}
+.addNewBtn {
+    justify-content: center;
+    align-items: center;
+}
+.alert {
+    margin: 0;
+    z-index: 9999;
+    /* justify-content: center; */
+}
+.alertCont {
+
+}
 
 .taskCont {
     /* border: 1px red solid; */

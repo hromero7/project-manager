@@ -1,7 +1,7 @@
 .task-container {
     margin-top: 100px;
     background-color: white;
-    height: 800px;
+    overflow: auto;
     border-radius: 15px;
 }
 
@@ -17,7 +17,7 @@
     /* height: 600px; */
 }
 .table {
-    margin-bottom: 400px;
+    overflow: auto;
     border-radius: 15px;
 
 }

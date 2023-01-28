@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Modal, Form, Button, Alert } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Modal,
+  Form,
+  Button,
+  Alert,
+} from "react-bootstrap";
 import DateTimePicker from "react-datetime-picker";
 import TaskAPI from "../../Utils/TaskAPI";
 import "./TaskModal.css";
@@ -56,73 +64,82 @@ const TaskModal = (props) => {
   };
 
   return (
-    <div className="modal-container">
-      <Button onClick={handleShow}>Add New</Button>
-      {message.body && message.error === false ? (
-        <Alert key="success" variant="success">
-          {message.body}
-        </Alert>
-      ) : (
-        ""
-      )}
-      <Modal show={show} onHide={handleClose} style={{ color: "black" }}>
-        <Modal.Header closeButton>
-          <Modal.Title>Task details:</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {message.error ? (
-            <Alert key="danger" variant="danger">
+    <Container>
+      {" "}
+      <Row>
+        <Col className="addNewBtnCont" xs={3}>
+          <Button className="addNewBtn" onClick={handleShow}>
+            Add New
+          </Button>
+        </Col>
+        <Col className="alertCont">
+          {message.body && message.error === false ? (
+            <Alert key="success" variant="success">
               {message.body}
             </Alert>
           ) : (
             ""
           )}
-          <Form>
-            <Form.Group className="mb-3" controlId="formTaskTitle">
-              <Form.Label>Task title:</Form.Label>
-              <Form.Control
-                name="taskTitle"
-                placeholder="Enter title"
-                value={taskValues.taskTitle}
-                onChange={handleTaskFormChange}
-                autocomplete="off"
-                required
-              />
-            </Form.Group>
+          <Modal show={show} onHide={handleClose} style={{ color: "black" }}>
+            <Modal.Header closeButton>
+              <Modal.Title>Task details:</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {message.error ? (
+                <Alert key="danger" variant="danger">
+                  {message.body}
+                </Alert>
+              ) : (
+                ""
+              )}
+              <Form>
+                <Form.Group className="mb-3" controlId="formTaskTitle">
+                  <Form.Label>Task title:</Form.Label>
+                  <Form.Control
+                    name="taskTitle"
+                    placeholder="Enter title"
+                    value={taskValues.taskTitle}
+                    onChange={handleTaskFormChange}
+                    autocomplete="off"
+                    required
+                  />
+                </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formStartDate">
-              <Form.Label>Start:</Form.Label>
-              <DateTimePicker value={startTime} onChange={setStartTime} />
-            </Form.Group>
+                <Form.Group className="mb-3" controlId="formStartDate">
+                  <Form.Label>Start:</Form.Label>
+                  <DateTimePicker value={startTime} onChange={setStartTime} />
+                </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formEndDate">
-              <Form.Label>End:</Form.Label>
-              <DateTimePicker value={endTime} onChange={setEndTime} />
-            </Form.Group>
+                <Form.Group className="mb-3" controlId="formEndDate">
+                  <Form.Label>End:</Form.Label>
+                  <DateTimePicker value={endTime} onChange={setEndTime} />
+                </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formEndDate">
-              <Form.Label>Priority:</Form.Label>
-              <Form.Control
-                type="text"
-                name="priority"
-                placeholder="Proiority"
-                value={taskValues.priority}
-                onChange={handleTaskFormChange}
-                autocomplete="off"
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={addTask}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
+                <Form.Group className="mb-3" controlId="formEndDate">
+                  <Form.Label>Priority:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="priority"
+                    placeholder="Proiority"
+                    value={taskValues.priority}
+                    onChange={handleTaskFormChange}
+                    autocomplete="off"
+                  />
+                </Form.Group>
+              </Form>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant="primary" onClick={addTask}>
+                Save Changes
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
