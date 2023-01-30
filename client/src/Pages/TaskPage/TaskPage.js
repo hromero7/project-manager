@@ -35,7 +35,7 @@ const TaskPage = () => {
       });
     });
   };
-
+  console.log(`projectData: `, projectData);
   return (
     <Container className="task-container">
       <Row className="taskRow">
@@ -60,8 +60,7 @@ const TaskPage = () => {
 
           <Row className="taskTable">
             <Col>
-              {" "}
-              <Container>
+              <Container className="tableCont">
                 <Table striped hover responsive>
                   <thead>
                     <tr>
@@ -117,6 +116,7 @@ const TaskPage = () => {
                           <td>
                             <TaskActionMenu
                               projectId={projectData.id}
+                              userId={projectData.userId}
                               taskId={task._id}
                               getProjectData={getProjData}
                             />

@@ -65,7 +65,6 @@ const TaskModal = (props) => {
 
   return (
     <Container>
-      {" "}
       <Row>
         <Col className="addNewBtnCont" xs={3}>
           <Button className="addNewBtn" onClick={handleShow}>
