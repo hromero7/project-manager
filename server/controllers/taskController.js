@@ -149,4 +149,55 @@ module.exports = {
       });
     }
   },
+  findAllTasks: async (req, res) => {
+
+    let startDate = new Date();
+    let endDate = new Date(startDate);
+        endDate.setDate(endDate.getDate() + 1);
+    
+  //  const projects = await db.Project.find({
+  //   "tasks.dueDate": {
+  //     $gte: "2023-01-08T19:47:43.462Z", 
+  //     $lte: endDate
+  //   }
+  // }, 'tasks -_id');
+  
+  // const projects = await db.Project.aggregate([
+  //   { $unwind: "$tasks" },
+
+  //   { $project: {
+  //     tasks: 1,
+  //     _id: 0,
+  //     }
+  //   },
+  
+  // ]);
+
+ const projects = await db.Project.aggregate([
+  { $unwind: "$tasks"},
+  { $replaceRoot: {
+    "newRoot": {
+      $mergeObjects: ["$tasks", "$$ROOT"]
+    }
+  }},
+  {
+    $match: {
+      "dueDate": {
+        $gte: new Date("2023-01-20T22:36:53.976Z"), 
+        $lte: new Date("2023-01-26T22:36:53.976Z")
+      }
+    }
+  },
+  {
+    $project: {
+      "tasks": 0
+    }
+  }
+ ])
+
+
+   res.json(projects);
+   // console.log(projects);
+   //return projects;
+  }
 };

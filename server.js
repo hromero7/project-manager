@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const routes = require("./server/routes/index");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const notifications = require("./notifications");
 
 app.use(cookieParser());
 // the __dirname is the current directory from where the script is running
@@ -45,6 +46,8 @@ mongoose
 app.get("/*", cors(), (req, res) => {
   res.sendFile(path.resolve(__dirname, "./client/build/index.html"));
 });
+
+notifications();
 
 app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);

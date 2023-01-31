@@ -5,6 +5,7 @@ const {
   deleteTask,
   addTaskAssignee,
   removeTaskAssignee,
+  findAllTasks
 } = require("../../controllers/taskController");
 
 router
@@ -22,4 +23,8 @@ router
   .route("/remove_assignee/:project_id/:task_id/:user_id")
   .put(passport.authenticate("jwt", { session: false }), removeTaskAssignee);
 
+router
+  .route("/find_all")
+  .get(findAllTasks);
+  
 module.exports = router;
