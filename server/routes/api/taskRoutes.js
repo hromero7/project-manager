@@ -1,6 +1,11 @@
 const router = require("express").Router();
 const passport = require("passport");
-const { createTask, deleteTask, addTaskAssignee, removeTaskAssignee } = require("../../controllers/taskController");
+const {
+  createTask,
+  deleteTask,
+  addTaskAssignee,
+  removeTaskAssignee,
+} = require("../../controllers/taskController");
 
 router
   .route("/create/:project_id")

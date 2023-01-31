@@ -38,7 +38,7 @@ const TaskPage = () => {
 
   return (
     <Container className="task-container">
-      <Row className="task-row">
+      <Row className="taskRow">
         <Col>
           <Row>
             <Col>
@@ -57,71 +57,76 @@ const TaskPage = () => {
               />
             </Col>
           </Row>
-          <Row>
+
+          <Row className="taskTable">
             <Col>
-              <Table className="task-col" striped hover responsive>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Title</th>
-                    <th>Status</th>
-                    <th>Assignee</th>
-                    <th>Due date</th>
-                    <th>Priority</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {projectData.tasks.map((task, i) => {
-                    // console.log("projectData.tasks: ", projectData.tasks);
-                    return (
-                      <tr key={i}>
-                        <td>{i + 1}</td>
-                        <td>{task.taskTitle}</td>
-                        <td>{task.status}</td>
-                        <td>
-                          <Row>
-                            <Col>
-                              <TaskAssignee
-                                projectId={projectData.id}
-                                taskId={task._id}
-                                assignee={task.assignee}
-                                getProjectData={getProjData}
-                              />
-                            </Col>
-                            <Col>
-                              {task.assignee.map((assignee) => {
-                                return <div>{assignee.username}</div>;
-                              })}
-                            </Col>
-                          </Row>
-                        </td>
-                        <td>{task.dueDate}</td>
-                        <td>
-                          <span
-                            className={`task-priority ${
-                              task.priority === "High"
-                                ? "priority-high"
-                                : task.priority === "Medium"
-                                ? "priority-medium"
-                                : "priority-low"
-                            }`}
-                          >
-                            {task.priority}
-                          </span>
-                        </td>
-                        <td>
-                          <TaskActionMenu
-                            projectId={projectData.id}
-                            taskId={task._id}
-                            getProjectData={getProjData}
-                          />
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </Table>
+              <Container className="tableCont">
+                <Table striped hover responsive>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Title</th>
+                      <th>Status</th>
+                      <th>Assignee</th>
+                      <th>Due date</th>
+                      <th>Priority</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {projectData.tasks.map((task, i) => {
+                      // console.log("projectData.tasks: ", projectData.tasks);
+                      return (
+                        <tr key={i}>
+                          <td>{i + 1}</td>
+                          <td>{task.taskTitle}</td>
+                          <td>{task.status}</td>
+                          <td>
+                            <Row>
+                              <Col>
+                                <TaskAssignee
+                                  projectId={projectData.id}
+                                  projectData={projectData}
+                                  taskId={task._id}
+                                  assignee={task.assignee}
+                                  getProjectData={getProjData}
+                                />
+                              </Col>
+                              <Col>
+                                {task.assignee.map((assignee) => {
+                                  return <div>{assignee.username}</div>;
+                                })}
+                              </Col>
+                            </Row>
+                          </td>
+                          <td>{task.dueDate}</td>
+                          <td>
+                            <span
+                              className={`task-priority ${
+                                task.priority === "High"
+                                  ? "priority-high"
+                                  : task.priority === "Medium"
+                                  ? "priority-medium"
+                                  : "priority-low"
+                              }`}
+                            >
+                              {task.priority}
+                            </span>
+                          </td>
+                          <td>
+                            <TaskActionMenu
+                              projectId={projectData.id}
+                              userId={projectData.userId}
+                              taskId={task._id}
+                              getProjectData={getProjData}
+                            />
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </Table>
+              </Container>
             </Col>
           </Row>
         </Col>

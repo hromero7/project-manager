@@ -32,6 +32,8 @@ module.exports = {
     }
   },
   deleteTask: async (req, res) => {
+    console.log(`req.params: `, req.params);
+    console.log(`req.body: `, req.body);
     const project = await db.Project.findById(req.params.project_id);
     if (!project)
       return res

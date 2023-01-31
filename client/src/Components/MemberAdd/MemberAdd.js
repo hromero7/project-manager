@@ -7,7 +7,6 @@ import "./MemberAdd.css";
 const MemberAdd = (props) => {
   const { ID } = useParams();
   const [value, setValue] = useState();
-  const [getSearchData, setGetSearchData] = useState();
   const [searchList, setSearchList] = useState([]);
 
   return (
@@ -20,7 +19,7 @@ const MemberAdd = (props) => {
         Add members:
       </Dropdown.Toggle>
       <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">
+        <Dropdown.Item href="#/action-1" id="memAddSearch">
           <Dropdown.Header>Add members:</Dropdown.Header>
           <Form>
             <Form.Control
@@ -31,13 +30,11 @@ const MemberAdd = (props) => {
               onChange={(e) => {
                 if (e.target.value.length <= 1) {
                   setSearchList([]);
-                  setGetSearchData(false);
                 } else {
                   axios
                     .get(`/api/user/finduser/${e.target.value}`)
                     .then((res) => {
                       setSearchList(res.data);
-                      setGetSearchData(true);
                     })
                     .catch((err) => console.log("err: ", err));
                 }
@@ -74,33 +71,42 @@ const MemberAdd = (props) => {
         {props.projectData.members.map((member) => {
           return (
             <Dropdown.Item key={member._id}>
-              <Row>
-                <Col>{member.username}</Col>
-                <Col>
-                  <i
-                    onClick={() => {
-                      axios
-                        .delete(
-                          `/api/project/delete_member/${props.projectId}`,
-                          {
-                            data: {
-                              userId: member.id,
-                              username: member.username,
-                              docId: member._id,
-                            },
-                          }
-                        )
-                        .then(() => {
-                          props.getProjectData();
-                        })
-                        .catch((err) => {
-                          console.log("err: ", err);
-                        });
-                    }}
-                    className="dropIcon fa-sharp fa-solid fa-xmark"
-                  ></i>
-                </Col>
-              </Row>
+              {member.id === props.projectData.userId ? (
+                <Row>
+                  <Col>{member.username}</Col>
+                  <Col id="projectLeadText">Project Leader</Col>
+                </Row>
+              ) : (
+                <Row>
+                  <Col>{member.username}</Col>
+                  <Col>
+                    <i
+                      onClick={() => {
+                        axios
+                          .delete(
+                            `/api/project/delete_member/${props.projectId}`,
+                            {
+                              data: {
+                                userId: member.id,
+                                username: member.username,
+                                docId: member._id,
+                                projectId: props.projectId,
+                              },
+                            }
+                          )
+                          .then((res) => {
+                            // console.log("res.data: ", res.data);
+                            props.getProjectData();
+                          })
+                          .catch((err) => {
+                            console.log("err: ", err);
+                          });
+                      }}
+                      className="dropIcon fa-sharp fa-solid fa-xmark"
+                    ></i>
+                  </Col>
+                </Row>
+              )}
             </Dropdown.Item>
           );
         })}

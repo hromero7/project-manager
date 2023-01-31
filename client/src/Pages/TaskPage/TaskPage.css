@@ -1,20 +1,67 @@
 .task-container {
     margin-top: 100px;
     background-color: white;
-    height: 800px;
+    overflow: auto;
     border-radius: 15px;
 }
 
-.task-col{
+.taskRow {
+  margin: 25px;
+  padding: 25px;
+}
+.taskTable{
     border: rgb(209, 209, 209) 1px solid;
-
+    margin: 5px;
+    border-radius: 25px;
     /* height: 600px; */
 }
-.table {
-    margin-bottom: 400px;
-    border-radius: 15px;
 
+table,
+thead,
+tbody,
+tr {
+  display: block;
 }
+thead {
+  margin-right:1em;
+  }
+tr {
+  display: table;
+  table-layout: fixed;
+  width:100%;
+}
+tbody {
+  height: 550px;
+  overflow: auto ; /* eventually : scroll;*/
+}
+table,
+th,
+td {
+  /* border: solid; */
+}
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #886293 #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #886293;
+    border-radius: 16px;
+    border: 1px none #ffffff;
+  }
+
 .fa-circle-plus {
     font-size: 28px;
     color: rgb(103, 58, 183);

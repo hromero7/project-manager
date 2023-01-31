@@ -138,15 +138,33 @@ module.exports = {
     }
   },
   deleteMember: async (req, res) => {
-    const checkIfExists = await db.Project.findOneAndUpdate(
+    const remFromTask = await db.Project.findOneAndUpdate(
       {
         _id: req.params.project_id,
       },
-      { $pull: { members: { id: req.body.userId } } }
-    )
-      .then((dbModel) => res.status(200).json(dbModel))
-      .catch((err) => {
-        console.log(err);
+      {
+        $pull: {
+          "tasks.$[].assignee": { username: req.body.username },
+          members: { id: req.body.userId },
+        },
+      },
+      { new: true }
+    );
+
+    if (!remFromTask) {
+      return res.status(404).json({
+        message: {
+          msgBody: "Error deleting member from member list",
+          msgError: true,
+        },
       });
+    } else {
+      return res.status(200).json({
+        message: {
+          msgBody: "Member successfully deleted",
+          msgError: false,
+        },
+      });
+    }
   },
 };

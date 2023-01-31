@@ -1,27 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
 import axios from "axios";
 import { Form, Dropdown, Row, Col } from "react-bootstrap";
+import "./TaskAssignee.css";
 
 const TaskAssignee = (props) => {
-  const { ID } = useParams();
   const [show, setShow] = useState(false);
   const [memberList, setMemberList] = useState();
 
-  useEffect(() => {
-    getMemberList();
-  }, []);
-
   const getMemberList = () => {
-    axios
-      .get(`/api/project/${ID}`)
-      .then((res) => {
-        if (res.status === 200) {
-          setMemberList(res.data.members.map((v) => ({ ...v, isActive: "" })));
-          setShow(true);
-        }
-      })
-      .catch((err) => console.log("err: ", err));
+    setMemberList(
+      props.projectData.members.map((v) => ({ ...v, isActive: "" }))
+    );
+    setShow(true);
   };
 
   const getActiveList = () => {
@@ -40,7 +30,7 @@ const TaskAssignee = (props) => {
       ref={ref}
       onClick={(e) => {
         e.preventDefault();
-
+        getMemberList();
         onClick(e);
       }}
     >
@@ -57,7 +47,6 @@ const TaskAssignee = (props) => {
           className={className}
           aria-labelledby={labeledBy}
         >
-          <ul className="list-unstyled"></ul>
           {children}
         </div>
       );
@@ -69,15 +58,19 @@ const TaskAssignee = (props) => {
       <Dropdown.Toggle as={CustomUserAddToggle} id="dropdown-custom-components">
         <i className="fa-solid fa-circle-plus"></i>
       </Dropdown.Toggle>
-      <Dropdown.Menu as={taskMenu}>
+      <Dropdown.Menu
+        className="assignTaskDDM"
+        align={{ lg: "start" }}
+        as={taskMenu}
+      >
         <Dropdown.Header>Assign tasks:</Dropdown.Header>
         {show
           ? memberList.map((item) => {
               getActiveList();
               return (
-                <Dropdown.Item key={item._id}>
+                <Dropdown.Item className="assignTaskNames" key={item._id}>
                   <Row>
-                    <Col>
+                    <Col className="switchContainer">
                       <Form.Check
                         onClick={(e) => {
                           e.stopPropagation();
@@ -89,7 +82,6 @@ const TaskAssignee = (props) => {
                               )
                               .then(() => {
                                 item.isActive = true;
-
                                 props.getProjectData();
                               })
                               .catch((err) => console.log("err: ", err));
@@ -102,6 +94,7 @@ const TaskAssignee = (props) => {
                               .then(() => {
                                 item.isActive = false;
                                 props.getProjectData();
+                                // getActiveList();
                               })
                               .catch((err) => console.log("err: ", err));
                           }
