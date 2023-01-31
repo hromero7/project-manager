@@ -16,15 +16,13 @@ export default {
         console.log(err.response);
       });
   },
-  deleteTask: (projectId, taskId, props) => {
-    console.log(`props: `, props);
+  deleteTask: (projectId, taskId, taskDeleteValues) => {
+    console.log(`taskDeleteValues: `, taskDeleteValues);
     return axios
       .delete(`/api/task/delete/${projectId}/${taskId}`, {
-        params: {
-          userId: props.userId,
-          taskId: props.taskId,
-          projectId: props.projectId,
-        },
+        userId: taskDeleteValues.userId,
+        taskId: taskDeleteValues.taskId,
+        projectId: taskDeleteValues.projectId,
       })
       .then((res) => {
         return res.data;

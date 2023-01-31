@@ -35,7 +35,7 @@ const TaskPage = () => {
       });
     });
   };
-  console.log(`projectData: `, projectData);
+
   return (
     <Container className="task-container">
       <Row className="taskRow">

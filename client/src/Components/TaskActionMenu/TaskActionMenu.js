@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import TaskAPI from "../../Utils/TaskAPI";
 
 const TaskActionMenu = (props) => {
+  const [taskDeleteValues, setTaskDeleteValues] = useState({
+    projectId: "",
+    taskId: "",
+    userId: "",
+  });
+
+  useEffect(() => {
+    setTaskDeleteValues({
+      projectId: props.projectId,
+      taskId: props.taskId,
+      userId: props.userId,
+    });
+  }, []);
+
   const deleteTask = async () => {
-    const res = await TaskAPI.deleteTask(props.projectId, props.taskId, props);
+    const res = await TaskAPI.deleteTask(
+      props.projectId,
+      props.taskId,
+      taskDeleteValues
+    );
     props.getProjectData();
     console.log(res);
   };
