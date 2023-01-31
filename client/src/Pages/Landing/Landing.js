@@ -15,7 +15,8 @@ const LandingPage = () => {
             businesses.
           </p>
         </Col>
-
+      </Row>
+      <Row>
         <Col>
           <NewUser />
         </Col>
