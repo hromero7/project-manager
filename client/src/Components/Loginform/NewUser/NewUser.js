@@ -38,14 +38,14 @@ export default function NewUser() {
   };
 
   return (
-    <Container>
+    <Container className="newUserCont">
       <Col></Col>
       <Col>
         <p>Get Started in less than 30 seconds</p>
         <Form>
           {/* Firstname */}
           <Form.Group className="mb-3" controlId="formBasicFirst">
-            <Form.Label>First name</Form.Label>
+            {/* <Form.Label>First name</Form.Label> */}
             <Form.Control
               type="name"
               name="firstName"
@@ -56,7 +56,7 @@ export default function NewUser() {
           </Form.Group>
           {/* Lastname */}
           <Form.Group className="mb-3" controlId="formBasicLast">
-            <Form.Label>Last name</Form.Label>
+            {/* <Form.Label>Last name</Form.Label> */}
             <Form.Control
               type="name"
               name="lastName"
@@ -67,7 +67,7 @@ export default function NewUser() {
           </Form.Group>
           {/* Email */}
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+            {/* <Form.Label>Email address</Form.Label> */}
             <Form.Control
               type="email"
               name="email"
@@ -76,13 +76,13 @@ export default function NewUser() {
               placeholder="Enter email"
               autoComplete="email"
             />
-            <Form.Text style={{color: "white"}}>
+            <Form.Text>
               We'll never share your email with anyone else.
             </Form.Text>
           </Form.Group>
           {/* Username */}
           <Form.Group className="mb-3" controlId="formBasicUser">
-            <Form.Label>Username</Form.Label>
+            {/* <Form.Label>Username</Form.Label> */}
             <Form.Control
               type="name"
               name="username"
@@ -94,7 +94,7 @@ export default function NewUser() {
           </Form.Group>
           {/* Password */}
           <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            {/* <Form.Label>Password</Form.Label> */}
             <Form.Control
               type="password"
               name="password"
@@ -119,7 +119,6 @@ export default function NewUser() {
           >
             Create Account
           </Button>
-
         </Form>
       </Col>
       <Col></Col>
