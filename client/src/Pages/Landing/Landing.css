@@ -8,6 +8,16 @@
     padding: 80px 0 120px;
 }
 
+.pt {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.pd {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+}
+
 .description {
     max-width: 560px;
     color: white;

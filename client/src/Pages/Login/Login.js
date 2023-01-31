@@ -12,7 +12,6 @@ const LoginPage = () => {
           <Col className="blobLayer">
             <span></span>
             <span></span>
-            <span></span>
           </Col>
           <Col className="login-container">
             <p>Log in to your account</p>
