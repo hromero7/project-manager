@@ -5,7 +5,8 @@ const {
   deleteTask,
   addTaskAssignee,
   removeTaskAssignee,
-  findAllTasks
+  findAllTasks,
+  updateNotified
 } = require("../../controllers/taskController");
 
 router
@@ -26,5 +27,9 @@ router
 router
   .route("/find_all")
   .get(findAllTasks);
+
+router
+  .route("/update_task/notify")
+  .put(updateNotified);
   
 module.exports = router;

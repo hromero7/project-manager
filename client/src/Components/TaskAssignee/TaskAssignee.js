@@ -78,7 +78,7 @@ const TaskAssignee = (props) => {
                             axios
                               .put(
                                 `/api/task/add_assignee/${props.projectId}/${props.taskId}`,
-                                { id: item.id, username: item.username }
+                                { id: item.id, username: item.username, email: item.email }
                               )
                               .then(() => {
                                 item.isActive = true;

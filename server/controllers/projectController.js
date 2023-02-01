@@ -45,7 +45,7 @@ module.exports = {
       let newProject = new db.Project({
         title,
         userId: user.id,
-        members: { id: user.id, username: user.username },
+        members: { id: user.id, username: user.username, email: user.email },
       });
       newProject.save((err, project) => {
         if (err)
@@ -120,7 +120,9 @@ module.exports = {
       } else if (checkIfExists[0].members.length === 0) {
         let userId = req.body.userId;
         let username = req.body.username;
-        project.members.push({ id: userId, username: username });
+        let email = req.body.email; 
+
+        project.members.push({ id: userId, username: username, email: email });
         project.save((err) => {
           if (err)
             return res.status(500).json({

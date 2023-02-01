@@ -19,6 +19,9 @@ const ProjectSchema = new Schema({
       username: {
         type: String,
       },
+      email: {
+        type: String
+      }
     },
   ],
   date: {
@@ -51,6 +54,9 @@ const ProjectSchema = new Schema({
           },
           username: {
             type: String,
+          },
+          email: {
+            type: String
           }
         },
       ],
@@ -61,6 +67,10 @@ const ProjectSchema = new Schema({
       status: {
         type: String,
         default: "Open",
+      },
+      notified: {
+        type: Boolean,
+        default: false
       },
       userId: {
         type: mongoose.Schema.Types.ObjectId,
