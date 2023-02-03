@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Table, Dropdown, Form } from "react-bootstrap";
+import { Container, Row, Col, Table } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import ProjectAPI from "../../Utils/ProjectAPI";
 import TaskModal from "../../Components/TaskModal/TaskModal";
@@ -115,6 +115,7 @@ const TaskPage = () => {
                           </td>
                           <td>
                             <TaskActionMenu
+                              task={task}
                               projectId={projectData.id}
                               userId={projectData.userId}
                               taskId={task._id}

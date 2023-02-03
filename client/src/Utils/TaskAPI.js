@@ -16,13 +16,26 @@ export default {
         console.log(err.response);
       });
   },
-  deleteTask: (projectId, taskId, taskDeleteValues) => {
-    console.log(`taskDeleteValues: `, taskDeleteValues);
+  deleteTask: (projectId, taskId) => {
     return axios
-      .delete(`/api/task/delete/${projectId}/${taskId}`, {
-        userId: taskDeleteValues.userId,
-        taskId: taskDeleteValues.taskId,
-        projectId: taskDeleteValues.projectId,
+      .delete(`/api/task/delete/${projectId}/${taskId}`)
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  },
+  updateTask: (projectId, taskId, taskValues) => {
+    return axios
+      .put(`/api/task/update/${projectId}/${taskId}`, {
+        dueDate: taskValues.dueDate,
+        priority: taskValues.priority,
+        startDate: taskValues.startDate,
+        status: taskValues.status,
+        taskTitle: taskValues.taskTitle,
+        projectId: projectId,
+        _id: taskId,
       })
       .then((res) => {
         return res.data;
