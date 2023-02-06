@@ -45,7 +45,6 @@ export default {
         password: user.password,
       })
       .then((res) => {
-        console.log("res.status", res.status);
         if (res.status === 200) {
           return res;
         }
@@ -60,11 +59,13 @@ export default {
     });
   },
   isAuthenticated: () => {
-    return axios.get(`/api/user/authenticated/`).then((res) => {
-      if (res.status !== 401) return res.data;
-    })
-    .catch((err) => {
-      return { isAuthenticated: false, user: { username: "" } };
-    });
+    return axios
+      .get(`/api/user/authenticated/`)
+      .then((res) => {
+        if (res.status !== 401) return res.data;
+      })
+      .catch((err) => {
+        return { isAuthenticated: false, user: { username: "" } };
+      });
   },
 };

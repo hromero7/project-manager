@@ -14,60 +14,41 @@
     display: flex;
     position: absolute;
     top: 50%;
-
-    /* filter: blur(1.5rem) */
-
-
 }
 
 .blobLayer span:nth-child(1) {
     z-index: -1;
     position: absolute;
-    top: 0;
+    top: 20%;
     left: 0;
     width: 600px;
     height: 600px;
-    /* border: 2px solid black; */
-    border-radius: 22% 78% 87% 13% / 73% 26% 74% 27% ;
-    transition: 0.5s;
+    border-radius: 33% 67% 43% 57% / 31% 66% 34% 69%;
+    transition: 5s;
     transition-timing-function: ease-in-out;
+    transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
     animation: animate 50s linear infinite ;
-    animation-direction: alternate ease-in-out;
+    animation-direction: alternate;
     background: rgb(166,0,249);
-    background: linear-gradient(90deg, rgb(97, 55, 179) 0%, rgba(141, 2, 255, 0.342) 100%);
+    background: linear-gradient(90deg, rgb(97, 55, 200) 0%, rgba(97, 55, 200, 0.342) 100%);
     filter: blur(0.5rem)
 }
+
 .blobLayer span:nth-child(2) {
     z-index: -1;
     position: absolute;
-    top: 0;
+    top: 20%;
     left: 0;
     width: 600px;
     height: 600px;
-    /* border: 2px solid black; */
-    border-radius:55% 45% 50% 50% / 23% 47% 53% 77% ;
-    transition: 0.5s;
+    border-radius: 75% 25% 76% 24% / 74% 29% 71% 26% ;
+    transition: 5s;
     transition-timing-function: ease-in-out;
+    transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
     animation: animate 40s linear infinite ;
     animation-direction: alternate-reverse;
     background: rgb(166,0,249);
-    background: linear-gradient(90deg, rgb(97, 55, 179) 0%, rgb(141, 2, 255) 100%);
-    filter: blur(0.5rem)
-}
-.blobLayer span:nth-child(3) {
-    z-index: -1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 600px;
-    height: 600px;
-    border-radius: 40% 60% 30% 70% / 47% 45% 55% 53% ;
-    transition: 10s;
-    transition-timing-function: ease-in-out;
-    animation: animate 100s linear infinite ;
-    animation-direction: alternate;
-    background: rgb(97, 55, 179);
-    background: linear-gradient(90deg, rgb(97, 55, 179) 0%, rgb(133, 2, 255) 100%);
+    background: linear-gradient(90deg, rgb(97, 55, 200) 0%, rgba(97, 55, 200, 0.342) 100%);
     filter: blur(0.5rem)
 }
 
@@ -79,15 +60,16 @@
     position: absolute;
     justify-content: center;
     align-items: center;
-    min-height: 55vh;
+    min-height: 50vh;
     flex-direction: column;
     margin-top: 200px;
     padding: 20px;
     max-width: 400px;
     background-color: white;
+    border: 2px solid rgb(209, 209, 209);
     border-radius: 25px;
     color: #333333;
-    top: 5%;
+    top: 10%;
     left: 15%;
 
 }
@@ -110,23 +92,23 @@
 @keyframes animate {
     0% {
         transform: rotate(0deg);
-        border-radius: -5% -41% 79% 62% / 4% -90% 5% -6%
+        border-radius: 75% 25% 76% 24% / 74% 29% 71% 26% ;
     }
 
     100% {
         transform: rotate(360deg);
-        border-radius: 59% 41% -79% 21% / -34% 65% 35% -66%
+        border-radius: 33% 67% 43% 57% / 31% 66% 34% 69%;
     }
 }
 
 @keyframes animate2 {
     0% {
         transform: rotate(360deg);
-        border-radius: 23% 77% 50% 50% / 61% 37% 63% 39%
+        border-radius: 75% 25% 76% 24% / 74% 29% 71% 26% ;
     }
 
     100% {
         transform: rotate(0deg);
-        border-radius: 69% 31% 85% 15% / 27% 66% 34% 73%
+        border-radius: 33% 67% 43% 57% / 31% 66% 34% 69%;
     }
 }
