@@ -2,11 +2,12 @@ const nodemailer = require("nodemailer");
 const cron = require("node-cron");
 const axios = require("axios");
 
-const cronJob = () => {
-    cron.schedule("*/3 * * * * *", () => {
-    task();
-});
-}
+// const cronJob = () => {
+//     cron.schedule("*/3 * * * * *", () => {
+//     task();
+// });
+// }
+
 const updateTask = async (projectId, taskId) => {
     const res = await axios.put(`http://localhost:3001/api/task/update_task/notify`, {
         projectId: projectId,
@@ -48,22 +49,25 @@ const task = async () => {
 const emailNotifications = async (email, taskTitle, username) => {
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
-  let testAccount = await nodemailer.createTestAccount();
+  
+  //let testAccount = await nodemailer.createTestAccount();
 
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
+    host: "smtp.mail.yahoo.com",
+    service: "yahoo",
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: testAccount.user, // generated ethereal user
-      pass: testAccount.pass, // generated ethereal password
+      user: "projectmanagerapp@yahoo.com", // generated ethereal user
+      pass: "create app password on yahoo settings", // generated ethereal password
     },
+    logger: true
   });
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: '"Fred Foo 👻" <foo@example.com>', // sender address
+    from: 'projectmanagerapp@yahoo.com', // sender address
     to: email, // list of receivers
     subject: `[PM NOTIFICATION] - ${taskTitle}`, // Subject line
     text: `Hello ${username}, This is a reminder that your task is due soon.`, // plain text body
@@ -80,4 +84,4 @@ const emailNotifications = async (email, taskTitle, username) => {
 
 // emailNotifications().catch(console.error);
 
-module.exports = cronJob;
+module.exports = task;

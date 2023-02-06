@@ -1,3 +1,4 @@
+const { getAllByDisplayValue } = require("@testing-library/react");
 const db = require("../models");
 
 module.exports = {
@@ -68,6 +69,34 @@ module.exports = {
           message: { msgBody: "Task successfully deleted.", msgError: false },
         });
     });
+  },
+  updateTask: async (req, res) => {
+    const bloop = await db.Project.findById({
+      _id: req.params.project_id.toString(),
+    });
+    bloop.tasks.forEach(
+      (item) => {
+        if (item._id.toString() === req.params.task_id) {
+          item.dueDate = req.body.dueDate;
+          item.priority = req.body.priority;
+          item.startDate = req.body.startDate;
+          item.taskTitle = req.body.taskTitle;
+        }
+      },
+      bloop.save(function (err, updatedBloop) {
+        if (err)
+          return res.status(500).json({
+            message: { msgBody: "Error has occured", msgError: true },
+          });
+        else
+          return res.status(200).json({
+            message: {
+              msgBody: `Task updated!`,
+              msgError: false,
+            },
+          });
+      })
+    );
   },
   addTaskAssignee: async (req, res) => {
     const project = await db.Project.findById(req.params.project_id);
@@ -151,7 +180,7 @@ module.exports = {
       });
     }
   },
-  findAllTasks: async (req, res) => {
+  findDueTasks: async (req, res) => {
 
     let startDate = new Date();
     let endDate = new Date(startDate);

@@ -3,9 +3,10 @@ const passport = require("passport");
 const {
   createTask,
   deleteTask,
+  updateTask,
   addTaskAssignee,
   removeTaskAssignee,
-  findAllTasks,
+  findDueTasks,
   updateNotified
 } = require("../../controllers/taskController");
 
@@ -15,6 +16,9 @@ router
 router
   .route("/delete/:project_id/:task_id")
   .delete(passport.authenticate("jwt", { session: false }), deleteTask);
+router
+  .route("/update/:project_id/:task_id")
+  .put(passport.authenticate("jwt", { session: false }), updateTask);
 
 router
   .route("/add_assignee/:project_id/:task_id")
@@ -26,7 +30,7 @@ router
 
 router
   .route("/find_all")
-  .get(findAllTasks);
+  .get(findDueTasks);
 
 router
   .route("/update_task/notify")

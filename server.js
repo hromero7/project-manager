@@ -47,7 +47,8 @@ app.get("/*", cors(), (req, res) => {
   res.sendFile(path.resolve(__dirname, "./client/build/index.html"));
 });
 
-notifications();
+// sends email notifications for tasks
+// notifications();
 
 app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
