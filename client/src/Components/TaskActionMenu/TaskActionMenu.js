@@ -31,6 +31,8 @@ const TaskActionMenu = (props) => {
 
   const handleTaskFormChange = (e) => {
     setTaskValues({ ...taskValues, [e.target.name]: e.target.value });
+    console.log(`startdate: `, startDate);
+    console.log(`duedate  : `, dueDate);
   };
 
   useEffect(() => {
@@ -59,9 +61,11 @@ const TaskActionMenu = (props) => {
     const sup = await TaskAPI.updateTask(
       props.projectId,
       props.taskId,
-      taskValues
+      taskValues,
+      startDate,
+      dueDate
     );
-    // console.log(`sup: `, sup);
+    console.log(`sup: `, sup);
     handleClose();
   };
 
@@ -106,7 +110,7 @@ const TaskActionMenu = (props) => {
                 placeholder="Enter title"
                 value={taskValues.taskTitle}
                 onChange={handleTaskFormChange}
-                autocomplete="off"
+                autoComplete="off"
                 required
               />
             </Form.Group>
@@ -133,7 +137,7 @@ const TaskActionMenu = (props) => {
                 placeholder={props.task.priority}
                 value={taskValues.priority}
                 onChange={handleTaskFormChange}
-                autocomplete="off"
+                autoComplete="off"
               />
             </Form.Group>
           </Form>
@@ -145,9 +149,7 @@ const TaskActionMenu = (props) => {
           <Button
             variant="primary"
             onClick={() => {
-              // sendUpdate();
-              console.log(`Startdate: `, startDate);
-              console.log(`taskValyes: `, taskValues);
+              sendUpdate();
             }}
           >
             Save Changes

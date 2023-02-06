@@ -26,12 +26,12 @@ export default {
         console.log(err.response);
       });
   },
-  updateTask: (projectId, taskId, taskValues) => {
+  updateTask: (projectId, taskId, taskValues, startDate, dueDate) => {
     return axios
       .put(`/api/task/update/${projectId}/${taskId}`, {
-        dueDate: taskValues.dueDate,
+        dueDate: dueDate,
         priority: taskValues.priority,
-        startDate: taskValues.startDate,
+        startDate: startDate,
         status: taskValues.status,
         taskTitle: taskValues.taskTitle,
         projectId: projectId,
