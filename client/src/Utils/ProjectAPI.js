@@ -33,9 +33,11 @@ export default {
       });
   },
   updateProjTitle: (project_id, title) => {
-    console.log(`project_id: `, project_id);
-    console.log(`title: `, title);
-    return axios.put(`/api/project/update/${project_id}`, { title: title });
+    return axios
+      .put(`/api/project/update/${project_id}`, { title: title })
+      .then((res) => {
+        return res.data;
+      });
   },
   addMember: () => {},
 };

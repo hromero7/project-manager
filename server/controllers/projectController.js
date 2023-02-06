@@ -168,7 +168,11 @@ module.exports = {
     }
   },
   updateProjectTitle: async (req, res) => {
-    if (req.body.title.length <= 5) {
+    if (
+      req.body.title.length <= 4 ||
+      req.body.title === undefined ||
+      req.body === undefined
+    ) {
       return res.status(200).json({
         message: {
           msgBody: "Project title must be 5 characters or more",

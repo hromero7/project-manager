@@ -11,7 +11,7 @@ import "./TaskPage.css";
 
 const TaskPage = () => {
   const { ID } = useParams();
-  const [titleChange, setTitleChange] = useState(true);
+  const [titleChange, setTitleChange] = useState(false);
   const [projectData, setProjectData] = useState({
     date: "",
     members: [],

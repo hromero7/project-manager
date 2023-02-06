@@ -6,32 +6,35 @@ import "./TitleChange.css";
 export default function TitleChange(props) {
   const [titleText, setTitleText] = useState();
 
-  const submitTitleChange = async () => {
+  const submitTitleChange = async (e) => {
+    e.preventDefault();
     const titleUpdate = await ProjectAPI.updateProjTitle(
       props.projectData.id,
       titleText
     );
     props.getProjData();
+    props.setTitleChange((titleChange) => !titleChange);
     console.log(`titleUpdate: `, titleUpdate);
   };
 
   return (
     <Col className="projTitleCont">
-      <Form id="titleCh">
+      <Form id="titleCh" onSubmit={submitTitleChange}>
         <Form.Control
           className="projTitleForm"
           type="text"
           placeholder={props.projectData.title}
           onChange={(e) => {
-            setTitleText(e.target.value);
+            setTitleText(
+              e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1)
+            );
           }}
           autoFocus
         />
       </Form>
       <i
-        onClick={() => {
-          props.setTitleChange((titleChange) => !titleChange);
-          submitTitleChange();
+        onClick={(e) => {
+          submitTitleChange(e);
         }}
         className="fa-solid fa-check"
       ></i>
