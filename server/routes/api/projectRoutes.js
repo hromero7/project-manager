@@ -10,6 +10,7 @@ const {
   getMembers,
   addMember,
   deleteMember,
+  updateProjectTitle,
 } = require("../../controllers/projectController");
 
 router.route("/all").get(findAll); // find all route
@@ -31,5 +32,8 @@ router
 router
   .route("/delete_member/:project_id")
   .delete(passport.authenticate("jwt", { session: false }), deleteMember);
+router
+  .route("/update/:project_id")
+  .put(passport.authenticate("jwt", { session: false }), updateProjectTitle);
 
 module.exports = router;

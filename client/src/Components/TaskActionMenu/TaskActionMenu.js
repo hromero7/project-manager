@@ -145,7 +145,9 @@ const TaskActionMenu = (props) => {
           <Button
             variant="primary"
             onClick={() => {
-              sendUpdate();
+              // sendUpdate();
+              console.log(`Startdate: `, startDate);
+              console.log(`taskValyes: `, taskValues);
             }}
           >
             Save Changes

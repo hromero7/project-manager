@@ -44,6 +44,7 @@ export default {
         console.log(err.response);
       });
   },
+
   addAssignee: (projectId, taskId, user) => {
     return axios
       .put(`/api/task/add_assignee/${projectId}/${taskId}`, {

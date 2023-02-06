@@ -4,12 +4,14 @@ import { useParams } from "react-router-dom";
 import ProjectAPI from "../../Utils/ProjectAPI";
 import TaskModal from "../../Components/TaskModal/TaskModal";
 import TaskActionMenu from "../../Components/TaskActionMenu/TaskActionMenu";
-import "./TaskPage.css";
 import TaskAssignee from "../../Components/TaskAssignee/TaskAssignee";
 import MemberAdd from "../../Components/MemberAdd/MemberAdd";
+import TitleChange from "../../Components/titleChange/TitleChange";
+import "./TaskPage.css";
 
 const TaskPage = () => {
   const { ID } = useParams();
+  const [titleChange, setTitleChange] = useState(true);
   const [projectData, setProjectData] = useState({
     date: "",
     members: [],
@@ -41,9 +43,24 @@ const TaskPage = () => {
       <Row className="taskRow">
         <Col>
           <Row>
-            <Col>
-              <h1>{projectData.title}</h1>
-            </Col>
+            {titleChange ? (
+              <TitleChange
+                projectData={projectData}
+                getProjData={getProjData}
+                titleChange={titleChange}
+                setTitleChange={setTitleChange}
+              />
+            ) : (
+              <Col className="projTitleCont">
+                <h1 className="projectTitle">{projectData.title}&nbsp;</h1>
+                <i
+                  onClick={() => {
+                    setTitleChange((titleChange) => !titleChange);
+                  }}
+                  className="fa-solid fa-pen-to-square"
+                ></i>
+              </Col>
+            )}
           </Row>
           <Row>
             <Col>
