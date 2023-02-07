@@ -33,6 +33,7 @@ module.exports = {
     }
   },
   deleteTask: async (req, res) => {
+    
     const project = await db.Project.findById(req.params.project_id);
     if (!project)
       return res
@@ -40,9 +41,11 @@ module.exports = {
         .json({ message: { msgBody: "No Project Found", msgError: true } });
 
     //members can only delete tasks
-    if (
-      project.members.find((member) => req.user.username !== member.username)
-    ) {
+    const userExists =  project.members.find(
+      (member) => req.user.username === member.username
+    );
+
+    if (!userExists) {
       return res
         .status(401)
         .json({ message: { msgBody: "Not Authorized", msgError: true } });
@@ -104,6 +107,7 @@ module.exports = {
     else {
       let userId = req.body.id;
       let username = req.body.username;
+      let email = req.body.email;
 
       //find task
 
@@ -123,7 +127,7 @@ module.exports = {
           },
         });
       else {
-        task.assignee.push({ id: userId, username: username });
+        task.assignee.push({ id: userId, username: username, email: email });
 
         project.save((err) => {
           if (err)
@@ -176,4 +180,75 @@ module.exports = {
       });
     }
   },
+  findDueTasks: async (req, res) => {
+
+    let startDate = new Date();
+    let endDate = new Date(startDate);
+        endDate.setDate(endDate.getDate() + 1);
+
+ const projects = await db.Project.aggregate([
+  { $unwind: "$tasks"},
+  {
+    $addFields: {
+      "taskId": "$tasks._id"
+    }
+  },
+  { $replaceRoot: {
+    "newRoot": {
+      $mergeObjects: ["$tasks", "$$ROOT"]
+    }
+  }},
+  {
+    $match: {
+      "dueDate": {
+        $gte: new Date("2023-01-20T22:36:53.976Z"), 
+        $lte: new Date("2023-01-31T23:36:53.976Z")
+      },
+      "notified" : false
+    }
+  },
+  {
+    $project: {
+      "tasks": 0,
+      
+    }
+  }
+ ])
+
+
+   res.json(projects);
+   // console.log(projects);
+   //return projects;
+  },
+  updateNotified: async (req, res) => {
+    const project = await db.Project.findById(req.body.projectId);
+    if (!project)
+      return res
+        .status(404)
+        .json({ message: { msgBody: "No Project Found", msgError: true } });
+    else {
+      //find task
+
+      const task = project.tasks.find(
+        (task) => req.body.taskId.toString() === task._id.toString()
+      );
+
+      // update notified field
+      task.notified = true;
+
+      project.save((err) => {
+        if (err)
+          return res.status(500).json({
+            message: { msgBody: "Error has occured", msgError: true },
+          });
+        else
+          return res.status(200).json({
+            message: {
+              msgBody: `${task.taskTitle} has been updated.`,
+              msgError: false,
+            },
+          });
+      });
+    }
+  }
 };
