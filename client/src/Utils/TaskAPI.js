@@ -1,12 +1,12 @@
 import axios from "axios";
 
 export default {
-  createTask: (projectId, taskValues) => {
+  createTask: (projectId, taskValues, startTime, endTime) => {
     return axios
       .post(`/api/task/create/${projectId}`, {
         taskTitle: taskValues.taskTitle,
-        startDate: taskValues.startTime,
-        dueDate: taskValues.endTime,
+        startDate: startTime,
+        dueDate: endTime,
         priority: taskValues.priority,
       })
       .then((res) => {
@@ -26,12 +26,12 @@ export default {
         console.log(err.response);
       });
   },
-  updateTask: (projectId, taskId, taskValues) => {
+  updateTask: (projectId, taskId, taskValues, startDate, dueDate) => {
     return axios
       .put(`/api/task/update/${projectId}/${taskId}`, {
-        dueDate: taskValues.dueDate,
+        dueDate: dueDate,
         priority: taskValues.priority,
-        startDate: taskValues.startDate,
+        startDate: startDate,
         status: taskValues.status,
         taskTitle: taskValues.taskTitle,
         projectId: projectId,
@@ -44,6 +44,7 @@ export default {
         console.log(err.response);
       });
   },
+
   addAssignee: (projectId, taskId, user) => {
     return axios
       .put(`/api/task/add_assignee/${projectId}/${taskId}`, {

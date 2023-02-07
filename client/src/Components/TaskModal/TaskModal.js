@@ -41,14 +41,22 @@ const TaskModal = (props) => {
   const handleClose = () => {
     setShow(false);
   };
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setShow(true);
+    console.log(`taskValues: `, taskValues);
+  };
 
   const addTask = async () => {
     if (taskValues.taskTitle === "" || taskValues.priority === "") {
       setMessage({ body: "Please fill out all fields.", error: true });
       clearMessage();
     } else {
-      const createTask = await TaskAPI.createTask(props.projectId, taskValues);
+      const createTask = await TaskAPI.createTask(
+        props.projectId,
+        taskValues,
+        startTime,
+        endTime
+      );
       setMessage({
         body: createTask.message.msgBody,
         error: createTask.message.msgError,
@@ -56,6 +64,7 @@ const TaskModal = (props) => {
       resetForm();
       setShow(false);
       props.getProjData();
+      console.log(`taskValues: `, taskValues);
     }
   };
 
@@ -104,15 +113,41 @@ const TaskModal = (props) => {
                   />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formStartDate">
-                  <Form.Label>Start:</Form.Label>
-                  <DateTimePicker value={startTime} onChange={setStartTime} />
-                </Form.Group>
+                <Row>
+                  <Form.Group className="mb-3" controlId="formStartDate">
+                    <Col>
+                      <Form.Label>Start:</Form.Label>
+                    </Col>
+                    <Col>
+                      <DateTimePicker
+                        className="taskModalTP"
+                        value={startTime}
+                        format="MMM dd y H:mm a"
+                        locale="en"
+                        disableClock
+                        onChange={setStartTime}
+                      />
+                    </Col>
+                  </Form.Group>
+                </Row>
 
-                <Form.Group className="mb-3" controlId="formEndDate">
-                  <Form.Label>End:</Form.Label>
-                  <DateTimePicker value={endTime} onChange={setEndTime} />
-                </Form.Group>
+                <Row>
+                  <Form.Group className="mb-3" controlId="formEndDate">
+                    <Col>
+                      <Form.Label>End:</Form.Label>
+                    </Col>
+                    <Col>
+                      <DateTimePicker
+                        className="taskModalTP"
+                        value={endTime}
+                        format="MMM dd y H:mm a"
+                        locale="en"
+                        disableClock
+                        onChange={setEndTime}
+                      />
+                    </Col>
+                  </Form.Group>
+                </Row>
 
                 <Form.Group className="mb-3" controlId="formEndDate">
                   <Form.Label>Priority:</Form.Label>

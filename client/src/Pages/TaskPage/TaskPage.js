@@ -4,12 +4,16 @@ import { useParams } from "react-router-dom";
 import ProjectAPI from "../../Utils/ProjectAPI";
 import TaskModal from "../../Components/TaskModal/TaskModal";
 import TaskActionMenu from "../../Components/TaskActionMenu/TaskActionMenu";
-import "./TaskPage.css";
 import TaskAssignee from "../../Components/TaskAssignee/TaskAssignee";
 import MemberAdd from "../../Components/MemberAdd/MemberAdd";
+import TitleChange from "../../Components/titleChange/TitleChange";
+import DateTimePicker from "react-datetime-picker";
+
+import "./TaskPage.css";
 
 const TaskPage = () => {
   const { ID } = useParams();
+  const [titleChange, setTitleChange] = useState(false);
   const [projectData, setProjectData] = useState({
     date: "",
     members: [],
@@ -41,9 +45,24 @@ const TaskPage = () => {
       <Row className="taskRow">
         <Col>
           <Row>
-            <Col>
-              <h1>{projectData.title}</h1>
-            </Col>
+            {titleChange ? (
+              <TitleChange
+                projectData={projectData}
+                getProjData={getProjData}
+                titleChange={titleChange}
+                setTitleChange={setTitleChange}
+              />
+            ) : (
+              <Col className="projTitleCont">
+                <h1 className="projectTitle">{projectData.title}&nbsp;</h1>
+                <i
+                  onClick={() => {
+                    setTitleChange((titleChange) => !titleChange);
+                  }}
+                  className="fa-solid fa-pen-to-square"
+                ></i>
+              </Col>
+            )}
           </Row>
           <Row>
             <Col>
@@ -75,11 +94,10 @@ const TaskPage = () => {
                   </thead>
                   <tbody>
                     {projectData.tasks.map((task, i) => {
-                      // console.log("projectData.tasks: ", projectData.tasks);
                       return (
                         <tr key={i}>
                           <td>{i + 1}</td>
-                          <td>{task.taskTitle}</td>
+                          <td className="taskTitle">{task.taskTitle}</td>
                           <td>{task.status}</td>
                           <td>
                             <Row>
@@ -99,7 +117,34 @@ const TaskPage = () => {
                               </Col>
                             </Row>
                           </td>
-                          <td>{task.dueDate}</td>
+                          <td className="dueDateCol">
+                            <Row>
+                              <Col className="taskDatePickCont">
+                                <DateTimePicker
+                                  className="taskDatePick"
+                                  placeholder={task.dueDate}
+                                  value={task.dueDate}
+                                  disabled={true}
+                                  clearIcon={null}
+                                  disableCalendar={true}
+                                  calendarIcon={null}
+                                  minDate={new Date()}
+                                  // onChange={setDueDate}
+                                />
+                              </Col>
+
+                              {/* <Col>
+                                {dMonth}/{dDay}/{dYear}
+                              </Col>
+                              <Col
+                                onClick={() => {
+                                  console.log(task, dHour, dMinute);
+                                }}
+                              >
+                                {dHour}:{dMinute}
+                              </Col> */}
+                            </Row>
+                          </td>
                           <td>
                             <span
                               className={`task-priority ${

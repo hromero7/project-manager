@@ -169,4 +169,37 @@ module.exports = {
       });
     }
   },
+  updateProjectTitle: async (req, res) => {
+    if (
+      req.body.title.length <= 4 ||
+      req.body.title === undefined ||
+      req.body === undefined
+    ) {
+      return res.status(200).json({
+        message: {
+          msgBody: "Project title must be 5 characters or more",
+          msgError: true,
+        },
+      });
+    } else {
+      const projectTitleUpdate = await db.Project.findById({
+        _id: req.params.project_id.toString(),
+      });
+
+      projectTitleUpdate.title = req.body.title;
+      projectTitleUpdate.save(function (err) {
+        if (err)
+          return res.status(500).json({
+            message: { msgBody: "Error has occured", msgError: true },
+          });
+        else
+          return res.status(200).json({
+            message: {
+              msgBody: `Project title updated to: ${req.body.title}`,
+              msgError: false,
+            },
+          });
+      });
+    }
+  },
 };

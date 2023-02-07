@@ -15,8 +15,8 @@ import TaskAPI from "../../Utils/TaskAPI";
 const TaskActionMenu = (props) => {
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState({ body: "", error: false });
-  const [startDate, setStartDate] = useState(new Date());
-  const [dueDate, setDueDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(props.task.startDate);
+  const [dueDate, setDueDate] = useState(props.task.dueDate);
   const [taskDeleteValues, setTaskDeleteValues] = useState({
     projectId: "",
     taskId: "",
@@ -53,15 +53,18 @@ const TaskActionMenu = (props) => {
 
   const updateTask = () => {
     handleShow();
+    console.log(`taskItems: `, taskValues);
   };
 
   const sendUpdate = async (response) => {
     const sup = await TaskAPI.updateTask(
       props.projectId,
       props.taskId,
-      taskValues
+      taskValues,
+      startDate,
+      dueDate
     );
-    // console.log(`sup: `, sup);
+    console.log(`sup: `, sup);
     handleClose();
   };
 
@@ -106,24 +109,48 @@ const TaskActionMenu = (props) => {
                 placeholder="Enter title"
                 value={taskValues.taskTitle}
                 onChange={handleTaskFormChange}
-                autocomplete="off"
+                autoComplete="off"
                 required
               />
             </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formStartDate">
-              <Form.Label>Start:</Form.Label>
-              <DateTimePicker value={startDate} onChange={setStartDate} />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formEndDate">
-              <Form.Label>End:</Form.Label>
-              <DateTimePicker
-                placeholder={props.task.dueDate}
-                value={dueDate}
-                onChange={setDueDate}
-              />
-            </Form.Group>
+            <Row>
+              {" "}
+              <Form.Group className="mb-3" controlId="formStartDate">
+                <Col>
+                  <Form.Label>Start:</Form.Label>
+                </Col>
+                <Col>
+                  <DateTimePicker
+                    className="taskModalTP"
+                    placeholder={props.task.startDate}
+                    value={startDate}
+                    format="MMM dd y H:mm a"
+                    locale="en"
+                    disableClock
+                    onChange={setStartDate}
+                  />
+                </Col>
+              </Form.Group>
+            </Row>
+            <Row>
+              <Form.Group className="mb-3" controlId="formEndDate">
+                <Col>
+                  <Form.Label>End:</Form.Label>
+                </Col>
+                <Col>
+                  {" "}
+                  <DateTimePicker
+                    className="taskModalTP"
+                    placeholder={taskValues.dueDate}
+                    value={dueDate}
+                    format="MMM dd y H:mm a"
+                    locale="en"
+                    disableClock
+                    onChange={setDueDate}
+                  />
+                </Col>
+              </Form.Group>
+            </Row>
 
             <Form.Group className="mb-3" controlId="formEndDate">
               <Form.Label>Priority:</Form.Label>
@@ -133,7 +160,7 @@ const TaskActionMenu = (props) => {
                 placeholder={props.task.priority}
                 value={taskValues.priority}
                 onChange={handleTaskFormChange}
-                autocomplete="off"
+                autoComplete="off"
               />
             </Form.Group>
           </Form>

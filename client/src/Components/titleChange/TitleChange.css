@@ -1,0 +1,31 @@
+
+.projTitleCont {
+    display: flex;
+    align-items: center;
+    border:0;
+  }
+
+  .fa-pen-to-square:hover {
+    font-weight: 500;
+    transform: scale(1.1);
+  }
+
+
+  .projTitleForm {
+   font-size: 32px;
+   border: none;
+   border-radius: none;
+   outline: none;
+   margin-bottom: 5px;
+  }
+
+  .projTitleForm:focus {
+  border-bottom: 1px rgb(185, 185, 185) solid;
+  border-radius: 0;
+  box-shadow: none;
+  outline: none;
+  }
+
+  .projectTitle {
+    font-size: 32px;
+  }

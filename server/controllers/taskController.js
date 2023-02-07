@@ -71,10 +71,10 @@ module.exports = {
     });
   },
   updateTask: async (req, res) => {
-    const bloop = await db.Project.findById({
+    const taskUpdate = await db.Project.findById({
       _id: req.params.project_id.toString(),
     });
-    bloop.tasks.forEach(
+    taskUpdate.tasks.forEach(
       (item) => {
         if (item._id.toString() === req.params.task_id) {
           item.dueDate = req.body.dueDate;
@@ -83,7 +83,7 @@ module.exports = {
           item.taskTitle = req.body.taskTitle;
         }
       },
-      bloop.save(function (err, updatedBloop) {
+      taskUpdate.save(function (err) {
         if (err)
           return res.status(500).json({
             message: { msgBody: "Error has occured", msgError: true },
