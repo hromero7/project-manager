@@ -93,6 +93,8 @@ const TaskPage = () => {
                   <tbody>
                     {projectData.tasks.map((task, i) => {
                       // console.log("projectData.tasks: ", projectData.tasks);
+                      console.log(`task.dueDate: `, task.dueDate.split("-"));
+
                       return (
                         <tr key={i}>
                           <td>{i + 1}</td>
