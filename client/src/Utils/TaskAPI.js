@@ -1,12 +1,12 @@
 import axios from "axios";
 
 export default {
-  createTask: (projectId, taskValues) => {
+  createTask: (projectId, taskValues, startTime, endTime) => {
     return axios
       .post(`/api/task/create/${projectId}`, {
         taskTitle: taskValues.taskTitle,
-        startDate: taskValues.startTime,
-        dueDate: taskValues.endTime,
+        startDate: startTime,
+        dueDate: endTime,
         priority: taskValues.priority,
       })
       .then((res) => {

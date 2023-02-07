@@ -119,3 +119,28 @@ td {
 .dropdown-menu.show {
     border-radius: 25px;
 }
+
+.dueDateCol {
+
+}
+
+.taskDatePickCont {
+
+}
+.react-datetime-picker__wrapper {
+border: none;
+}
+.react-datetime-picker__inputGroup__amPm {
+  /* display: none; */
+}
+
+.react-datetime-picker__wrapper:focus {
+border-bottom: 2px solid black;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+}

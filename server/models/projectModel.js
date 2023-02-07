@@ -20,12 +20,12 @@ const ProjectSchema = new Schema({
         type: String,
       },
       email: {
-        type: String
-      }
+        type: String,
+      },
     },
   ],
   date: {
-    type: Date,
+    type: String,
     default: Date.now(),
   },
   tasks: [
@@ -56,8 +56,8 @@ const ProjectSchema = new Schema({
             type: String,
           },
           email: {
-            type: String
-          }
+            type: String,
+          },
         },
       ],
       priority: {
@@ -70,7 +70,7 @@ const ProjectSchema = new Schema({
       },
       notified: {
         type: Boolean,
-        default: false
+        default: false,
       },
       userId: {
         type: mongoose.Schema.Types.ObjectId,

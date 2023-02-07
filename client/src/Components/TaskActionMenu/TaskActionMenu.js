@@ -15,8 +15,8 @@ import TaskAPI from "../../Utils/TaskAPI";
 const TaskActionMenu = (props) => {
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState({ body: "", error: false });
-  const [startDate, setStartDate] = useState(new Date());
-  const [dueDate, setDueDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(props.task.startDate);
+  const [dueDate, setDueDate] = useState(props.task.dueDate);
   const [taskDeleteValues, setTaskDeleteValues] = useState({
     projectId: "",
     taskId: "",
@@ -31,8 +31,6 @@ const TaskActionMenu = (props) => {
 
   const handleTaskFormChange = (e) => {
     setTaskValues({ ...taskValues, [e.target.name]: e.target.value });
-    console.log(`startdate: `, startDate);
-    console.log(`duedate  : `, dueDate);
   };
 
   useEffect(() => {
@@ -55,6 +53,7 @@ const TaskActionMenu = (props) => {
 
   const updateTask = () => {
     handleShow();
+    console.log(`taskItems: `, taskValues);
   };
 
   const sendUpdate = async (response) => {
@@ -117,14 +116,26 @@ const TaskActionMenu = (props) => {
 
             <Form.Group className="mb-3" controlId="formStartDate">
               <Form.Label>Start:</Form.Label>
-              <DateTimePicker value={startDate} onChange={setStartDate} />
+              <DateTimePicker
+                className="taskModalTP"
+                placeholder={props.task.startDate}
+                value={startDate}
+                format="MMM dd y H:mm a"
+                locale="en"
+                disableClock
+                onChange={setStartDate}
+              />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formEndDate">
               <Form.Label>End:</Form.Label>
               <DateTimePicker
-                placeholder={props.task.dueDate}
+                className="taskModalTP"
+                placeholder={taskValues.dueDate}
                 value={dueDate}
+                format="MMM dd y H:mm a"
+                locale="en"
+                disableClock
                 onChange={setDueDate}
               />
             </Form.Group>

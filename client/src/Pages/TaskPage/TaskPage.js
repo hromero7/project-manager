@@ -7,6 +7,8 @@ import TaskActionMenu from "../../Components/TaskActionMenu/TaskActionMenu";
 import TaskAssignee from "../../Components/TaskAssignee/TaskAssignee";
 import MemberAdd from "../../Components/MemberAdd/MemberAdd";
 import TitleChange from "../../Components/titleChange/TitleChange";
+import DateTimePicker from "react-datetime-picker";
+
 import "./TaskPage.css";
 
 const TaskPage = () => {
@@ -92,17 +94,6 @@ const TaskPage = () => {
                   </thead>
                   <tbody>
                     {projectData.tasks.map((task, i) => {
-                      let year = task.dueDate.split("-")[0];
-                      let month = task.dueDate.split("-")[1];
-                      let day = task.dueDate.split("-")[2].split("T")[0];
-                      let hour = task.dueDate
-                        .split("-")[2]
-                        .split("T")[1]
-                        .split(":")[0];
-                      let minute = task.dueDate
-                        .split("-")[2]
-                        .split("T")[1]
-                        .split(":")[1];
                       return (
                         <tr key={i}>
                           <td>{i + 1}</td>
@@ -126,14 +117,31 @@ const TaskPage = () => {
                               </Col>
                             </Row>
                           </td>
-                          <td>
+                          <td className="dueDateCol">
                             <Row>
-                              <Col>
-                                {month}/{day}/{year}
+                              <Col className="taskDatePickCont">
+                                <DateTimePicker
+                                  className="taskDatePick"
+                                  placeholder={task.dueDate}
+                                  value={task.dueDate}
+                                  disabled={true}
+                                  clearIcon={null}
+                                  disableCalendar={true}
+                                  calendarIcon={null}
+                                  // onChange={setDueDate}
+                                />
                               </Col>
-                              <Col>
-                                {hour}:{minute}
+
+                              {/* <Col>
+                                {dMonth}/{dDay}/{dYear}
                               </Col>
+                              <Col
+                                onClick={() => {
+                                  console.log(task, dHour, dMinute);
+                                }}
+                              >
+                                {dHour}:{dMinute}
+                              </Col> */}
                             </Row>
                           </td>
                           <td>
