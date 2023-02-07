@@ -16,6 +16,10 @@
     /* height: 600px; */
 }
 
+.taskTitle {
+  font-weight: 500;
+}
+
 table,
 thead,
 tbody,

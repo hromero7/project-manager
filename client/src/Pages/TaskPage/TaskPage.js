@@ -97,7 +97,7 @@ const TaskPage = () => {
                       return (
                         <tr key={i}>
                           <td>{i + 1}</td>
-                          <td>{task.taskTitle}</td>
+                          <td className="taskTitle">{task.taskTitle}</td>
                           <td>{task.status}</td>
                           <td>
                             <Row>
