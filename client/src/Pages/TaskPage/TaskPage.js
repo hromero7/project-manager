@@ -92,9 +92,17 @@ const TaskPage = () => {
                   </thead>
                   <tbody>
                     {projectData.tasks.map((task, i) => {
-                      // console.log("projectData.tasks: ", projectData.tasks);
-                      console.log(`task.dueDate: `, task.dueDate.split("-"));
-
+                      let year = task.dueDate.split("-")[0];
+                      let month = task.dueDate.split("-")[1];
+                      let day = task.dueDate.split("-")[2].split("T")[0];
+                      let hour = task.dueDate
+                        .split("-")[2]
+                        .split("T")[1]
+                        .split(":")[0];
+                      let minute = task.dueDate
+                        .split("-")[2]
+                        .split("T")[1]
+                        .split(":")[1];
                       return (
                         <tr key={i}>
                           <td>{i + 1}</td>
@@ -118,7 +126,16 @@ const TaskPage = () => {
                               </Col>
                             </Row>
                           </td>
-                          <td>{task.dueDate}</td>
+                          <td>
+                            <Row>
+                              <Col>
+                                {month}/{day}/{year}
+                              </Col>
+                              <Col>
+                                {hour}:{minute}
+                              </Col>
+                            </Row>
+                          </td>
                           <td>
                             <span
                               className={`task-priority ${

@@ -106,12 +106,22 @@ const TaskModal = (props) => {
 
                 <Form.Group className="mb-3" controlId="formStartDate">
                   <Form.Label>Start:</Form.Label>
-                  <DateTimePicker value={startTime} onChange={setStartTime} />
+                  <DateTimePicker
+                    value={startTime}
+                    format="MMM dd y H:mm a"
+                    locale="en"
+                    onChange={setStartTime}
+                  />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formEndDate">
                   <Form.Label>End:</Form.Label>
-                  <DateTimePicker value={endTime} onChange={setEndTime} />
+                  <DateTimePicker
+                    value={endTime}
+                    format="MMM dd y H:mm a"
+                    locale="en"
+                    onChange={setEndTime}
+                  />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formEndDate">
