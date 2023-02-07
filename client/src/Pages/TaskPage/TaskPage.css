@@ -120,22 +120,17 @@ td {
     border-radius: 25px;
 }
 
-.dueDateCol {
-
-}
-
-.taskDatePickCont {
-
-}
 .react-datetime-picker__wrapper {
-border: none;
+  border: none;
 }
 .react-datetime-picker__inputGroup__amPm {
   /* display: none; */
 }
-
-.react-datetime-picker__wrapper:focus {
-border-bottom: 2px solid black;
+.react-datetime-picker {
+  background: none;
+}
+.taskDatePick:focus {
+  border-bottom: 2px solid black;
 }
 
 select {

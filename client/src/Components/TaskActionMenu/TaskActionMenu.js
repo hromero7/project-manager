@@ -113,32 +113,44 @@ const TaskActionMenu = (props) => {
                 required
               />
             </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formStartDate">
-              <Form.Label>Start:</Form.Label>
-              <DateTimePicker
-                className="taskModalTP"
-                placeholder={props.task.startDate}
-                value={startDate}
-                format="MMM dd y H:mm a"
-                locale="en"
-                disableClock
-                onChange={setStartDate}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formEndDate">
-              <Form.Label>End:</Form.Label>
-              <DateTimePicker
-                className="taskModalTP"
-                placeholder={taskValues.dueDate}
-                value={dueDate}
-                format="MMM dd y H:mm a"
-                locale="en"
-                disableClock
-                onChange={setDueDate}
-              />
-            </Form.Group>
+            <Row>
+              {" "}
+              <Form.Group className="mb-3" controlId="formStartDate">
+                <Col>
+                  <Form.Label>Start:</Form.Label>
+                </Col>
+                <Col>
+                  <DateTimePicker
+                    className="taskModalTP"
+                    placeholder={props.task.startDate}
+                    value={startDate}
+                    format="MMM dd y H:mm a"
+                    locale="en"
+                    disableClock
+                    onChange={setStartDate}
+                  />
+                </Col>
+              </Form.Group>
+            </Row>
+            <Row>
+              <Form.Group className="mb-3" controlId="formEndDate">
+                <Col>
+                  <Form.Label>End:</Form.Label>
+                </Col>
+                <Col>
+                  {" "}
+                  <DateTimePicker
+                    className="taskModalTP"
+                    placeholder={taskValues.dueDate}
+                    value={dueDate}
+                    format="MMM dd y H:mm a"
+                    locale="en"
+                    disableClock
+                    onChange={setDueDate}
+                  />
+                </Col>
+              </Form.Group>
+            </Row>
 
             <Form.Group className="mb-3" controlId="formEndDate">
               <Form.Label>Priority:</Form.Label>

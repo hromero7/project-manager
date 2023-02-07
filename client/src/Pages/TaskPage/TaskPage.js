@@ -128,6 +128,7 @@ const TaskPage = () => {
                                   clearIcon={null}
                                   disableCalendar={true}
                                   calendarIcon={null}
+                                  minDate={new Date()}
                                   // onChange={setDueDate}
                                 />
                               </Col>
