@@ -4,9 +4,6 @@ import TaskAPI from "../../Utils/TaskAPI";
 
 export default function PriorityLevel(props) {
   const priorityUpdate = async (e) => {
-    // console.log(`starValue: `, props, starValue);
-    console.log(`e.target.id: `, e.target.id);
-
     if (props.taskValues._id !== undefined) {
       const pup = await TaskAPI.updatePriority(
         props.projectId,

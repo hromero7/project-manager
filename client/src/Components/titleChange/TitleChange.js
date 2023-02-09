@@ -4,7 +4,7 @@ import ProjectAPI from "../../Utils/ProjectAPI";
 import "./TitleChange.css";
 
 export default function TitleChange(props) {
-  const [titleText, setTitleText] = useState();
+  const [titleText, setTitleText] = useState(props.projectData.title);
 
   const submitTitleChange = async (e) => {
     e.preventDefault();
