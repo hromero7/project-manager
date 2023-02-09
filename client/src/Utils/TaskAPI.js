@@ -45,7 +45,6 @@ export default {
       });
   },
   updatePriority: (projectId, taskId, starValue) => {
-    console.log(`starValue: `, starValue);
     return axios
       .put(`/api/task/updatePriority/${projectId}/${taskId}`, {
         priority: starValue,

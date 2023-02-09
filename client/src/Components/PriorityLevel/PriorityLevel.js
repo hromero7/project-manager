@@ -1,6 +1,7 @@
 import React from "react";
 import { Col } from "react-bootstrap";
 import TaskAPI from "../../Utils/TaskAPI";
+import "./PriorityLevel.css";
 
 export default function PriorityLevel(props) {
   const priorityUpdate = async (e) => {

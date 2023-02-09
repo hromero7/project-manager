@@ -127,9 +127,7 @@ td {
 .react-datetime-picker__wrapper {
   border: none;
 }
-.react-datetime-picker__inputGroup__amPm {
-  /* display: none; */
-}
+
 .react-datetime-picker {
   background: none;
 }

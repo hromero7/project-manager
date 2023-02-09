@@ -8,7 +8,8 @@ import TaskAssignee from "../../Components/TaskAssignee/TaskAssignee";
 import MemberAdd from "../../Components/MemberAdd/MemberAdd";
 import TitleChange from "../../Components/titleChange/TitleChange";
 import DateTimePicker from "react-datetime-picker";
-
+import DatePicker from "react-date-picker";
+import TimePicker from "react-time-picker";
 import "./TaskPage.css";
 import PriorityLevel from "../../Components/PriorityLevel/PriorityLevel";
 
@@ -123,6 +124,7 @@ const TaskPage = () => {
                   </thead>
                   <tbody>
                     {projectData.tasks.map((task, i) => {
+                      console.log(`task.dueDate: `, task, task.dueDate.split());
                       return (
                         <tr key={i}>
                           <td>{i + 1}</td>
@@ -157,7 +159,26 @@ const TaskPage = () => {
                           <td className="dueDateCol">
                             <Row>
                               <Col className="taskDatePickCont">
+                                <DatePicker
+                                  placeholder={task.dueDate}
+                                  value={task.dueDate}
+                                  disabled={true}
+                                  clearIcon={null}
+                                  disableCalendar={true}
+                                  calendarIcon={null}
+                                  minDate={new Date()}
+                                />
+                                <TimePicker
+                                  placeholder={task.dueDate.split("T")[1]}
+                                  value={task.dueDate.split("T")[1]}
+                                  disabled={true}
+                                  clearIcon={null}
+                                  clockIcon={null}
+                                  locale="en"
+                                />
                                 <DateTimePicker
+                                  calendarClassName="calDTP"
+                                  clockClassName="cloDTP"
                                   className="taskDatePick"
                                   placeholder={task.dueDate}
                                   value={task.dueDate}
