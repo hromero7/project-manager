@@ -124,13 +124,20 @@ td {
     border-radius: 25px;
 }
 
-.react-datetime-picker__wrapper {
+.react-datetime-picker__wrapper,
+.react-date-picker__wrapper,
+.react-date-picker,
+.react-time-picker,
+.react-time-picker__wrapper {
   border: none;
+  background: none;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+
 }
 
-.react-datetime-picker {
-  background: none;
-}
+
 .taskDatePick:focus {
   border-bottom: 2px solid black;
 }

@@ -123,7 +123,8 @@ const TaskModal = (props) => {
                       <DateTimePicker
                         className="taskModalTP"
                         value={startTime}
-                        format="MMM dd y H:mm a"
+                        showTime={{ use12Hours: true, format: "hh:mm a" }}
+                        format="MMM dd y hh:mm a"
                         locale="en"
                         disableClock
                         onChange={setStartTime}
@@ -141,7 +142,8 @@ const TaskModal = (props) => {
                       <DateTimePicker
                         className="taskModalTP"
                         value={endTime}
-                        format="MMM dd y H:mm a"
+                        showTime={{ use12Hours: true, format: "hh:mm a" }}
+                        format="MMM dd y hh:mm a"
                         locale="en"
                         disableClock
                         onChange={setEndTime}
@@ -164,14 +166,6 @@ const TaskModal = (props) => {
                     projectId={props.projectId}
                     getProjData={props.getProjData}
                   />
-                  {/* <Form.Control
-                    type="text"
-                    name="priority"
-                    placeholder="Proiority"
-                    value={taskValues.priority}
-                    onChange={handleTaskFormChange}
-                    autocomplete="off"
-                  /> */}
                 </Form.Group>
               </Form>
             </Modal.Body>

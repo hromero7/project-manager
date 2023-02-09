@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 import DateTimePicker from "react-datetime-picker";
 import TaskAPI from "../../Utils/TaskAPI";
+import PriorityLevel from "../PriorityLevel/PriorityLevel";
 
 const TaskActionMenu = (props) => {
   const [show, setShow] = useState(false);
@@ -124,7 +125,8 @@ const TaskActionMenu = (props) => {
                     className="taskModalTP"
                     placeholder={props.task.startDate}
                     value={startDate}
-                    format="MMM dd y H:mm a"
+                    showTime={{ use12Hours: true, format: "hh:mm a" }}
+                    format="MMM dd y hh:mm a"
                     locale="en"
                     disableClock
                     onChange={setStartDate}
@@ -138,12 +140,12 @@ const TaskActionMenu = (props) => {
                   <Form.Label>End:</Form.Label>
                 </Col>
                 <Col>
-                  {" "}
                   <DateTimePicker
                     className="taskModalTP"
                     placeholder={taskValues.dueDate}
                     value={dueDate}
-                    format="MMM dd y H:mm a"
+                    showTime={{ use12Hours: true, format: "hh:mm a" }}
+                    format="MMM dd y hh:mm a"
                     locale="en"
                     disableClock
                     onChange={setDueDate}
@@ -154,13 +156,11 @@ const TaskActionMenu = (props) => {
 
             <Form.Group className="mb-3" controlId="formEndDate">
               <Form.Label>Priority:</Form.Label>
-              <Form.Control
-                type="text"
-                name="priority"
-                placeholder={props.task.priority}
-                value={taskValues.priority}
-                onChange={handleTaskFormChange}
-                autoComplete="off"
+              <PriorityLevel
+                taskValues={taskValues}
+                priority={taskValues.priority}
+                projectId={props.projectId}
+                getProjData={props.getProjectData}
               />
             </Form.Group>
           </Form>
