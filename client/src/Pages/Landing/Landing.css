@@ -1,11 +1,22 @@
-.landing-container {
+.landing {
+    padding: 0px;
+    overflow: hidden;
+    overflow-y: hidden;
+}
+
+.landingContainer {
+    flex-direction: row;
     display: flex;
     justify-content: center;
     align-items: center;
-    column-gap: 150px;
-    min-height: 50vh;
-    margin: auto;
-    padding: 80px 0 120px;
+    height: 100vh;
+}
+
+.leftContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .pt {
@@ -21,4 +32,28 @@
 .description {
     max-width: 560px;
     color: white;
+}
+
+.rightContainer{
+
+
+}
+
+.landingUserRow{
+    border: 5px solid black;
+    margin-left: 55px;
+    margin-right: 55px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 200vh;
+    width: 120vh;
+    background-color: white;
+    margin-right: 25px;
+    transform: rotate(6deg);
+}
+
+.landingUserCol{
+    transform: rotate(-6deg);
+    height: 60vh;
 }

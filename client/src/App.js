@@ -1,5 +1,4 @@
 import { React, useContext } from "react";
-import { Container } from "react-bootstrap";
 import { Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthContext } from "./Context/AuthContext";
@@ -21,7 +20,7 @@ function App() {
   // });
 
   return (
-    <Container className="App">
+    <div className="App">
       <NavBar />
       <Routes>
         <Route element={<PublicRoute />}>
@@ -34,7 +33,7 @@ function App() {
           <Route path="/project/:ID" element={<TaskPage />} />
         </Route>
       </Routes>
-    </Container>
+    </div>
   );
 }
 
