@@ -27,7 +27,12 @@ const NavBar = () => {
           navigate("/dashboard");
         }}
       >
-        <LogoSm />
+        <LogoSm
+          className="navbar-title"
+          onClick={(e) => {
+            navigate("/dashboard");
+          }}
+        />
       </Navbar.Brand>
       <Container fluid>
         <Nav className="me-auto">

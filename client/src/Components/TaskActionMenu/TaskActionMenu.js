@@ -39,7 +39,7 @@ const TaskActionMenu = (props) => {
       taskId: props.taskId,
       userId: props.userId,
     });
-  }, []);
+  }, [props.projectId, props.taskId, props.userId]);
 
   const deleteTask = async () => {
     const res = await TaskAPI.deleteTask(
@@ -47,6 +47,7 @@ const TaskActionMenu = (props) => {
       props.taskId,
       taskDeleteValues
     );
+    setMessage(res.message.msgBody);
     props.getProjectData();
     console.log(res);
   };
@@ -64,7 +65,8 @@ const TaskActionMenu = (props) => {
       startDate,
       dueDate
     );
-    console.log(`sup: `, sup);
+    console.log(`sup.message.msgBody: `, sup.message.msgBody);
+    setMessage(sup.message.msgBody);
     handleClose();
   };
 
@@ -114,7 +116,6 @@ const TaskActionMenu = (props) => {
               />
             </Form.Group>
             <Row>
-              {" "}
               <Form.Group className="mb-3" controlId="formStartDate">
                 <Col>
                   <Form.Label>Start:</Form.Label>

@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { Container, Row, Col, Button, Form, Alert } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import UserAPI from "../../../Utils/UserAPI";
 import "./NewUser.css";
 
