@@ -6,11 +6,6 @@ export default function Logo() {
   return (
     <Container className="logoCont logo">
       <Row className="logoRow logo">
-        {/* <Col className="fontIconContainer logo">
-          <span aria-hidden="true" className="logoIcon logo">
-            <i className="fa-solid fa-cubes logo" />
-          </span>
-        </Col> */}
         <Col className="logoTextContainer logo">
           <span className="logoTexta">
             <span className="logoTextb logo">

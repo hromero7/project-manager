@@ -13,21 +13,50 @@ const LandingPage = () => {
             <Col>
               <Logo />
             </Col>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="landingTagline">
             <h2 className="pd">
-              The most comprehensive project management software
+              <p>Unleash your team's potential with us!</p>
             </h2>
-            <p>
-              The preferred project management application of more than a
-              million businesses.
-            </p>
+            <h3>
+              <p>Empower your team, streamline your projects.</p>
+            </h3>
           </Col>
         </Row>
       </Container>
-
+      <Container className="ContentContainer">
+        <Row>
+          <Col className="middleContent">
+            <Col>
+              <i class=" fa-solid fa-bell"></i>
+              {/* <h1>words is hard</h1> */}
+            </Col>
+            <Col>
+              <i class=" fa-solid fa-users"></i>
+            </Col>
+            <Col>
+              <i class="fa-solid fa-comment"></i>
+            </Col>
+          </Col>
+        </Row>
+      </Container>
       <Container className="rightContainer landing" fluid>
         <Row className="landingUserRow landing" fluid>
           <Col className="landingUserCol">
-            <NewUser />
+            <Row>
+              <Col>
+                <h3>
+                  <p>Get things done, together with 3rd</p>
+                </h3>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <NewUser />
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Container>

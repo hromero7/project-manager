@@ -3,7 +3,7 @@
     padding: 0;
     margin: 0;
 }
-.logoRow {
+.logoSmRow {
     /* border: 5px solid black; */
     display: flex;
     flex-direction: row;
@@ -15,7 +15,7 @@
 
 
 
-.logoRow>  .fontIconContainer {
+.logoSmRow>  .fontIconContainer {
     /* border: 5px solid black; */
     display: flex;
     justify-content: center;
@@ -23,7 +23,7 @@
     align-items: center;
 }
 
-.logoIcon {
+.logoSmIcon {
     /* border: 5px solid white; */
 
     display: flex;
@@ -31,31 +31,17 @@
     align-items: center;
 }
 
-.fa-cubes {
-    /* border: 1px solid black; */
-    text-align: center;
-    font-size: 80px;
-    vertical-align: middle;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-}
-
-.logoRow> .logoTextContainer {
+.logoSmRow> .logoTextContainer {
     /* border: 5px solid black; */
-    font-size: 48px;
+    /* font-size: 48px; */
     display: flex;
-    flex: 2;
+    /* flex: 2; */
     justify-content: center;
     align-items: center;
 }
 
-.logoTexta {
-    /* border: 5px solid rgb(37, 0, 97); */
+.logoSmTexta {
+    /* border: 5px solid RGB(97, 55, 179); */
     border-radius: 100%;
     display: flex;
     flex-direction: column;
@@ -65,11 +51,12 @@
 
 }
 
-.logoTextb {
-    border: 10px solid rgb(37, 0, 97);
+.logoSmTextb {
+    border: 3px solid rgb(37, 0, 97);
     border-radius: 100%;
-    height: 180px;
-    width: 180px;
+    background-color: RGB(97, 55, 179);
+    height: 45px;
+    width: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,19 +66,23 @@
        /* border: 1px solid red; */
 }
 
-#logo3 {
+#logoSm3 {
     font-family: 'Lobster', cursive;
-    font-size: 125px;
+    color: white;
+    font-size: 46px;
     text-shadow: 3px 3px 9px rgb(0, 0, 0);
+    margin-top: 15px;
+    /* margin-bottom: 65px; */
+    /* margin-left: 6px; */
 
     /* border: 1px solid black; */
 }
-#logoRd {
+#logoSmRd {
     font-family: 'Bebas Neue', cursive;
-    font-size: 32px;
+    font-size: 16px;
     text-decoration: underline;
     /* border: 1px solid red; */
-    margin-top: 55px;
-    /* margin-bottom: 65px; */
-    /* margin-left: 6px; */
+    margin-top: 27px;
+    margin-bottom: 65px;
+    margin-left: 6px;
     }
