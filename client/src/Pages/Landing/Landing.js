@@ -3,7 +3,6 @@ import { Container, Row, Col } from "react-bootstrap";
 import Logo from "../../Components/Assets/3rd logo/Logo";
 import RisingBubbles from "../../Components/Assets/RisingBubbles/RisingBubbles";
 import NewUser from "../../Components/Loginform/NewUser/NewUser";
-
 import "./Landing.css";
 
 const LandingPage = () => {
