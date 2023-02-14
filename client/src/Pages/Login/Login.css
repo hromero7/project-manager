@@ -27,7 +27,7 @@
     transition: 5s;
     transition-timing-function: ease-in-out;
     transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
-    animation: animate 50s linear infinite ;
+    animation: animate1 50s linear infinite ;
     animation-direction: alternate;
     background: rgb(166,0,249);
     background: linear-gradient(90deg, rgb(97, 55, 200) 0%, rgba(97, 55, 200, 0.342) 100%);
@@ -45,7 +45,7 @@
     transition: 5s;
     transition-timing-function: ease-in-out;
     transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
-    animation: animate 40s linear infinite ;
+    animation: animate2 40s linear infinite ;
     animation-direction: alternate-reverse;
     background: rgb(166,0,249);
     background: linear-gradient(90deg, rgb(97, 55, 200) 0%, rgba(97, 55, 200, 0.342) 100%);
@@ -89,7 +89,7 @@
     background-color: rgb(81, 45, 168);
 }
 
-@keyframes animate {
+@keyframes animate1 {
     0% {
         transform: rotate(0deg);
         border-radius: 75% 25% 76% 24% / 74% 29% 71% 26% ;

@@ -1,8 +1,6 @@
-import { React, useContext } from "react";
-import { Container } from "react-bootstrap";
+import { React } from "react";
 import { Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { AuthContext } from "./Context/AuthContext";
 import PrivateRoute from "./Utils/PrivateRoute";
 import PublicRoute from "./Utils/PublicRoute";
 import LandingPage from "./Pages/Landing/Landing";
@@ -14,14 +12,8 @@ import TaskPage from "./Pages/TaskPage/TaskPage";
 import "./App.css";
 
 function App() {
-  // const { user, isAuthenticated } = useContext(AuthContext);
-  // console.log("app context obj: ", {
-  //   user: user,
-  //   isAuth: isAuthenticated,
-  // });
-
   return (
-    <Container className="App">
+    <div className="App">
       <NavBar />
       <Routes>
         <Route element={<PublicRoute />}>
@@ -34,7 +26,7 @@ function App() {
           <Route path="/project/:ID" element={<TaskPage />} />
         </Route>
       </Routes>
-    </Container>
+    </div>
   );
 }
 

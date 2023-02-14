@@ -7,9 +7,10 @@ import TaskActionMenu from "../../Components/TaskActionMenu/TaskActionMenu";
 import TaskAssignee from "../../Components/TaskAssignee/TaskAssignee";
 import MemberAdd from "../../Components/MemberAdd/MemberAdd";
 import TitleChange from "../../Components/titleChange/TitleChange";
-import DateTimePicker from "react-datetime-picker";
-
+import DatePicker from "react-date-picker";
+import TimePicker from "react-time-picker";
 import "./TaskPage.css";
+import PriorityLevel from "../../Components/PriorityLevel/PriorityLevel";
 
 const TaskPage = () => {
   const { ID } = useParams();
@@ -83,22 +84,59 @@ const TaskPage = () => {
                 <Table striped hover responsive>
                   <thead>
                     <tr>
-                      <th>#</th>
-                      <th>Title</th>
-                      <th>Status</th>
-                      <th>Assignee</th>
-                      <th>Due date</th>
-                      <th>Priority</th>
-                      <th>Action</th>
+                      <th>
+                        <Row>
+                          <Col>#</Col>
+                        </Row>
+                      </th>
+                      <th>
+                        <Row>
+                          <Col>Title</Col>
+                        </Row>
+                      </th>
+                      <th>
+                        <Row>
+                          <Col>Status</Col>
+                        </Row>
+                      </th>
+                      <th>
+                        <Row>
+                          <Col>Assignee</Col>
+                        </Row>
+                      </th>
+                      <th>
+                        <Row>
+                          <Col>Due date</Col>
+                        </Row>
+                      </th>
+                      <th>
+                        <Row>
+                          <Col>Priority</Col>
+                        </Row>
+                      </th>
+                      <th>
+                        <Row>
+                          <Col>Action</Col>
+                        </Row>
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
                     {projectData.tasks.map((task, i) => {
+                      let newTime = new Date(task.dueDate);
                       return (
                         <tr key={i}>
                           <td>{i + 1}</td>
-                          <td className="taskTitle">{task.taskTitle}</td>
-                          <td>{task.status}</td>
+                          <td className="taskTitle">
+                            <Row>
+                              <Col>{task.taskTitle}</Col>
+                            </Row>
+                          </td>
+                          <td>
+                            <Row>
+                              <Col>{task.status}</Col>
+                            </Row>
+                          </td>
                           <td>
                             <Row>
                               <Col>
@@ -120,8 +158,7 @@ const TaskPage = () => {
                           <td className="dueDateCol">
                             <Row>
                               <Col className="taskDatePickCont">
-                                <DateTimePicker
-                                  className="taskDatePick"
+                                <DatePicker
                                   placeholder={task.dueDate}
                                   value={task.dueDate}
                                   disabled={true}
@@ -129,43 +166,42 @@ const TaskPage = () => {
                                   disableCalendar={true}
                                   calendarIcon={null}
                                   minDate={new Date()}
-                                  // onChange={setDueDate}
+                                />
+                                <TimePicker
+                                  placeholder={newTime}
+                                  value={newTime}
+                                  disabled={true}
+                                  clearIcon={null}
+                                  clockIcon={null}
+                                  locale="en"
                                 />
                               </Col>
-
-                              {/* <Col>
-                                {dMonth}/{dDay}/{dYear}
-                              </Col>
-                              <Col
-                                onClick={() => {
-                                  console.log(task, dHour, dMinute);
-                                }}
-                              >
-                                {dHour}:{dMinute}
-                              </Col> */}
                             </Row>
                           </td>
                           <td>
-                            <span
-                              className={`task-priority ${
-                                task.priority === "High"
-                                  ? "priority-high"
-                                  : task.priority === "Medium"
-                                  ? "priority-medium"
-                                  : "priority-low"
-                              }`}
-                            >
-                              {task.priority}
-                            </span>
+                            <Row>
+                              <Col>
+                                <PriorityLevel
+                                  taskValues={task}
+                                  priority={task.priority}
+                                  projectId={projectData.id}
+                                  getProjData={getProjData}
+                                />
+                              </Col>
+                            </Row>
                           </td>
                           <td>
-                            <TaskActionMenu
-                              task={task}
-                              projectId={projectData.id}
-                              userId={projectData.userId}
-                              taskId={task._id}
-                              getProjectData={getProjData}
-                            />
+                            <Row>
+                              <Col>
+                                <TaskActionMenu
+                                  task={task}
+                                  projectId={projectData.id}
+                                  userId={projectData.userId}
+                                  taskId={task._id}
+                                  getProjectData={getProjData}
+                                />
+                              </Col>
+                            </Row>
                           </td>
                         </tr>
                       );

@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
-import { Container, Col, Button, Form, Alert } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Container, Row, Col, Button, Form, Alert } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import UserAPI from "../../../Utils/UserAPI";
 import "./NewUser.css";
 
@@ -39,89 +39,84 @@ export default function NewUser() {
 
   return (
     <Container className="newUserCont">
-      <Col></Col>
-      <Col>
-        <p>Get Started in less than 30 seconds</p>
-        <Form>
-          {/* Firstname */}
-          <Form.Group className="mb-3" controlId="formBasicFirst">
-            {/* <Form.Label>First name</Form.Label> */}
-            <Form.Control
-              type="name"
-              name="firstName"
-              value={user.firstName}
-              onChange={handleFormChange}
-              placeholder="First Name"
-            />
-          </Form.Group>
-          {/* Lastname */}
-          <Form.Group className="mb-3" controlId="formBasicLast">
-            {/* <Form.Label>Last name</Form.Label> */}
-            <Form.Control
-              type="name"
-              name="lastName"
-              value={user.lastName}
-              onChange={handleFormChange}
-              placeholder="Last Name"
-            />
-          </Form.Group>
-          {/* Email */}
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            {/* <Form.Label>Email address</Form.Label> */}
-            <Form.Control
-              type="email"
-              name="email"
-              value={user.email}
-              onChange={handleFormChange}
-              placeholder="Enter email"
-              autoComplete="email"
-            />
-            <Form.Text>
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
-          {/* Username */}
-          <Form.Group className="mb-3" controlId="formBasicUser">
-            {/* <Form.Label>Username</Form.Label> */}
-            <Form.Control
-              type="name"
-              name="username"
-              value={user.username}
-              onChange={handleFormChange}
-              placeholder="Username"
-              autoComplete="username"
-            />
-          </Form.Group>
-          {/* Password */}
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            {/* <Form.Label>Password</Form.Label> */}
-            <Form.Control
-              type="password"
-              name="password"
-              value={user.password}
-              onChange={handleFormChange}
-              placeholder="Password"
-              autoComplete="current-password"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            {/* <Form.Check type="checkbox" label="Check me out" /> */}
-          </Form.Group>
-          {errorMessage ? <Alert variant={"danger"}>{errorMessage}</Alert> : ""}
+      <Row>
+        <Col>
+          <p id="newUserTagLine">Get Started in less than 30 seconds</p>
+          <Form>
+            <Form.Group className="mb-3" controlId="formBasicFirst">
+              <Form.Control
+                type="name"
+                name="firstName"
+                value={user.firstName}
+                onChange={handleFormChange}
+                placeholder="First Name"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicLast">
+              <Form.Control
+                type="name"
+                name="lastName"
+                value={user.lastName}
+                onChange={handleFormChange}
+                placeholder="Last Name"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Control
+                type="email"
+                name="email"
+                value={user.email}
+                onChange={handleFormChange}
+                placeholder="Enter email"
+                autoComplete="email"
+              />
+              <Form.Text>
+                We'll never share your email with anyone else.
+              </Form.Text>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicUser">
+              <Form.Control
+                type="name"
+                name="username"
+                value={user.username}
+                onChange={handleFormChange}
+                placeholder="Username"
+                autoComplete="username"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Control
+                type="password"
+                name="password"
+                value={user.password}
+                onChange={handleFormChange}
+                placeholder="Password"
+                autoComplete="current-password"
+              />
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              controlId="formBasicCheckbox"
+            ></Form.Group>
+            {errorMessage ? (
+              <Alert variant={"danger"}>{errorMessage}</Alert>
+            ) : (
+              ""
+            )}
 
-          <Button
-            className="signup-btn"
-            variant="primary"
-            type="button"
-            onClick={(e) => {
-              submitBtn(e);
-            }}
-          >
-            Create Account
-          </Button>
-        </Form>
-      </Col>
-      <Col></Col>
+            <Button
+              className="signup-btn"
+              variant="primary"
+              type="button"
+              onClick={(e) => {
+                submitBtn(e);
+              }}
+            >
+              Create Account
+            </Button>
+          </Form>
+        </Col>
+      </Row>
     </Container>
   );
 }

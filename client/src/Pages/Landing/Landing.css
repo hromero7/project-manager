@@ -1,11 +1,45 @@
-.landing-container {
+.landing {
+    padding: 0px;
+    overflow: hidden;
+    overflow-y: hidden;
+}
+
+.landingContainer {
+    background-color: #013A6B;
+    background-image: -webkit-linear-gradient(-90deg,RGB(89, 50, 173) 48%, #A997DF 50%);
+    /* padding-top: 25px; */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
+    /* height: 100%; */
+      /* border: 1px solid black; */
+
+}
+
+.row1Container {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+    height: 80vh;
+
+}
+
+
+.wordContainer {
     display: flex;
     justify-content: center;
     align-items: center;
-    column-gap: 150px;
-    min-height: 50vh;
-    margin: auto;
-    padding: 80px 0 120px;
+    flex-direction: column;
+    /* border: 1px solid red; */
+
+}
+.landingPrefixText {
+    font-family: 'Vidaloka', serif;
+    font-weight: 400;
+    font-size: 32px;
+    color: #fff;
 }
 
 .pt {
@@ -15,10 +49,140 @@
 
 .pd {
     font-family: 'Poppins', sans-serif;
-    font-weight: 200;
+    font-weight: 400;
+    color: #fff;
+    font-size: 42px;
+    text-align: center;
+    /* text-decoration: underline;
+    text-decoration-color: rgb(44, 44, 44); */
 }
 
 .description {
     max-width: 560px;
     color: white;
 }
+
+.ContentContainer {
+    display: flex;
+    justify-content: center;
+    /* border: 5px solid rgba(199,199,199,0.75); */
+    /* border-radius: 25px; */
+    flex-direction: row;
+    /* position: absolute; */
+    /* z-index: 999; */
+    /* width: 44vh; */
+    /* height: 44vh; */
+    /* -webkit-box-shadow: 6px 6px 15px -2px rgba(0,0,0,0.5);
+    -moz-box-shadow: 6px 6px 15px -2px rgba(0,0,0,0.5);
+    box-shadow: 6px 6px 15px -2px rgba(0,0,0,0.5); */
+    /* background-color: white; */
+    background-color: #A997DF;
+}
+
+.middleContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+gap: 30px;
+    /* height: 100vh; */
+}
+
+.productDescription {
+    border-radius: 25px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    justify-content: center;
+    -webkit-box-shadow: 6px 6px 15px -2px rgba(0,0,0,0.5);
+    -moz-box-shadow: 6px 6px 15px -2px rgba(0,0,0,0.5);
+    box-shadow: 6px 6px 15px -2px rgba(0,0,0,0.5);
+    background-color: white;
+}
+
+.productDescription:nth-child(odd) {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.productDescriptionIcon{
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pdIcon {
+    font-size: 70px;
+}
+
+.pdIconCont{
+    border:10px solid black;
+    border-radius: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pdIconInner {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.productDescriptionText{
+    padding: 10px;
+    margin: 15px;
+    /* border: 1px solid black; */
+    /* background-color: #ffffff; */
+    /* border-radius: 25px; */
+    width: 90vh;
+    /* -webkit-box-shadow: 6px 6px 15px -2px rgba(0,0,0,0.5);
+    -moz-box-shadow: 6px 6px 15px -2px rgba(0,0,0,0.5);
+    box-shadow: 6px 6px 15px -2px rgba(0,0,0,0.5); */
+
+}
+
+
+.landingNewUser {
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.landingUserRow{
+    /* border: 5px solid black; */
+    margin-left: 55px;
+    margin-right: 55px;
+    display: flex;
+    /* flex-flow: column; */
+    justify-content: flex-start;
+    align-items: center;
+    /* height: 200vh;
+    width: 120vh; */
+    /* height: 100vh; */
+    margin-right: 25px;
+    /* transform: rotate(6deg); */
+
+
+}
+
+.landingUserCol{
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    /* transform: rotate(-6deg); */
+    /* height: 60vh; */
+}
+
+
+

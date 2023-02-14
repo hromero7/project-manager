@@ -1,0 +1,70 @@
+
+.logo {
+    padding: 0;
+    margin: 0;
+}
+.logoSmRow {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+}
+
+
+
+.logoSmRow>  .fontIconContainer {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.logoSmIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoSmRow> .logoTextContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoSmTexta {
+    border-radius: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoSmTextb {
+    border: 3px solid rgb(37, 0, 97);
+    border-radius: 100%;
+    background-color: RGB(97, 55, 179);
+    height: 38px;
+    width: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -ms-transform: rotate(20deg); /* IE 9 */
+    transform: rotate(7deg);
+    cursor: pointer;
+}
+
+#logoSm3 {
+    font-family: 'Lobster', cursive;
+    color: white;
+    font-size: 36px;
+    text-shadow: 3px 3px 9px rgb(0, 0, 0);
+    margin-top: 15px;
+}
+#logoSmRd {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 16px;
+    text-decoration: underline;
+    margin-top: 27px;
+    margin-bottom: 65px;
+    margin-left: 6px;
+    }

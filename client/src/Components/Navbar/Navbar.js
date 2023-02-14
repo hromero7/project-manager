@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import UserAPI from "../../Utils/UserAPI";
 import { AuthContext } from "../../Context/AuthContext";
 import "./Navbar.css";
+import LogoSm from "../Assets/3rd logo small/LogoSm";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -20,12 +21,18 @@ const NavBar = () => {
 
   return (
     <Navbar className="navbar" variant="light" fixed="top">
-      <Navbar.Brand className="navbar-title"
+      <Navbar.Brand
+        className="navbar-title"
         onClick={(e) => {
           navigate("/dashboard");
         }}
       >
-        Project Manager
+        <LogoSm
+          className="navbar-title"
+          onClick={(e) => {
+            navigate("/dashboard");
+          }}
+        />
       </Navbar.Brand>
       <Container fluid>
         <Nav className="me-auto">

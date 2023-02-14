@@ -120,7 +120,7 @@ module.exports = {
       } else if (checkIfExists[0].members.length === 0) {
         let userId = req.body.userId;
         let username = req.body.username;
-        let email = req.body.email; 
+        let email = req.body.email;
 
         project.members.push({ id: userId, username: username, email: email });
         project.save((err) => {
@@ -170,6 +170,8 @@ module.exports = {
     }
   },
   updateProjectTitle: async (req, res) => {
+    // console.log(`req.body: `, req.body);
+    // console.log(`req.body.title: `, req.body.title);
     if (
       req.body.title.length <= 4 ||
       req.body.title === undefined ||
@@ -185,7 +187,6 @@ module.exports = {
       const projectTitleUpdate = await db.Project.findById({
         _id: req.params.project_id.toString(),
       });
-
       projectTitleUpdate.title = req.body.title;
       projectTitleUpdate.save(function (err) {
         if (err)

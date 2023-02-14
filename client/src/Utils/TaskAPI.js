@@ -44,7 +44,20 @@ export default {
         console.log(err.response);
       });
   },
-
+  updatePriority: (projectId, taskId, starValue) => {
+    return axios
+      .put(`/api/task/updatePriority/${projectId}/${taskId}`, {
+        priority: starValue,
+        projectId: projectId,
+        _id: taskId,
+      })
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  },
   addAssignee: (projectId, taskId, user) => {
     return axios
       .put(`/api/task/add_assignee/${projectId}/${taskId}`, {

@@ -29,7 +29,7 @@ app.get("/ping", function (req, res) {
 app.use(routes);
 
 //Connect to MongoDB Atlas
-
+mongoose.set("strictQuery", false);
 mongoose
   .connect(
     `mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASS}@${process.env.DB_URL}?retryWrites=true&w=majority`,

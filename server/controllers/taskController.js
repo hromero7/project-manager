@@ -33,7 +33,6 @@ module.exports = {
     }
   },
   deleteTask: async (req, res) => {
-    
     const project = await db.Project.findById(req.params.project_id);
     if (!project)
       return res
@@ -41,7 +40,7 @@ module.exports = {
         .json({ message: { msgBody: "No Project Found", msgError: true } });
 
     //members can only delete tasks
-    const userExists =  project.members.find(
+    const userExists = project.members.find(
       (member) => req.user.username === member.username
     );
 
@@ -92,6 +91,31 @@ module.exports = {
           return res.status(200).json({
             message: {
               msgBody: `Task updated!`,
+              msgError: false,
+            },
+          });
+      })
+    );
+  },
+  updatePriority: async (req, res) => {
+    const taskUpdate = await db.Project.findById({
+      _id: req.params.project_id.toString(),
+    });
+    taskUpdate.tasks.forEach(
+      (item) => {
+        if (item._id.toString() === req.params.task_id) {
+          item.priority = req.body.priority;
+        }
+      },
+      taskUpdate.save(function (err) {
+        if (err)
+          return res.status(500).json({
+            message: { msgBody: "Error has occured: #TU1", msgError: true },
+          });
+        else
+          return res.status(200).json({
+            message: {
+              msgBody: `Task priority updated!`,
               msgError: false,
             },
           });
@@ -181,44 +205,43 @@ module.exports = {
     }
   },
   findDueTasks: async (req, res) => {
-
     let startDate = new Date();
     let endDate = new Date(startDate);
-        endDate.setDate(endDate.getDate() + 1);
+    endDate.setDate(endDate.getDate() + 1);
 
- const projects = await db.Project.aggregate([
-  { $unwind: "$tasks"},
-  {
-    $addFields: {
-      "taskId": "$tasks._id"
-    }
-  },
-  { $replaceRoot: {
-    "newRoot": {
-      $mergeObjects: ["$tasks", "$$ROOT"]
-    }
-  }},
-  {
-    $match: {
-      "dueDate": {
-        $gte: new Date("2023-01-20T22:36:53.976Z"), 
-        $lte: new Date("2023-01-31T23:36:53.976Z")
+    const projects = await db.Project.aggregate([
+      { $unwind: "$tasks" },
+      {
+        $addFields: {
+          taskId: "$tasks._id",
+        },
       },
-      "notified" : false
-    }
-  },
-  {
-    $project: {
-      "tasks": 0,
-      
-    }
-  }
- ])
+      {
+        $replaceRoot: {
+          newRoot: {
+            $mergeObjects: ["$tasks", "$$ROOT"],
+          },
+        },
+      },
+      {
+        $match: {
+          dueDate: {
+            $gte: new Date("2023-01-20T22:36:53.976Z"),
+            $lte: new Date("2023-01-31T23:36:53.976Z"),
+          },
+          notified: false,
+        },
+      },
+      {
+        $project: {
+          tasks: 0,
+        },
+      },
+    ]);
 
-
-   res.json(projects);
-   // console.log(projects);
-   //return projects;
+    res.json(projects);
+    // console.log(projects);
+    //return projects;
   },
   updateNotified: async (req, res) => {
     const project = await db.Project.findById(req.body.projectId);
@@ -250,5 +273,5 @@ module.exports = {
           });
       });
     }
-  }
+  },
 };

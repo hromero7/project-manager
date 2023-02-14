@@ -4,7 +4,6 @@ import {
   Row,
   Col,
   Dropdown,
-  DropdownButton,
   Form,
   Button,
   Card,
@@ -23,7 +22,7 @@ export default function Projectlist() {
 
   useEffect(() => {
     getProjects();
-  }, []);
+  });
 
   const getProjects = async () => {
     const projectData = await ProjectAPI.getProjects(auth.user._id);
@@ -50,7 +49,7 @@ export default function Projectlist() {
   };
 
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    <a
+    <Dropdown
       ref={ref}
       onClick={(e) => {
         e.preventDefault();
@@ -60,7 +59,7 @@ export default function Projectlist() {
       {children}
       &nbsp;
       <i className="fa-sharp fa-solid fa-plus"></i>
-    </a>
+    </Dropdown>
   ));
 
   const CustomMenu = React.forwardRef(
@@ -82,7 +81,7 @@ export default function Projectlist() {
   );
 
   const OptionToggle = React.forwardRef(({ children, onClick }, ref) => (
-    <a
+    <Dropdown
       ref={ref}
       onClick={(e) => {
         e.preventDefault();
@@ -92,13 +91,11 @@ export default function Projectlist() {
     >
       {children}
       <i className="fa-sharp fa-solid fa-fire "></i>
-    </a>
+    </Dropdown>
   ));
 
   const OptionMenu = React.forwardRef(
     ({ children, style, className, "aria-labelledby": labeledBy }, ref) => {
-      const [value, setValue] = useState("");
-
       return (
         <div
           ref={ref}
@@ -106,12 +103,7 @@ export default function Projectlist() {
           className={className}
           aria-labelledby={labeledBy}
         >
-          <ul className="list-unstyled">
-            {React.Children.toArray(children).filter(
-              (child) =>
-                !value || child.props.children.toLowerCase().startsWith(value)
-            )}
-          </ul>
+          <ul className="list-unstyled">{children}</ul>
         </div>
       );
     }

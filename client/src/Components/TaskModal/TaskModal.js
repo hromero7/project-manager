@@ -11,6 +11,7 @@ import {
 import DateTimePicker from "react-datetime-picker";
 import TaskAPI from "../../Utils/TaskAPI";
 import "./TaskModal.css";
+import PriorityLevel from "../PriorityLevel/PriorityLevel.js";
 
 const TaskModal = (props) => {
   const [show, setShow] = useState(false);
@@ -40,10 +41,11 @@ const TaskModal = (props) => {
   };
   const handleClose = () => {
     setShow(false);
+    resetForm();
   };
   const handleShow = () => {
     setShow(true);
-    console.log(`taskValues: `, taskValues);
+    // console.log(`props: `, props);
   };
 
   const addTask = async () => {
@@ -64,7 +66,6 @@ const TaskModal = (props) => {
       resetForm();
       setShow(false);
       props.getProjData();
-      console.log(`taskValues: `, taskValues);
     }
   };
 
@@ -122,7 +123,8 @@ const TaskModal = (props) => {
                       <DateTimePicker
                         className="taskModalTP"
                         value={startTime}
-                        format="MMM dd y H:mm a"
+                        showTime={{ use12Hours: true, format: "hh:mm a" }}
+                        format="MMM dd y hh:mm a"
                         locale="en"
                         disableClock
                         onChange={setStartTime}
@@ -140,7 +142,8 @@ const TaskModal = (props) => {
                       <DateTimePicker
                         className="taskModalTP"
                         value={endTime}
-                        format="MMM dd y H:mm a"
+                        showTime={{ use12Hours: true, format: "hh:mm a" }}
+                        format="MMM dd y hh:mm a"
                         locale="en"
                         disableClock
                         onChange={setEndTime}
@@ -150,14 +153,18 @@ const TaskModal = (props) => {
                 </Row>
 
                 <Form.Group className="mb-3" controlId="formEndDate">
-                  <Form.Label>Priority:</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="priority"
-                    placeholder="Proiority"
-                    value={taskValues.priority}
-                    onChange={handleTaskFormChange}
-                    autocomplete="off"
+                  <Form.Label
+                    onClick={() => {
+                      console.log(`taskValues: `, taskValues);
+                    }}
+                  >
+                    Priority:
+                  </Form.Label>
+                  <PriorityLevel
+                    taskValues={taskValues}
+                    priority={taskValues.priority}
+                    projectId={props.projectId}
+                    getProjData={props.getProjData}
                   />
                 </Form.Group>
               </Form>

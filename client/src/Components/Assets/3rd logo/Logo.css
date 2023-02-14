@@ -1,0 +1,97 @@
+
+.logo {
+    padding: 0;
+    margin: 0;
+}
+.logoRow {
+    /* border: 5px solid black; */
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+
+    /* height: 5em; */
+}
+
+
+
+.logoRow>  .fontIconContainer {
+    /* border: 5px solid black; */
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.logoIcon {
+    /* border: 5px solid white; */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fa-cubes {
+    /* border: 1px solid black; */
+    text-align: center;
+    font-size: 80px;
+    vertical-align: middle;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.logoRow> .logoTextContainer {
+    /* border: 5px solid black; */
+    font-size: 48px;
+    display: flex;
+    flex: 2;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoTexta {
+    /* border: 5px solid rgb(37, 0, 97); */
+    border-radius: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.logoTextb {
+    border: 10px solid rgb(37, 0, 97);
+    border-radius: 100%;
+    height: 180px;
+    width: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -ms-transform: rotate(20deg); /* IE 9 */
+    transform: rotate(7deg);
+
+       /* border: 1px solid red; */
+}
+
+#logo3 {
+    font-family: 'Lobster', cursive;
+    font-size: 125px;
+    text-shadow: 3px 3px 9px rgb(0, 0, 0);
+
+    /* border: 1px solid black; */
+}
+#logoRd {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 32px;
+    text-decoration: underline;
+    /* border: 1px solid red; */
+    margin-top: 55px;
+    /* margin-bottom: 65px; */
+    /* margin-left: 6px; */
+    }
