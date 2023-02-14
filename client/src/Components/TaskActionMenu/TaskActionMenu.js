@@ -55,6 +55,7 @@ const TaskActionMenu = (props) => {
   const updateTask = () => {
     handleShow();
     console.log(`taskItems: `, taskValues);
+    console.log(`props: `, typeof props.task.dueDate);
   };
 
   const sendUpdate = async (response) => {
@@ -142,7 +143,7 @@ const TaskActionMenu = (props) => {
                 <Col>
                   <DateTimePicker
                     className="taskModalTP"
-                    placeholder={taskValues.dueDate}
+                    placeholder={props.task.dueDate}
                     value={dueDate}
                     showTime={{ use12Hours: true, format: "hh:mm a" }}
                     format="MMM dd y hh:mm a"
