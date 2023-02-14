@@ -11,6 +11,7 @@ const {
   addMember,
   deleteMember,
   updateProjectTitle,
+  findAssignedProjects
 } = require("../../controllers/projectController");
 
 router.route("/all").get(findAll); // find all route
@@ -35,5 +36,9 @@ router
 router
   .route("/update/:project_id")
   .put(passport.authenticate("jwt", { session: false }), updateProjectTitle);
+
+router
+  .route("/assigned_projects/:username")
+  .get(passport.authenticate("jwt", { session: false } ), findAssignedProjects);
 
 module.exports = router;

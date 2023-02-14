@@ -54,7 +54,7 @@ const TaskAssignee = (props) => {
   );
 
   return (
-    <Dropdown autoClose="outside">
+    <Dropdown autoClose="outside" className="dropdown-assignee">
       <Dropdown.Toggle as={CustomUserAddToggle} id="dropdown-custom-components">
         <i className="fa-solid fa-circle-plus"></i>
       </Dropdown.Toggle>

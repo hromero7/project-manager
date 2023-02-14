@@ -140,6 +140,12 @@ const TaskPage = () => {
                           <td>
                             <Row>
                               <Col>
+                                {task.assignee.map((assignee) => {
+                                    return <div className="user-circle">
+                                            {assignee.username[0].toUpperCase()}
+                                           </div>;
+                                })}
+                              
                                 <TaskAssignee
                                   projectId={projectData.id}
                                   projectData={projectData}
@@ -148,11 +154,7 @@ const TaskPage = () => {
                                   getProjectData={getProjData}
                                 />
                               </Col>
-                              <Col>
-                                {task.assignee.map((assignee) => {
-                                  return <div>{assignee.username}</div>;
-                                })}
-                              </Col>
+                    
                             </Row>
                           </td>
                           <td className="dueDateCol">

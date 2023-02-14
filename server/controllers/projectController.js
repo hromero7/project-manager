@@ -1,4 +1,5 @@
 const db = require("../models");
+const mongoose = require("mongoose");
 
 module.exports = {
   findAll: (req, res) => {
@@ -203,4 +204,27 @@ module.exports = {
       });
     }
   },
+  findAssignedProjects: async (req, res) => {
+    const username = req.user.username
+    const userId = req.user.id
+
+    const projects = await db.Project.aggregate([
+      { 
+        $match: {
+         $and: [
+          { "members.username": username }, 
+          { "userId": {$ne: new mongoose.Types.ObjectId(userId)} }
+          ]      
+        }
+    
+      }
+    ]);
+
+    if (!projects)
+      return res
+        .status(404)
+        .json({ message: { msgBody: "No Projects Found", msgError: true } });
+    else
+      return res.status(200).json(projects);
+  }
 };
