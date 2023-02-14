@@ -13,6 +13,7 @@
     /* justify-content: center;
     align-items: center; */
     /* height: 100%; */
+      /* border: 1px solid black; */
 
 }
 
@@ -22,6 +23,7 @@
     /* justify-content: center; */
     align-items: center;
     height: 80vh;
+
 }
 
 
@@ -146,6 +148,7 @@ gap: 30px;
     box-shadow: 6px 6px 15px -2px rgba(0,0,0,0.5); */
 
 }
+
 
 .landingNewUser {
     /* border: 1px solid black; */
