@@ -1,4 +1,7 @@
-
+.dropdown-assignee {
+    display: inline-block;
+    vertical-align: middle;
+}
 
 .assignTaskDDM{
     /* border: 5px solid red; */

@@ -39,5 +39,13 @@ export default {
         return res.data;
       });
   },
+  getAssignedProjects: (username) => {
+    return axios
+        .get(`/api/project/assigned_projects/${username}`)
+        .then((res) => {
+            return res.data; 
+        })
+  },
   addMember: () => {},
+
 };
