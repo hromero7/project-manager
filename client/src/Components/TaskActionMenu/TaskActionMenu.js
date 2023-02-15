@@ -15,8 +15,8 @@ import PriorityLevel from "../PriorityLevel/PriorityLevel";
 const TaskActionMenu = (props) => {
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState({ body: "", error: false });
-  const [startDate, setStartDate] = useState(props.task.startDate);
-  const [dueDate, setDueDate] = useState(props.task.dueDate);
+  const [startDate, setStartDate] = useState(new Date(props.task.startDate));
+  const [dueDate, setDueDate] = useState(new Date(props.task.dueDate));
   const [taskDeleteValues, setTaskDeleteValues] = useState({
     projectId: "",
     taskId: "",
