@@ -9,6 +9,7 @@ import MemberAdd from "../../Components/MemberAdd/MemberAdd";
 import TitleChange from "../../Components/titleChange/TitleChange";
 import DatePicker from "react-date-picker";
 import TimePicker from "react-time-picker";
+import Moment from "react-moment";
 import "./TaskPage.css";
 import PriorityLevel from "../../Components/PriorityLevel/PriorityLevel";
 
@@ -140,6 +141,12 @@ const TaskPage = () => {
                           <td>
                             <Row>
                               <Col>
+                                {task.assignee.map((assignee) => {
+                                    return <div className="user-circle">
+                                            {assignee.username[0].toUpperCase()}
+                                           </div>;
+                                })}
+                              
                                 <TaskAssignee
                                   projectId={projectData.id}
                                   projectData={projectData}
@@ -148,17 +155,14 @@ const TaskPage = () => {
                                   getProjectData={getProjData}
                                 />
                               </Col>
-                              <Col>
-                                {task.assignee.map((assignee) => {
-                                  return <div>{assignee.username}</div>;
-                                })}
-                              </Col>
+                    
                             </Row>
                           </td>
                           <td className="dueDateCol">
                             <Row>
                               <Col className="taskDatePickCont">
-                                <DatePicker
+                                <Moment local format="MM/DD/YY hh:mm A">{task.dueDate}</Moment>
+                                {/* <DatePicker
                                   placeholder={task.dueDate}
                                   value={task.dueDate}
                                   disabled={true}
@@ -174,7 +178,7 @@ const TaskPage = () => {
                                   clearIcon={null}
                                   clockIcon={null}
                                   locale="en"
-                                />
+                                /> */}
                               </Col>
                             </Row>
                           </td>

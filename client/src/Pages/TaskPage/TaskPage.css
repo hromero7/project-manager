@@ -38,11 +38,31 @@ tbody {
   height: 550px;
   overflow: auto ; /* eventually : scroll;*/
 }
-table,
+/* table,
 th,
 td {
-  /* border: solid; */
+  border: solid; 
+} */
+
+.user-circle {
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid black;
+    height: 28px;
+    width: 28px;
+    margin: -5px;
+    border-radius: 50%;
+    text-align: center;
+    background-color: blue;
+    color: white;
+    transition: 0.1s ease 0s;
+    cursor: pointer;
 }
+
+.user-circle:hover {
+    transform: translateY(-5px);
+}
+
 
 /* ===== Scrollbar CSS ===== */
   /* Firefox */
@@ -69,6 +89,11 @@ td {
 .fa-circle-plus {
     font-size: 28px;
     color: rgb(103, 58, 183);
+    transition: 0.1s ease 0s;
+}
+
+.fa-circle-plus:hover {
+    transform: translateY(-5px);
 }
 
 .task-priority {

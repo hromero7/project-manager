@@ -125,6 +125,7 @@ const TaskActionMenu = (props) => {
                   <DateTimePicker
                     className="taskModalTP"
                     placeholder={props.task.startDate}
+                    name="startDate"
                     value={startDate}
                     showTime={{ use12Hours: true, format: "hh:mm a" }}
                     format="MMM dd y hh:mm a"
@@ -143,7 +144,8 @@ const TaskActionMenu = (props) => {
                 <Col>
                   <DateTimePicker
                     className="taskModalTP"
-                    placeholder={props.task.dueDate}
+                    placeholder={taskValues.dueDate}
+                    name="dueDate"
                     value={dueDate}
                     showTime={{ use12Hours: true, format: "hh:mm a" }}
                     format="MMM dd y hh:mm a"
