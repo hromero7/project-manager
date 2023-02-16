@@ -142,11 +142,13 @@ const TaskPage = () => {
                             <Row>
                               <Col>
                                 {task.assignee.map((assignee) => {
-                                    return <div className="user-circle">
-                                            {assignee.username[0].toUpperCase()}
-                                           </div>;
+                                  return (
+                                    <div className="user-circle">
+                                      {assignee.username[0].toUpperCase()}
+                                    </div>
+                                  );
                                 })}
-                              
+
                                 <TaskAssignee
                                   projectId={projectData.id}
                                   projectData={projectData}
@@ -155,14 +157,13 @@ const TaskPage = () => {
                                   getProjectData={getProjData}
                                 />
                               </Col>
-                    
                             </Row>
                           </td>
                           <td className="dueDateCol">
                             <Row>
                               <Col className="taskDatePickCont">
-                                <Moment local format="MM/DD/YY hh:mm A">{task.dueDate}</Moment>
-                                {/* <DatePicker
+                                {/* <Moment local format="MM/DD/YY hh:mm A">{task.dueDate}</Moment> */}
+                                <DatePicker
                                   placeholder={task.dueDate}
                                   value={task.dueDate}
                                   disabled={true}
@@ -178,7 +179,7 @@ const TaskPage = () => {
                                   clearIcon={null}
                                   clockIcon={null}
                                   locale="en"
-                                /> */}
+                                />
                               </Col>
                             </Row>
                           </td>

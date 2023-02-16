@@ -2,6 +2,7 @@
 .logo {
     padding: 0;
     margin: 0;
+    z-index: 10;
 }
 .logoRow {
     /* border: 5px solid black; */

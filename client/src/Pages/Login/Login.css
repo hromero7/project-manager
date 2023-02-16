@@ -31,7 +31,7 @@
     animation-direction: alternate;
     background: rgb(166,0,249);
     background: linear-gradient(90deg, rgb(97, 55, 200) 0%, rgba(97, 55, 200, 0.342) 100%);
-    filter: blur(0.5rem)
+    filter: blur(0.1rem)
 }
 
 .blobLayer span:nth-child(2) {
@@ -49,7 +49,7 @@
     animation-direction: alternate-reverse;
     background: rgb(166,0,249);
     background: linear-gradient(90deg, rgb(97, 55, 200) 0%, rgba(97, 55, 200, 0.342) 100%);
-    filter: blur(0.5rem)
+    filter: blur(0.3rem)
 }
 
 
