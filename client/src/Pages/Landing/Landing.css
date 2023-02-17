@@ -79,31 +79,30 @@
 }
 
 .ContentContainer {
+    background-image: -webkit-linear-gradient(-90deg,#A997DF 5%, #e7e7e7 20%);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     /* align-items: center; */
-    border: 1px solid black;
-    background-color: #A997DF;
+    /* border: 1px solid black; */
+    /* background-color: #A997DF; */
+    gap: 30px 50px;
 }
 
 .productDescriptionCont {
     /* border: 1px solid red; */
+    /* padding-top: 50px; */
     display: flex;
-    flex-direction: row;
-    justify-content: start;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 50px 50px;
     /* align-items: center; */
     /* width: 45vh; */
 }
 
-.productDescriptionCont:nth-child(odd){
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: end;
-}
 
 .productDescription {
-    border: 1px solid pink;
+    /* border: 1px solid pink; */
     display: flex;
     flex-direction: column;
     /* float: left; */
@@ -113,7 +112,6 @@
 
     z-index: 10;
 }
-
 
 .productDescriptionIcon{
     /* border: 1px solid black; */
@@ -146,7 +144,8 @@
 }
 
 .productDescriptionText {
-    margin: 0px;
+    /* margin: 0px; */
+    text-align: center;
     padding: 15px;
     border-radius: 25px;
     -webkit-box-shadow: 6px 6px 15px -2px rgba(0,0,0,0.5);
@@ -177,13 +176,16 @@
     align-items: center;
 }
 
+.landingImage{
+
+}
+
 .landingImage1{
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png");
+
 }
 .landingImage2{
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png");
+
 }
 .landingImage3{
-    width: 600px;
-    height: 900px;
+
 }
