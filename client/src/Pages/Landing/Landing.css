@@ -86,73 +86,46 @@
     /* align-items: center; */
     /* border: 1px solid black; */
     /* background-color: #A997DF; */
-    gap: 30px 50px;
+    gap: 30px 30px;
 }
 
 .productDescriptionCont {
     /* border: 1px solid red; */
     /* padding-top: 50px; */
+    margin: 15px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    gap: 50px 50px;
+    /* justify-content: center; */
+    /* gap: 25px 25px; */
     /* align-items: center; */
     /* width: 45vh; */
+    border-radius: 15px;
+    -webkit-box-shadow: 6px 6px 15px -2px rgba(0,0,0,0.5);
+    -moz-box-shadow: 6px 6px 15px -2px rgba(0,0,0,0.5);
+    box-shadow: 6px 6px 15px -2px rgba(0,0,0,0.5);
+    z-index: 10;
+    background-color: #e7e7e7;
 }
 
+.descImageCont{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* border: 1px solid red; */
+}
 
 .productDescription {
-    /* border: 1px solid pink; */
     display: flex;
     flex-direction: column;
-    /* float: left; */
-    width: 60vh;
-    justify-content: center;
-    /* align-items: center; */
-
     z-index: 10;
-}
-
-.productDescriptionIcon{
-    /* border: 1px solid black; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.pdIconCont{
-    border:10px solid black;
-    border-radius: 100%;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.pdIconInner {
-    height: 100px;
-    width: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.pdIcon {
-    font-size: 70px;
 }
 
 .productDescriptionText {
     /* margin: 0px; */
     text-align: center;
     padding: 15px;
-    border-radius: 25px;
-    -webkit-box-shadow: 6px 6px 15px -2px rgba(0,0,0,0.5);
-    -moz-box-shadow: 6px 6px 15px -2px rgba(0,0,0,0.5);
-    box-shadow: 6px 6px 15px -2px rgba(0,0,0,0.5);
-    z-index: 10;
-    background-color: white;
+    /* border-radius: 25px; */
+
 }
 
 
@@ -160,32 +133,31 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 10px;
 }
 
 
 .landingImageRow {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
+    /* border: 1px solid red; */
 }
 
 
 .landingImageCol {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    /* border: 1px solid black; */
 }
 
-.landingImage{
-
-}
-
-.landingImage1{
-
-}
-.landingImage2{
-
-}
-.landingImage3{
-
+.LandingImage{
+    padding: 10px;
+    border-radius: 15px;
+    display: block;
+    margin: 0 auto;
+    width: 100%;
 }
