@@ -1,0 +1,73 @@
+.row1Container {
+    background-image: -webkit-linear-gradient(-90deg,RGB(89, 50, 173) 52%, #A997DF 93%);
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+    height: 100vh;
+}
+
+
+.wordContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* border: 1px solid red; */
+    z-index: 10;
+
+}
+
+.description {
+    max-width: 560px;
+    color: white;
+}
+
+.landingTagline {
+    z-index: 10;
+}
+
+
+.pd {
+    font-family: 'Asap', sans-serif;
+    font-size: 80px;
+    font-weight: 400;
+    text-shadow: 2px 3px rgb(23, 23, 23);
+    color: #e9e9e9;
+    text-align: center;
+}
+
+.landingNewUser {
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.landingUserRow{
+    /* border: 5px solid black; */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 120vh;
+    z-index: 10;
+}
+
+.landingUserCol{
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+}
+
+.landingPrefixText {
+    font-family: 'Asap', sans-serif;
+    font-weight: 400;
+    text-shadow: 1px 2px rgb(23, 23, 23);
+    font-size: 32px;
+    color: #e9e9e9;
+
+}
+
