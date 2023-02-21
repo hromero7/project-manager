@@ -3,9 +3,9 @@ import { Container, Row, Col } from "react-bootstrap";
 import Logo from "../../../Components/Assets/3rd logo/Logo";
 import RisingBubbles from "../../../Components/Assets/RisingBubbles/RisingBubbles";
 import NewUser from "../../../Components/Loginform/NewUser/NewUser";
-import "./Row1.css";
+import "./HeroPanel.css";
 
-export default function Row1() {
+export default function HeroPanel() {
   return (
     <Container className="row1Container landing" fluid>
       <Container className="wordContainer landing" fluid>

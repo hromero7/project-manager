@@ -1,4 +1,4 @@
-.row2Container {
+.productDescriptionContainer {
     background-image: -webkit-linear-gradient(-90deg,#A997DF 5%, #e7e7e7 20%);
     display: flex;
     flex-direction: row;
@@ -96,8 +96,8 @@
 }
 
 .LandingImage{
-    /* padding: 10px; */
-    /* border-radius: 15px; */
+    padding: 10px;
+    border-radius: 15px;
     /* max-width: 100%; */
     /* max-height: 100%; */
     /* display: block; */

@@ -3,6 +3,7 @@
     padding: 0;
     margin: 0;
     z-index: 10;
+
 }
 .logoRow {
     /* border: 5px solid black; */
@@ -84,15 +85,12 @@
     font-family: 'Lobster', cursive;
     font-size: 125px;
     text-shadow: 3px 3px 9px rgb(0, 0, 0);
-
-    /* border: 1px solid black; */
+    color: #FFFFFF;
 }
 #logoRd {
     font-family: 'Bebas Neue', cursive;
     font-size: 32px;
     text-decoration: underline;
-    /* border: 1px solid red; */
     margin-top: 55px;
-    /* margin-bottom: 65px; */
-    /* margin-left: 6px; */
+    color: #FFFFFF;
     }

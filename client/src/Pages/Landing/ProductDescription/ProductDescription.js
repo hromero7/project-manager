@@ -1,10 +1,10 @@
 import React from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
-import "./Row2.css";
+import "./ProductDescription.css";
 
-export default function Row2() {
+export default function ProductDescription() {
   return (
-    <Container className="row2Container" fluid>
+    <Container className="productDescriptionContainer" fluid>
       <Container className="ContentContainerProduct  landing" fluid>
         <Container className="productDescriptionCont " fluid>
           <Container className="descImageCont" fluid>

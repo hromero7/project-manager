@@ -1,14 +1,16 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import Row1 from "../Landing/Row1/Row1";
-import Row2 from "../Landing/Row2/Row2";
+import HeroPanel from "./HeroPanel/HeroPanel";
+import ProductDescription from "./ProductDescription/ProductDescription";
 import "./Landing.css";
+import Footer from "../../Components/Assets/Footer/Footer";
 
 const LandingPage = () => {
   return (
     <Container className="landingContainer landing" fluid>
-      <Row1 />
-      <Row2 />
+      <HeroPanel />
+      <ProductDescription />
+      <Footer />
     </Container>
   );
 };
