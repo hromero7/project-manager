@@ -13,7 +13,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="App">
+    <div data-testid="app" className="App">
       <NavBar />
       <Routes>
         <Route element={<PublicRoute />}>

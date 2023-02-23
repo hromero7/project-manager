@@ -8,7 +8,7 @@ import Footer from "../../Components/Assets/Footer/Footer";
 const LandingPage = () => {
   return (
     <Container className="landingContainer landing" fluid>
-      <HeroPanel />
+      <HeroPanel data-testid="landingComponent" />
       <ProductDescription />
       <Footer />
     </Container>
