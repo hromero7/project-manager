@@ -19,6 +19,7 @@ const TaskAssignee = (props) => {
       for (let j = 0; j < props.assignee.length; j++) {
         if (memberList[i].id === props.assignee[j].id) {
           memberList[i].isActive = true;
+          memberList[i].arrPos = j;
         }
       }
     }
@@ -54,11 +55,16 @@ const TaskAssignee = (props) => {
   );
 
   return (
-    <Dropdown autoClose="outside" className="dropdown-assignee">
+    <Dropdown
+      data-testid="taskAssigneeDropdown"
+      autoClose="outside"
+      className="dropdown-assignee"
+    >
       <Dropdown.Toggle as={CustomUserAddToggle} id="dropdown-custom-components">
-        <i className="fa-solid fa-circle-plus"></i>
+        <i title="plusButton" className="fa-solid fa-circle-plus"></i>
       </Dropdown.Toggle>
       <Dropdown.Menu
+        role="menu"
         className="assignTaskDDM"
         align={{ lg: "start" }}
         as={taskMenu}
@@ -72,13 +78,18 @@ const TaskAssignee = (props) => {
                   <Row>
                     <Col className="switchContainer">
                       <Form.Check
+                        data-testid={`checkbox${item.arrPos}`}
                         onClick={(e) => {
                           e.stopPropagation();
                           if (item.isActive === false || item.isActive === "") {
                             axios
                               .put(
                                 `/api/task/add_assignee/${props.projectId}/${props.taskId}`,
-                                { id: item.id, username: item.username, email: item.email }
+                                {
+                                  id: item.id,
+                                  username: item.username,
+                                  email: item.email,
+                                }
                               )
                               .then(() => {
                                 item.isActive = true;
