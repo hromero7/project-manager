@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Form, Dropdown, Row, Col } from "react-bootstrap";
 import "./TaskAssignee.css";
@@ -63,6 +63,7 @@ const TaskAssignee = (props) => {
       <Dropdown.Toggle as={CustomUserAddToggle} id="dropdown-custom-components">
         <i title="plusButton" className="fa-solid fa-circle-plus"></i>
       </Dropdown.Toggle>
+
       <Dropdown.Menu
         role="menu"
         className="assignTaskDDM"
@@ -71,14 +72,15 @@ const TaskAssignee = (props) => {
       >
         <Dropdown.Header>Assign tasks:</Dropdown.Header>
         {show
-          ? memberList.map((item) => {
+          ? memberList.map((item, index) => {
               getActiveList();
               return (
-                <Dropdown.Item className="assignTaskNames" key={item._id}>
+                <Dropdown.Item className="assignTaskNames" key={index}>
                   <Row>
                     <Col className="switchContainer">
                       <Form.Check
                         data-testid={`checkbox${item.arrPos}`}
+                        onChange={(e) => {}}
                         onClick={(e) => {
                           e.stopPropagation();
                           if (item.isActive === false || item.isActive === "") {
