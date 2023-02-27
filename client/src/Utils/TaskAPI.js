@@ -58,11 +58,14 @@ export default {
         console.log(err.response);
       });
   },
-  addAssignee: (projectId, taskId, user) => {
+  addAssignee: (projectId, taskId, id, username, email) => {
     return axios
       .put(`/api/task/add_assignee/${projectId}/${taskId}`, {
-        id: user.id,
-        username: user.username,
+        projectId: projectId,
+        taskId: taskId,
+        id: id,
+        username: username,
+        email: email,
       })
       .then((res) => {
         return res.data;

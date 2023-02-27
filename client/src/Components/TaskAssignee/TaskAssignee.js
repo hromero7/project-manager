@@ -74,8 +74,6 @@ const TaskAssignee = (props) => {
         <Dropdown.Header>Assign tasks:</Dropdown.Header>
         {show
           ? memberList.map((item, index) => {
-              console.log(`item: `, item);
-              console.log(`props: `, props);
               getActiveList();
               return (
                 <Dropdown.Item className="assignTaskNames" key={index}>
@@ -87,37 +85,41 @@ const TaskAssignee = (props) => {
                         onClick={(e) => {
                           e.stopPropagation();
                           if (item.isActive === false || item.isActive === "") {
-                            TaskAPI.addAssignee({
-                              projectId: props.projectId,
-                              taskId: props.taskId,
+                            TaskAPI.addAssignee(
+                              props.projectId,
+                              props.taskId,
+                              item.id,
+                              item.username,
+                              item.email
+                            ).then((res) => {
+                              if (res.status === 200) {
+                                item.isActive = true;
+                                props.getProjectData();
+                              }
                             });
-
-                            // axios
-                            //   .put(
-                            //     `/api/task/add_assignee/${props.projectId}/${props.taskId}`,
-                            //     {
-                            //       id: item.id,
-                            //       username: item.username,
-                            //       email: item.email,
-                            //     }
-                            //   )
-                            //   .then(() => {
-                            //     item.isActive = true;
-                            //     props.getProjectData();
-                            //   })
-                            //   .catch((err) => console.log("err: ", err));
                           } else if (item.isActive === true) {
-                            axios
-                              .put(
-                                `/api/task/remove_assignee/${props.projectId}/${props.taskId}/${item.id}`,
-                                { id: item.id, username: item.username }
-                              )
-                              .then(() => {
+                            TaskAPI.removeAssignee(
+                              props.projectId,
+                              props.taskId,
+                              item.id
+                            ).then((res) => {
+                              if (res.status === 200) {
                                 item.isActive = false;
                                 props.getProjectData();
-                                // getActiveList();
-                              })
-                              .catch((err) => console.log("err: ", err));
+                              }
+                            });
+
+                            //   axios
+                            //     .put(
+                            //       `/api/task/remove_assignee/${props.projectId}/${props.taskId}/${item.id}`,
+                            //       { id: item.id, username: item.username }
+                            //     )
+                            //     .then(() => {
+                            //       item.isActive = false;
+                            //       props.getProjectData();
+                            //       // getActiveList();
+                            //     })
+                            //     .catch((err) => console.log("err: ", err));
                           }
                         }}
                         type="switch"
