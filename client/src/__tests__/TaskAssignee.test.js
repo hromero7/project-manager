@@ -25,7 +25,7 @@ describe("DropdownComponent", () => {
     projectData: {
       date: "someDate",
       title: "Project Name",
-      id: 0,
+      id: "0s0",
       members: [
         {
           id: 1,
@@ -41,8 +41,8 @@ describe("DropdownComponent", () => {
         },
       ],
     },
-    projectId: "7777",
-    taskId: "9999",
+    projectId: "7s777",
+    taskId: "0mp09",
   };
 
   it("renders a closed dropdown by default", () => {

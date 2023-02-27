@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Form, Dropdown, Row, Col } from "react-bootstrap";
+import TaskAPI from "../../Utils/TaskAPI";
 import "./TaskAssignee.css";
 
 const TaskAssignee = (props) => {
@@ -74,7 +75,7 @@ const TaskAssignee = (props) => {
         {show
           ? memberList.map((item, index) => {
               console.log(`item: `, item);
-              // console.log(`Object.keys: `, Object.keys(item));
+              console.log(`props: `, props);
               getActiveList();
               return (
                 <Dropdown.Item className="assignTaskNames" key={index}>
@@ -86,20 +87,25 @@ const TaskAssignee = (props) => {
                         onClick={(e) => {
                           e.stopPropagation();
                           if (item.isActive === false || item.isActive === "") {
-                            axios
-                              .put(
-                                `/api/task/add_assignee/${props.projectId}/${props.taskId}`,
-                                {
-                                  id: item.id,
-                                  username: item.username,
-                                  email: item.email,
-                                }
-                              )
-                              .then(() => {
-                                item.isActive = true;
-                                props.getProjectData();
-                              })
-                              .catch((err) => console.log("err: ", err));
+                            TaskAPI.addAssignee({
+                              projectId: props.projectId,
+                              taskId: props.taskId,
+                            });
+
+                            // axios
+                            //   .put(
+                            //     `/api/task/add_assignee/${props.projectId}/${props.taskId}`,
+                            //     {
+                            //       id: item.id,
+                            //       username: item.username,
+                            //       email: item.email,
+                            //     }
+                            //   )
+                            //   .then(() => {
+                            //     item.isActive = true;
+                            //     props.getProjectData();
+                            //   })
+                            //   .catch((err) => console.log("err: ", err));
                           } else if (item.isActive === true) {
                             axios
                               .put(
