@@ -108,18 +108,6 @@ const TaskAssignee = (props) => {
                                 props.getProjectData();
                               }
                             });
-
-                            //   axios
-                            //     .put(
-                            //       `/api/task/remove_assignee/${props.projectId}/${props.taskId}/${item.id}`,
-                            //       { id: item.id, username: item.username }
-                            //     )
-                            //     .then(() => {
-                            //       item.isActive = false;
-                            //       props.getProjectData();
-                            //       // getActiveList();
-                            //     })
-                            //     .catch((err) => console.log("err: ", err));
                           }
                         }}
                         type="switch"
