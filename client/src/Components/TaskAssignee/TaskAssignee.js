@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Form, Dropdown, Row, Col } from "react-bootstrap";
 import "./TaskAssignee.css";
@@ -73,6 +73,8 @@ const TaskAssignee = (props) => {
         <Dropdown.Header>Assign tasks:</Dropdown.Header>
         {show
           ? memberList.map((item, index) => {
+              console.log(`item: `, item);
+              // console.log(`Object.keys: `, Object.keys(item));
               getActiveList();
               return (
                 <Dropdown.Item className="assignTaskNames" key={index}>

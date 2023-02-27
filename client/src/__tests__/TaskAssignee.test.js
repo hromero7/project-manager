@@ -3,16 +3,6 @@ import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
 import TaskAssignee from "../Components/TaskAssignee/TaskAssignee";
 
-test("checking if TaskAssignee renders", () => {
-  render(<TaskAssignee />);
-});
-
-test("taskAssigneeDropdown renders within the document.", () => {
-  render(<TaskAssignee />);
-  const pageElement = screen.getByTestId(/taskAssigneeDropdown/);
-  expect(pageElement).toBeInTheDocument();
-});
-
 describe("DropdownComponent", () => {
   const props = {
     assignee: [
@@ -47,7 +37,7 @@ describe("DropdownComponent", () => {
         },
         {
           id: 3,
-          username: "User3",
+          username: "User2",
         },
       ],
     },
@@ -65,7 +55,7 @@ describe("DropdownComponent", () => {
     expect(dropdownButton).toBeInTheDocument();
   });
 
-  it("opens the dropdown menu when the dropdown button is clicked", () => {
+  it("opens the dropdown menu when the dropdown button is clicked and for users 0 1 2 to be in document", () => {
     render(
       <TaskAssignee
         projectId={props.projectData.id}
@@ -81,8 +71,51 @@ describe("DropdownComponent", () => {
     fireEvent.click(dropdownButton);
     const dropdownMenu = screen.getByTestId(/taskAssigneeDropdown/);
     expect(dropdownMenu).toBeInTheDocument();
-    // expect(screen.getByText(/action/i)).toBeInTheDocument();
-    // expect(screen.getByText(/another action/i)).toBeInTheDocument();
-    // expect(screen.getByText(/something else/i)).toBeInTheDocument();
+    expect(screen.getByText(/User0/i)).toBeInTheDocument();
+    expect(screen.getByText(/User1/i)).toBeInTheDocument();
+    expect(screen.getByText(/User2/i)).toBeInTheDocument();
+  });
+
+  it("checks props 'checked' exists", () => {
+    render(
+      <TaskAssignee
+        projectId={props.projectData.id}
+        projectData={props.projectData}
+        taskId={props._id}
+        assignee={props.assignee}
+        getProjectData={props.getProjData}
+      />
+    );
+    const dropdownButton = screen.getByTitle("plusButton", {
+      name: /dropdown button/i,
+    });
+    fireEvent.click(dropdownButton);
+    const dropdownMenu = screen.getByTestId(/taskAssigneeDropdown/);
+    expect(dropdownMenu).toBeInTheDocument();
+    expect(screen.getByTestId(/checkbox0/i)).toHaveAttribute("checked");
+    expect(screen.getByTestId(/checkbox1/i)).toHaveAttribute("checked");
+    expect(screen.getByTestId(/checkbox2/i)).toHaveAttribute("checked");
+  });
+
+  it("checks props 'isActive' exists", () => {
+    render(
+      <TaskAssignee
+        projectId={props.projectData.id}
+        projectData={props.projectData}
+        taskId={props._id}
+        assignee={props.assignee}
+        getProjectData={props.getProjData}
+      />
+    );
+    const dropdownButton = screen.getByTitle("plusButton", {
+      name: /dropdown button/i,
+    });
+    fireEvent.click(dropdownButton);
+    const dropdownMenu = screen.getByTestId(/taskAssigneeDropdown/);
+    expect(dropdownMenu).toBeInTheDocument();
+    const memberListItems = screen.queryAllByRole(".assignTaskNames");
+    memberListItems.forEach((item) => {
+      expect(item).toHaveAttribute("isActive", "");
+    });
   });
 });
