@@ -1,4 +1,4 @@
-import { React, useContext } from "react";
+import { React, useContext, useEffect } from "react";
 import { Nav, Navbar, Button, Container, NavDropdown } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import UserAPI from "../../Utils/UserAPI";
@@ -8,7 +8,7 @@ import LogoSm from "../Assets/3rd logo small/LogoSm";
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const { isAuthenticated, setIsAuthenticated, setUser } =
+  const { isAuthenticated, setIsAuthenticated, setUser, user } =
     useContext(AuthContext);
 
   const handleLogout = async () => {
@@ -18,6 +18,8 @@ const NavBar = () => {
       setIsAuthenticated(false);
     }
   };
+
+  console.log(`user: `, user);
 
   return (
     <Navbar className="navbar" variant="light" fixed="top">
@@ -49,8 +51,11 @@ const NavBar = () => {
         <Nav>
           <Nav.Item className="navbar-right">
             {isAuthenticated ? (
-              <NavDropdown align="end" id="collasible-nav-dropdown">
-                <NavDropdown.Item>Action</NavDropdown.Item>
+              <NavDropdown
+                align="end"
+                id="collasible-nav-dropdown"
+                title={`Hello ${user.firstName}!`}
+              >
                 <NavDropdown.Item>
                   <Button
                     variant="primary"

@@ -10,8 +10,9 @@ import {
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
-import "./ProjectList.css";
 import ProjectAPI from "../../Utils/ProjectAPI";
+import DatePicker from "react-date-picker";
+import "./ProjectList.css";
 
 export default function Projectlist() {
   const auth = useContext(AuthContext);
@@ -28,6 +29,10 @@ export default function Projectlist() {
     const projectData = await ProjectAPI.getProjects(auth.user._id);
     setDbItems(projectData);
     setGetData(true);
+  };
+
+  const getClostestTask = () => {
+    console.log(`dbItems: `, dbItems);
   };
 
   const addProject = async () => {
@@ -110,17 +115,10 @@ export default function Projectlist() {
   );
 
   return (
-    <Container>
+    <Container className="projectListCont">
       <Row>
         <Col>
           <Row>
-            <Col
-              onClick={() => {
-                getProjects();
-              }}
-            >
-              <div>Hello {auth.user.username}!</div>
-            </Col>
             <Col>
               <Dropdown>
                 <Dropdown.Toggle
@@ -145,48 +143,64 @@ export default function Projectlist() {
           </Row>
           <Row>
             {getData ? (
-              dbItems.map((item) => (
-                <Col key={item._id}>
-                  <Card
-                    style={{
-                      width: "18rem",
-                      height: "200px",
-                      margin: "15px",
-                      color: "black",
-                    }}
-                    key={item._id}
-                  >
-                    <Card.Body
-                      onClick={() => {
-                        navigate(`/project/${item._id}`);
+              dbItems.map((item, index) => {
+                console.log(`item: `, item);
+                let newTime = new Date(item.tasks[0].dueDate);
+                return (
+                  <Col key={item._id}>
+                    <Card
+                      style={{
+                        width: "18rem",
+                        height: "200px",
+                        margin: "15px",
+                        color: "black",
                       }}
-                      style={{ cursor: "pointer" }}
+                      key={item._id}
                     >
-                      <Card.Title>{item.title}</Card.Title>
-                      <Card.Text>{item._id.slice(-5)}</Card.Text>
-                    </Card.Body>
+                      <Card.Body
+                        onClick={() => {
+                          navigate(`/project/${item._id}`);
+                        }}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <Card.Title>{item.title}</Card.Title>
+                        <Card.Text>
+                          Due soon: {item.tasks[0].taskTitle}
+                        </Card.Text>
+                        <Card.Text>
+                          <DatePicker
+                            placeholder={newTime}
+                            value={newTime}
+                            disabled={true}
+                            clearIcon={null}
+                            disableCalendar={true}
+                            calendarIcon={null}
+                          />
+                        </Card.Text>
+                      </Card.Body>
 
-                    <Card.Footer>
-                      <Dropdown align="end" className="dropdown">
-                        <Dropdown.Toggle
-                          as={OptionToggle}
-                          id="dropdown-custom-components"
-                        ></Dropdown.Toggle>
-                        <Dropdown.Menu as={OptionMenu}>
-                          <Dropdown.Item
-                            eventKey="1"
-                            onClick={(e) => {
-                              deleteProject(item._id, auth.user._id);
-                            }}
-                          >
-                            Delete Project
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
-                    </Card.Footer>
-                  </Card>
-                </Col>
-              ))
+                      <Card.Footer>
+                        <Dropdown align="end" className="dropdown">
+                          <Dropdown.Toggle
+                            as={OptionToggle}
+                            id="dropdown-custom-components"
+                          ></Dropdown.Toggle>
+                          <Dropdown.Menu as={OptionMenu}>
+                            <Dropdown.Item
+                              eventKey="1"
+                              onClick={(e) => {
+                                deleteProject(item._id, auth.user._id);
+                              }}
+                            >
+                              Delete Project
+                            </Dropdown.Item>
+                          </Dropdown.Menu>
+                        </Dropdown>
+                      </Card.Footer>
+                    </Card>
+                  </Col>
+                );
+              })
             ) : (
               <div>Loading</div>
             )}

@@ -125,6 +125,7 @@ const TaskPage = () => {
                   <tbody>
                     {projectData.tasks.map((task, i) => {
                       let newTime = new Date(task.dueDate);
+                      let newDate = new Date(task.dueDate);
                       return (
                         <tr key={i}>
                           <td>{i + 1}</td>
@@ -164,13 +165,12 @@ const TaskPage = () => {
                               <Col className="taskDatePickCont">
                                 {/* <Moment local format="MM/DD/YY hh:mm A">{task.dueDate}</Moment> */}
                                 <DatePicker
-                                  placeholder={task.dueDate}
-                                  value={task.dueDate}
+                                  placeholder={newDate}
+                                  value={newDate}
                                   disabled={true}
                                   clearIcon={null}
                                   disableCalendar={true}
                                   calendarIcon={null}
-                                  minDate={new Date()}
                                 />
                                 <TimePicker
                                   placeholder={newTime}

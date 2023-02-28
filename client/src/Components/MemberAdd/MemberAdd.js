@@ -45,7 +45,6 @@ const MemberAdd = (props) => {
           </Form>
         </Dropdown.Item>
         {searchList.map((item) => {
-          
           return (
             <Dropdown.Item
               onClick={() => {
@@ -53,7 +52,7 @@ const MemberAdd = (props) => {
                   .put(`/api/project/add_member/${ID}`, {
                     username: item.username,
                     userId: item._id,
-                    email: item.email
+                    email: item.email,
                   })
                   .then(() => {
                     props.getProjectData();
@@ -69,8 +68,8 @@ const MemberAdd = (props) => {
         })}
         <Dropdown.Divider />
         <Dropdown.Header>Members:</Dropdown.Header>
-
         {props.projectData.members.map((member) => {
+          console.log(`props: `, props);
           return (
             <Dropdown.Item key={member._id}>
               {member.id === props.projectData.userId ? (
@@ -93,7 +92,7 @@ const MemberAdd = (props) => {
                                 username: member.username,
                                 docId: member._id,
                                 projectId: props.projectId,
-                                email: member.email
+                                email: member.email,
                               },
                             }
                           )

@@ -3,23 +3,26 @@ import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
 import TaskAssignee from "../Components/TaskAssignee/TaskAssignee";
 
-describe("DropdownComponent", () => {
+describe("DropdownComponent within TaskAssignee.js", () => {
   const props = {
     assignee: [
       {
         id: 1,
         username: "User0",
         _id: "12b0",
+        email: "user0@mail.com",
       },
       {
         id: 2,
         username: "User1",
         _id: "12b1",
+        email: "user1@mail.com",
       },
       {
         id: 3,
         username: "User3",
         _id: "12b2",
+        email: "user2@mail.com",
       },
     ],
     projectData: {
@@ -42,7 +45,7 @@ describe("DropdownComponent", () => {
       ],
     },
     projectId: "7s777",
-    taskId: "0mp09",
+    taskId: "012f1ssmp09",
   };
 
   it("renders a closed dropdown by default", () => {

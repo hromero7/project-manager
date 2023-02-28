@@ -1,5 +1,9 @@
 
 
+.projectListCont {
+    padding-top: 25px;
+}
+
 .fa-sharp, .fa-fire {
     font-size: 25px;
     border: 1px solid black;
