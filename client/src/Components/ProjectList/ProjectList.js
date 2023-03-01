@@ -165,16 +165,25 @@ export default function Projectlist() {
                         style={{ cursor: "pointer" }}
                       >
                         <Card.Title>{item.title}</Card.Title>
-                        <Card.Text>Due soon:</Card.Text>
-                        {dueDateSort[0].taskTitle} &#64;
-                        <DatePicker
-                          placeholder={dueDateSort[0].dueDate}
-                          value={dueDateSort[0].dueDate}
-                          disabled={true}
-                          clearIcon={null}
-                          disableCalendar={true}
-                          calendarIcon={null}
-                        />
+                        {dueDateSort >= 0 ? (
+                          ""
+                        ) : (
+                          <>
+                            <Card.Text>
+                              Due soon: {dueDateSort[0].taskTitle} &#64;
+                            </Card.Text>
+                            <Card.Text>
+                              <DatePicker
+                                placeholder={dueDateSort[0].dueDate}
+                                value={dueDateSort[0].dueDate}
+                                disabled={true}
+                                clearIcon={null}
+                                disableCalendar={true}
+                                calendarIcon={null}
+                              />
+                            </Card.Text>
+                          </>
+                        )}
                       </Card.Body>
 
                       <Card.Footer>

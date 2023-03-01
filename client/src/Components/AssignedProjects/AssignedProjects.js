@@ -47,19 +47,25 @@ const AssignedProjects = () => {
                     style={{ cursor: "pointer" }}
                   >
                     <Card.Title>{project.title}</Card.Title>
-                    <Card.Text>
-                      Due soon: {dueDateSort[0].taskTitle} &#64;
-                    </Card.Text>
-                    <Card.Text>
-                      <DatePicker
-                        placeholder={dueDateSort[0].dueDate}
-                        value={dueDateSort[0].dueDate}
-                        disabled={true}
-                        clearIcon={null}
-                        disableCalendar={true}
-                        calendarIcon={null}
-                      />
-                    </Card.Text>
+                    {dueDateSort >= 0 ? (
+                      ""
+                    ) : (
+                      <>
+                        <Card.Text>
+                          Due soon: {dueDateSort[0].taskTitle} &#64;
+                        </Card.Text>
+                        <Card.Text>
+                          <DatePicker
+                            placeholder={dueDateSort[0].dueDate}
+                            value={dueDateSort[0].dueDate}
+                            disabled={true}
+                            clearIcon={null}
+                            disableCalendar={true}
+                            calendarIcon={null}
+                          />
+                        </Card.Text>
+                      </>
+                    )}
                   </Card.Body>
                 </Card>
               </Col>
