@@ -130,5 +130,6 @@ describe("Adding members to project list. There is a search function, and an add
 
   it("renders the memberAdd component and allows ability to search/select/add/remove members to list.", () => {
     render(<TaskAssignee props={props} />);
+    console.log(`props: `, props);
   });
 });

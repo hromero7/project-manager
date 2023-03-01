@@ -19,8 +19,6 @@ const NavBar = () => {
     }
   };
 
-  console.log(`user: `, user);
-
   return (
     <Navbar className="navbar" variant="light" fixed="top">
       <Navbar.Brand

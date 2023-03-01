@@ -23,7 +23,7 @@ export default function Projectlist() {
 
   useEffect(() => {
     getProjects();
-  });
+  }, []);
 
   const getProjects = async () => {
     const projectData = await ProjectAPI.getProjects(auth.user._id);
@@ -144,8 +144,9 @@ export default function Projectlist() {
           <Row>
             {getData ? (
               dbItems.map((item, index) => {
-                console.log(`item: `, item);
-                let newTime = new Date(item.tasks[0].dueDate);
+                const dueDateSort = item.tasks.sort(
+                  (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
+                );
                 return (
                   <Col key={item._id}>
                     <Card
@@ -164,19 +165,16 @@ export default function Projectlist() {
                         style={{ cursor: "pointer" }}
                       >
                         <Card.Title>{item.title}</Card.Title>
-                        <Card.Text>
-                          Due soon: {item.tasks[0].taskTitle}
-                        </Card.Text>
-                        <Card.Text>
-                          <DatePicker
-                            placeholder={newTime}
-                            value={newTime}
-                            disabled={true}
-                            clearIcon={null}
-                            disableCalendar={true}
-                            calendarIcon={null}
-                          />
-                        </Card.Text>
+                        <Card.Text>Due soon:</Card.Text>
+                        {dueDateSort[0].taskTitle} &#64;
+                        <DatePicker
+                          placeholder={dueDateSort[0].dueDate}
+                          value={dueDateSort[0].dueDate}
+                          disabled={true}
+                          clearIcon={null}
+                          disableCalendar={true}
+                          calendarIcon={null}
+                        />
                       </Card.Body>
 
                       <Card.Footer>
