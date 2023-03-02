@@ -76,8 +76,5 @@ export default {
       .then((res) => {
         return res;
       })
-      .catch((err) => {
-        console.log("err: ", err);
-      });
   },
 };
