@@ -46,13 +46,38 @@ export default {
         return res.data;
       });
   },
-  findMember: (project_id, userQuery) => {
-    axios
-      .get(`/api/user/finduser/${userQuery}`)
+  findMember: (userQuery) => {
+    return axios.get(`/api/user/finduser/${userQuery}`).then((res) => {
+      return res.data;
+    });
+  },
+  addMember: (project_id, item) => {
+    return axios
+      .put(`/api/project/add_member/${project_id}`, {
+        username: item.username,
+        userId: item._id,
+        email: item.email,
+      })
       .then((res) => {
         return res.data;
-      })
-      .catch((err) => console.log("err: ", err));
+      });
   },
-  addMember: () => {},
+  removeMembers: (project_id, member) => {
+    return axios
+      .delete(`/api/project/delete_member/${project_id}`, {
+        data: {
+          userId: member.id,
+          username: member.username,
+          docId: member._id,
+          projectId: project_id,
+          email: member.email,
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+      });
+  },
 };

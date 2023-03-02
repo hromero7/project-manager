@@ -10,6 +10,29 @@ const MemberAdd = (props) => {
   const [value, setValue] = useState();
   const [searchList, setSearchList] = useState([]);
 
+  const findMembers = async (e) => {
+    const res = await ProjectAPI.findMember(e.target.value);
+    setSearchList(res);
+  };
+
+  const addMembers = async (item) => {
+    const res = await ProjectAPI.addMember(ID, item);
+    if (res.status === 200) {
+      props.getProjectData();
+    } else {
+      console.log(`message: `, res.message.msgBody);
+    }
+  };
+
+  const removeMembers = async (member) => {
+    const res = await ProjectAPI.removeMembers(ID, member);
+    if (res.status === 200) {
+      props.getProjectData();
+    } else {
+      console.log(`message: `, res.message.msgBody);
+    }
+  };
+
   return (
     <Dropdown className="memAddDD" autoClose="outside">
       <Dropdown.Toggle
@@ -32,18 +55,7 @@ const MemberAdd = (props) => {
                 if (e.target.value.length <= 1) {
                   setSearchList([]);
                 } else {
-                  ProjectAPI.findMember(ID, e.target.value)
-                    .then((res) => {
-                      setSearchList(res.data);
-                    })
-                    .catch((err) => console.log("err: ", err));
-
-                  // axios
-                  //   .get(`/api/user/finduser/${e.target.value}`)
-                  //   .then((res) => {
-                  //     setSearchList(res.data);
-                  //   })
-                  //   .catch((err) => console.log("err: ", err));
+                  findMembers(e);
                 }
                 setValue(e.target.value);
               }}
@@ -55,18 +67,7 @@ const MemberAdd = (props) => {
           return (
             <Dropdown.Item
               onClick={() => {
-                axios
-                  .put(`/api/project/add_member/${ID}`, {
-                    username: item.username,
-                    userId: item._id,
-                    email: item.email,
-                  })
-                  .then(() => {
-                    props.getProjectData();
-                  })
-                  .catch((err) => {
-                    console.log("err: ", err);
-                  });
+                addMembers(item);
               }}
             >
               {item.firstName}
@@ -76,7 +77,6 @@ const MemberAdd = (props) => {
         <Dropdown.Divider />
         <Dropdown.Header>Members:</Dropdown.Header>
         {props.projectData.members.map((member) => {
-          console.log(`props: `, props);
           return (
             <Dropdown.Item key={member._id}>
               {member.id === props.projectData.userId ? (
@@ -90,26 +90,7 @@ const MemberAdd = (props) => {
                   <Col>
                     <i
                       onClick={() => {
-                        axios
-                          .delete(
-                            `/api/project/delete_member/${props.projectId}`,
-                            {
-                              data: {
-                                userId: member.id,
-                                username: member.username,
-                                docId: member._id,
-                                projectId: props.projectId,
-                                email: member.email,
-                              },
-                            }
-                          )
-                          .then((res) => {
-                            // console.log("res.data: ", res.data);
-                            props.getProjectData();
-                          })
-                          .catch((err) => {
-                            console.log("err: ", err);
-                          });
+                        removeMembers(member);
                       }}
                       className="dropIcon fa-sharp fa-solid fa-xmark"
                     ></i>

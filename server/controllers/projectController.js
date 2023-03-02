@@ -135,6 +135,7 @@ module.exports = {
                 msgBody: `${username} has been successfully added to ${project.title}.`,
                 msgError: false,
               },
+              status: 200,
             });
         });
       }
@@ -205,26 +206,24 @@ module.exports = {
     }
   },
   findAssignedProjects: async (req, res) => {
-    const username = req.user.username
-    const userId = req.user.id
+    const username = req.user.username;
+    const userId = req.user.id;
 
     const projects = await db.Project.aggregate([
-      { 
+      {
         $match: {
-         $and: [
-          { "members.username": username }, 
-          { "userId": {$ne: new mongoose.Types.ObjectId(userId)} }
-          ]      
-        }
-    
-      }
+          $and: [
+            { "members.username": username },
+            { userId: { $ne: new mongoose.Types.ObjectId(userId) } },
+          ],
+        },
+      },
     ]);
 
     if (!projects)
       return res
         .status(404)
         .json({ message: { msgBody: "No Projects Found", msgError: true } });
-    else
-      return res.status(200).json(projects);
-  }
+    else return res.status(200).json(projects);
+  },
 };
