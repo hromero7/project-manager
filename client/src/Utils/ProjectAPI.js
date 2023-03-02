@@ -41,11 +41,18 @@ export default {
   },
   getAssignedProjects: (username) => {
     return axios
-        .get(`/api/project/assigned_projects/${username}`)
-        .then((res) => {
-            return res.data; 
-        })
+      .get(`/api/project/assigned_projects/${username}`)
+      .then((res) => {
+        return res.data;
+      });
+  },
+  findMember: (project_id, userQuery) => {
+    axios
+      .get(`/api/user/finduser/${userQuery}`)
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => console.log("err: ", err));
   },
   addMember: () => {},
-
 };

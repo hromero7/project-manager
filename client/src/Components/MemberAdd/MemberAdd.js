@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Row, Col, Dropdown, Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import ProjectAPI from "../../Utils/ProjectAPI";
 import "./MemberAdd.css";
 
 const MemberAdd = (props) => {
@@ -31,12 +32,18 @@ const MemberAdd = (props) => {
                 if (e.target.value.length <= 1) {
                   setSearchList([]);
                 } else {
-                  axios
-                    .get(`/api/user/finduser/${e.target.value}`)
+                  ProjectAPI.findMember(ID, e.target.value)
                     .then((res) => {
                       setSearchList(res.data);
                     })
                     .catch((err) => console.log("err: ", err));
+
+                  // axios
+                  //   .get(`/api/user/finduser/${e.target.value}`)
+                  //   .then((res) => {
+                  //     setSearchList(res.data);
+                  //   })
+                  //   .catch((err) => console.log("err: ", err));
                 }
                 setValue(e.target.value);
               }}

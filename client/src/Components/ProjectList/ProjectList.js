@@ -23,16 +23,12 @@ export default function Projectlist() {
 
   useEffect(() => {
     getProjects();
-  }, []);
+  });
 
   const getProjects = async () => {
     const projectData = await ProjectAPI.getProjects(auth.user._id);
     setDbItems(projectData);
     setGetData(true);
-  };
-
-  const getClostestTask = () => {
-    console.log(`dbItems: `, dbItems);
   };
 
   const addProject = async () => {

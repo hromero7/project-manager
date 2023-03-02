@@ -4,7 +4,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import MemberAdd from "../Components/MemberAdd/MemberAdd";
 import TaskAssignee from "../Components/TaskAssignee/TaskAssignee";
 
-describe("Adding members to project list. There is a search function, and an add and remove for each member within the search dropdown. ", () => {
+describe("Adding members to project list. There is a search function, and an add and remove for each member within the search dropdown.", () => {
   const props = {
     getProjectData: "someFunction",
     projectData: {

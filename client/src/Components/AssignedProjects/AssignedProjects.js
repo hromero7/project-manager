@@ -12,7 +12,7 @@ const AssignedProjects = () => {
 
   useEffect(() => {
     getProjects();
-  }, []);
+  });
 
   const getProjects = async () => {
     const res = await ProjectAPI.getAssignedProjects(auth.user.username);
