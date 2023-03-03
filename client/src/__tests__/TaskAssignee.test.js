@@ -31,16 +31,22 @@ describe("DropdownComponent within TaskAssignee.js", () => {
       id: "0s0",
       members: [
         {
+          email: "user0@email.com",
           id: 1,
           username: "User0",
+          _id: "63d97b509daeb9531978777a",
         },
         {
+          email: "user1@email.com",
           id: 2,
           username: "User1",
+          _id: "63d97b509daeb9531978777b",
         },
         {
+          email: "user2@email.com",
           id: 3,
           username: "User2",
+          _id: "63d97b509daeb9531978777c",
         },
       ],
     },

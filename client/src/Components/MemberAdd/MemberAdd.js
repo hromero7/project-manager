@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Row, Col, Dropdown, Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import ProjectAPI from "../../Utils/ProjectAPI";
 import "./MemberAdd.css";
 
@@ -34,8 +33,13 @@ const MemberAdd = (props) => {
   };
 
   return (
-    <Dropdown className="memAddDD" autoClose="outside">
+    <Dropdown
+      data-testid="dropdownList"
+      className="memAddDD"
+      autoClose="outside"
+    >
       <Dropdown.Toggle
+        data-testid="dropdownToggle"
         className="toggleDD"
         variant="primary"
         id="dropdown-basic"
@@ -44,9 +48,16 @@ const MemberAdd = (props) => {
       </Dropdown.Toggle>
       <Dropdown.Menu>
         <Dropdown.Item href="#/action-1" id="memAddSearch">
-          <Dropdown.Header>Add members:</Dropdown.Header>
+          <Dropdown.Header
+            onClick={() => {
+              console.log(`props: `, props);
+            }}
+          >
+            Add members:
+          </Dropdown.Header>
           <Form>
             <Form.Control
+              data-testid="searchForm"
               autoFocus
               className="mx-3 my-2 w-auto"
               placeholder="Search by username"
