@@ -6,10 +6,13 @@ import "./MemberAdd.css";
 
 const MemberAdd = (props) => {
   const { ID } = useParams();
-  const [value, setValue] = useState();
-  const [searchList, setSearchList] = useState([]);
+  const [value, setValue] = useState("");
+  const [searchList, setSearchList] = useState([
+    { id: 0, username: "", email: "" },
+  ]);
 
   const findMembers = async (e) => {
+    e.preventDefault();
     const res = await ProjectAPI.findMember(e.target.value);
     setSearchList(res);
   };
@@ -46,23 +49,26 @@ const MemberAdd = (props) => {
       >
         Add members:
       </Dropdown.Toggle>
-      <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1" id="memAddSearch">
-          <Dropdown.Header
-            onClick={() => {
-              console.log(`props: `, props);
-            }}
-          >
-            Add members:
-          </Dropdown.Header>
-          <Form>
+      <Dropdown.Menu key="memAddSearch">
+        <Dropdown.Item key="memAddSearchItem0" id="memAddSearch">
+          <Dropdown.Header>Add members:</Dropdown.Header>
+          <Form className="inputForm">
             <Form.Control
               data-testid="searchForm"
+              type="text"
               autoFocus
               className="mx-3 my-2 w-auto"
               placeholder="Search by username"
               autoComplete="off"
+              onSubmit={(e) => {
+                e.preventDefault();
+                findMembers(e);
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+              }}
               onChange={(e) => {
+                e.preventDefault();
                 if (e.target.value.length <= 1) {
                   setSearchList([]);
                 } else {
@@ -74,9 +80,12 @@ const MemberAdd = (props) => {
             />
           </Form>
         </Dropdown.Item>
-        {searchList.map((item) => {
+        {searchList.map((item, index) => {
           return (
             <Dropdown.Item
+              key={`searchItem${index}`}
+              data-testid={`searchItem${index}`}
+              tabIndex={index}
               onClick={() => {
                 addMembers(item);
               }}
@@ -86,10 +95,11 @@ const MemberAdd = (props) => {
           );
         })}
         <Dropdown.Divider />
+
         <Dropdown.Header>Members:</Dropdown.Header>
-        {props.projectData.members.map((member) => {
+        {props.projectData.members.map((member, index) => {
           return (
-            <Dropdown.Item key={member._id}>
+            <Dropdown.Item tabIndex={index} key={member._id}>
               {member.id === props.projectData.userId ? (
                 <Row>
                   <Col>{member.username}</Col>

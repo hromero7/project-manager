@@ -1,7 +1,13 @@
 import React from "react";
 import "@testing-library/jest-dom";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, fireEvent, screen, waitFor } from "@testing-library/react";
+import { act } from "react-dom/test-utils";
+import userEvent from "@testing-library/user-event";
 import MemberAdd from "../Components/MemberAdd/MemberAdd";
+import ProjectAPI from "../Utils/ProjectAPI";
+import { wait } from "@testing-library/user-event/dist/utils";
+
+jest.mock("../Utils/ProjectAPI");
 
 describe("MemberAdd component", () => {
   const props = {
@@ -54,13 +60,68 @@ describe("MemberAdd component", () => {
     taskId: "012f1ssmp09",
   };
 
-  it("renders the memberAdd component", async () => {
-    render(<MemberAdd projectData={props.projectData} />);
+  test("searches for members and displays them in dropdown", async () => {
+    const mockGetProjectData = jest.fn();
+    const res = [
+      {
+        email: "user0@email.com",
+        firstname: "User1FN",
+        lastname: "User1LN",
+        id: 1,
+        username: "User0",
+        _id: "63d97b509daeb9531978777a",
+      },
+      {
+        email: "user1@email.com",
+        firstname: "User1FN",
+        lastname: "User1LN",
+        id: 2,
+        username: "User1",
+        _id: "63d97b509daeb9531978777b",
+      },
+      {
+        email: "user2@email.com",
+        firstname: "User2FN",
+        lastname: "User2LN",
+        id: 3,
+        username: "User2",
+        _id: "63d97b509daeb9531978777c",
+      },
+    ];
+
+    ProjectAPI.findMember.mockResolvedValue(res);
+
+    // act(() => {
+    //   ReactDOM.createRoot().render(
+    //     <MemberAdd
+    //       getProjectData={mockGetProjectData}
+    //       projectData={props.projectData}
+    //     />
+    //   );
+    // });
+
+    render(
+      <MemberAdd
+        getProjectData={mockGetProjectData}
+        projectData={props.projectData}
+      />
+    );
 
     const dropdownButton = screen.getByTestId("dropdownToggle");
     fireEvent.click(dropdownButton);
-    const searchInput = screen.getByPlaceholderText(/Search by username/i);
-    fireEvent.change(searchInput, { target: { value: "User1" } });
-    // need to be able to target search list output.
+
+    const searchInput = screen.getByTestId("searchForm");
+    fireEvent.click(searchInput);
+
+    await waitFor(async () => {
+      await userEvent.type(searchInput, "user");
+    });
+
+    await new Promise((r) => {
+      setTimeout(r, 1000);
+    });
+
+    const searchResult = screen.getByTestId("searchItem0");
+    expect(searchResult).toBeInTheDocument();
   });
 });

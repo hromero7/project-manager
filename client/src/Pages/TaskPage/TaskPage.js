@@ -27,7 +27,7 @@ const TaskPage = () => {
 
   useEffect(() => {
     getProjData();
-  }, []);
+  });
 
   const getProjData = () => {
     ProjectAPI.getOneProject(ID).then((response) => {
