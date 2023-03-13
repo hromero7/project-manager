@@ -1,11 +1,9 @@
 import React from "react";
 import "@testing-library/jest-dom";
 import { render, fireEvent, screen, waitFor } from "@testing-library/react";
-import { act } from "react-dom/test-utils";
 import userEvent from "@testing-library/user-event";
 import MemberAdd from "../Components/MemberAdd/MemberAdd";
 import ProjectAPI from "../Utils/ProjectAPI";
-import { wait } from "@testing-library/user-event/dist/utils";
 
 jest.mock("../Utils/ProjectAPI");
 
@@ -90,15 +88,6 @@ describe("MemberAdd component", () => {
     ];
 
     ProjectAPI.findMember.mockResolvedValue(res);
-
-    // act(() => {
-    //   ReactDOM.createRoot().render(
-    //     <MemberAdd
-    //       getProjectData={mockGetProjectData}
-    //       projectData={props.projectData}
-    //     />
-    //   );
-    // });
 
     render(
       <MemberAdd
