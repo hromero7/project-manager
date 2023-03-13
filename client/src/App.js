@@ -7,6 +7,7 @@ import LandingPage from "./Pages/Landing/Landing";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import LoginPage from "./Pages/Login/Login";
 import NavBar from "./Components/Navbar/Navbar";
+import ProfileUpdate from "./Components/ProfileUpdate/ProfileUpdate";
 import Whoops from "./Pages/PNF/Whoops";
 import TaskPage from "./Pages/TaskPage/TaskPage";
 import "./App.css";
@@ -23,6 +24,7 @@ function App() {
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/editprofile" element={<ProfileUpdate />} />
           <Route path="/project/:ID" element={<TaskPage />} />
         </Route>
       </Routes>
