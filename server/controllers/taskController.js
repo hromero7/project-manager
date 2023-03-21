@@ -73,6 +73,7 @@ module.exports = {
     const taskUpdate = await db.Project.findById({
       _id: req.params.project_id.toString(),
     });
+
     taskUpdate.tasks.forEach(
       (item) => {
         if (item._id.toString() === req.params.task_id) {
@@ -82,6 +83,7 @@ module.exports = {
           item.taskTitle = req.body.taskTitle;
         }
       },
+
       taskUpdate.save(function (err) {
         if (err)
           return res.status(500).json({

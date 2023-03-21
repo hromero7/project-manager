@@ -120,4 +120,39 @@ module.exports = {
       success: true,
     });
   },
+  editProfile: async (req, res) => {
+    // body.data.{username:"", oldPassword:"", firstName: "", lastName: "", email:""}
+
+    // console.log(`req.body.data: `, req.body.data);
+    const profileEdit = await db.User.findById({
+      _id: req.params._id,
+    })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => console.log(`failed to get profile data `, err));
+
+    // console.log(`profileEdit: `, profileEdit);
+    profileEdit.username = req.body.data.username;
+    profileEdit.firstName = req.body.data.firstname;
+    profileEdit.lastName = req.body.data.lastname;
+    profileEdit.email = req.body.data.email;
+    profileEdit.password = profileEdit.password;
+    // console.log(`profileEdit1: `, profileEdit);
+
+    profileEdit.save(function (err) {
+      if (err) {
+        return res.status(500).json({
+          message: { msgBody: "Error updating profile", msgError: true },
+        });
+      } else {
+        return res.status(200).json({
+          message: { msgBody: "Profile updated!", msgError: false },
+        });
+      }
+    });
+  },
+  passwordChange: async (req, res) => {
+    console.log(`req.body: `, req.body);
+  },
 };

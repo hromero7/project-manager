@@ -1,4 +1,4 @@
-import { React, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Nav, Navbar, Button, Container, NavDropdown } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import UserAPI from "../../Utils/UserAPI";
@@ -54,6 +54,13 @@ const NavBar = () => {
                 id="collasible-nav-dropdown"
                 title={`Hello ${user.firstName}!`}
               >
+                <NavDropdown.Item
+                  onClick={() => {
+                    navigate("/editprofile");
+                  }}
+                >
+                  Settings
+                </NavDropdown.Item>
                 <NavDropdown.Item>
                   <Button
                     variant="primary"
