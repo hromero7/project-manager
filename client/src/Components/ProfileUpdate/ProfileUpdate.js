@@ -37,7 +37,7 @@ function ProfileUpdate() {
       console.log(`getUser: `, getUser);
     } else {
       console.log(
-        `true: ${passwordChange.oldPassword} and ${passwordChange.newPassword} don't match`
+        `true: ${passwordChange.newPassword} and ${passwordChange.newConfirm} don't match`
       );
     }
   };

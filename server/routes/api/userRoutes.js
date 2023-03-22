@@ -32,12 +32,12 @@ router
   .get(passport.authenticate("jwt", { session: false }), authenticateUser); //verifys user is authenticated
 router
   .route("/edit/:_id")
-  .put(passport.authenticate("jwt", { session: false }), editProfile);
+  .put(passport.authenticate("local", { session: false }), editProfile);
 router.route("/passwordUpdate").post(
-  passport.authenticate("local", {
+  passport.authenticate("jwt", {
     session: false,
-    failureMessage: true,
   }),
+
   passwordChange
 );
 module.exports = router;

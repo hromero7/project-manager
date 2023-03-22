@@ -86,8 +86,10 @@ export default {
         console.log(`res: `, res);
         axios
           .post(`/api/user/passwordUpdate/`, {
-            username: res.data.username,
-            password: oldPassword,
+            _id: _id,
+            oldPassword: oldPassword,
+            newPassword: newPassword,
+            newConfirm: newConfirm,
           })
           .then((res) => {
             console.log(`res: `, res);

@@ -1,5 +1,6 @@
 const db = require("../models");
 const JWT = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const signToken = (userID) => {
   return JWT.sign(
@@ -153,6 +154,68 @@ module.exports = {
     });
   },
   passwordChange: async (req, res) => {
-    console.log(`req.body: `, req.body);
+    let _id = req.body._id;
+    let oldPassword = req.body.oldPassword;
+    let newPassword = req.body.newPassword;
+    let newConfirm = req.body.newConfirm;
+
+    const newPasswordChange = await db.User.findOne({ _id });
+    if (!newPasswordChange)
+      return res
+        .status(404)
+        .json({ message: { msgBody: "User not Found", msgError: true } });
+
+    if (newPasswordChange) {
+      bcrypt.compare(
+        oldPassword,
+        newPasswordChange.password,
+        (err, isMatch, res) => {
+          if (err) {
+            return err;
+          } else if (!isMatch) {
+            return res.sendStatus(500).json({
+              message: {
+                msgBody: "Incorrect original password, please try again. ",
+              },
+            });
+          } else {
+            if (newConfirm !== newPassword) {
+              return res.sendStatus(500).json({
+                message: {
+                  msgBody:
+                    "New passwords have been input incorrectly, please try again. ",
+                },
+              });
+            } else {
+              bcrypt.hash(newPassword, 10, (err, hashPassword) => {
+                console.log(`newPasswordChange before: `, newPasswordChange);
+                // console.log(`newPasswordChange before: `, newPasswordChange);
+                newPasswordChange.password = hashPassword;
+                console.log(`newPasswordChange after: `, newPasswordChange);
+                console.log(`hashPassword: `, hashPassword);
+                newPasswordChange.save((err, savedUser) => {
+                  if (err)
+                    return res.status(500).json({
+                      message: {
+                        msgBody: "Error changing password",
+                        msgError: true,
+                        statusNum: 500,
+                      },
+                    });
+                  else
+                    return res.status(200).json({
+                      message: {
+                        msgBody: "Password successfully changed!",
+                        msgError: false,
+                        statusNum: 200,
+                      },
+                    });
+                });
+              });
+            }
+          }
+        }
+      );
+    }
   },
 };
