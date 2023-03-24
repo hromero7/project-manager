@@ -83,7 +83,6 @@ export default {
     return axios
       .get(`/api/user/find/${_id}`)
       .then((res) => {
-        console.log(`res: `, res);
         axios
           .post(`/api/user/passwordUpdate/`, {
             _id: _id,
