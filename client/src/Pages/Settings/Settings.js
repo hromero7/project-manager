@@ -5,12 +5,12 @@ import ProfileUpdate from "../../Components/ProfileUpdate/ProfileUpdate";
 export default function Settings() {
   return (
     <Container>
-      <Tab.Container defaultActiveKey="first">
+      <Tab.Container defaultActiveKey="profileUpdate">
         <Row>
           <Col>
             <Nav varient="pills" className="flex-column">
               <Nav.Item>
-                <Nav.Link eventKey="first">Profile</Nav.Link>
+                <Nav.Link eventKey="profileUpdate">Profile</Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="second">Tab 2</Nav.Link>
@@ -19,7 +19,7 @@ export default function Settings() {
           </Col>
           <Col>
             <Tab.Content>
-              <Tab.Pane eventKey="first">
+              <Tab.Pane eventKey="profileUpdate">
                 <ProfileUpdate />
               </Tab.Pane>
               <Tab.Pane eventKey="second">
