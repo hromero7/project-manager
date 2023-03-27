@@ -1,4 +1,3 @@
-const { getAllByDisplayValue } = require("@testing-library/react");
 const db = require("../models");
 
 module.exports = {
