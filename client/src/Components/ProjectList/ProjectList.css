@@ -1,8 +1,66 @@
 
 
-.projectListCont {
-    padding-top: 25px;
+.card-title{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 5px;
 }
+
+.card-body::-webkit-scrollbar  {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    display: none;
+}
+
+.card-body {
+    overflow-y: scroll;
+}
+
+.cardItems {
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardContainer {
+    border: 1px green solid;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.cardContainera {
+    border: 1px solid red;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    /* flex-wrap: wrap; */
+
+
+}
+
+.cardContainerb {
+    border: 1px solid blue;
+    display: flex;
+    padding: 1rem;
+
+}
+
+.cardRow {
+    border: 1px solid green;
+    justify-content: left;
+    display: flex;
+}
+
+.cardContent {
+    border: 1px solid rgb(255, 255, 255);
+    display: flex;
+}
+
 
 .fa-sharp, .fa-fire {
     font-size: 25px;
@@ -10,4 +68,5 @@
     border-radius:  100%;
     padding: 4px;
     justify-content: center;
+
 }

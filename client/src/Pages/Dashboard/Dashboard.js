@@ -7,6 +7,7 @@ const Dashboard = () => {
   return (
     <Container>
       <ProjectList />
+      <h1>ASSIGNED PROJECTS</h1>
       <AssignedProjects />
     </Container>
   );

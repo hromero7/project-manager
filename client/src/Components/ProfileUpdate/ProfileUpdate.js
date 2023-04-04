@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { AuthContext } from "../../Context/AuthContext";
 import UserAPI from "../../Utils/UserAPI";
+import "./ProfileUpdate.css";
 
 function ProfileUpdate() {
   const userContextData = useContext(AuthContext);
@@ -51,7 +52,7 @@ function ProfileUpdate() {
 
   return (
     <Container>
-      <Container>
+      <Container className="formContainer">
         <Row>
           <Col>
             <Form>

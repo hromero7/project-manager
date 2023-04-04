@@ -20,15 +20,13 @@ const AssignedProjects = () => {
   };
 
   return (
-    <Container>
-      <h1>ASSIGNED PROJECTS</h1>
+    <Container className="projectListCont">
       <Row>
         {projectList ? (
           projectList.map((project) => {
             const dueDateSort = project.tasks.sort(
               (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
             );
-
             return (
               <Col key={project._id}>
                 <Card
@@ -54,16 +52,14 @@ const AssignedProjects = () => {
                         <Card.Text>
                           Due soon: {dueDateSort[0].taskTitle} &#64;
                         </Card.Text>
-                        <Card.Text>
-                          <DatePicker
-                            placeholder={dueDateSort[0].dueDate}
-                            value={dueDateSort[0].dueDate}
-                            disabled={true}
-                            clearIcon={null}
-                            disableCalendar={true}
-                            calendarIcon={null}
-                          />
-                        </Card.Text>
+                        <DatePicker
+                          placeholder={dueDateSort[0].dueDate}
+                          value={dueDateSort[0].dueDate}
+                          disabled={true}
+                          clearIcon={null}
+                          disableCalendar={true}
+                          calendarIcon={null}
+                        />
                       </>
                     )}
                   </Card.Body>
