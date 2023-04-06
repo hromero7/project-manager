@@ -1,4 +1,10 @@
+.projectListCont {
+    background-color: #FAFAFA;
+}
 
+.addProjCont {
+    padding-top: 20px;
+}
 
 .card-title{
     align-items: center;
@@ -18,48 +24,68 @@
 }
 
 .cardItems {
-    border: 1px solid white;
+    /* border: 1px solid white; */
     display: flex;
     flex-direction: column;
+    /* padding-top: 5px; */
 }
 
 .cardContainer {
-    border: 1px green solid;
+    /* border: 1px green solid; */
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+
 
 }
 
 .cardContainera {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
     flex-wrap: wrap;
     list-style: none;
-    margin: 0;
+    margin: 0 5% 0 5%;
     padding: 0;
-
-    /* flex-wrap: wrap; */
 
 
 }
 
+
+
 .cardContainerb {
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     display: flex;
     padding: 1rem;
+    align-items: center;
+    justify-content: center;
 
 }
 
 .cardRow {
-    border: 1px solid green;
+    /* border: 1px solid green; */
     justify-content: left;
     display: flex;
 }
 
-.cardContent {
-    border: 1px solid rgb(255, 255, 255);
-    display: flex;
-}
+.cardProject{
+    background-color: #f2f8f9;
+    border-radius: 4px;
+    text-decoration: none;
+    z-index: 0;
+    border: 1px solid #f2f8f9;
+  }
+  .cardProject:hover {
+    transition: all 0.2s ease-out;
+    box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+    top: -4px;
+    border: 1px solid #cccccc;
+    background-color: white;
+  }
+
+  .cardProject:hover:before {
+    transform: scale(2.15);
+  }
 
 
 .fa-sharp, .fa-fire {

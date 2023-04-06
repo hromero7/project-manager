@@ -115,7 +115,7 @@ export default function Projectlist() {
   return (
     <Container className="projectListCont">
       <Row>
-        <Col>
+        <Col className="addProjCont">
           <Dropdown>
             <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
               Add Project
@@ -145,65 +145,65 @@ export default function Projectlist() {
                   );
                   return (
                     <li className="cardContainerb">
-                      <Col className="cardRow">
-                        <Col className="cardContent">
-                          <Card
-                            style={{
-                              width: "18rem",
-                              height: "200px",
-                              margin: "15px",
-                              color: "black",
+                      {/* <Col className="cardRow"> */}
+                      <Col className="cardContent">
+                        <Card
+                          className="cardProject"
+                          style={{
+                            width: "18rem",
+                            height: "200px",
+                            margin: "15px",
+                            color: "black",
+                          }}
+                          key={item._id}
+                        >
+                          <Card.Title>{item.title}</Card.Title>
+                          <Card.Body
+                            onClick={() => {
+                              navigate(`/project/${item._id}`);
                             }}
-                            key={item._id}
+                            style={{ cursor: "pointer" }}
                           >
-                            <Card.Title>{item.title}</Card.Title>
-                            <Card.Body
-                              onClick={() => {
-                                navigate(`/project/${item._id}`);
-                              }}
-                              style={{ cursor: "pointer" }}
-                            >
-                              {dueDateSort >= 0 ? (
-                                ""
-                              ) : (
-                                <div className="cardData">
-                                  <Card.Text>
-                                    Due soon: {dueDateSort[0].taskTitle} &#64;
-                                  </Card.Text>
-                                  {/* <Card.Text> */}
-                                  <DatePicker
-                                    placeholder={dueDateSort[0].dueDate}
-                                    value={dueDateSort[0].dueDate}
-                                    disabled={true}
-                                    clearIcon={null}
-                                    disableCalendar={true}
-                                    calendarIcon={null}
-                                  />
-                                  {/* </Card.Text> */}
-                                </div>
-                              )}
-                            </Card.Body>
+                            {dueDateSort >= 0 ? (
+                              ""
+                            ) : (
+                              <div className="cardData">
+                                <Card.Text>
+                                  Due soon: {dueDateSort[0].taskTitle} &#64;
+                                </Card.Text>
+                                {/* <Card.Text> */}
+                                <DatePicker
+                                  placeholder={dueDateSort[0].dueDate}
+                                  value={dueDateSort[0].dueDate}
+                                  disabled={true}
+                                  clearIcon={null}
+                                  disableCalendar={true}
+                                  calendarIcon={null}
+                                />
+                                {/* </Card.Text> */}
+                              </div>
+                            )}
+                          </Card.Body>
 
-                            <Card.Footer>
-                              <Dropdown align="start">
-                                <Dropdown.Toggle
-                                  as={OptionToggle}
-                                  id="dropdown-custom-components"
-                                ></Dropdown.Toggle>
-                                <Dropdown.Menu as={OptionMenu}>
-                                  <Dropdown.Item
-                                    eventKey="1"
-                                    onClick={(e) => {
-                                      deleteProject(item._id, auth.user._id);
-                                    }}
-                                  >
-                                    Delete Project
-                                  </Dropdown.Item>
-                                </Dropdown.Menu>
-                              </Dropdown>
-                            </Card.Footer>
-                          </Card>
-                        </Col>
+                          <Card.Footer>
+                            <Dropdown align="start">
+                              <Dropdown.Toggle
+                                as={OptionToggle}
+                                id="dropdown-custom-components"
+                              ></Dropdown.Toggle>
+                              <Dropdown.Menu as={OptionMenu}>
+                                <Dropdown.Item
+                                  eventKey="1"
+                                  onClick={(e) => {
+                                    deleteProject(item._id, auth.user._id);
+                                  }}
+                                >
+                                  Delete Project
+                                </Dropdown.Item>
+                              </Dropdown.Menu>
+                            </Dropdown>
+                          </Card.Footer>
+                        </Card>
                       </Col>
                     </li>
                   );

@@ -21,56 +21,66 @@ const AssignedProjects = () => {
 
   return (
     <Container className="projectListCont">
-      <Row>
-        {projectList ? (
-          projectList.map((project) => {
-            const dueDateSort = project.tasks.sort(
-              (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
-            );
-            return (
-              <Col key={project._id}>
-                <Card
-                  style={{
-                    width: "18rem",
-                    height: "200px",
-                    margin: "15px",
-                    color: "black",
-                  }}
-                  key={project._id}
-                >
-                  <Card.Body
-                    onClick={() => {
-                      navigate(`/project/${project._id}`);
-                    }}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <Card.Title>{project.title}</Card.Title>
-                    {dueDateSort >= 0 ? (
-                      ""
-                    ) : (
-                      <>
-                        <Card.Text>
-                          Due soon: {dueDateSort[0].taskTitle} &#64;
-                        </Card.Text>
-                        <DatePicker
-                          placeholder={dueDateSort[0].dueDate}
-                          value={dueDateSort[0].dueDate}
-                          disabled={true}
-                          clearIcon={null}
-                          disableCalendar={true}
-                          calendarIcon={null}
-                        />
-                      </>
-                    )}
-                  </Card.Body>
-                </Card>
-              </Col>
-            );
-          })
-        ) : (
-          <div>Loading</div>
-        )}
-      </Row>
+      <Container className="cardParent">
+        <h1>ASSIGNED PROJECTS</h1>
+        <Row className="cardItems">
+          <Col className="cardContainer">
+            <ul className="cardContainera">
+              {projectList ? (
+                projectList.map((project) => {
+                  const dueDateSort = project.tasks.sort(
+                    (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
+                  );
+                  return (
+                    <li className="cardContainerb">
+                      <Col className="cardContent">
+                        <Card
+                          className="cardProject"
+                          style={{
+                            width: "18rem",
+                            height: "200px",
+                            margin: "15px",
+                            color: "black",
+                          }}
+                          key={project._id}
+                        >
+                          <Card.Body
+                            onClick={() => {
+                              navigate(`/project/${project._id}`);
+                            }}
+                            style={{ cursor: "pointer" }}
+                          >
+                            <Card.Title>{project.title}</Card.Title>
+                            {dueDateSort >= 0 ? (
+                              ""
+                            ) : (
+                              <>
+                                <Card.Text>
+                                  Due soon: {dueDateSort[0].taskTitle} &#64;
+                                </Card.Text>
+                                <DatePicker
+                                  placeholder={dueDateSort[0].dueDate}
+                                  value={dueDateSort[0].dueDate}
+                                  disabled={true}
+                                  clearIcon={null}
+                                  disableCalendar={true}
+                                  calendarIcon={null}
+                                />
+                              </>
+                            )}
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                    </li>
+                  );
+                })
+              ) : (
+                <div>Loading</div>
+              )}
+            </ul>
+          </Col>
+        </Row>
+      </Container>
     </Container>
   );
 };
