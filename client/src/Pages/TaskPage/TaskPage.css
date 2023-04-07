@@ -41,7 +41,7 @@ tbody {
 /* table,
 th,
 td {
-  border: solid; 
+  border: solid;
 } */
 
 .user-circle {
@@ -62,7 +62,6 @@ td {
 .user-circle:hover {
     transform: translateY(-5px);
 }
-
 
 /* ===== Scrollbar CSS ===== */
   /* Firefox */
@@ -87,13 +86,18 @@ td {
   }
 
 .fa-circle-plus {
-    font-size: 28px;
+  transition: all 0.2s ease-out;
+  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+  top: -4px;
+  border: 1px solid #cccccc;
+  background-color: white;
+  font-size: 30px;
     color: rgb(103, 58, 183);
-    transition: 0.1s ease 0s;
+
 }
 
-.fa-circle-plus:hover {
-    transform: translateY(-5px);
+.fa-circle-plus:hover:before {
+  transform: scale(2.15);
 }
 
 .task-priority {

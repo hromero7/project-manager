@@ -3,8 +3,31 @@
     vertical-align: middle;
 }
 
+.TAButton {
+    border: none;
+    background-color: transparent;
+}
+
+.plusButton {
+    border-radius: 100%;
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid black;
+    height: 28px;
+    width: 28px;
+    /* margin: -5px; */
+    text-align: center;
+    /* z-index: 0; */
+    transition: transform 0.3s ease;
+    z-index: 9999;
+}
+
+.plusButton:hover {
+    transform: translateY(-5px);
+}
+
 .assignTaskDDM{
-    /* border: 5px solid red; */
+    border: 5px solid red;
     width: 15px;
 }
 
