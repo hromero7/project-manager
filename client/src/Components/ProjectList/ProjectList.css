@@ -34,8 +34,8 @@
     /* border: 1px green solid; */
     display: flex;
     /* flex-direction: column; */
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center; */
+    /* align-items: center; */
 
 
 }
@@ -57,8 +57,8 @@
     /* border: 1px solid blue; */
     display: flex;
     padding: 1rem;
-    align-items: center;
-    justify-content: center;
+    /* align-items: center; */
+    /* justify-content: center; */
 
 }
 
@@ -70,12 +70,13 @@
 
 .cardProject{
     background-color: #f2f8f9;
-    border-radius: 4px;
+    border-radius: 10px;
     text-decoration: none;
     z-index: 0;
-    border: 1px solid #f2f8f9;
+    border: 1px solid #cccccc;
   }
-  .cardProject:hover {
+
+.cardProject:hover {
     transition: all 0.2s ease-out;
     box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
     top: -4px;
@@ -83,9 +84,9 @@
     background-color: white;
   }
 
-  .cardProject:hover:before {
+.cardProject:hover:before {
     transform: scale(2.15);
-  }
+}
 
 
 .fa-sharp, .fa-fire {
