@@ -3,33 +3,30 @@
     vertical-align: middle;
 }
 
-.TAButton {
-    border: none;
-    background-color: transparent;
-}
-
-.plusButton {
-    border-radius: 100%;
-    display: inline-block;
-    vertical-align: middle;
-    border: 1px solid black;
-    height: 28px;
-    width: 28px;
-    /* margin: -5px; */
-    text-align: center;
-    /* z-index: 0; */
-    transition: transform 0.3s ease;
+.addToggle {
     z-index: 9999;
 }
 
-.plusButton:hover {
+.TAButton {
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid black;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    text-align: center;
+    background-color: RGB(82, 46, 169);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+    font-size: 30px;
+      color: rgb(103, 58, 183);
+
+}
+
+.TAButton:hover {
     transform: translateY(-5px);
-}
-
-.assignTaskDDM{
-    border: 5px solid red;
-    width: 15px;
+    transition: transform 0.1s ease 0s;
 }
 
 
-.assignTaskNames{}

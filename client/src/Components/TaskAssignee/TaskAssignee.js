@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Form, Dropdown, Row, Col } from "react-bootstrap";
+import axios from "axios";
 import TaskAPI from "../../Utils/TaskAPI";
 import "./TaskAssignee.css";
 
@@ -20,17 +20,13 @@ const TaskAssignee = (props) => {
       for (let j = 0; j < props.assignee.length; j++) {
         if (memberList[i].id === props.assignee[j].id) {
           memberList[i].isActive = true;
-          memberList[i].arrPos = j;
-        } else {
-          memberList[i].isActive = memberList[i].isActive !== false;
         }
       }
     }
   };
-
   const CustomUserAddToggle = React.forwardRef(({ children, onClick }, ref) => (
-    <button
-      className="TAButton"
+    <a
+      href=""
       ref={ref}
       onClick={(e) => {
         e.preventDefault();
@@ -39,7 +35,7 @@ const TaskAssignee = (props) => {
       }}
     >
       {children}
-    </button>
+    </a>
   ));
 
   const taskMenu = React.forwardRef(
@@ -64,10 +60,7 @@ const TaskAssignee = (props) => {
       className="dropdown-assignee"
     >
       <Dropdown.Toggle as={CustomUserAddToggle} id="dropdown-custom-components">
-        <i
-          title="plusButton"
-          className="fa-solid fa-circle-plus plusButton"
-        ></i>
+        <i className="fa-solid fa-circle-plus TAButton"></i>
       </Dropdown.Toggle>
 
       <Dropdown.Menu
@@ -88,7 +81,7 @@ const TaskAssignee = (props) => {
                         data-testid={`checkbox${item.arrPos}`}
                         onChange={() => {}}
                         onClick={(e) => {
-                          e.preventDefault();
+                          e.stopPropagation();
                           if (item.isActive === false || item.isActive === "") {
                             TaskAPI.addAssignee(
                               props.projectId,
