@@ -13,12 +13,14 @@ import { AuthContext } from "../../Context/AuthContext";
 import ProjectAPI from "../../Utils/ProjectAPI";
 import DatePicker from "react-date-picker";
 import "./ProjectList.css";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 export default function Projectlist() {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const [dbItems, setDbItems] = useState();
   const [getData, setGetData] = useState(false);
+  // const [getData, setGetData] = useState(true);
   const [projectTitle, setProjectTitle] = useState("");
 
   useEffect(() => {
@@ -135,82 +137,84 @@ export default function Projectlist() {
         </Col>
       </Row>
       <Container className="cardParent">
+        {getData ? (
+          ""
+        ) : (
+          <Container className="PLLoading">
+            <LoadingSpinner />
+          </Container>
+        )}
         <Row className="cardItems">
           <Col className="cardContainer">
             <ul className="cardContainera">
-              {getData ? (
-                dbItems.map((item, index) => {
-                  const dueDateSort = item.tasks.sort(
-                    (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
-                  );
-                  return (
-                    <li className="cardContainerb">
-                      {/* <Col className="cardRow"> */}
-                      <Col className="cardContent">
-                        <Card
-                          className="cardProject"
-                          style={{
-                            width: "18rem",
-                            height: "200px",
-                            margin: "15px",
-                            color: "black",
-                          }}
-                          key={item._id}
-                        >
-                          <Card.Title>{item.title}</Card.Title>
-                          <Card.Body
-                            onClick={() => {
-                              navigate(`/project/${item._id}`);
+              {getData
+                ? dbItems.map((item, index) => {
+                    const dueDateSort = item.tasks.sort(
+                      (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
+                    );
+                    return (
+                      <li key={index} className="cardContainerb">
+                        <Col className="cardContent">
+                          <Card
+                            className="cardProject"
+                            style={{
+                              width: "18rem",
+                              height: "200px",
+                              margin: "15px",
+                              color: "black",
                             }}
-                            style={{ cursor: "pointer" }}
+                            key={item._id}
                           >
-                            {dueDateSort >= 0 ? (
-                              ""
-                            ) : (
-                              <div className="cardData">
-                                <Card.Text>
-                                  Due soon: {dueDateSort[0].taskTitle} &#64;
-                                </Card.Text>
-                                {/* <Card.Text> */}
-                                <DatePicker
-                                  placeholder={dueDateSort[0].dueDate}
-                                  value={dueDateSort[0].dueDate}
-                                  disabled={true}
-                                  clearIcon={null}
-                                  disableCalendar={true}
-                                  calendarIcon={null}
-                                />
-                                {/* </Card.Text> */}
-                              </div>
-                            )}
-                          </Card.Body>
+                            <Card.Title>{item.title}</Card.Title>
+                            <Card.Body
+                              onClick={() => {
+                                navigate(`/project/${item._id}`);
+                              }}
+                              style={{ cursor: "pointer" }}
+                            >
+                              {dueDateSort >= 0 ? (
+                                ""
+                              ) : (
+                                <div className="cardData">
+                                  <Card.Text>
+                                    Due soon: {dueDateSort[0].taskTitle} &#64;
+                                  </Card.Text>
+                                  <DatePicker
+                                    placeholder={dueDateSort[0].dueDate}
+                                    value={dueDateSort[0].dueDate}
+                                    disabled={true}
+                                    clearIcon={null}
+                                    disableCalendar={true}
+                                    calendarIcon={null}
+                                  />
+                                </div>
+                              )}
+                            </Card.Body>
 
-                          <Card.Footer>
-                            <Dropdown align="start">
-                              <Dropdown.Toggle
-                                as={OptionToggle}
-                                id="dropdown-custom-components"
-                              ></Dropdown.Toggle>
-                              <Dropdown.Menu as={OptionMenu}>
-                                <Dropdown.Item
-                                  eventKey="1"
-                                  onClick={(e) => {
-                                    deleteProject(item._id, auth.user._id);
-                                  }}
-                                >
-                                  Delete Project
-                                </Dropdown.Item>
-                              </Dropdown.Menu>
-                            </Dropdown>
-                          </Card.Footer>
-                        </Card>
-                      </Col>
-                    </li>
-                  );
-                })
-              ) : (
-                <div>Loading</div>
-              )}
+                            <Card.Footer>
+                              <Dropdown align="start">
+                                <Dropdown.Toggle
+                                  as={OptionToggle}
+                                  id="dropdown-custom-components"
+                                ></Dropdown.Toggle>
+                                <Dropdown.Menu as={OptionMenu}>
+                                  <Dropdown.Item
+                                    eventKey="1"
+                                    onClick={(e) => {
+                                      deleteProject(item._id, auth.user._id);
+                                    }}
+                                  >
+                                    Delete Project
+                                  </Dropdown.Item>
+                                </Dropdown.Menu>
+                              </Dropdown>
+                            </Card.Footer>
+                          </Card>
+                        </Col>
+                      </li>
+                    );
+                  })
+                : ""}
             </ul>
           </Col>
         </Row>

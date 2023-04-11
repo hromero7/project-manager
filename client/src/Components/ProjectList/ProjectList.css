@@ -6,6 +6,15 @@
     padding-top: 20px;
 }
 
+
+.PLLoading {
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .card-title{
     align-items: center;
     justify-content: center;

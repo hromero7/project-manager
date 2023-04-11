@@ -224,6 +224,10 @@ module.exports = {
       return res
         .status(404)
         .json({ message: { msgBody: "No Projects Found", msgError: true } });
-    else return res.status(200).json(projects);
+    else
+      return res.status(200).json({
+        body: projects,
+        message: { msgBody: "Projects found", status: 200, msgError: false },
+      });
   },
 };

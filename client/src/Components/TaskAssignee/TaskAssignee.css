@@ -16,11 +16,11 @@
     border-radius: 50%;
     text-align: center;
     background-color: RGB(82, 46, 169);
-    color: white;
+    /* color: white; */
     cursor: pointer;
     box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
     font-size: 30px;
-      color: rgb(103, 58, 183);
+    color: rgb(103, 58, 183);
 
 }
 
