@@ -33,6 +33,7 @@ const TaskAssignee = (props) => {
         getMemberList();
         onClick(e);
       }}
+      className="plusTogBtn"
     >
       {children}
     </a>

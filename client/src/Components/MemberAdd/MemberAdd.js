@@ -114,6 +114,10 @@ const MemberAdd = (props) => {
                 <Row>
                   <Col>{member.username}</Col>
                   <Col>
+                    {/* <i className="fa-solid fa-heart fa-lg"></i>
+                    <i className="fa-regular fa-heart fa-lg"></i> */}
+                  </Col>
+                  <Col>
                     <i
                       onClick={() => {
                         removeMembers(member);
