@@ -49,8 +49,12 @@ const MemberAdd = (props) => {
       >
         Add members:
       </Dropdown.Toggle>
-      <Dropdown.Menu key="memAddSearch">
-        <Dropdown.Item key="memAddSearchItem0" id="memAddSearch">
+      <Dropdown.Menu key="memAddSearch" className="MDDM">
+        <Dropdown.Item
+          key="memAddSearchItem0"
+          id="memAddSearch"
+          className="MDDI"
+        >
           <Dropdown.Header>Add members:</Dropdown.Header>
           <Form className="inputForm">
             <Form.Control
@@ -83,6 +87,7 @@ const MemberAdd = (props) => {
         {searchList.map((item, index) => {
           return (
             <Dropdown.Item
+              className="MDDI"
               key={`searchItem${index}`}
               data-testid={`searchItem${index}`}
               tabIndex={index}
@@ -99,7 +104,7 @@ const MemberAdd = (props) => {
         <Dropdown.Header>Members:</Dropdown.Header>
         {props.projectData.members.map((member, index) => {
           return (
-            <Dropdown.Item tabIndex={index} key={member._id}>
+            <Dropdown.Item className="MDDI" tabIndex={index} key={member._id}>
               {member.id === props.projectData.userId ? (
                 <Row>
                   <Col>{member.username}</Col>

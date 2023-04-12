@@ -11,6 +11,7 @@ import {
 import DateTimePicker from "react-datetime-picker";
 import TaskAPI from "../../Utils/TaskAPI";
 import PriorityLevel from "../PriorityLevel/PriorityLevel";
+import "./TaskActionMenu.css";
 
 const TaskActionMenu = (props) => {
   const [show, setShow] = useState(false);
@@ -84,11 +85,11 @@ const TaskActionMenu = (props) => {
         <i className="fa-solid fa-circle-info"></i>
       </Dropdown.Toggle>
 
-      <Dropdown.Menu>
-        <Dropdown.Item eventKey="1" onClick={updateTask}>
+      <Dropdown.Menu className="TADD">
+        <Dropdown.Item eventKey="1" className="TAI" onClick={updateTask}>
           Edit <i className="fa-regular fa-pen-to-square"></i>
         </Dropdown.Item>
-        <Dropdown.Item eventKey="2" onClick={deleteTask}>
+        <Dropdown.Item eventKey="2" className="TAI" onClick={deleteTask}>
           Delete <i className="fa-regular fa-trash-can"></i>
         </Dropdown.Item>
       </Dropdown.Menu>

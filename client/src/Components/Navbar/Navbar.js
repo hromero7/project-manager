@@ -55,13 +55,14 @@ const NavBar = () => {
                 title={`Hello ${user.firstName}!`}
               >
                 <NavDropdown.Item
+                  className="navDropItem"
                   onClick={() => {
                     navigate("/editprofile");
                   }}
                 >
                   Settings
                 </NavDropdown.Item>
-                <NavDropdown.Item>
+                <NavDropdown.Item className="navDropItem">
                   <Button
                     variant="primary"
                     type="submit"
