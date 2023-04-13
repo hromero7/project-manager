@@ -3,6 +3,7 @@ import { Row, Col, Dropdown, Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import ProjectAPI from "../../Utils/ProjectAPI";
 import "./MemberAdd.css";
+import Promote from "../Promote/Promote";
 
 const MemberAdd = (props) => {
   const { ID } = useParams();
@@ -103,6 +104,7 @@ const MemberAdd = (props) => {
 
         <Dropdown.Header>Members:</Dropdown.Header>
         {props.projectData.members.map((member, index) => {
+          console.log(`member: `, member);
           return (
             <Dropdown.Item className="MDDI" tabIndex={index} key={member._id}>
               {member.id === props.projectData.userId ? (
@@ -114,8 +116,12 @@ const MemberAdd = (props) => {
                 <Row>
                   <Col>{member.username}</Col>
                   <Col>
-                    {/* <i className="fa-solid fa-heart fa-lg"></i>
-                    <i className="fa-regular fa-heart fa-lg"></i> */}
+                    <Promote
+                      props={props}
+                      memberId={member.id}
+                      email={member.email}
+                      username={member.username}
+                    />
                   </Col>
                   <Col>
                     <i

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Form, Dropdown, Row, Col } from "react-bootstrap";
-import axios from "axios";
 import TaskAPI from "../../Utils/TaskAPI";
 import "./TaskAssignee.css";
 

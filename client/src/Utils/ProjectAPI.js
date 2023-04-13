@@ -75,6 +75,20 @@ export default {
       })
       .then((res) => {
         return res;
-      })
+      });
   },
+  // promoteMember: () => {
+  //   return axios.put(`/api/project/promote_member/${}`,{
+  //     data: ""
+  //   }).then((res) => {
+  //     return res;
+  //   })
+  // },
+  // demoteMember: () => {
+  //   return axios.put(`/api/project/demote_member/${}`,{
+  //     data: ""
+  //   }).then((res) => {
+  //     return res;
+  //   })
+  // }
 };
