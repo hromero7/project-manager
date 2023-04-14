@@ -230,4 +230,18 @@ module.exports = {
         message: { msgBody: "Projects found", status: 200, msgError: false },
       });
   },
+  promoteMember: async (req, res) => {
+    const userId = req.body.data.userId;
+    const email = req.body.data.email;
+    const username = req.body.data.username;
+    const projectId = req.body.data.projectId;
+    console.log(`req.body: `, {
+      userId: userId,
+      email: email,
+      username: username,
+      projectId: projectId,
+    });
+
+    // goal here is to insert a username into an existing document and returning a 200 status code to the front end. Afterward a checkbox will indicate that this user is part of the array and therefore "promoted" so that they can interact with the projects they're assigned. If they aren't promoted, they should not have the power to add members, or assign tasks to those projects they're involved in.
+  },
 };

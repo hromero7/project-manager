@@ -77,13 +77,21 @@ export default {
         return res;
       });
   },
-  // promoteMember: () => {
-  //   return axios.put(`/api/project/promote_member/${}`,{
-  //     data: ""
-  //   }).then((res) => {
-  //     return res;
-  //   })
-  // },
+  promoteMember: (props) => {
+    console.log(`props: `, props);
+    return axios
+      .put(`/api/project/promote_member/${props.memberId}`, {
+        data: {
+          userId: props.memberId,
+          email: props.email,
+          username: props.username,
+          projectId: props.props.projectId,
+        },
+      })
+      .then((res) => {
+        return res;
+      });
+  },
   // demoteMember: () => {
   //   return axios.put(`/api/project/demote_member/${}`,{
   //     data: ""

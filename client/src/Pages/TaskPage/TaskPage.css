@@ -28,21 +28,44 @@ tr {
 }
 thead {
   margin-right:1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   }
 tr {
   display: table;
   table-layout: fixed;
   width:100%;
+  /* border: 1px solid black; */
 }
+th {
+  /* border: 1px solid black; */
+}
+
 tbody {
   height: 550px;
   overflow: auto ; /* eventually : scroll;*/
 }
-/* table,
-th,
-td {
-  border: solid;
-} */
+
+.taskStatus {
+  text-align: center;
+}
+
+
+.assigneeCont {
+  display: flex;
+  border: 1px solid rgb(255, 0, 0);
+  align-items: center;
+  justify-content: right;
+}
+
+.assigneeContRow {
+  display: flex;
+  border: 1px solid black;
+  align-items: center;
+  justify-content: center;
+}
 
 .user-circle {
     display: inline-block;
@@ -148,6 +171,14 @@ td {
     border-radius: 25px;
 }
 
+.taskDatePickCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* border: 1px solid purple; */
+}
+
 .react-datetime-picker__wrapper,
 .react-date-picker__wrapper,
 .react-date-picker,
@@ -165,9 +196,30 @@ td {
   border-bottom: 2px solid black;
 }
 
+.priLvlRow {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid black; */
+}
+
+.priLvlCol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;
   text-overflow: '';
+}
+
+.TAMCol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

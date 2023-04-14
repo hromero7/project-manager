@@ -137,12 +137,12 @@ const TaskPage = () => {
                           </td>
                           <td>
                             <Row>
-                              <Col>{task.status}</Col>
+                              <Col className="taskStatus">{task.status}</Col>
                             </Row>
                           </td>
                           <td>
-                            <Row>
-                              <Col>
+                            <Col className="assigneeContRow">
+                              <Col className="assigneeCont">
                                 {task.assignee.map((assignee) => {
                                   return (
                                     <div className="user-circle">
@@ -159,7 +159,7 @@ const TaskPage = () => {
                                   getProjectData={getProjData}
                                 />
                               </Col>
-                            </Row>
+                            </Col>
                           </td>
                           <td className="dueDateCol">
                             <Row>
@@ -185,8 +185,8 @@ const TaskPage = () => {
                             </Row>
                           </td>
                           <td>
-                            <Row>
-                              <Col>
+                            <Row className="priLvlRow">
+                              <Col className="priLvlCol">
                                 <PriorityLevel
                                   taskValues={task}
                                   priority={task.priority}
@@ -197,8 +197,8 @@ const TaskPage = () => {
                             </Row>
                           </td>
                           <td>
-                            <Row>
-                              <Col>
+                            <Row className="TAMRow">
+                              <Col className="TAMCol">
                                 <TaskActionMenu
                                   task={task}
                                   projectId={projectData.id}
