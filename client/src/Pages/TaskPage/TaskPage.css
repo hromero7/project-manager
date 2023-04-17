@@ -20,6 +20,10 @@
   font-weight: 500;
 }
 
+tbody {
+  z-index: 0;
+}
+
 table,
 thead,
 tbody,
@@ -55,14 +59,14 @@ tbody {
 
 .assigneeCont {
   display: flex;
-  border: 1px solid rgb(255, 0, 0);
+  /* border: 1px solid rgb(255, 0, 0); */
   align-items: center;
   justify-content: right;
 }
 
 .assigneeContRow {
   display: flex;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   align-items: center;
   justify-content: center;
 }
@@ -222,4 +226,11 @@ select {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    padding: 20px;
+  }
 }
