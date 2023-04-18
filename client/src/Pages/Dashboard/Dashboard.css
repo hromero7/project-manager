@@ -3,3 +3,33 @@
     height: auto;
     min-height: 100vh;
 }
+
+.dashboard-container {
+    background-size: cover;
+    background-color: white;
+}
+
+.dashboard-projects {
+    padding: 25px 32px 50px 250px;
+}
+
+.project-view {
+    position: relative;
+    top: 40px;
+    right: 20px;
+    text-align: right;
+}
+
+.project-view .view-btn {
+    background-color: white;
+    border: none;
+}
+
+.project-view i {
+    font-size: 18px;
+}
+
+.btn-active {
+    background-color: blueviolet;
+    color: white;
+}

@@ -13,6 +13,7 @@ const {
   updateProjectTitle,
   findAssignedProjects,
   promoteMember,
+  projectProgress
 } = require("../../controllers/projectController");
 
 router.route("/all").get(findAll); // find all route
@@ -41,7 +42,13 @@ router
 router
   .route("/assigned_projects/:username")
   .get(passport.authenticate("jwt", { session: false }), findAssignedProjects);
+  
 router
   .route("/promote_member/:id")
   .put(passport.authenticate("jwt", { session: false }), promoteMember);
+
+router
+  .route("/project_progress/:project_id")
+  .get(passport.authenticate("jwt", { session: false }), projectProgress);
+
 module.exports = router;

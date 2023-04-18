@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 const cron = require("node-cron");
 const axios = require("axios");
-
+require("dotenv").config();
 // const cronJob = () => {
 //     cron.schedule("*/3 * * * * *", () => {
 //     task();
@@ -60,7 +60,7 @@ const emailNotifications = async (email, taskTitle, username) => {
     secure: false, // true for 465, false for other ports
     auth: {
       user: "projectmanagerapp@yahoo.com", // generated ethereal user
-      pass: "create app password on yahoo settings", // generated ethereal password
+      pass: process.env.EMAIL_PASS, // generated ethereal password
     },
     logger: true
   });

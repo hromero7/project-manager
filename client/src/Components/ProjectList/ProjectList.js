@@ -15,7 +15,7 @@ import DatePicker from "react-date-picker";
 import "./ProjectList.css";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
-export default function Projectlist() {
+export default function Projectlist(props) {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const [dbItems, setDbItems] = useState();
@@ -115,25 +115,87 @@ export default function Projectlist() {
   );
 
   return (
-    <Container className="projectListCont">
+    <Container className="dashboard-projects">
       <Row>
-        <Col className="addProjCont">
-          <Dropdown>
-            <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-              Add Project
-            </Dropdown.Toggle>
-            <Dropdown.Menu as={CustomMenu}>
-              <Dropdown.Item eventKey="1">
-                <Button
-                  onClick={() => {
-                    addProject();
-                  }}
+        <Col>
+          <Row>
+            <Col
+              onClick={() => {
+                getProjects();
+              }}
+            >
+              <div>3RD v1.0 / Project Dashboard / Projects</div>
+            </Col>
+            <Col>
+              <Dropdown>
+                <Dropdown.Toggle
+                  as={CustomToggle}
+                  id="dropdown-custom-components"
                 >
-                  Submit
-                </Button>
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+                  Add Project
+                </Dropdown.Toggle>
+                <Dropdown.Menu as={CustomMenu}>
+                  <Dropdown.Item eventKey="1">
+                    <Button
+                      onClick={(e) => {
+                        addProject();
+                      }}
+                    >
+                      Submit
+                    </Button>
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </Col>
+          </Row>
+          <Row>
+            {props.projectData ? (
+              props.projectData.map((item) => (
+                <Col key={item._id}>
+                  <Card
+                    style={{
+                      width: "18rem",
+                      height: "200px",
+                      margin: "15px",
+                      color: "black",
+                    }}
+                    key={item._id}
+                  >
+                    <Card.Body
+                      onClick={() => {
+                        navigate(`/project/${item._id}`);
+                      }}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <Card.Title>{item.title}</Card.Title>
+                      <Card.Text>{item._id.slice(-5)}</Card.Text>
+                    </Card.Body>
+
+                    <Card.Footer>
+                      <Dropdown align="end" className="dropdown">
+                        <Dropdown.Toggle
+                          as={OptionToggle}
+                          id="dropdown-custom-components"
+                        ></Dropdown.Toggle>
+                        <Dropdown.Menu as={OptionMenu}>
+                          <Dropdown.Item
+                            eventKey="1"
+                            onClick={(e) => {
+                              deleteProject(item._id, auth.user._id);
+                            }}
+                          >
+                            Delete Project
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    </Card.Footer>
+                  </Card>
+                </Col>
+              ))
+            ) : (
+              <div>Loading</div>
+            )}
+          </Row>
         </Col>
       </Row>
       <Container className="cardParent">

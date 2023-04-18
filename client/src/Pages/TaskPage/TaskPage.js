@@ -83,7 +83,7 @@ const TaskPage = () => {
           <Row className="taskTable">
             <Col>
               <Container className="tableCont">
-                <Table striped hover responsive>
+                <Table striped hover>
                   <thead>
                     <tr>
                       <th>

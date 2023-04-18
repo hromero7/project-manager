@@ -99,4 +99,12 @@ export default {
   //     return res;
   //   })
   // }
+  projectProgress: (project_id) => {
+    return axios
+      .get(`/api/project/project_progress/${project_id}`)
+      .then((res) => {
+        return res.data;
+      }); 
+  },
+  addMember: () => {},
 };

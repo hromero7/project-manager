@@ -1,29 +1,49 @@
-import { React } from "react";
-import { Container, Tabs, Tab } from "react-bootstrap";
+import React, { useEffect, useState, useContext } from "react";
+import { Container } from "react-bootstrap";
 import ProjectList from "../../Components/ProjectList/ProjectList";
 import AssignedProjects from "../../Components/AssignedProjects/AssignedProjects";
+import DashNav from "../../Components/DashNav/DashNav";
+import ProjectTable from "../../Components/ProjectTable/ProjectTable";
+import { AuthContext } from "../../Context/AuthContext";
+import ProjectAPI from "../../Utils/ProjectAPI";
 import "./Dashboard.css";
 
 const Dashboard = () => {
+  const auth = useContext(AuthContext);
+  const [ projectOverview, setProjectOverview ] = useState(true)
+  const [projectData, setProjectData] = useState([]);
+
+  useEffect(() => {
+    getProjects();
+  }, []);
+
+  const getProjects = async () => {
+    const res = await ProjectAPI.getAssignedProjects(auth.user.username);
+        setProjectData(res.body);
+  }
+
   return (
-    <Container className="dashCont">
-      <Tabs
-        defaultActiveKey="projects"
-        id="fill-tab-example"
-        className="mb-3"
-        fill
-      >
-        <Tab eventKey="projects" title="Projects">
-          <ProjectList />
-        </Tab>
-        <Tab eventKey="assigned" title="Assigned">
-          <AssignedProjects />
-        </Tab>
-        <Tab eventKey="manage" title="Management">
-          <h1>Bleep bloop</h1>
-        </Tab>
-      </Tabs>
-    </Container>
+    <div className="dashboard-container">
+      <DashNav />
+      <div className="project-view">
+        <button className={projectOverview? "btn-active" : "view-btn"} 
+          onClick={() => setProjectOverview(true)}>
+          <i className="fa-solid fa-table-list"></i>
+        </button>
+
+        <button className={projectOverview === false? "btn-active" : "view-btn"} 
+          onClick={() => setProjectOverview(false)}>
+            <i className="fa-solid fa-table-cells"></i>
+        </button>
+      </div>
+      { projectOverview ?
+        <ProjectTable 
+          projectData={projectData}/>
+        : <ProjectList 
+          projectData={projectData}/>
+      }
+      
+    </div>
   );
 };
 

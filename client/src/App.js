@@ -16,7 +16,7 @@ import "./App.css";
 function App() {
   return (
     <div data-testid="app" className="App">
-      <NavBar />
+      {/* <NavBar /> */}
       <Routes>
         <Route element={<PublicRoute />}>
           <Route exact path="/" element={<LandingPage />} />
