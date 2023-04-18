@@ -5,7 +5,7 @@ import "./Login.css";
 
 const LoginPage = () => {
   return (
-    <Container>
+    <Container className="loginPg">
       <Row>
         <Col />
         <Col className="itemContainer">
