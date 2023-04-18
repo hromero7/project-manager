@@ -1,0 +1,54 @@
+.footerContainer {
+    background-image: -webkit-linear-gradient(-90deg,#e7e7e7 0%, #242424 5%);
+    /* height: 25vh; */
+    color: white;
+}
+
+.footerContent {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+    padding: 15px;
+}
+
+.footerLogoContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.footerLogo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.siteMapContainer {
+    font-family: 'Asap', sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.siteMapItems {
+    display: flex;
+    justify-content:flex-end;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+#siteMapText {
+    font-size: 25px;
+    text-decoration: underline;
+}
+
+.siteMapItem {
+    font-size: 25px;
+}
+.siteMapItem:hover {
+    cursor: pointer;
+    text-decoration: underline;
+
+}

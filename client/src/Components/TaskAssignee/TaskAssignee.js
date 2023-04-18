@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Form, Dropdown, Row, Col } from "react-bootstrap";
+import TaskAPI from "../../Utils/TaskAPI";
 import "./TaskAssignee.css";
 
 const TaskAssignee = (props) => {
@@ -23,7 +23,6 @@ const TaskAssignee = (props) => {
       }
     }
   };
-
   const CustomUserAddToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a
       href=""
@@ -33,6 +32,7 @@ const TaskAssignee = (props) => {
         getMemberList();
         onClick(e);
       }}
+      className="plusTogBtn"
     >
       {children}
     </a>
@@ -54,49 +54,58 @@ const TaskAssignee = (props) => {
   );
 
   return (
-    <Dropdown autoClose="outside" className="dropdown-assignee">
+    <Dropdown
+      data-testid="taskAssigneeDropdown"
+      autoClose="outside"
+      className="dropdown-assignee"
+    >
       <Dropdown.Toggle as={CustomUserAddToggle} id="dropdown-custom-components">
-        <i className="fa-solid fa-circle-plus"></i>
+        <i className="fa-solid fa-circle-plus TAButton"></i>
       </Dropdown.Toggle>
+
       <Dropdown.Menu
+        role="menu"
         className="assignTaskDDM"
         align={{ lg: "start" }}
         as={taskMenu}
       >
         <Dropdown.Header>Assign tasks:</Dropdown.Header>
         {show
-          ? memberList.map((item) => {
+          ? memberList.map((item, index) => {
               getActiveList();
               return (
-                <Dropdown.Item className="assignTaskNames" key={item._id}>
+                <Dropdown.Item className="assignTaskNames" key={index}>
                   <Row>
                     <Col className="switchContainer">
                       <Form.Check
+                        data-testid={`checkbox${item.arrPos}`}
+                        onChange={() => {}}
                         onClick={(e) => {
                           e.stopPropagation();
                           if (item.isActive === false || item.isActive === "") {
-                            axios
-                              .put(
-                                `/api/task/add_assignee/${props.projectId}/${props.taskId}`,
-                                { id: item.id, username: item.username, email: item.email }
-                              )
-                              .then(() => {
+                            TaskAPI.addAssignee(
+                              props.projectId,
+                              props.taskId,
+                              item.id,
+                              item.username,
+                              item.email
+                            ).then((res) => {
+                              if (res.status === 200) {
                                 item.isActive = true;
                                 props.getProjectData();
-                              })
-                              .catch((err) => console.log("err: ", err));
+                              }
+                            });
                           } else if (item.isActive === true) {
-                            axios
-                              .put(
-                                `/api/task/remove_assignee/${props.projectId}/${props.taskId}/${item.id}`,
-                                { id: item.id, username: item.username }
-                              )
-                              .then(() => {
+                            TaskAPI.removeAssignee(
+                              props.projectId,
+                              props.taskId,
+                              item.id
+                            ).then((res) => {
+                              if (res.status === 200) {
                                 item.isActive = false;
                                 props.getProjectData();
-                                // getActiveList();
-                              })
-                              .catch((err) => console.log("err: ", err));
+                              }
+                            });
                           }
                         }}
                         type="switch"

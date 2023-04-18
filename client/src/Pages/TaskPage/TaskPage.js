@@ -39,6 +39,7 @@ const TaskPage = () => {
         userId: response.userId,
         id: response._id,
       });
+      console.log(`projectData: `, projectData);
     });
   };
 
@@ -125,6 +126,7 @@ const TaskPage = () => {
                   <tbody>
                     {projectData.tasks.map((task, i) => {
                       let newTime = new Date(task.dueDate);
+                      let newDate = new Date(task.dueDate);
                       return (
                         <tr key={i}>
                           <td>{i + 1}</td>
@@ -135,18 +137,20 @@ const TaskPage = () => {
                           </td>
                           <td>
                             <Row>
-                              <Col>{task.status}</Col>
+                              <Col className="taskStatus">{task.status}</Col>
                             </Row>
                           </td>
                           <td>
-                            <Row>
-                              <Col>
+                            <Col className="assigneeContRow">
+                              <Col className="assigneeCont">
                                 {task.assignee.map((assignee) => {
-                                    return <div className="user-circle">
-                                            {assignee.username[0].toUpperCase()}
-                                           </div>;
+                                  return (
+                                    <div className="user-circle">
+                                      {assignee.username[0].toUpperCase()}
+                                    </div>
+                                  );
                                 })}
-                              
+
                                 <TaskAssignee
                                   projectId={projectData.id}
                                   projectData={projectData}
@@ -155,21 +159,19 @@ const TaskPage = () => {
                                   getProjectData={getProjData}
                                 />
                               </Col>
-                    
-                            </Row>
+                            </Col>
                           </td>
                           <td className="dueDateCol">
                             <Row>
                               <Col className="taskDatePickCont">
-                                <Moment local format="MM/DD/YY hh:mm A">{task.dueDate}</Moment>
-                                {/* <DatePicker
-                                  placeholder={task.dueDate}
-                                  value={task.dueDate}
+                                {/* <Moment local format="MM/DD/YY hh:mm A">{task.dueDate}</Moment> */}
+                                <DatePicker
+                                  placeholder={newDate}
+                                  value={newDate}
                                   disabled={true}
                                   clearIcon={null}
                                   disableCalendar={true}
                                   calendarIcon={null}
-                                  minDate={new Date()}
                                 />
                                 <TimePicker
                                   placeholder={newTime}
@@ -178,13 +180,13 @@ const TaskPage = () => {
                                   clearIcon={null}
                                   clockIcon={null}
                                   locale="en"
-                                /> */}
+                                />
                               </Col>
                             </Row>
                           </td>
                           <td>
-                            <Row>
-                              <Col>
+                            <Row className="priLvlRow">
+                              <Col className="priLvlCol">
                                 <PriorityLevel
                                   taskValues={task}
                                   priority={task.priority}
@@ -195,8 +197,8 @@ const TaskPage = () => {
                             </Row>
                           </td>
                           <td>
-                            <Row>
-                              <Col>
+                            <Row className="TAMRow">
+                              <Col className="TAMCol">
                                 <TaskActionMenu
                                   task={task}
                                   projectId={projectData.id}

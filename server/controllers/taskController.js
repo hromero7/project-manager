@@ -1,4 +1,3 @@
-const { getAllByDisplayValue } = require("@testing-library/react");
 const db = require("../models");
 
 module.exports = {
@@ -73,6 +72,7 @@ module.exports = {
     const taskUpdate = await db.Project.findById({
       _id: req.params.project_id.toString(),
     });
+
     taskUpdate.tasks.forEach(
       (item) => {
         if (item._id.toString() === req.params.task_id) {
@@ -82,6 +82,7 @@ module.exports = {
           item.taskTitle = req.body.taskTitle;
         }
       },
+
       taskUpdate.save(function (err) {
         if (err)
           return res.status(500).json({
@@ -160,6 +161,7 @@ module.exports = {
             });
           else
             return res.status(200).json({
+              status: 200,
               message: {
                 msgBody: `${username} has been successfully added to ${task.taskTitle}.`,
                 msgError: false,
@@ -196,6 +198,7 @@ module.exports = {
           });
         else
           return res.status(200).json({
+            status: 200,
             message: {
               msgBody: `User has been successfully removed from ${task.taskTitle}.`,
               msgError: false,

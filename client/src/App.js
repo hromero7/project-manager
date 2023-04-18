@@ -7,13 +7,15 @@ import LandingPage from "./Pages/Landing/Landing";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import LoginPage from "./Pages/Login/Login";
 import NavBar from "./Components/Navbar/Navbar";
+// import ProfileUpdate from "./Components/ProfileUpdate/ProfileUpdate";
+import Settings from "./Pages/Settings/Settings";
 import Whoops from "./Pages/PNF/Whoops";
 import TaskPage from "./Pages/TaskPage/TaskPage";
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
+    <div data-testid="app" className="App">
       <NavBar />
       <Routes>
         <Route element={<PublicRoute />}>
@@ -23,6 +25,7 @@ function App() {
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/editprofile" element={<Settings />} />
           <Route path="/project/:ID" element={<TaskPage />} />
         </Route>
       </Routes>

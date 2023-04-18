@@ -27,7 +27,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-regular fa-star"
+            className="fa-regular fa-star"
           ></i>
           <i
             id="2"
@@ -36,7 +36,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-regular fa-star"
+            className="fa-regular fa-star"
           ></i>
           <i
             id="3"
@@ -45,7 +45,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-regular fa-star"
+            className="fa-regular fa-star"
           ></i>
           <i
             id="4"
@@ -54,7 +54,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-regular fa-star"
+            className="fa-regular fa-star"
           ></i>
           <i
             id="5"
@@ -63,7 +63,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-regular fa-star"
+            className="fa-regular fa-star"
           ></i>
         </Col>
       );
@@ -76,7 +76,7 @@ export default function PriorityLevel(props) {
               props.taskValues.priority = e.target.id;
               priorityUpdate(e);
             }}
-            class="fa-solid fa-star"
+            className="fa-solid fa-star"
           ></i>
           <i
             id="2"
@@ -85,7 +85,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-regular fa-star"
+            className="fa-regular fa-star"
           ></i>
           <i
             id="3"
@@ -94,7 +94,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-regular fa-star"
+            className="fa-regular fa-star"
           ></i>
           <i
             id="4"
@@ -103,7 +103,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-regular fa-star"
+            className="fa-regular fa-star"
           ></i>
           <i
             id="5"
@@ -112,7 +112,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-regular fa-star"
+            className="fa-regular fa-star"
           ></i>
         </Col>
       );
@@ -126,7 +126,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-solid fa-star"
+            className="fa-solid fa-star"
           ></i>
           <i
             id="2"
@@ -135,7 +135,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-solid fa-star"
+            className="fa-solid fa-star"
           ></i>
           <i
             id="3"
@@ -144,7 +144,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-regular fa-star"
+            className="fa-regular fa-star"
           ></i>
           <i
             id="4"
@@ -153,7 +153,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-regular fa-star"
+            className="fa-regular fa-star"
           ></i>
           <i
             id="5"
@@ -162,7 +162,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-regular fa-star"
+            className="fa-regular fa-star"
           ></i>
         </Col>
       );
@@ -176,7 +176,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-solid fa-star"
+            className="fa-solid fa-star"
           ></i>
           <i
             id="2"
@@ -185,7 +185,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-solid fa-star"
+            className="fa-solid fa-star"
           ></i>
           <i
             id="3"
@@ -194,7 +194,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-solid fa-star"
+            className="fa-solid fa-star"
           ></i>
           <i
             id="4"
@@ -203,7 +203,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-regular fa-star"
+            className="fa-regular fa-star"
           ></i>
           <i
             id="5"
@@ -212,7 +212,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-regular fa-star"
+            className="fa-regular fa-star"
           ></i>
         </Col>
       );
@@ -226,7 +226,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-solid fa-star"
+            className="fa-solid fa-star"
           ></i>
           <i
             id="2"
@@ -235,7 +235,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-solid fa-star"
+            className="fa-solid fa-star"
           ></i>
           <i
             id="3"
@@ -244,7 +244,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-solid fa-star"
+            className="fa-solid fa-star"
           ></i>
           <i
             id="4"
@@ -253,7 +253,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-solid fa-star"
+            className="fa-solid fa-star"
           ></i>
           <i
             id="5"
@@ -262,7 +262,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-regular fa-star"
+            className="fa-regular fa-star"
           ></i>
         </Col>
       );
@@ -276,7 +276,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-solid fa-star"
+            className="fa-solid fa-star"
           ></i>
           <i
             id="2"
@@ -285,7 +285,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-solid fa-star"
+            className="fa-solid fa-star"
           ></i>
           <i
             id="3"
@@ -294,7 +294,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-solid fa-star"
+            className="fa-solid fa-star"
           ></i>
           <i
             id="4"
@@ -303,7 +303,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-solid fa-star"
+            className="fa-solid fa-star"
           ></i>
           <i
             id="5"
@@ -312,7 +312,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-solid fa-star"
+            className="fa-solid fa-star"
           ></i>
         </Col>
       );
@@ -326,7 +326,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-regular fa-star"
+            className="fa-regular fa-star"
           ></i>
           <i
             id="2"
@@ -335,7 +335,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-regular fa-star"
+            className="fa-regular fa-star"
           ></i>
           <i
             id="3"
@@ -344,7 +344,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-regular fa-star"
+            className="fa-regular fa-star"
           ></i>
           <i
             id="4"
@@ -353,7 +353,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-regular fa-star"
+            className="fa-regular fa-star"
           ></i>
           <i
             id="5"
@@ -362,7 +362,7 @@ export default function PriorityLevel(props) {
               props.getProjData();
               priorityUpdate(e);
             }}
-            class="fa-regular fa-star"
+            className="fa-regular fa-star"
           ></i>
         </Col>
       );

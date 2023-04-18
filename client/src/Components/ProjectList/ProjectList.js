@@ -10,19 +10,22 @@ import {
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
-import "./ProjectList.css";
 import ProjectAPI from "../../Utils/ProjectAPI";
+import DatePicker from "react-date-picker";
+import "./ProjectList.css";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 export default function Projectlist() {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const [dbItems, setDbItems] = useState();
   const [getData, setGetData] = useState(false);
+  // const [getData, setGetData] = useState(true);
   const [projectTitle, setProjectTitle] = useState("");
 
   useEffect(() => {
     getProjects();
-  });
+  }, []);
 
   const getProjects = async () => {
     const projectData = await ProjectAPI.getProjects(auth.user._id);
@@ -70,7 +73,9 @@ export default function Projectlist() {
             autoFocus
             className="mx-3 my-2 w-auto"
             placeholder="New project title:"
-            onChange={(e) => setProjectTitle(e.target.value)}
+            onChange={(e) => {
+              setProjectTitle(e.target.value);
+            }}
             value={projectTitle}
             autocomplete="off"
           />
@@ -110,89 +115,110 @@ export default function Projectlist() {
   );
 
   return (
-    <Container>
+    <Container className="projectListCont">
       <Row>
-        <Col>
-          <Row>
-            <Col
-              onClick={() => {
-                getProjects();
-              }}
-            >
-              <div>Hello {auth.user.username}!</div>
-            </Col>
-            <Col>
-              <Dropdown>
-                <Dropdown.Toggle
-                  as={CustomToggle}
-                  id="dropdown-custom-components"
+        <Col className="addProjCont">
+          <Dropdown>
+            <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+              Add Project
+            </Dropdown.Toggle>
+            <Dropdown.Menu as={CustomMenu}>
+              <Dropdown.Item eventKey="1">
+                <Button
+                  onClick={() => {
+                    addProject();
+                  }}
                 >
-                  Add Project
-                </Dropdown.Toggle>
-                <Dropdown.Menu as={CustomMenu}>
-                  <Dropdown.Item eventKey="1">
-                    <Button
-                      onClick={(e) => {
-                        addProject();
-                      }}
-                    >
-                      Submit
-                    </Button>
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </Col>
-          </Row>
-          <Row>
-            {getData ? (
-              dbItems.map((item) => (
-                <Col key={item._id}>
-                  <Card
-                    style={{
-                      width: "18rem",
-                      height: "200px",
-                      margin: "15px",
-                      color: "black",
-                    }}
-                    key={item._id}
-                  >
-                    <Card.Body
-                      onClick={() => {
-                        navigate(`/project/${item._id}`);
-                      }}
-                      style={{ cursor: "pointer" }}
-                    >
-                      <Card.Title>{item.title}</Card.Title>
-                      <Card.Text>{item._id.slice(-5)}</Card.Text>
-                    </Card.Body>
-
-                    <Card.Footer>
-                      <Dropdown align="end" className="dropdown">
-                        <Dropdown.Toggle
-                          as={OptionToggle}
-                          id="dropdown-custom-components"
-                        ></Dropdown.Toggle>
-                        <Dropdown.Menu as={OptionMenu}>
-                          <Dropdown.Item
-                            eventKey="1"
-                            onClick={(e) => {
-                              deleteProject(item._id, auth.user._id);
-                            }}
-                          >
-                            Delete Project
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
-                    </Card.Footer>
-                  </Card>
-                </Col>
-              ))
-            ) : (
-              <div>Loading</div>
-            )}
-          </Row>
+                  Submit
+                </Button>
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Col>
       </Row>
+      <Container className="cardParent">
+        {getData ? (
+          ""
+        ) : (
+          <Container className="PLLoading">
+            <LoadingSpinner />
+          </Container>
+        )}
+        <Row className="cardItems">
+          <Col className="cardContainer">
+            <ul className="cardContainera">
+              {getData
+                ? dbItems.map((item, index) => {
+                    const dueDateSort = item.tasks.sort(
+                      (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
+                    );
+                    return (
+                      <li key={index} className="cardContainerb">
+                        <Col className="cardContent">
+                          <Card
+                            className="cardProject"
+                            style={{
+                              width: "18rem",
+                              height: "200px",
+                              margin: "15px",
+                              color: "black",
+                            }}
+                            key={item._id}
+                          >
+                            <Card.Title>{item.title}</Card.Title>
+                            <Card.Body
+                              onClick={() => {
+                                navigate(`/project/${item._id}`);
+                              }}
+                              style={{ cursor: "pointer" }}
+                            >
+                              {dueDateSort >= 0 ? (
+                                ""
+                              ) : (
+                                <div className="cardData">
+                                  <Card.Text>
+                                    Due soon: {dueDateSort[0].taskTitle} &#64;
+                                  </Card.Text>
+                                  <DatePicker
+                                    placeholder={dueDateSort[0].dueDate}
+                                    value={dueDateSort[0].dueDate}
+                                    disabled={true}
+                                    clearIcon={null}
+                                    disableCalendar={true}
+                                    calendarIcon={null}
+                                  />
+                                </div>
+                              )}
+                            </Card.Body>
+
+                            <Card.Footer>
+                              <Dropdown align="start">
+                                <Dropdown.Toggle
+                                  as={OptionToggle}
+                                  id="dropdown-custom-components"
+                                ></Dropdown.Toggle>
+                                <Dropdown.Menu as={OptionMenu}>
+                                  <Dropdown.Item
+                                    eventKey="1"
+                                    onClick={(e) => {
+                                      deleteProject(item._id, auth.user._id);
+                                    }}
+                                  >
+                                    Delete Project
+                                  </Dropdown.Item>
+                                </Dropdown.Menu>
+                              </Dropdown>
+                            </Card.Footer>
+                          </Card>
+                        </Col>
+                      </li>
+                    );
+                  })
+                : ""}
+            </ul>
+          </Col>
+        </Row>
+      </Container>
     </Container>
   );
 }

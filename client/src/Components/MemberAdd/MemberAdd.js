@@ -1,42 +1,83 @@
 import React, { useState } from "react";
 import { Row, Col, Dropdown, Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import ProjectAPI from "../../Utils/ProjectAPI";
 import "./MemberAdd.css";
+import Promote from "../Promote/Promote";
 
 const MemberAdd = (props) => {
   const { ID } = useParams();
-  const [value, setValue] = useState();
-  const [searchList, setSearchList] = useState([]);
+  const [value, setValue] = useState("");
+  const [searchList, setSearchList] = useState([
+    { id: 0, username: "", email: "" },
+  ]);
+
+  const findMembers = async (e) => {
+    e.preventDefault();
+    const res = await ProjectAPI.findMember(e.target.value);
+    setSearchList(res);
+  };
+
+  const addMembers = async (item) => {
+    const res = await ProjectAPI.addMember(ID, item);
+    if (res.status === 200) {
+      props.getProjectData();
+    } else {
+      console.log(`message: `, res.message.msgBody);
+    }
+  };
+
+  const removeMembers = async (member) => {
+    const res = await ProjectAPI.removeMembers(ID, member);
+    if (res.status === 200) {
+      props.getProjectData();
+    } else {
+      console.log(`message: `, res.message.msgBody);
+    }
+  };
 
   return (
-    <Dropdown className="memAddDD" autoClose="outside">
+    <Dropdown
+      data-testid="dropdownList"
+      className="memAddDD"
+      autoClose="outside"
+    >
       <Dropdown.Toggle
+        data-testid="dropdownToggle"
         className="toggleDD"
         variant="primary"
         id="dropdown-basic"
       >
         Add members:
       </Dropdown.Toggle>
-      <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1" id="memAddSearch">
+      <Dropdown.Menu key="memAddSearch" className="MDDM">
+        <Dropdown.Item
+          key="memAddSearchItem0"
+          id="memAddSearch"
+          className="MDDI"
+        >
           <Dropdown.Header>Add members:</Dropdown.Header>
-          <Form>
+          <Form className="inputForm">
             <Form.Control
+              data-testid="searchForm"
+              type="text"
               autoFocus
               className="mx-3 my-2 w-auto"
               placeholder="Search by username"
               autoComplete="off"
+              onSubmit={(e) => {
+                e.preventDefault();
+                findMembers(e);
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+              }}
               onChange={(e) => {
+                e.preventDefault();
                 if (e.target.value.length <= 1) {
                   setSearchList([]);
                 } else {
-                  axios
-                    .get(`/api/user/finduser/${e.target.value}`)
-                    .then((res) => {
-                      setSearchList(res.data);
-                    })
-                    .catch((err) => console.log("err: ", err));
+                  findMembers(e);
                 }
                 setValue(e.target.value);
               }}
@@ -44,23 +85,15 @@ const MemberAdd = (props) => {
             />
           </Form>
         </Dropdown.Item>
-        {searchList.map((item) => {
-          
+        {searchList.map((item, index) => {
           return (
             <Dropdown.Item
+              className="MDDI"
+              key={`searchItem${index}`}
+              data-testid={`searchItem${index}`}
+              tabIndex={index}
               onClick={() => {
-                axios
-                  .put(`/api/project/add_member/${ID}`, {
-                    username: item.username,
-                    userId: item._id,
-                    email: item.email
-                  })
-                  .then(() => {
-                    props.getProjectData();
-                  })
-                  .catch((err) => {
-                    console.log("err: ", err);
-                  });
+                addMembers(item);
               }}
             >
               {item.firstName}
@@ -68,11 +101,12 @@ const MemberAdd = (props) => {
           );
         })}
         <Dropdown.Divider />
-        <Dropdown.Header>Members:</Dropdown.Header>
 
-        {props.projectData.members.map((member) => {
+        <Dropdown.Header>Members:</Dropdown.Header>
+        {props.projectData.members.map((member, index) => {
+          console.log(`member: `, member);
           return (
-            <Dropdown.Item key={member._id}>
+            <Dropdown.Item className="MDDI" tabIndex={index} key={member._id}>
               {member.id === props.projectData.userId ? (
                 <Row>
                   <Col>{member.username}</Col>
@@ -82,28 +116,17 @@ const MemberAdd = (props) => {
                 <Row>
                   <Col>{member.username}</Col>
                   <Col>
+                    <Promote
+                      props={props}
+                      memberId={member.id}
+                      email={member.email}
+                      username={member.username}
+                    />
+                  </Col>
+                  <Col>
                     <i
                       onClick={() => {
-                        axios
-                          .delete(
-                            `/api/project/delete_member/${props.projectId}`,
-                            {
-                              data: {
-                                userId: member.id,
-                                username: member.username,
-                                docId: member._id,
-                                projectId: props.projectId,
-                                email: member.email
-                              },
-                            }
-                          )
-                          .then((res) => {
-                            // console.log("res.data: ", res.data);
-                            props.getProjectData();
-                          })
-                          .catch((err) => {
-                            console.log("err: ", err);
-                          });
+                        removeMembers(member);
                       }}
                       className="dropIcon fa-sharp fa-solid fa-xmark"
                     ></i>

@@ -68,4 +68,38 @@ export default {
         return { isAuthenticated: false, user: { username: "" } };
       });
   },
+  editProfile: (data, _id) => {
+    return axios
+      .put(`/api/user/edit/${_id}`, { data, _id })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  },
+  passwordChange: (_id, oldPassword, newPassword, newConfirm) => {
+    console.log(`old / new / newcon: `, oldPassword, newPassword, newConfirm);
+    return axios
+      .get(`/api/user/find/${_id}`)
+      .then((res) => {
+        axios
+          .post(`/api/user/passwordUpdate/`, {
+            _id: _id,
+            oldPassword: oldPassword,
+            newPassword: newPassword,
+            newConfirm: newConfirm,
+          })
+          .then((res) => {
+            console.log(`res: `, res);
+          })
+          .catch((err) => {
+            console.log(`failed to obtain auth info: `, err);
+          });
+        // return res;
+      })
+      .catch((err) => {
+        return err;
+      });
+  },
 };

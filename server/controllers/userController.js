@@ -1,5 +1,6 @@
 const db = require("../models");
 const JWT = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const signToken = (userID) => {
   return JWT.sign(
@@ -112,12 +113,104 @@ module.exports = {
     }
   },
   logout: (req, res) => {
-    //logout user route, removes jwt token from user
     res.clearCookie("access_token");
     res.status(200).json({
       isAuthenticated: false,
       user: { username: "" },
       success: true,
     });
+  },
+  editProfile: async (req, res) => {
+    const profileEdit = await db.User.findById({
+      _id: req.params._id,
+    })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => console.log(`failed to get profile data `, err));
+
+    profileEdit.username = req.body.data.username;
+    profileEdit.firstName = req.body.data.firstname;
+    profileEdit.lastName = req.body.data.lastname;
+    profileEdit.email = req.body.data.email;
+    profileEdit.password = profileEdit.password;
+    profileEdit.save(function (err) {
+      if (err) {
+        return res.status(500).json({
+          message: { msgBody: "Error updating profile", msgError: true },
+        });
+      } else {
+        return res.status(200).json({
+          message: { msgBody: "Profile updated!", msgError: false },
+        });
+      }
+    });
+  },
+  passwordChange: async (req, res) => {
+    let _id = req.body._id;
+    let oldPassword = req.body.oldPassword;
+    let newPassword = req.body.newPassword;
+    let newConfirm = req.body.newConfirm;
+
+    const newPasswordChange = await db.User.findOne({ _id })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        console.log(`failed to obtain newPasswordChange findOne: `, err);
+      });
+    if (!newPasswordChange)
+      return res
+        .status(404)
+        .json({ message: { msgBody: "User not Found", msgError: true } });
+
+    if (newPasswordChange) {
+      bcrypt.compare(
+        oldPassword,
+        newPasswordChange.password,
+        (err, isMatch) => {
+          if (err) {
+            return err;
+          } else if (!isMatch) {
+            return res.status(500).json({
+              message: {
+                msgBody: "Incorrect original password, please try again. ",
+              },
+            });
+          } else {
+            if (newConfirm !== newPassword) {
+              return res.send(500).json({
+                message: {
+                  msgBody:
+                    "New passwords have been input incorrectly, please try again. ",
+                },
+              });
+            } else {
+              newPasswordChange.password = newPassword;
+              // when password string gets saved, the userModel hashes the password.
+              newPasswordChange.save((err, savedUser) => {
+                if (err) {
+                  return res.status(500).json({
+                    message: {
+                      msgBody: "Error changing password",
+                      msgError: true,
+                      statusNum: 500,
+                    },
+                  });
+                } else {
+                  return res.status(200).json({
+                    message: {
+                      msgBody: "Password successfully changed!",
+                      msgError: false,
+                      statusNum: 200,
+                    },
+                  });
+                }
+              });
+            }
+          }
+        }
+      );
+    }
   },
 };

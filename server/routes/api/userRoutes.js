@@ -9,6 +9,8 @@ const {
   authenticateUser,
   findbyid,
   findbyusername,
+  editProfile,
+  passwordChange,
 } = require("../../controllers/userController");
 
 router.route("/all").get(findAll); // findAll route
@@ -28,5 +30,14 @@ router
 router
   .route("/authenticated")
   .get(passport.authenticate("jwt", { session: false }), authenticateUser); //verifys user is authenticated
+router
+  .route("/edit/:_id")
+  .put(passport.authenticate("local", { session: false }), editProfile);
+router.route("/passwordUpdate").post(
+  passport.authenticate("jwt", {
+    session: false,
+  }),
 
+  passwordChange
+);
 module.exports = router;

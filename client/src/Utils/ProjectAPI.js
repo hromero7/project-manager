@@ -41,11 +41,62 @@ export default {
   },
   getAssignedProjects: (username) => {
     return axios
-        .get(`/api/project/assigned_projects/${username}`)
-        .then((res) => {
-            return res.data; 
-        })
+      .get(`/api/project/assigned_projects/${username}`)
+      .then((res) => {
+        return res.data;
+      });
   },
-  addMember: () => {},
-
+  findMember: (userQuery) => {
+    return axios.get(`/api/user/finduser/${userQuery}`).then((res) => {
+      return res.data;
+    });
+  },
+  addMember: (project_id, item) => {
+    return axios
+      .put(`/api/project/add_member/${project_id}`, {
+        username: item.username,
+        userId: item._id,
+        email: item.email,
+      })
+      .then((res) => {
+        return res.data;
+      });
+  },
+  removeMembers: (project_id, member) => {
+    return axios
+      .delete(`/api/project/delete_member/${project_id}`, {
+        data: {
+          userId: member.id,
+          username: member.username,
+          docId: member._id,
+          projectId: project_id,
+          email: member.email,
+        },
+      })
+      .then((res) => {
+        return res;
+      });
+  },
+  promoteMember: (props) => {
+    console.log(`props: `, props);
+    return axios
+      .put(`/api/project/promote_member/${props.memberId}`, {
+        data: {
+          userId: props.memberId,
+          email: props.email,
+          username: props.username,
+          projectId: props.props.projectId,
+        },
+      })
+      .then((res) => {
+        return res;
+      });
+  },
+  // demoteMember: () => {
+  //   return axios.put(`/api/project/demote_member/${}`,{
+  //     data: ""
+  //   }).then((res) => {
+  //     return res;
+  //   })
+  // }
 };
