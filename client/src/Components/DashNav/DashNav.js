@@ -1,19 +1,13 @@
 import React, { useState, useContext } from "react";
-import {
-  Navbar,
-  Container,
-  Nav,
-  NavDropdown,
-  Button,
-  NavbarBrand,
-} from "react-bootstrap";
-import Logo from "../Assets/3rd logo/Logo";
+import { Navbar, Container, Nav } from "react-bootstrap";
 import { AuthContext } from "../../Context/AuthContext";
+import { useNavigate } from "react-router";
 import LogoSm from "../Assets/3rd logo small/LogoSm";
 import "./DashNav.css";
 import UserAPI from "../../Utils/UserAPI";
 
 const DashNav = () => {
+  const navigate = useNavigate();
   const [textClass, setTextClass] = useState({ isHovered: false });
   const toggleClass = (boolean) => {
     setTextClass({ isHovered: boolean });
@@ -35,7 +29,13 @@ const DashNav = () => {
         onMouseEnter={() => toggleClass(true)}
         onMouseLeave={() => toggleClass(false)}
       >
-        <Navbar.Brand href="#" className="side-nav-logo">
+        <Navbar.Brand
+          // href="/dashboard"
+          className="side-nav-logo"
+          onClick={() => {
+            navigate("/dashboard");
+          }}
+        >
           <LogoSm />
         </Navbar.Brand>
         <div className="side-nav-icon">
@@ -88,17 +88,25 @@ const DashNav = () => {
                     <p className="dash-name">
                       {user.firstName} {user.lastName}
                     </p>
-                    <p className="dash-project">Project Dashboard</p>
                   </div>
                 </Navbar.Brand>
-                <Nav.Link href="#features" className="nav-link">
+                <Nav.Link
+                  // href="/dashboard"
+                  className="nav-link"
+                  onClick={() => {
+                    navigate("/dashboard");
+                  }}
+                >
                   <i className="fa-solid fa-table"></i>
                   <p>Projects</p>
                 </Nav.Link>
 
                 <Nav.Link
-                  href="#pricing"
+                  // href="/editprofile"
                   className="nav-link nav-link-settings"
+                  onClick={() => {
+                    navigate("/editprofile");
+                  }}
                 >
                   <i className="fa-solid fa-gear"></i>
                   <p>Account Settings</p>

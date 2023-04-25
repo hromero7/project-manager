@@ -212,13 +212,12 @@ module.exports = {
     const projects = await db.Project.aggregate([
       {
         $match: {
-         $and: [
-          { "members.username": username }, 
-          // { "userId": {$ne: new mongoose.Types.ObjectId(userId)} }
-          ]      
-        }
-    
-      }
+          $and: [
+            { "members.username": username },
+            // { "userId": {$ne: new mongoose.Types.ObjectId(userId)} }
+          ],
+        },
+      },
     ]);
 
     if (!projects)
@@ -253,35 +252,40 @@ module.exports = {
     };
     console.log(`project: `, project);
 
-    project.promoted.push(promoted);
-    project.save((err) => {
-      if (err)
-        return res.status(500).json({
-          message: { msgBody: "Error has occured", msgError: true },
-        });
-      else
-        return res.status(200).json({
-          message: {
-            msgBody: `${username} promoted!`,
-            msgError: false,
-          },
-        });
-    });
+    // project.promoted.push(promoted);
+    // project.save((err) => {
+    //   if (err)
+    //     return res.status(500).json({
+    //       message: { msgBody: "Error has occured", msgError: true },
+    //     });
+    //   else
+    //     return res.status(200).json({
+    //       message: {
+    //         msgBody: `${username} promoted!`,
+    //         msgError: false,
+    //       },
+    //     });
+    // }
+    // );
 
     // goal here is to insert a username into an existing document and returning a 200 status code to the front end. Afterward a checkbox will indicate that this user is part of the array and therefore "promoted" so that they can interact with the projects they're assigned. If they aren't promoted, they should not have the power to add members, or assign tasks to those projects they're involved in.
   },
   projectProgress: async (req, res) => {
     const project = await db.Project.findById(req.params.project_id);
     if (!project)
-      return res.status(404).json({ message: { msgBody: "No Project Found", msgError: true } });
+      return res
+        .status(404)
+        .json({ message: { msgBody: "No Project Found", msgError: true } });
     else if (project.tasks.length === 0) {
       return res.status(200).json(0);
-    }
-      else {
-      const completedTasks = project.tasks.filter(task => 
-      task.status == "Completed");
-      const progress = Math.round((completedTasks.length / project.tasks.length) * 100); 
+    } else {
+      const completedTasks = project.tasks.filter(
+        (task) => task.status == "Completed"
+      );
+      const progress = Math.round(
+        (completedTasks.length / project.tasks.length) * 100
+      );
       return res.status(200).json(progress);
-      }
-  } 
+    }
+  },
 };
