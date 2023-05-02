@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { Container } from "react-bootstrap";
 import { Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PrivateRoute from "./Utils/PrivateRoute";
@@ -17,7 +16,7 @@ import DashNav from "./Components/DashNav/DashNav";
 function App() {
   const auth = useContext(AuthContext);
   return (
-    <Container data-testid="app" className="App">
+    <div data-testid="app" className="App">
       {auth.isAuthenticated ? <DashNav /> : ""}
       <Routes>
         <Route element={<PublicRoute />}>
@@ -31,7 +30,7 @@ function App() {
           <Route path="/project/:ID" element={<TaskPage />} />
         </Route>
       </Routes>
-    </Container>
+    </div>
   );
 }
 

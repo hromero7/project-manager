@@ -78,7 +78,6 @@ export default {
       });
   },
   promoteMember: (props) => {
-    console.log(`props: `, props);
     return axios
       .put(`/api/project/promote_member/${props.memberId}`, {
         data: {
@@ -98,13 +97,12 @@ export default {
   //   }).then((res) => {
   //     return res;
   //   })
-  // }
+  // },
   projectProgress: (project_id) => {
     return axios
       .get(`/api/project/project_progress/${project_id}`)
       .then((res) => {
         return res.data;
-      }); 
+      });
   },
-  addMember: () => {},
 };

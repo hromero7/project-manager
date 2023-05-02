@@ -231,44 +231,41 @@ module.exports = {
       });
   },
   promoteMember: async (req, res) => {
-    const userId = req.body.data.userId;
-    const email = req.body.data.email;
-    const username = req.body.data.username;
-    const projectId = req.body.data.projectId.toString();
-    console.log(`req.body: `, {
-      userId: userId,
-      email: email,
-      username: username,
-      projectId: projectId,
-    });
     const project = await db.Project.findById({
-      _id: projectId,
+      _id: req.body.data.projectId.toString(),
     });
-    let promoted = {
-      userId: userId,
-      email: email,
-      username: username,
-      projectId: projectId,
-    };
-    console.log(`project: `, project);
+    if (!project) {
+      return res
+        .status(404)
+        .json({ message: { msgBody: "No project found", msgError: true } });
+    } else {
+      console.log(`req.body.data: `, req.body.data);
+      project.promotion.push({
+        userId: req.body.data.userId.toString(),
+        email: req.body.data.email,
+        username: req.body.data.username,
+        projectId: req.body.data.projectId.toString(),
+      });
 
-    // project.promoted.push(promoted);
-    // project.save((err) => {
-    //   if (err)
-    //     return res.status(500).json({
-    //       message: { msgBody: "Error has occured", msgError: true },
-    //     });
-    //   else
-    //     return res.status(200).json({
-    //       message: {
-    //         msgBody: `${username} promoted!`,
-    //         msgError: false,
-    //       },
-    //     });
-    // }
-    // );
-
-    // goal here is to insert a username into an existing document and returning a 200 status code to the front end. Afterward a checkbox will indicate that this user is part of the array and therefore "promoted" so that they can interact with the projects they're assigned. If they aren't promoted, they should not have the power to add members, or assign tasks to those projects they're involved in.
+      project.save((err) => {
+        if (err) {
+          return res.status(500).json({
+            message: { msgBody: "Error has occured", msgError: true },
+          });
+        } else {
+          return res.status(200).json({
+            status: 200,
+            message: {
+              msgBody: `${req.body.data.username} has been successfully added.`,
+              msgError: false,
+            },
+          });
+        }
+      });
+    }
+  },
+  demoteMember: async (req, res) => {
+    console.log(`req.body: `);
   },
   projectProgress: async (req, res) => {
     const project = await db.Project.findById(req.params.project_id);

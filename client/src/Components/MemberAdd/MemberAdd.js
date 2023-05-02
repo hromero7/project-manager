@@ -3,7 +3,8 @@ import { Row, Col, Dropdown, Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import ProjectAPI from "../../Utils/ProjectAPI";
 import "./MemberAdd.css";
-import Promote from "../Promote/Promote";
+import Promote from "../Promote/Promote/Promote";
+import Demote from "../Promote/Demote/Demote";
 
 const MemberAdd = (props) => {
   const { ID } = useParams();
@@ -33,6 +34,17 @@ const MemberAdd = (props) => {
       props.getProjectData();
     } else {
       console.log(`message: `, res.message.msgBody);
+    }
+  };
+  const isPromoted = () => {
+    for (let i = 0; i < props.projectData.members.length; i++) {
+      for (let j = 0; j < props.projectData.promo.length; j++) {
+        if (
+          props.projectData.members[i].id === props.projectData.promo[j].userId
+        ) {
+          props.projectData.members[i].isActive = true;
+        }
+      }
     }
   };
 
@@ -104,24 +116,41 @@ const MemberAdd = (props) => {
 
         <Dropdown.Header>Members:</Dropdown.Header>
         {props.projectData.members.map((member, index) => {
+          isPromoted();
           console.log(`member: `, member);
+
           return (
             <Dropdown.Item className="MDDI" tabIndex={index} key={member._id}>
               {member.id === props.projectData.userId ? (
                 <Row>
-                  <Col>{member.username}</Col>
+                  <Col
+                    onClick={() =>
+                      console.log(`props.projectData: `, props.projectData)
+                    }
+                  >
+                    {member.username}
+                  </Col>
                   <Col id="projectLeadText">Project Leader</Col>
                 </Row>
               ) : (
                 <Row>
                   <Col>{member.username}</Col>
                   <Col>
-                    <Promote
-                      props={props}
-                      memberId={member.id}
-                      email={member.email}
-                      username={member.username}
-                    />
+                    {member.isActive ? (
+                      <Demote
+                        props={props}
+                        memberId={member.id}
+                        email={member.email}
+                        username={member.username}
+                      />
+                    ) : (
+                      <Promote
+                        props={props}
+                        memberId={member.id}
+                        email={member.email}
+                        username={member.username}
+                      />
+                    )}
                   </Col>
                   <Col>
                     <i
