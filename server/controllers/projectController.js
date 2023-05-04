@@ -150,6 +150,7 @@ module.exports = {
         $pull: {
           "tasks.$[].assignee": { username: req.body.username },
           members: { id: req.body.userId },
+          promotion: { userId: req.body.userId },
         },
       },
       { new: true }
@@ -172,8 +173,6 @@ module.exports = {
     }
   },
   updateProjectTitle: async (req, res) => {
-    // console.log(`req.body: `, req.body);
-    // console.log(`req.body.title: `, req.body.title);
     if (
       req.body.title.length <= 4 ||
       req.body.title === undefined ||
@@ -207,15 +206,10 @@ module.exports = {
   },
   findAssignedProjects: async (req, res) => {
     const username = req.user.username;
-    const userId = req.user.id;
-
     const projects = await db.Project.aggregate([
       {
         $match: {
-          $and: [
-            { "members.username": username },
-            // { "userId": {$ne: new mongoose.Types.ObjectId(userId)} }
-          ],
+          $and: [{ "members.username": username }],
         },
       },
     ]);
@@ -239,7 +233,6 @@ module.exports = {
         .status(404)
         .json({ message: { msgBody: "No project found", msgError: true } });
     } else {
-      console.log(`req.body.data: `, req.body.data);
       project.promotion.push({
         userId: req.body.data.userId.toString(),
         email: req.body.data.email,
@@ -265,7 +258,32 @@ module.exports = {
     }
   },
   demoteMember: async (req, res) => {
-    console.log(`req.body: `);
+    const demoMember = await db.Project.findOneAndUpdate(
+      {
+        _id: req.body.data.projectId,
+      },
+      {
+        $pull: {
+          promotion: { userId: req.body.data.userId.toString() },
+        },
+      }
+    );
+
+    if (!demoMember) {
+      return res.status(404).json({
+        message: {
+          msgBody: "Error deleting member from member list",
+          msgError: true,
+        },
+      });
+    } else {
+      return res.status(200).json({
+        message: {
+          msgBody: "Member successfully deleted",
+          msgError: false,
+        },
+      });
+    }
   },
   projectProgress: async (req, res) => {
     const project = await db.Project.findById(req.params.project_id);

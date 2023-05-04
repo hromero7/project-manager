@@ -91,13 +91,20 @@ export default {
         return res;
       });
   },
-  // demoteMember: () => {
-  //   return axios.put(`/api/project/demote_member/${}`,{
-  //     data: ""
-  //   }).then((res) => {
-  //     return res;
-  //   })
-  // },
+  demoteMember: (props) => {
+    return axios
+      .put(`/api/project/demote_member/${props.memberId}`, {
+        data: {
+          userId: props.memberId,
+          email: props.email,
+          username: props.username,
+          projectId: props.props.projectId,
+        },
+      })
+      .then((res) => {
+        return res;
+      });
+  },
   projectProgress: (project_id) => {
     return axios
       .get(`/api/project/project_progress/${project_id}`)

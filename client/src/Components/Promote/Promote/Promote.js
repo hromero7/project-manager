@@ -5,7 +5,12 @@ import ProjectAPI from "../../../Utils/ProjectAPI";
 function Promote(props) {
   const promoteUser = async () => {
     const res = await ProjectAPI.promoteMember(props);
-    console.log(`props: `, props);
+    console.log(`res: `, res);
+    if (res.status === 200) {
+      props.props.getProjectData();
+    } else {
+      console.log(`Error message: `, res.data.message);
+    }
   };
 
   return (

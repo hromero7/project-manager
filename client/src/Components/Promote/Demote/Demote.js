@@ -5,7 +5,11 @@ import ProjectAPI from "../../../Utils/ProjectAPI";
 function Demote(props) {
   const demoteUser = async () => {
     const res = await ProjectAPI.demoteMember(props);
-    console.log(`props: `, props);
+    if (res.status === 200) {
+      props.props.getProjectData();
+    } else {
+      console.log(`Error message: `, res.data.message);
+    }
   };
 
   return (

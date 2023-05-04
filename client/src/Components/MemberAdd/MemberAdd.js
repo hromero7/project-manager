@@ -117,8 +117,6 @@ const MemberAdd = (props) => {
         <Dropdown.Header>Members:</Dropdown.Header>
         {props.projectData.members.map((member, index) => {
           isPromoted();
-          console.log(`member: `, member);
-
           return (
             <Dropdown.Item className="MDDI" tabIndex={index} key={member._id}>
               {member.id === props.projectData.userId ? (
