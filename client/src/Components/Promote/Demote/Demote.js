@@ -22,7 +22,6 @@ function Demote(props) {
             }}
             className="fa-solid fa-heart fa-lg"
           ></i>
-          {/* <i className="fa-solid fa-heart fa-lg"></i> */}
         </Col>
       </Row>
     </Container>
