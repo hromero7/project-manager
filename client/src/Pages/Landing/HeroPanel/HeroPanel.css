@@ -71,3 +71,48 @@
 
 }
 
+
+
+
+@media (max-width: 768px) {
+
+    /* Adjustments for smaller screens */
+    .row1Container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .landing {
+        height: 100%;
+    }
+
+    .wordContainer {
+        height: 100%;
+    }
+
+    .newUserCont {
+        height: 100%;
+    }
+
+}
+
+@media (min-width: 577px) and (max-width: 991px) {
+    .row1Container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .landing {
+        height: 100%;
+    }
+
+    .wordContainer {
+        height: 100%;
+    }
+
+    .newUserCont {
+        height: 100%;
+    }
+
+
+}
