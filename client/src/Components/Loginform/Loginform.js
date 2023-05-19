@@ -27,13 +27,14 @@ export default function Loginform() {
   };
 
   return (
-    <Container>
+    <Container className="loginContainer">
       <Row>
         <Row>
-          <Col>
+          <Col className="lformCont">
             <Form onSubmit={authInfo} action="/api/user/login" method="post">
               <Col>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <p>Log in to your account</p>
+                <Form.Group className="mb-3">
                   <Form.Label>Username</Form.Label>
                   <Form.Control
                     type="name"

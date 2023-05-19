@@ -6,6 +6,10 @@
     padding-top: 20px;
 }
 
+.prj{
+    /* border: 1px solid green; */
+    width: 150px;
+}
 
 .PLLoading {
     height: auto;

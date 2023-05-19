@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Container, Table } from "react-bootstrap";
+import { Container, Col, Row, Table } from "react-bootstrap";
 import ProjectAPI from "../../Utils/ProjectAPI";
 import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -30,67 +30,74 @@ const ProjectTable = (props) => {
   };
 
   return (
-    <Container className="dashboard-projects">
-      <div>3RD v1.0 / Project Dashboard / Projects</div>
-      <Table hover responsive className="dashboard-table">
-        <thead className="dashboard-table-header">
-          <tr>
-            <th>Project Name</th>
-            <th>Project Manager</th>
-            <th>Members</th>
-            <th>Progress</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody className="dashboard-table-body">
-          {props.projectData ? (
-            props.projectData.map((project, i) => {
-              return (
-                <tr key={i}>
-                  <td>{project.title}</td>
-                  <td>{project.members[0].username}</td>
-                  <td>
-                    {project.members.map((member, index) => {
-                      return (
-                        <div className="user-circle" key={index}>
-                          {member.username[0].toUpperCase()}
-                        </div>
-                      );
-                    })}
-                  </td>
-                  <td>
-                    <div style={{ width: "40px", height: "40px" }}>
-                      {percentage.map((item) => {
+    <Container className="dashboard-projects" fluid>
+      <Row>
+        <Col>
+          <div>3RD v1.0 / Project Dashboard / Projects</div>
+        </Col>
+      </Row>
+
+      <Row>
+        <Table hover responsive className="dashboard-table">
+          <thead className="dashboard-table-header">
+            <tr>
+              <th>Project Name</th>
+              <th>Project Manager</th>
+              <th>Members</th>
+              <th>Progress</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody className="dashboard-table-body">
+            {props.projectData ? (
+              props.projectData.map((project, i) => {
+                return (
+                  <tr key={i}>
+                    <td>{project.title}</td>
+                    <td>{project.members[0].username}</td>
+                    <td>
+                      {project.members.map((member, index) => {
                         return (
-                          <CircularProgressbar
-                            value={item[i]}
-                            text={`${item[i]}%`}
-                            styles={buildStyles({
-                              textSize: "34px",
-                            })}
-                          />
+                          <div className="user-circle" key={index}>
+                            {member.username[0].toUpperCase()}
+                          </div>
                         );
                       })}
-                      {/* <CircularProgressbar
+                    </td>
+                    <td>
+                      <div style={{ width: "40px", height: "40px" }}>
+                        {percentage.map((item) => {
+                          return (
+                            <CircularProgressbar
+                              value={item[i]}
+                              text={`${item[i]}%`}
+                              styles={buildStyles({
+                                textSize: "34px",
+                              })}
+                            />
+                          );
+                        })}
+                        {/* <CircularProgressbar
                                 value={percentage[i]} text={`${percentage[i]}%`}
                                 styles={buildStyles({
                                     textSize: "34px"
                                 })}/> */}
-                    </div>
-                  </td>
-                  <td>
-                    <button>
-                      <i className="fa-solid fa-ellipsis"></i>
-                    </button>
-                  </td>
-                </tr>
-              );
-            })
-          ) : (
-            <div>Loading</div>
-          )}
-        </tbody>
-      </Table>
+                      </div>
+                    </td>
+                    <td>
+                      <button>
+                        <i className="fa-solid fa-ellipsis"></i>
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <div>Loading</div>
+            )}
+          </tbody>
+        </Table>
+      </Row>
     </Container>
   );
 };

@@ -61,7 +61,7 @@ export default function Projectlist(props) {
     >
       {children}
       &nbsp;
-      <i className="fa-sharp fa-solid fa-plus"></i>
+      <i className="fa-sharp fa-solid fa-plus "></i>
     </Dropdown>
   ));
 
@@ -115,7 +115,7 @@ export default function Projectlist(props) {
   );
 
   return (
-    <Container className="dashboard-projects">
+    <Container className="dashboard-projects-cards">
       <Row>
         <Col>
           <Row>
@@ -126,27 +126,26 @@ export default function Projectlist(props) {
             >
               <div>3RD v1.0 / Project Dashboard / Projects</div>
             </Col>
-            <Col>
-              <Dropdown>
-                <Dropdown.Toggle
-                  as={CustomToggle}
-                  id="dropdown-custom-components"
-                >
-                  Add Project
-                </Dropdown.Toggle>
-                <Dropdown.Menu as={CustomMenu}>
-                  <Dropdown.Item eventKey="1">
-                    <Button
-                      onClick={(e) => {
-                        addProject();
-                      }}
-                    >
-                      Submit
-                    </Button>
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </Col>
+            <Row>
+              <Col>
+                <Dropdown className="prj">
+                  <Dropdown.Toggle as={CustomToggle}>
+                    Add Project
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu as={CustomMenu}>
+                    <Dropdown.Item eventKey="1">
+                      <Button
+                        onClick={(e) => {
+                          addProject();
+                        }}
+                      >
+                        Submit
+                      </Button>
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </Col>
+            </Row>
           </Row>
           <Row>
             {props.projectData ? (
@@ -200,86 +199,85 @@ export default function Projectlist(props) {
       </Row>
       <Container className="cardParent">
         {getData ? (
-          ""
-        ) : (
           <Container className="PLLoading">
             <LoadingSpinner />
           </Container>
-        )}
-        <Row className="cardItems">
-          <Col className="cardContainer">
-            <ul className="cardContainera">
-              {getData
-                ? dbItems.map((item, index) => {
-                    const dueDateSort = item.tasks.sort(
-                      (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
-                    );
-                    return (
-                      <li key={index} className="cardContainerb">
-                        <Col className="cardContent">
-                          <Card
-                            className="cardProject"
-                            style={{
-                              width: "18rem",
-                              height: "200px",
-                              margin: "15px",
-                              color: "black",
-                            }}
-                            key={item._id}
-                          >
-                            <Card.Title>{item.title}</Card.Title>
-                            <Card.Body
-                              onClick={() => {
-                                navigate(`/project/${item._id}`);
+        ) : (
+          <Row className="cardItems">
+            <Col className="cardContainer">
+              <ul className="cardContainera">
+                {getData
+                  ? dbItems.map((item, index) => {
+                      const dueDateSort = item.tasks.sort(
+                        (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
+                      );
+                      return (
+                        <li key={index} className="cardContainerb">
+                          <Col className="cardContent">
+                            <Card
+                              className="cardProject"
+                              style={{
+                                width: "18rem",
+                                height: "200px",
+                                margin: "15px",
+                                color: "black",
                               }}
-                              style={{ cursor: "pointer" }}
+                              key={item._id}
                             >
-                              {dueDateSort >= 0 ? (
-                                ""
-                              ) : (
-                                <div className="cardData">
-                                  <Card.Text>
-                                    Due soon: {dueDateSort[0].taskTitle} &#64;
-                                  </Card.Text>
-                                  <DatePicker
-                                    placeholder={dueDateSort[0].dueDate}
-                                    value={dueDateSort[0].dueDate}
-                                    disabled={true}
-                                    clearIcon={null}
-                                    disableCalendar={true}
-                                    calendarIcon={null}
-                                  />
-                                </div>
-                              )}
-                            </Card.Body>
+                              <Card.Title>{item.title}</Card.Title>
+                              <Card.Body
+                                onClick={() => {
+                                  navigate(`/project/${item._id}`);
+                                }}
+                                style={{ cursor: "pointer" }}
+                              >
+                                {dueDateSort >= 0 ? (
+                                  ""
+                                ) : (
+                                  <div className="cardData">
+                                    <Card.Text>
+                                      Due soon: {dueDateSort[0].taskTitle} &#64;
+                                    </Card.Text>
+                                    <DatePicker
+                                      placeholder={dueDateSort[0].dueDate}
+                                      value={dueDateSort[0].dueDate}
+                                      disabled={true}
+                                      clearIcon={null}
+                                      disableCalendar={true}
+                                      calendarIcon={null}
+                                    />
+                                  </div>
+                                )}
+                              </Card.Body>
 
-                            <Card.Footer>
-                              <Dropdown align="start">
-                                <Dropdown.Toggle
-                                  as={OptionToggle}
-                                  id="dropdown-custom-components"
-                                ></Dropdown.Toggle>
-                                <Dropdown.Menu as={OptionMenu}>
-                                  <Dropdown.Item
-                                    eventKey="1"
-                                    onClick={(e) => {
-                                      deleteProject(item._id, auth.user._id);
-                                    }}
-                                  >
-                                    Delete Project
-                                  </Dropdown.Item>
-                                </Dropdown.Menu>
-                              </Dropdown>
-                            </Card.Footer>
-                          </Card>
-                        </Col>
-                      </li>
-                    );
-                  })
-                : ""}
-            </ul>
-          </Col>
-        </Row>
+                              <Card.Footer>
+                                <Dropdown align="start">
+                                  <Dropdown.Toggle
+                                    as={OptionToggle}
+                                    id="dropdown-custom-components"
+                                  ></Dropdown.Toggle>
+                                  <Dropdown.Menu as={OptionMenu}>
+                                    <Dropdown.Item
+                                      eventKey="1"
+                                      onClick={(e) => {
+                                        deleteProject(item._id, auth.user._id);
+                                      }}
+                                    >
+                                      Delete Project
+                                    </Dropdown.Item>
+                                  </Dropdown.Menu>
+                                </Dropdown>
+                              </Card.Footer>
+                            </Card>
+                          </Col>
+                        </li>
+                      );
+                    })
+                  : ""}
+              </ul>
+            </Col>
+          </Row>
+        )}
       </Container>
     </Container>
   );

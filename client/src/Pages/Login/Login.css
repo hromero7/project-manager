@@ -1,12 +1,19 @@
-.loginPg {
- border: 1px solid rgb(103, 58, 183)
-}
+.loginPgCont {
+    /* border: 1px solid rgb(103, 58, 183) */
+   }
 
 .itemContainer {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.loginContainer{
+    background-color: #FFFFFF;
+    /* border: 15px solid red; */
+    width: 35vh;
+
 }
 
 .blobLayer {
@@ -115,4 +122,64 @@
         transform: rotate(0deg);
         border-radius: 33% 67% 43% 57% / 31% 66% 34% 69%;
     }
+}
+
+@media (max-width: 768px) {
+
+    .loginContainer{
+
+        /* border: 15px solid red; */
+        width: 25vh;
+
+    }
+
+    .login-container {
+        z-index: 10;
+        display: flex;
+        position: absolute;
+        justify-content: center;
+        align-items: center;
+        min-height: 50vh;
+        flex-direction: column;
+        margin-top: 200px;
+        padding: 20px;
+        max-width: 400px;
+        background-color: white;
+        border: 2px solid rgb(209, 209, 209);
+        border-radius: 25px;
+        color: #333333;
+        top: 10%;
+        left: 15%;
+
+    }
+
+    .lformCont {
+        width: 600px;
+        border: 1px solid red;
+
+    }
+
+    .blobLayer {
+        overflow: hidden;
+        height: 80vh;
+        width: 70vh;
+    }
+
+}
+
+@media (min-width: 577px) and (max-width: 991px) {
+
+    .login-container{
+
+        /* border: 15px solid red; */
+        width: 25vh;
+
+    }
+
+    .blobLayer {
+        overflow: hidden;
+        height: 80vh;
+        width: 70vh;
+    }
+
 }

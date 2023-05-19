@@ -5,32 +5,31 @@ import "./Login.css";
 
 const LoginPage = () => {
   return (
-    <Container className="loginPg">
+    <Container className="loginPgCont">
       <Row>
-        <Col />
-        <Col className="itemContainer">
-          <Col className="blobLayer">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+        <Row>
+          <Col className="itemContainer">
+            <Col className="blobLayer">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </Col>
           </Col>
-          <Col className="login-container">
-            <p>Log in to your account</p>
-            <Loginform />
-          </Col>
-        </Col>
-        <Col />
+        </Row>
+      </Row>
+      <Row>
+        <Loginform />
       </Row>
     </Container>
   );
