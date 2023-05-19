@@ -12,8 +12,20 @@
 .loginContainer{
     background-color: #FFFFFF;
     /* border: 15px solid red; */
+    border-radius: 15px;
+    padding: 15px 0px 15px 0px;
     width: 35vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20%;
 
+}
+
+.lformCont {
+    padding: 35px;
+    background-color: white;
+    border-radius: 15%;
 }
 
 .blobLayer {
@@ -90,6 +102,7 @@
     text-align: center;
 }
 
+
 .loginBtn {
     background-color: rgb(103, 58, 183);
     width: 100%;
@@ -129,7 +142,7 @@
     .loginContainer{
 
         /* border: 15px solid red; */
-        width: 25vh;
+        /* width: 20vh; */
 
     }
 
@@ -154,9 +167,7 @@
     }
 
     .lformCont {
-        width: 600px;
-        border: 1px solid red;
-
+        /* width: 600px; */
     }
 
     .blobLayer {
@@ -170,9 +181,7 @@
 @media (min-width: 577px) and (max-width: 991px) {
 
     .login-container{
-
-        /* border: 15px solid red; */
-        width: 25vh;
+        width: 20vh;
 
     }
 
