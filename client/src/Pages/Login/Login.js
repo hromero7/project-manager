@@ -6,27 +6,24 @@ import "./Login.css";
 const LoginPage = () => {
   return (
     <Container className="loginPgCont">
-      <Row>
-        <Row>
-          <Col className="itemContainer">
-            <Col className="blobLayer">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </Col>
-          </Col>
-        </Row>
+      <Row className="itemContainer">
+        <Col className="blobLayer">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </Col>
+        /
       </Row>
       <Row>
         <Loginform />

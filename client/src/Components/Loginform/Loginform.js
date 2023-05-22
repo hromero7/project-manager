@@ -28,61 +28,60 @@ export default function Loginform() {
 
   return (
     <Container className="loginContainer">
-      <Row>
-        <Row>
-          <Col className="lformCont">
-            <Form onSubmit={authInfo} action="/api/user/login" method="post">
-              <Col>
-                <p>Log in to your account</p>
-                <Form.Group className="mb-3">
-                  <Form.Label>Username</Form.Label>
-                  <Form.Control
-                    type="name"
-                    placeholder="Enter username"
-                    name="username"
-                    value={user.username}
-                    onChange={handleFormChange}
-                  />
-                </Form.Group>
-              </Col>
-              <Col>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Password"
-                    name="password"
-                    value={user.password}
-                    onChange={handleFormChange}
-                  />
-                </Form.Group>
-              </Col>
-              <Row>
-                <Col>
-                  <Button
-                    className="loginBtn"
-                    variant="primary"
-                    type="submit"
-                    onClick={(e) => {
-                      authInfo(e);
-                      if (location.state?.from) {
-                        navigate(location.state.from);
-                      }
-                    }}
-                  >
-                    Log In
-                  </Button>
-                  {errorMessage ? (
-                    <Alert variant={"danger"}>{errorMessage}</Alert>
-                  ) : (
-                    ""
-                  )}
-                </Col>
-              </Row>
-            </Form>
+      <Col className="lformCont">
+        <Form onSubmit={authInfo} action="/api/user/login" method="post">
+          <Col>
+            <Col className="logintitle">
+              <p>Log in to your account</p>
+            </Col>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="name"
+                placeholder="Enter username"
+                name="username"
+                value={user.username}
+                onChange={handleFormChange}
+              />
+            </Form.Group>
           </Col>
-        </Row>
-      </Row>
+          <Col>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={user.password}
+                onChange={handleFormChange}
+              />
+            </Form.Group>
+          </Col>
+          <Row>
+            <Col>
+              <Button
+                className="loginBtn"
+                variant="primary"
+                type="submit"
+                onClick={(e) => {
+                  authInfo(e);
+                  if (location.state?.from) {
+                    navigate(location.state.from);
+                  }
+                }}
+              >
+                Log In
+              </Button>
+              {errorMessage ? (
+                <Alert variant={"danger"}>{errorMessage}</Alert>
+              ) : (
+                ""
+              )}
+            </Col>
+          </Row>
+        </Form>
+      </Col>
     </Container>
   );
 }

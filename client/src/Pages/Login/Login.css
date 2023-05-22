@@ -2,6 +2,14 @@
     /* border: 1px solid rgb(103, 58, 183) */
    }
 
+
+   .logintitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+}
+
 .itemContainer {
     position: relative;
     display: flex;
@@ -166,8 +174,19 @@
 
     }
 
+    .logintitle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
+    }
+
     .lformCont {
         /* width: 600px; */
+    }
+
+    .itemContainer {
+        width: 100vw;
     }
 
     .blobLayer {
@@ -181,14 +200,17 @@
 @media (min-width: 577px) and (max-width: 991px) {
 
     .login-container{
-        width: 20vh;
+        width: 100vw;
+    }
 
+    .itemContainer {
+        width: 100vw;
     }
 
     .blobLayer {
         overflow: hidden;
-        height: 80vh;
-        width: 70vh;
+        height: 100vh;
+        width: 100vw;
     }
 
 }
