@@ -7,26 +7,25 @@ const LoginPage = () => {
   return (
     <Container className="loginPgCont">
       <Row className="itemContainer">
-        <Col className="blobLayer">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </Col>
-        /
-      </Row>
-      <Row>
-        <Loginform />
+        <Row className="blobCont">
+          <Container className="blobLayer">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </Container>
+          <Loginform />
+        </Row>
       </Row>
     </Container>
   );
