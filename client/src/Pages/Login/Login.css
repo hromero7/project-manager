@@ -8,7 +8,7 @@
    }
 
 
-   .logintitle {
+.logintitle {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -81,6 +81,23 @@
 }
 
 .blobLayer span:nth-child(2) {
+    z-index: -1;
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 600px;
+    height: 600px;
+    border-radius: 75% 25% 76% 24% / 74% 29% 71% 26% ;
+    transition: 5s;
+    transition-timing-function: ease-in-out;
+    transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+    animation: animate2 40s linear infinite ;
+    animation-direction: alternate-reverse;
+    background: rgb(166,0,249);
+    background: linear-gradient(90deg, rgb(97, 55, 200) 0%, rgba(97, 55, 200, 0.342) 100%);
+    filter: blur(0.3rem)
+}
+.blobLayer span:nth-child(3) {
     z-index: -1;
     position: absolute;
     top: 20%;
@@ -215,6 +232,7 @@
     }
 
     .blobLayer {
+        position: absolute;
         overflow: hidden;
         height: 100vh;
         width: 100vw;
@@ -222,7 +240,6 @@
         align-items: center;
         justify-content: center;
         margin: 0px ;
-
     }
 
 }
@@ -230,22 +247,23 @@
 @media (min-width: 577px) and (max-width: 991px) {
 
     .loginPgCont {
-        display: flex;
-        justify-self: center;
-        align-items: center;
+        /* display: flex; */
+        /* justify-content: center;
+        align-items: center; */
+        /* border: 1px solid black; */
+        height: 100vh;
+        width: 100vw;
         /* padding: 0;
         margin: 0; */
     }
-
-    /* .login-container{
-        width: 100vw;
-
-    } */
 
     .blobCont {
         display: flex;
         flex-direction: row;
         margin: 0px ;
+        align-items: center;
+        justify-items: center;
+
     }
 
 
@@ -255,18 +273,23 @@
         justify-content: center;
         align-items: center;
         margin: 0px ;
+
     }
 
     .blobLayer {
+
         overflow: hidden;
         position: absolute;
-        margin: 0px;
+        /* margin: 10px; */
+        /* left: 20%; */
         height: 100vh;
         width: 100vw;
         display: flex;
         align-items: center;
-        justify-content: center;
-        /* border: 3px solid rgb(0, 0, 0); */
+        justify-items: center;
+        /* border: 1px solid green; */
     }
+
+
 
 }
