@@ -1,66 +1,14 @@
 
 
-.App {
-    margin-top: 60px;
-}
-
 body {
     background: linear-gradient(to right, rgb(103, 58, 183), rgb(81, 45, 168));
-    /* background: linear-gradient(to right, rgb(103, 58, 183) 60%, #3c4179); */
-    /* color: white; */
 }
-
-
-
-/*
-.dropdown-menu {
-    border: rgb(209, 209, 209) 1px solid;
-    -webkit-box-shadow: 21px 24px 18px -13px rgba(156,156,156,0.79);
-    -moz-box-shadow: 21px 24px 18px -13px rgba(156,156,156,0.79);
-    box-shadow: 21px 24px 18px -13px rgba(156,156,156,0.79);
-    border-radius: 25px;
-
-}
-
-.dropdown-item  {
-    padding: 0px 15px;
-    transition: all .2s ease-in-out;
-    text-align: left;
-
-}
-.dropdown-item:first-child:hover{
-    background: none;
-    padding: 0px 15px;
-}
-
-.dropdown-item:hover  {
-    border:rgb(212, 212, 212) 0.5px solid;
-    border-radius: 10px;
-    font-weight: 500;
-    padding: 0px 15px;
-    text-overflow:ellipsis;
-    z-index: 9999;
-    transform: scale(1.1);
-
-}
-.dropdown-item:focus  {
-    border-radius: 10px;
-    background-color: rgb(229, 226, 226);
-    color: black;
-
-} */
 
 .switchContainer {
-    /* width: 15px; */
     padding: 0;
     margin: 0;
 }
 
 .form-switch {
-       /* padding: 0; */
     margin: 0;
 }
-.col {
-    /* border: .5px black solid; */
-}
-

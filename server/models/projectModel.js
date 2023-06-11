@@ -10,6 +10,26 @@ const ProjectSchema = new Schema({
     type: String,
     required: true,
   },
+  promotion: [
+    {
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+      username: {
+        type: String,
+      },
+      email: {
+        type: String,
+      },
+      userId: {
+        type: String,
+      },
+      projectId: {
+        type: String,
+      },
+    },
+  ],
   members: [
     {
       id: {
@@ -20,6 +40,12 @@ const ProjectSchema = new Schema({
         type: String,
       },
       email: {
+        type: String,
+      },
+      userId: {
+        type: String,
+      },
+      projectId: {
         type: String,
       },
     },

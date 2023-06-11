@@ -5,11 +5,10 @@ import "./Login.css";
 
 const LoginPage = () => {
   return (
-    <Container>
-      <Row>
-        <Col />
-        <Col className="itemContainer">
-          <Col className="blobLayer">
+    <Container className="loginPgCont">
+      <Row className="itemContainer">
+        <Row className="blobCont">
+          <Container className="blobLayer">
             <span></span>
             <span></span>
             <span></span>
@@ -24,13 +23,9 @@ const LoginPage = () => {
             <span></span>
             <span></span>
             <span></span>
-          </Col>
-          <Col className="login-container">
-            <p>Log in to your account</p>
-            <Loginform />
-          </Col>
-        </Col>
-        <Col />
+          </Container>
+          <Loginform />
+        </Row>
       </Row>
     </Container>
   );

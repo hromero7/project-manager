@@ -117,6 +117,19 @@ export default function NewUser() {
           </Form>
         </Col>
       </Row>
+      <Row>
+        <Col>
+          <Button
+            className="logBtn"
+            variant="warning"
+            onClick={() => {
+              nav("/login");
+            }}
+          >
+            Sign in
+          </Button>
+        </Col>
+      </Row>
     </Container>
   );
 }

@@ -1,8 +1,53 @@
+.loginPgCont {
+    /* border: 1px solid rgb(103, 58, 183) */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+   }
+
+
+.logintitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+}
+
 .itemContainer {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.loginContainer{
+    background-color: #FFFFFF;
+    /* border: 15px solid red; */
+    border-radius: 15px;
+    padding: 15px 0px 15px 0px;
+    width: 35vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20vh;
+
+}
+
+.lformCont {
+    padding: 35px;
+    background-color: white;
+    border-radius: 15%;
+}
+
+.blobCont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    width: 100vw;
+    /* border: black 1px solid; */
 }
 
 .blobLayer {
@@ -12,8 +57,9 @@
     width: 500px;
     height: 500px;
     display: flex;
-    position: absolute;
-    top: 50%;
+    align-items: center;
+    justify-content: center;
+    /* top: 50%; */
 }
 
 .blobLayer span:nth-child(1) {
@@ -35,6 +81,23 @@
 }
 
 .blobLayer span:nth-child(2) {
+    z-index: -1;
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 600px;
+    height: 600px;
+    border-radius: 75% 25% 76% 24% / 74% 29% 71% 26% ;
+    transition: 5s;
+    transition-timing-function: ease-in-out;
+    transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+    animation: animate2 40s linear infinite ;
+    animation-direction: alternate-reverse;
+    background: rgb(166,0,249);
+    background: linear-gradient(90deg, rgb(97, 55, 200) 0%, rgba(97, 55, 200, 0.342) 100%);
+    filter: blur(0.3rem)
+}
+.blobLayer span:nth-child(3) {
     z-index: -1;
     position: absolute;
     top: 20%;
@@ -79,6 +142,7 @@
     text-align: center;
 }
 
+
 .loginBtn {
     background-color: rgb(103, 58, 183);
     width: 100%;
@@ -111,4 +175,121 @@
         transform: rotate(0deg);
         border-radius: 33% 67% 43% 57% / 31% 66% 34% 69%;
     }
+}
+
+@media (max-width: 768px) {
+
+    .loginContainer{
+        display: flex;
+        /* border: 15px solid red; */
+        /* width: 20vh; */
+
+    }
+
+    .blobCont {
+        display: flex;
+        flex-direction: row;
+        margin: 0px ;
+    }
+
+    .login-container {
+        z-index: 10;
+        display: flex;
+        position: absolute;
+        justify-content: center;
+        align-items: center;
+        min-height: 50vh;
+        flex-direction: column;
+        margin-top: 200px;
+        padding: 20px;
+        max-width: 400px;
+        background-color: white;
+        border: 2px solid rgb(209, 209, 209);
+        border-radius: 25px;
+        color: #333333;
+        top: 10%;
+        left: 15%;
+
+    }
+
+    .logintitle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
+    }
+
+    .lformCont {
+        /* width: 600px; */
+    }
+
+    .itemContainer {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0px ;
+    }
+
+    .blobLayer {
+        position: absolute;
+        overflow: hidden;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0px ;
+    }
+
+}
+
+@media (min-width: 577px) and (max-width: 991px) {
+
+    .loginPgCont {
+        /* display: flex; */
+        /* justify-content: center;
+        align-items: center; */
+        /* border: 1px solid black; */
+        height: 100vh;
+        width: 100vw;
+        /* padding: 0;
+        margin: 0; */
+    }
+
+    .blobCont {
+        display: flex;
+        flex-direction: row;
+        margin: 0px ;
+        align-items: center;
+        justify-items: center;
+
+    }
+
+
+    .itemContainer {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0px ;
+
+    }
+
+    .blobLayer {
+
+        overflow: hidden;
+        position: absolute;
+        /* margin: 10px; */
+        /* left: 20%; */
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        /* border: 1px solid green; */
+    }
+
+
+
 }

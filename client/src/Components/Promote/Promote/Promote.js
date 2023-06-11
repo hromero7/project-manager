@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import ProjectAPI from "../../Utils/ProjectAPI";
+import ProjectAPI from "../../../Utils/ProjectAPI";
 
 function Promote(props) {
   const promoteUser = async () => {
     const res = await ProjectAPI.promoteMember(props);
-    console.log(`props: `, props);
-  };
-  const demoteUser = () => {
-    console.log(`heartClicked: `, props);
+    console.log(`res: `, res);
+    if (res.status === 200) {
+      props.props.getProjectData();
+    } else {
+      console.log(`Error message: `, res.data.message);
+    }
   };
 
   return (

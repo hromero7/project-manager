@@ -133,42 +133,24 @@ module.exports = {
       let userId = req.body.id;
       let username = req.body.username;
       let email = req.body.email;
-
-      //find task
-
       const task = project.tasks.find(
         (task) => req.params.task_id.toString() === task._id.toString()
       );
-
-      //check if user has already been added
-      const userExists = task.assignee.find(
-        (user) => user.id.toString() === userId.toString()
-      );
-
-      if (userExists)
-        return res.status(500).json({
-          message: {
-            msgBody: `${username} has already been assigned to this task`,
-          },
-        });
-      else {
-        task.assignee.push({ id: userId, username: username, email: email });
-
-        project.save((err) => {
-          if (err)
-            return res.status(500).json({
-              message: { msgBody: "Error has occured", msgError: true },
-            });
-          else
-            return res.status(200).json({
-              status: 200,
-              message: {
-                msgBody: `${username} has been successfully added to ${task.taskTitle}.`,
-                msgError: false,
-              },
-            });
-        });
-      }
+      task.assignee.push({ id: userId, username: username, email: email });
+      project.save((err) => {
+        if (err)
+          return res.status(500).json({
+            message: { msgBody: "Error has occured", msgError: true },
+          });
+        else
+          return res.status(200).json({
+            status: 200,
+            message: {
+              msgBody: `${username} has been successfully added to ${task.taskTitle}.`,
+              msgError: false,
+            },
+          });
+      });
     }
   },
   removeTaskAssignee: async (req, res) => {

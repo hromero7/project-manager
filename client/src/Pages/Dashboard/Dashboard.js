@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Container } from "react-bootstrap";
 import ProjectList from "../../Components/ProjectList/ProjectList";
-import AssignedProjects from "../../Components/AssignedProjects/AssignedProjects";
-import DashNav from "../../Components/DashNav/DashNav";
 import ProjectTable from "../../Components/ProjectTable/ProjectTable";
 import { AuthContext } from "../../Context/AuthContext";
 import ProjectAPI from "../../Utils/ProjectAPI";
@@ -10,7 +8,7 @@ import "./Dashboard.css";
 
 const Dashboard = () => {
   const auth = useContext(AuthContext);
-  const [ projectOverview, setProjectOverview ] = useState(true)
+  const [projectOverview, setProjectOverview] = useState(true);
   const [projectData, setProjectData] = useState([]);
 
   useEffect(() => {
@@ -19,31 +17,32 @@ const Dashboard = () => {
 
   const getProjects = async () => {
     const res = await ProjectAPI.getAssignedProjects(auth.user.username);
-        setProjectData(res.body);
-  }
+    setProjectData(res.body);
+  };
 
   return (
-    <div className="dashboard-container">
-      <DashNav />
+    <Container className="dashboard-container">
       <div className="project-view">
-        <button className={projectOverview? "btn-active" : "view-btn"} 
-          onClick={() => setProjectOverview(true)}>
+        <button
+          className={projectOverview ? "btn-active" : "view-btn"}
+          onClick={() => setProjectOverview(true)}
+        >
           <i className="fa-solid fa-table-list"></i>
         </button>
 
-        <button className={projectOverview === false? "btn-active" : "view-btn"} 
-          onClick={() => setProjectOverview(false)}>
-            <i className="fa-solid fa-table-cells"></i>
+        <button
+          className={projectOverview === false ? "btn-active" : "view-btn"}
+          onClick={() => setProjectOverview(false)}
+        >
+          <i className="fa-solid fa-table-cells"></i>
         </button>
       </div>
-      { projectOverview ?
-        <ProjectTable 
-          projectData={projectData}/>
-        : <ProjectList 
-          projectData={projectData}/>
-      }
-      
-    </div>
+      {projectOverview ? (
+        <ProjectTable projectData={projectData} />
+      ) : (
+        <ProjectList projectData={projectData} />
+      )}
+    </Container>
   );
 };
 

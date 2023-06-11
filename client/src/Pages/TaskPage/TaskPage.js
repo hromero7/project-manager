@@ -23,6 +23,7 @@ const TaskPage = () => {
     title: "",
     userId: "",
     id: "",
+    promo: "",
   });
 
   useEffect(() => {
@@ -38,8 +39,8 @@ const TaskPage = () => {
         title: response.title,
         userId: response.userId,
         id: response._id,
+        promo: response.promotion,
       });
-      console.log(`projectData: `, projectData);
     });
   };
 
