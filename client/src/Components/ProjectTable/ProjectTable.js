@@ -52,7 +52,13 @@ const ProjectTable = (props) => {
             {props.projectData ? (
               props.projectData.map((project, i) => {
                 return (
-                  <tr key={i}>
+                  <tr
+                    key={i}
+                    onClick={() => {
+                      navigate(`/project/${project._id}`);
+                      // console.log(`project: `, project);
+                    }}
+                  >
                     <td>{project.title}</td>
                     <td>{project.members[0].username}</td>
                     <td>

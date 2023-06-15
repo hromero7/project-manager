@@ -32,3 +32,8 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 ## Contact
 
 If you have any questions or concerns, please contact the horacioromero17@gmail.com or marcsalaver@gmail.com.
+
+## Changes:
+
+Shifting to AI for marketing.
+Goals: create a form that takes in user prompts and stores these as responses within mongo FIRST. SECOND, send these prompts to chatGPT to then output responses for user.

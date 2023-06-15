@@ -14,7 +14,6 @@ export default function TitleChange(props) {
     );
     props.getProjData();
     props.setTitleChange((titleChange) => !titleChange);
-    console.log(`titleUpdate: `, titleUpdate);
   };
 
   return (
