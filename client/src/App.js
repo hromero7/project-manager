@@ -12,6 +12,7 @@ import TaskPage from "./Pages/TaskPage/TaskPage";
 import "./App.css";
 import { AuthContext } from "./Context/AuthContext";
 import DashNav from "./Components/DashNav/DashNav";
+import AIForms from "./Components/AIForm/AIForms";
 
 function App() {
   const auth = useContext(AuthContext);
@@ -26,6 +27,7 @@ function App() {
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/questions" element={<AIForms />} />
           <Route path="/editprofile" element={<Settings />} />
           <Route path="/project/:ID" element={<TaskPage />} />
         </Route>

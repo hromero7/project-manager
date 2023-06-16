@@ -1,0 +1,9 @@
+.questionContainer {
+    background-color: #FAFAFA;
+    height: auto;
+    min-height: 100vh;
+}
+
+.questionForm {
+    padding: 25px;
+}

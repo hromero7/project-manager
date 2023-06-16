@@ -100,6 +100,16 @@ const DashNav = () => {
                   <i className="fa-solid fa-table"></i>
                   <p>Projects</p>
                 </Nav.Link>
+                <Nav.Link
+                  // href="/dashboard"
+                  className="nav-link"
+                  onClick={() => {
+                    navigate("/questions");
+                  }}
+                >
+                  <i class="fa-solid fa-truck-fast"></i>
+                  <p>AI Form</p>
+                </Nav.Link>
 
                 <Nav.Link
                   // href="/editprofile"
