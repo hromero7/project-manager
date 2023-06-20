@@ -1,9 +1,23 @@
+
+
+.aiForm {
+     background-color: #FAFAFA;
+}
+
 .questionContainer {
-    background-color: #FAFAFA;
+
     height: auto;
     min-height: 100vh;
+    display: flex;
+    justify-content: center;
 }
 
 .questionForm {
+    padding: 25px;
+    max-width: 70vw;
+
+}
+
+.questionTitle {
     padding: 25px;
 }

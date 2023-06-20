@@ -63,3 +63,7 @@ const AIQuestionSchema = new Schema({
     required: true,
   },
 });
+
+const AIQuestions = mongoose.model("AIQuestions", AIQuestionSchema);
+
+module.exports = AIQuestions;
