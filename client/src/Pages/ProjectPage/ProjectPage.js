@@ -168,7 +168,7 @@ export default function ProjectPage() {
                             <Button onClick={handleShow}>Add Task</Button>
                             <Modal show={show} onHide={handleClose}>
                               <Modal.Header closeButton>
-                                <Modal.Title>Task details:</Modal.Title>
+                                <Modal.Title>Task details::::</Modal.Title>
                               </Modal.Header>
                               <Modal.Body>
                                 <Form>
@@ -308,7 +308,6 @@ export default function ProjectPage() {
                                                 feedback
                                               />
                                             </Form>
-                                            {}
                                           </Dropdown.Item>
                                         );
                                       })

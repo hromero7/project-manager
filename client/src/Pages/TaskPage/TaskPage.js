@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Table } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import ProjectAPI from "../../Utils/ProjectAPI";
-import TaskModal from "../../Components/TaskModal/TaskModal";
+import FormModal from "../../Components/FormModal/FormModal";
 import TaskActionMenu from "../../Components/TaskActionMenu/TaskActionMenu";
 import TaskAssignee from "../../Components/TaskAssignee/TaskAssignee";
 import MemberAdd from "../../Components/MemberAdd/MemberAdd";
@@ -70,7 +70,7 @@ const TaskPage = () => {
           </Row>
           <Row>
             <Col>
-              <TaskModal projectId={ID} getProjData={getProjData} />
+              <FormModal projectId={ID} getProjData={getProjData} />
             </Col>
             <Col>
               <MemberAdd
