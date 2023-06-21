@@ -1,26 +1,42 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { AuthContext } from "../../Context/AuthContext";
+import AIRoute from "../../Utils/AIRoute";
 import "./AIForms.css";
 
 export default function AIForms() {
+  const { user } = useContext(AuthContext);
+
   const [productValues, setProductValues] = useState({
-    question1: "",
-    question2: "",
-    question3: "",
-    question4: "",
-    question5: "",
-    question6: "",
-    question7: "",
-    question8: "",
-    question9: "",
-    question10: "",
+    question1: "answer1",
+    question2: "answer2",
+    question3: "answer3",
+    question4: "answer4",
+    question5: "answer5",
+    question6: "answer6",
+    question7: "answer7",
+    question8: "answer8",
+    question9: "answer9",
+    question10: "answer10",
+    // question1: "",
+    // question2: "",
+    // question3: "",
+    // question4: "",
+    // question5: "",
+    // question6: "",
+    // question7: "",
+    // question8: "",
+    // question9: "",
+    // question10: "",
   });
 
   const handleFormData = (e) => {
     setProductValues({ ...productValues, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const sendQuestions = await AIRoute.sendQuestions(productValues);
     console.log(`productValues: `, productValues);
   };
 
@@ -47,6 +63,9 @@ export default function AIForms() {
                     autoComplete="off"
                     required
                   />
+                  <Form.Control.Feedback type="invalid">
+                    Please provide a response.
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
             </Row>
@@ -61,6 +80,9 @@ export default function AIForms() {
                     autoComplete="off"
                     required
                   />
+                  <Form.Control.Feedback type="invalid">
+                    Please provide a response.
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
             </Row>
@@ -77,6 +99,9 @@ export default function AIForms() {
                     autoComplete="off"
                     required
                   />
+                  <Form.Control.Feedback type="invalid">
+                    Please provide a response.
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
             </Row>
@@ -93,6 +118,9 @@ export default function AIForms() {
                     autoComplete="off"
                     required
                   />
+                  <Form.Control.Feedback type="invalid">
+                    Please provide a response.
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
             </Row>
@@ -109,6 +137,9 @@ export default function AIForms() {
                     autoComplete="off"
                     required
                   />
+                  <Form.Control.Feedback type="invalid">
+                    Please provide a response.
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
             </Row>
@@ -127,6 +158,9 @@ export default function AIForms() {
                     autoComplete="off"
                     required
                   />
+                  <Form.Control.Feedback type="invalid">
+                    Please provide a response.
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
             </Row>
@@ -144,6 +178,9 @@ export default function AIForms() {
                     autoComplete="off"
                     required
                   />
+                  <Form.Control.Feedback type="invalid">
+                    Please provide a response.
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
             </Row>
@@ -161,6 +198,9 @@ export default function AIForms() {
                     autoComplete="off"
                     required
                   />
+                  <Form.Control.Feedback type="invalid">
+                    Please provide a response.
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
             </Row>
@@ -178,6 +218,9 @@ export default function AIForms() {
                     autoComplete="off"
                     required
                   />
+                  <Form.Control.Feedback type="invalid">
+                    Please provide a response.
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
             </Row>
@@ -194,18 +237,14 @@ export default function AIForms() {
                     autoComplete="off"
                     required
                   />
+                  <Form.Control.Feedback type="invalid">
+                    Please provide a response.
+                  </Form.Control.Feedback>
                 </Form.Group>
               </Col>
             </Row>
+            <Button type="submit">Submit</Button>
           </Form>
-          <Button
-            type="submit"
-            onClick={() => {
-              handleSubmit();
-            }}
-          >
-            Submit
-          </Button>
         </Row>
       </Container>
     </Container>

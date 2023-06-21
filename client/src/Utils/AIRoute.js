@@ -2,6 +2,7 @@ import axios from "axios";
 
 export default {
   sendQuestions: (questions) => {
-    return axios.post(`api/oai/sendQ`, {});
+    console.log(`questions: `, questions);
+    return axios.post(`api/oai/sendQ`, { questions });
   },
 };
