@@ -54,8 +54,7 @@ const FormModal = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const sendQuestions = await AIRoute.sendQuestions(productValues, props);
-    console.log(`productValues: `, productValues);
-    console.log(`props: `, props);
+    console.log(`sendQuestions: `, sendQuestions);
   };
 
   return (
