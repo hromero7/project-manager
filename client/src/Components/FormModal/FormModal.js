@@ -14,6 +14,8 @@ import AIRoute from "../../Utils/AIAPI";
 import "./FormModal.css";
 import ProductName from "./Questions/ProductName/ProductName";
 import ProductCategory from "./Questions/ProductCategory/ProductCategory";
+import UniqueFeatures from "./Questions/UniqueFeatures/UniqueFeatures";
+import ProductChallenges from "./Questions/ProductChallenges/ProductChallenges";
 
 const FormModal = (props) => {
   const [open, setOpen] = useState(false);
@@ -32,7 +34,17 @@ const FormModal = (props) => {
     other: false,
   });
   const [otherCheck, setOtherCheck] = useState(false);
-  const [uniqueFeatures, setUniqueFeatures] = useState([]);
+  const [uniqueFeatures, setUniqueFeatures] = useState({
+    performance: false,
+    design: false,
+    functionality: false,
+    qualityAndDurability: false,
+    innovation: false,
+    ecoFriendliness: false,
+    userExperience: false,
+    otherInput: "",
+  });
+
   const [productValues, setProductValues] = useState({
     question1: "",
     question2: categorySelection,
@@ -78,16 +90,20 @@ const FormModal = (props) => {
     }));
 
     if (checked) {
-      setUniqueFeatures((prevUniqueFeatures) => [...prevUniqueFeatures, name]);
+      setUniqueFeatures((prevUniqueFeatures) => ({
+        ...prevUniqueFeatures,
+        [name]: true,
+      }));
     } else {
-      setUniqueFeatures((prevUniqueFeatures) =>
-        prevUniqueFeatures.filter((feature) => feature !== name)
-      );
+      setUniqueFeatures((prevUniqueFeatures) => ({
+        ...prevUniqueFeatures,
+        [name]: false,
+      }));
     }
 
     setProductValues((prevProductValues) => ({
       ...prevProductValues,
-      question3: [...uniqueFeatures],
+      question3: uniqueFeatures,
     }));
   };
 
@@ -103,9 +119,9 @@ const FormModal = (props) => {
         otherInput: "",
       });
     }
-
     setOtherCheck(e.target.checked);
   };
+
   const handleOtherForm = (e) => {
     setUniqueFeatures({
       ...uniqueFeatures,
@@ -155,121 +171,24 @@ const FormModal = (props) => {
                   />
                 </Row>
                 <Row>
-                  <Col>
-                    <Form.Group className="mb-3" controlId="formTaskTitle">
-                      <Form.Label>
-                        What are the unique features or benefits of your
-                        product?
-                      </Form.Label>
-                      <Form.Check
-                        inline
-                        label="Performance"
-                        name="performance"
-                        type="checkbox"
-                        checked={uniqueFeatures.performance}
-                        onChange={handleCheck}
-                      />
-                      <Form.Check
-                        inline
-                        label="Design"
-                        name="design"
-                        type="checkbox"
-                        checked={uniqueFeatures.design}
-                        onChange={handleCheck}
-                      />
-                      <Form.Check
-                        inline
-                        label="Functionality"
-                        name="functionality"
-                        checked={uniqueFeatures.functionality}
-                        type="checkbox"
-                        onChange={handleCheck}
-                      />
-                      <Form.Check
-                        inline
-                        label="Quality and Durability"
-                        name="quality and durability"
-                        checked={uniqueFeatures.qualityAndDurability}
-                        type="checkbox"
-                        onChange={handleCheck}
-                      />
-                      <Form.Check
-                        inline
-                        label="Innovation"
-                        name="innovation"
-                        checked={uniqueFeatures.innovation}
-                        type="checkbox"
-                        onChange={handleCheck}
-                      />
-                      <Form.Check
-                        inline
-                        label="Eco-Friendliness"
-                        name="ecoFriendliness"
-                        checked={uniqueFeatures.ecoFriendliness}
-                        type="checkbox"
-                        onChange={handleCheck}
-                      />
-                      <Form.Check
-                        inline
-                        label="User Experience"
-                        name="userExperience"
-                        checked={uniqueFeatures.userExperience}
-                        type="checkbox"
-                        onChange={handleCheck}
-                      />
-                      <Form.Check
-                        inline
-                        label="Value for Money"
-                        name="valueForMoney"
-                        checked={checkboxValues.valueForMoney}
-                        type="checkbox"
-                        onChange={handleCheck}
-                      />
-                      <Form.Check
-                        inline
-                        label="Other:"
-                        name="other"
-                        type="checkbox"
-                        onChange={handleOtherCheck}
-                      />
-                      {checkboxValues.other ? (
-                        <>
-                          <Form.Control
-                            name="otherInput"
-                            placeholder="Please specify"
-                            value={uniqueFeatures.otherInput}
-                            onChange={handleOtherForm}
-                            autoComplete="off"
-                          />
-                        </>
-                      ) : (
-                        ""
-                      )}
-
-                      <Form.Control.Feedback type="invalid">
-                        Please provide a response.
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
+                  <UniqueFeatures
+                    uniqueFeatures={uniqueFeatures}
+                    setUniqueFeatures={setUniqueFeatures}
+                    handleCheck={handleCheck}
+                    checkboxValues={checkboxValues}
+                    setCheckboxValues={setCheckboxValues}
+                    handleOtherCheck={handleOtherCheck}
+                    handleOtherForm={handleOtherForm}
+                    setOtherCheck={setOtherCheck}
+                    otherCheck={otherCheck}
+                  />
                 </Row>
                 <Row>
-                  <Col>
-                    <Form.Group className="mb-3" controlId="formTaskTitle">
-                      <Form.Label>
-                        What problems or challenges does your product solve?
-                      </Form.Label>
-                      <Form.Control
-                        name="question4"
-                        value={productValues.question4}
-                        onChange={handleFormData}
-                        autoComplete="off"
-                        required
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Please provide a response.
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
+                  <ProductChallenges
+                    question2={productValues.question2}
+                    productValues={productValues}
+                    handleFormData={handleFormData}
+                  />
                 </Row>
                 <Row>
                   <Col>
