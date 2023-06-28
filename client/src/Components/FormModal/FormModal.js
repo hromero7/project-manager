@@ -6,36 +6,54 @@ import {
   Modal,
   Form,
   Button,
+  Dropdown,
   Alert,
 } from "react-bootstrap";
 import { AuthContext } from "../../Context/AuthContext";
-import AIRoute from "../../Utils/AIRoute";
+import AIRoute from "../../Utils/AIAPI";
 import "./FormModal.css";
+import ProductName from "./Questions/ProductName/ProductName";
+import ProductCategory from "./Questions/ProductCategory/ProductCategory";
 
 const FormModal = (props) => {
   const [open, setOpen] = useState(false);
-  const [productValues, setProductValues] = useState({
-    question1: "answer1",
-    question2: "answer2",
-    question3: "answer3",
-    question4: "answer4",
-    question5: "answer5",
-    question6: "answer6",
-    question7: "answer7",
-    question8: "answer8",
-    question9: "answer9",
-    question10: "answer10",
-    // question1: "",
-    // question2: "",
-    // question3: "",
-    // question4: "",
-    // question5: "",
-    // question6: "",
-    // question7: "",
-    // question8: "",
-    // question9: "",
-    // question10: "",
+  const [categorySelection, setCategorySelection] = useState(
+    "Please make a selection"
+  );
+  const [checkboxValues, setCheckboxValues] = useState({
+    performance: false,
+    design: false,
+    functionality: false,
+    qualityAndDurability: false,
+    innovation: false,
+    ecoFriendliness: false,
+    userExperience: false,
+    valueForMoney: false,
+    other: false,
   });
+  const [otherCheck, setOtherCheck] = useState(false);
+  const [uniqueFeatures, setUniqueFeatures] = useState([]);
+  const [productValues, setProductValues] = useState({
+    question1: "",
+    question2: categorySelection,
+    question3: uniqueFeatures,
+    question4: "",
+    question5: "",
+    question6: "",
+    question7: "",
+    question8: "",
+    question9: "",
+    question10: "",
+  });
+
+  const handleCategorySelection = (value) => {
+    setCategorySelection(value);
+
+    setProductValues((prevProductValues) => ({
+      ...prevProductValues,
+      question2: value,
+    }));
+  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -51,10 +69,55 @@ const FormModal = (props) => {
     setProductValues({ ...productValues, [e.target.name]: e.target.value });
   };
 
+  const handleCheck = (e) => {
+    const { name, checked } = e.target;
+
+    setCheckboxValues((prevCheckboxValues) => ({
+      ...prevCheckboxValues,
+      [name]: checked,
+    }));
+
+    if (checked) {
+      setUniqueFeatures((prevUniqueFeatures) => [...prevUniqueFeatures, name]);
+    } else {
+      setUniqueFeatures((prevUniqueFeatures) =>
+        prevUniqueFeatures.filter((feature) => feature !== name)
+      );
+    }
+
+    setProductValues((prevProductValues) => ({
+      ...prevProductValues,
+      question3: [...uniqueFeatures],
+    }));
+  };
+
+  const handleOtherCheck = (e) => {
+    setCheckboxValues({
+      ...checkboxValues,
+      other: e.target.checked,
+    });
+
+    if (!e.target.checked) {
+      setUniqueFeatures({
+        ...uniqueFeatures,
+        otherInput: "",
+      });
+    }
+
+    setOtherCheck(e.target.checked);
+  };
+  const handleOtherForm = (e) => {
+    setUniqueFeatures({
+      ...uniqueFeatures,
+      otherInput: e.target.value,
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const sendQuestions = await AIRoute.sendQuestions(productValues, props);
-    console.log(`sendQuestions: `, sendQuestions);
+    console.log(`productValues: `, productValues);
+    // const sendQuestions = await AIRoute.sendQuestions(productValues, props);
+    // console.log(`sendQuestions: `, sendQuestions);
   };
 
   return (
@@ -64,47 +127,32 @@ const FormModal = (props) => {
         <Container className="aiForm">
           <Row className="questionTitle">
             <Col>
-              <h1>Tell us about your product:</h1>
+              <h1
+                onClick={() => {
+                  console.log(`uniqueFeatures: `, uniqueFeatures);
+                  console.log(`productValues: `, productValues);
+                }}
+              >
+                Tell us about your product:
+              </h1>
             </Col>
           </Row>
           <Container className="questionContainer">
             <Row className="questionForm">
               <Form onSubmit={handleSubmit}>
                 <Row>
-                  <Col>
-                    <Form.Group className="mb-3" controlId="formTaskTitle">
-                      <Form.Label>
-                        What is the purpose or goal of your product?
-                      </Form.Label>
-                      <Form.Control
-                        name="question1"
-                        value={productValues.question1}
-                        onChange={handleFormData}
-                        autoComplete="off"
-                        required
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Please provide a response.
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
+                  <ProductName
+                    productValues={productValues.question1}
+                    handleFormData={handleFormData}
+                  />
                 </Row>
                 <Row>
-                  <Col>
-                    <Form.Group className="mb-3" controlId="formTaskTitle">
-                      <Form.Label>Who is your target audience?</Form.Label>
-                      <Form.Control
-                        name="question2"
-                        value={productValues.question2}
-                        onChange={handleFormData}
-                        autoComplete="off"
-                        required
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Please provide a response.
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
+                  <ProductCategory
+                    categorySelection={categorySelection}
+                    handleCategorySelection={handleCategorySelection}
+                    productValues={productValues}
+                    handleFormData={handleFormData}
+                  />
                 </Row>
                 <Row>
                   <Col>
@@ -113,13 +161,91 @@ const FormModal = (props) => {
                         What are the unique features or benefits of your
                         product?
                       </Form.Label>
-                      <Form.Control
-                        name="question3"
-                        value={productValues.question3}
-                        onChange={handleFormData}
-                        autoComplete="off"
-                        required
+                      <Form.Check
+                        inline
+                        label="Performance"
+                        name="performance"
+                        type="checkbox"
+                        checked={uniqueFeatures.performance}
+                        onChange={handleCheck}
                       />
+                      <Form.Check
+                        inline
+                        label="Design"
+                        name="design"
+                        type="checkbox"
+                        checked={uniqueFeatures.design}
+                        onChange={handleCheck}
+                      />
+                      <Form.Check
+                        inline
+                        label="Functionality"
+                        name="functionality"
+                        checked={uniqueFeatures.functionality}
+                        type="checkbox"
+                        onChange={handleCheck}
+                      />
+                      <Form.Check
+                        inline
+                        label="Quality and Durability"
+                        name="quality and durability"
+                        checked={uniqueFeatures.qualityAndDurability}
+                        type="checkbox"
+                        onChange={handleCheck}
+                      />
+                      <Form.Check
+                        inline
+                        label="Innovation"
+                        name="innovation"
+                        checked={uniqueFeatures.innovation}
+                        type="checkbox"
+                        onChange={handleCheck}
+                      />
+                      <Form.Check
+                        inline
+                        label="Eco-Friendliness"
+                        name="ecoFriendliness"
+                        checked={uniqueFeatures.ecoFriendliness}
+                        type="checkbox"
+                        onChange={handleCheck}
+                      />
+                      <Form.Check
+                        inline
+                        label="User Experience"
+                        name="userExperience"
+                        checked={uniqueFeatures.userExperience}
+                        type="checkbox"
+                        onChange={handleCheck}
+                      />
+                      <Form.Check
+                        inline
+                        label="Value for Money"
+                        name="valueForMoney"
+                        checked={checkboxValues.valueForMoney}
+                        type="checkbox"
+                        onChange={handleCheck}
+                      />
+                      <Form.Check
+                        inline
+                        label="Other:"
+                        name="other"
+                        type="checkbox"
+                        onChange={handleOtherCheck}
+                      />
+                      {checkboxValues.other ? (
+                        <>
+                          <Form.Control
+                            name="otherInput"
+                            placeholder="Please specify"
+                            value={uniqueFeatures.otherInput}
+                            onChange={handleOtherForm}
+                            autoComplete="off"
+                          />
+                        </>
+                      ) : (
+                        ""
+                      )}
+
                       <Form.Control.Feedback type="invalid">
                         Please provide a response.
                       </Form.Control.Feedback>

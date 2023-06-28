@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { AuthContext } from "../../Context/AuthContext";
-import AIRoute from "../../Utils/AIRoute";
+import AIRoute from "../../Utils/AIAPI";
 import "./AIForms.css";
 
 export default function AIForms() {
@@ -37,7 +37,7 @@ export default function AIForms() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const sendQuestions = await AIRoute.sendQuestions(productValues);
-    console.log(`productValues: `, productValues);
+    console.log(`sendQuestions: `, sendQuestions);
   };
 
   return (
