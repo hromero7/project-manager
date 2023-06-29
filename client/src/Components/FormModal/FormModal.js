@@ -44,11 +44,12 @@ const FormModal = (props) => {
     userExperience: false,
     otherInput: "",
   });
+  const [challengeValues, setChallengeValues] = useState({});
   const [productValues, setProductValues] = useState({
     question1: "",
     question2: categorySelection,
     question3: uniqueFeatures,
-    question4: "",
+    question4: challengeValues,
     question5: "",
     question6: "",
     question7: "",
@@ -182,6 +183,8 @@ const FormModal = (props) => {
                     question2={productValues.question2}
                     productValues={productValues}
                     handleFormData={handleFormData}
+                    challengeValues={challengeValues}
+                    setChallengeValues={setChallengeValues}
                   />
                 </Row>
                 <Row>

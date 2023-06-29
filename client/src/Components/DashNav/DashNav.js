@@ -107,7 +107,7 @@ const DashNav = () => {
                     navigate("/questions");
                   }}
                 >
-                  <i class="fa-solid fa-truck-fast"></i>
+                  <i className="fa-solid fa-truck-fast"></i>
                   <p>AI Form</p>
                 </Nav.Link>
 

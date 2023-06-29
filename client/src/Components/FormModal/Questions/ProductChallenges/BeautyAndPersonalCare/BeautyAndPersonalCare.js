@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Col, Form } from "react-bootstrap";
 
-export default function ElectronicsChallenges(props) {
+export default function BeautyAndPersonalCare(props) {
   const [challengeItems, setChallengeItems] = useState([]);
 
   useEffect(() => {
@@ -18,71 +18,72 @@ export default function ElectronicsChallenges(props) {
       );
     }
   };
-
   return (
     <Col>
       <Form.Check
         inline
-        label="Connectivity"
-        name="connectivity"
+        label="Skincare Concerns"
+        name="skincare concerns"
         type="checkbox"
-        checked={challengeItems.includes("connectivity")}
+        checked={challengeItems.includes("skincare concerns")}
         onChange={handleCheckboxChange}
       />
       <Form.Check
         inline
-        label="Battery life"
-        name="battery life"
+        label="Personalized Solutions"
+        name="personalized solutions"
         type="checkbox"
-        checked={challengeItems.includes("battery life")}
+        checked={challengeItems.includes("personalized solutions")}
         onChange={handleCheckboxChange}
       />
       <Form.Check
         inline
-        label="User Interface"
-        name="user interface"
+        label="Clean and Natural Ingredients"
+        name="clean and natural ingredients"
         type="checkbox"
-        checked={challengeItems.includes("user interface")}
+        checked={challengeItems.includes("clean and natural ingredients")}
         onChange={handleCheckboxChange}
       />
       <Form.Check
         inline
-        label="Performance and Speed"
-        name="performance"
+        label="Ethical Sourcing and Sustainability"
+        name="ethical sourcing and sustainability"
         type="checkbox"
-        checked={challengeItems.includes("performance")}
+        checked={challengeItems.includes("ethical sourcing and sustainability")}
         onChange={handleCheckboxChange}
       />
       <Form.Check
         inline
-        label="Compatibility"
-        name="compatibility"
+        label="Makeup Application and Techniques"
+        name="makeup application and techniques"
         type="checkbox"
-        checked={challengeItems.includes("compatibility")}
+        checked={challengeItems.includes("makeup application and techniques")}
         onChange={handleCheckboxChange}
       />
       <Form.Check
         inline
-        label="Durability"
-        name="durability"
+        label="Long-Lasting and Transfer-Proof Formulas"
+        name="long-lasting and transfer-proof formulas"
         type="checkbox"
-        checked={challengeItems.includes("durability")}
+        checked={challengeItems.includes(
+          "long-lasting and transfer-proof formulas"
+        )}
         onChange={handleCheckboxChange}
       />
       <Form.Check
         inline
-        label="Data Security"
-        name="data security"
+        label="Accessibility and Inclusivity"
+        name="accessibility and inclusivity"
         type="checkbox"
-        checked={challengeItems.includes("data security")}
+        checked={challengeItems.includes("accessibility and inclusivity")}
         onChange={handleCheckboxChange}
       />
       <Form.Check
         inline
-        label="Environmental Impact"
-        name="environmental impact"
+        label="Packaging and Portability"
+        name="packaging and portability"
         type="checkbox"
-        checked={challengeItems.includes("environmental impact")}
+        checked={challengeItems.includes("packaging and portability")}
         onChange={handleCheckboxChange}
       />
     </Col>

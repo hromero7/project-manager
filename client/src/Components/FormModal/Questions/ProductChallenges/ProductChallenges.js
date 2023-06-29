@@ -1,16 +1,46 @@
 import React from "react";
 import { Col, Form } from "react-bootstrap";
 import ElectronicsChallenges from "./ElectronicsChallenges/ElectronicsChallenges";
+import FashionAndApperelChallenges from "./FashionAndApparelChallenges/FashionAndApperelChallenges";
+import BeautyAndPersonalCare from "./BeautyAndPersonalCare/BeautyAndPersonalCare";
+import HomeAndKitchenAppliances from "./HomeAndKitchenAppliances/HomeAndKitchenAppliances";
 
 export default function ProductChallenges(props) {
+  console.log(`props `, props);
   let challengeOptions;
 
   switch (props.question2) {
     case "Electronics":
-      challengeOptions = <ElectronicsChallenges />;
+      challengeOptions = (
+        <ElectronicsChallenges
+          challengeValues={props.challengeValues}
+          setChallengeValues={props.setChallengeValues}
+        />
+      );
       break;
     case "Fashion and Apparel":
-      challengeOptions = <FashionAndApparelChallenges />;
+      challengeOptions = (
+        <FashionAndApperelChallenges
+          challengeValues={props.challengeValues}
+          setChallengeValues={props.setChallengeValues}
+        />
+      );
+      break;
+    case "Beauty and Personal Care":
+      challengeOptions = (
+        <BeautyAndPersonalCare
+          challengeValues={props.challengeValues}
+          setChallengeValues={props.setChallengeValues}
+        />
+      );
+      break;
+    case "Home and Kitchen Appliances":
+      challengeOptions = (
+        <HomeAndKitchenAppliances
+          challengeValues={props.challengeValues}
+          setChallengeValues={props.setChallengeValues}
+        />
+      );
     default:
       break;
   }
@@ -21,16 +51,7 @@ export default function ProductChallenges(props) {
         <Form.Label>
           What problems or challenges does your product solve?
         </Form.Label>
-        {/* <Form.Control
-          name="question4"
-          value={props.productValues.question4}
-          onChange={props.handleFormData}
-          autoComplete="off"
-          required
-        />
-        <Form.Control.Feedback type="invalid">
-          Please provide a response.
-        </Form.Control.Feedback> */}
+
         {challengeOptions}
       </Form.Group>
     </Col>
