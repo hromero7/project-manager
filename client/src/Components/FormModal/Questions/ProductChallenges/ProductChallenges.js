@@ -9,7 +9,8 @@ export default function ProductChallenges(props) {
     case "Electronics":
       challengeOptions = <ElectronicsChallenges />;
       break;
-
+    case "Fashion and Apparel":
+      challengeOptions = <FashionAndApparelChallenges />;
     default:
       break;
   }

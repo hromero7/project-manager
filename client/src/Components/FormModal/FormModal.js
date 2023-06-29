@@ -44,7 +44,6 @@ const FormModal = (props) => {
     userExperience: false,
     otherInput: "",
   });
-
   const [productValues, setProductValues] = useState({
     question1: "",
     question2: categorySelection,
@@ -60,7 +59,6 @@ const FormModal = (props) => {
 
   const handleCategorySelection = (value) => {
     setCategorySelection(value);
-
     setProductValues((prevProductValues) => ({
       ...prevProductValues,
       question2: value,
@@ -83,12 +81,10 @@ const FormModal = (props) => {
 
   const handleCheck = (e) => {
     const { name, checked } = e.target;
-
     setCheckboxValues((prevCheckboxValues) => ({
       ...prevCheckboxValues,
       [name]: checked,
     }));
-
     if (checked) {
       setUniqueFeatures((prevUniqueFeatures) => ({
         ...prevUniqueFeatures,
@@ -100,7 +96,6 @@ const FormModal = (props) => {
         [name]: false,
       }));
     }
-
     setProductValues((prevProductValues) => ({
       ...prevProductValues,
       question3: uniqueFeatures,
@@ -112,7 +107,6 @@ const FormModal = (props) => {
       ...checkboxValues,
       other: e.target.checked,
     });
-
     if (!e.target.checked) {
       setUniqueFeatures({
         ...uniqueFeatures,
