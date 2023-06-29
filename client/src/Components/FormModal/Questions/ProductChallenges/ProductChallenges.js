@@ -4,9 +4,9 @@ import ElectronicsChallenges from "./ElectronicsChallenges/ElectronicsChallenges
 import FashionAndApperelChallenges from "./FashionAndApparelChallenges/FashionAndApperelChallenges";
 import BeautyAndPersonalCare from "./BeautyAndPersonalCare/BeautyAndPersonalCare";
 import HomeAndKitchenAppliances from "./HomeAndKitchenAppliances/HomeAndKitchenAppliances";
+import HealthAndFitness from "./HealthAndFitness/HealthAndFitness";
 
 export default function ProductChallenges(props) {
-  console.log(`props `, props);
   let challengeOptions;
 
   switch (props.question2) {
@@ -41,6 +41,15 @@ export default function ProductChallenges(props) {
           setChallengeValues={props.setChallengeValues}
         />
       );
+      break;
+    case "Health and Fitness":
+      challengeOptions = (
+        <HealthAndFitness
+          challengeValues={props.challengeValues}
+          setChallengeValues={props.setChallengeValues}
+        />
+      );
+      break;
     default:
       break;
   }
