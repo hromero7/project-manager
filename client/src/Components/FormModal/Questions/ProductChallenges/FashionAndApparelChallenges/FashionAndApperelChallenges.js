@@ -3,7 +3,16 @@ import { Col, Form } from "react-bootstrap";
 
 export default function FashionAndApperelChallenges(props) {
   const [challengeItems, setChallengeItems] = useState([]);
-
+  let challenges = [
+    "Fit and Sizing",
+    "Comfort",
+    "Style Versatility",
+    "Quality and Durability",
+    "Sustainability",
+    "Unique Style and Individuality",
+    "Accessibility and Inclusivity",
+    "Online Shopping Experience",
+  ];
   useEffect(() => {
     props.setChallengeValues(challengeItems);
   });
@@ -21,70 +30,18 @@ export default function FashionAndApperelChallenges(props) {
 
   return (
     <Col>
-      <Form.Check
-        inline
-        label="Fit and Sizing"
-        name="fit and sizing"
-        type="checkbox"
-        checked={challengeItems.includes("fit and sizing")}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Comfort"
-        name="comfort"
-        type="checkbox"
-        checked={challengeItems.includes("comfort")}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Style Versatility"
-        name="style versatility"
-        type="checkbox"
-        checked={challengeItems.includes("style versatility")}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Quality and Durability"
-        name="quality and durability"
-        type="checkbox"
-        checked={challengeItems.includes("quality and durability")}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Sustainability"
-        name="sustainability"
-        type="checkbox"
-        checked={challengeItems.includes("sustainability")}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Unique Style and Individuality"
-        name="unique style and individuality"
-        type="checkbox"
-        checked={challengeItems.includes("unique style and individuality")}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Accessibility and Inclusivity"
-        name="accessibility and inclusivity"
-        type="checkbox"
-        checked={challengeItems.includes("accessibility and inclusivity")}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Online Shopping Experience"
-        name="online shopping experience"
-        type="checkbox"
-        checked={challengeItems.includes("online shopping experience")}
-        onChange={handleCheckboxChange}
-      />
+      {challenges.map((challItem) => {
+        return (
+          <Form.Check
+            inline
+            label={challItem}
+            name={challItem.toLowerCase()}
+            type="checkbox"
+            checked={challengeItems.includes(challItem.toLowerCase())}
+            onChange={handleCheckboxChange}
+          />
+        );
+      })}
     </Col>
   );
 }

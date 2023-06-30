@@ -3,7 +3,16 @@ import { Col, Form } from "react-bootstrap";
 
 export default function HealthAndFitness(props) {
   const [challengeItems, setChallengeItems] = useState([]);
-
+  let challenges = [
+    "Motivation and Accountability",
+    "Accessibility and Convenience",
+    "Personalization",
+    "Injury Prevention and Recovery",
+    "Tracking and Monitoring",
+    "Education and Guidance",
+    "Stress Reduction and Mental Well-being",
+    "Sustainability and Eco-Friendliness",
+  ];
   useEffect(() => {
     props.setChallengeValues(challengeItems);
   });
@@ -21,72 +30,18 @@ export default function HealthAndFitness(props) {
 
   return (
     <Col>
-      <Form.Check
-        inline
-        label="Motivation and Accountability"
-        name="motivation and accountability"
-        type="checkbox"
-        checked={challengeItems.includes("motivation and accountability")}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Accessibility and Convenience"
-        name="accessibility and convenience"
-        type="checkbox"
-        checked={challengeItems.includes("accessibility and convenience")}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Personalization"
-        name="personalization"
-        type="checkbox"
-        checked={challengeItems.includes("personalization")}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Injury Prevention and Recovery"
-        name="injury prevention and recovery"
-        type="checkbox"
-        checked={challengeItems.includes("injury prevention and recovery")}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Tracking and Monitoring"
-        name="tracking and monitoring"
-        type="checkbox"
-        checked={challengeItems.includes("tracking and monitoring")}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Education and Guidance"
-        name="education and guidance"
-        type="checkbox"
-        checked={challengeItems.includes("education and guidance")}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Stress Reduction and Mental Well-being"
-        name="stress reduction and mental well-being"
-        type="checkbox"
-        checked={challengeItems.includes(
-          "stress reduction and mental well-being"
-        )}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Sustainability and Eco-Friendliness"
-        name="sustainability and eco-friendliness"
-        type="checkbox"
-        checked={challengeItems.includes("sustainability and eco-friendliness")}
-        onChange={handleCheckboxChange}
-      />
+      {challenges.map((challItem) => {
+        return (
+          <Form.Check
+            inline
+            label={challItem}
+            name={challItem.toLowerCase()}
+            type="checkbox"
+            checked={challengeItems.includes(challItem.toLowerCase())}
+            onChange={handleCheckboxChange}
+          />
+        );
+      })}
     </Col>
   );
 }

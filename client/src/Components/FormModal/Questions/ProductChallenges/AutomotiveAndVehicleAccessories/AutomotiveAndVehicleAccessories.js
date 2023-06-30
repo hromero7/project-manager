@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { Col, Form } from "react-bootstrap";
 
-export default function ToysAndGames(props) {
+export default function AutomotiveAndVehicleAccessories(props) {
   const [challengeItems, setChallengeItems] = useState([]);
   let challenges = [
-    "Educational Value",
-    "Age Appropriateness",
-    "Engagement and Entertainment",
-    "Durability and Safety",
-    "Social Interaction",
-    "Screen-Free Play",
-    "Storage and Organization",
-    "Inclusivity and Diversity",
+    "Safety and Security",
+    "Convenience and Comfort",
+    "Versatility and Adaptability",
+    "Organization and Storage",
+    "Connectivity and Technology integration",
+    "Energy Efficiency and Sustainability",
+    "Maintenance and Care",
+    "Personalization and Style",
   ];
+
   useEffect(() => {
     props.setChallengeValues(challengeItems);
-  });
+  }, [challengeItems, props]);
 
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
+
     if (checked) {
       setChallengeItems((prevChallengeItems) => [...prevChallengeItems, name]);
     } else {

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   Container,
   Row,
@@ -22,6 +22,7 @@ const FormModal = (props) => {
   const [categorySelection, setCategorySelection] = useState(
     "Please make a selection"
   );
+  const [challengeValues, setChallengeValues] = useState([]);
   const [checkboxValues, setCheckboxValues] = useState({
     performance: false,
     design: false,
@@ -44,7 +45,6 @@ const FormModal = (props) => {
     userExperience: false,
     otherInput: "",
   });
-  const [challengeValues, setChallengeValues] = useState({});
   const [productValues, setProductValues] = useState({
     question1: "",
     question2: categorySelection,
@@ -57,6 +57,13 @@ const FormModal = (props) => {
     question9: "",
     question10: "",
   });
+
+  useEffect(() => {
+    setProductValues((prevValues) => ({
+      ...prevValues,
+      question4: challengeValues,
+    }));
+  }, [challengeValues]);
 
   const handleCategorySelection = (value) => {
     setCategorySelection(value);
@@ -127,6 +134,7 @@ const FormModal = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(`productValues: `, productValues);
+    console.log(`challengeValues: `, challengeValues);
     // const sendQuestions = await AIRoute.sendQuestions(productValues, props);
     // console.log(`sendQuestions: `, sendQuestions);
   };

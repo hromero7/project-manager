@@ -3,6 +3,16 @@ import { Col, Form } from "react-bootstrap";
 
 export default function BeautyAndPersonalCare(props) {
   const [challengeItems, setChallengeItems] = useState([]);
+  let challenges = [
+    "Skincare Concerns",
+    "Personalized Solutions",
+    "Clean and Natural Ingredients",
+    "Ethical Sourcing and Sustainability",
+    "Makeup Application and Techniques",
+    "Long-Lasting and Transfer-Proof Formulas",
+    "Accessibility and Inclusivity",
+    "Packaging and Portability",
+  ];
 
   useEffect(() => {
     props.setChallengeValues(challengeItems);
@@ -20,72 +30,18 @@ export default function BeautyAndPersonalCare(props) {
   };
   return (
     <Col>
-      <Form.Check
-        inline
-        label="Skincare Concerns"
-        name="skincare concerns"
-        type="checkbox"
-        checked={challengeItems.includes("skincare concerns")}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Personalized Solutions"
-        name="personalized solutions"
-        type="checkbox"
-        checked={challengeItems.includes("personalized solutions")}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Clean and Natural Ingredients"
-        name="clean and natural ingredients"
-        type="checkbox"
-        checked={challengeItems.includes("clean and natural ingredients")}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Ethical Sourcing and Sustainability"
-        name="ethical sourcing and sustainability"
-        type="checkbox"
-        checked={challengeItems.includes("ethical sourcing and sustainability")}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Makeup Application and Techniques"
-        name="makeup application and techniques"
-        type="checkbox"
-        checked={challengeItems.includes("makeup application and techniques")}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Long-Lasting and Transfer-Proof Formulas"
-        name="long-lasting and transfer-proof formulas"
-        type="checkbox"
-        checked={challengeItems.includes(
-          "long-lasting and transfer-proof formulas"
-        )}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Accessibility and Inclusivity"
-        name="accessibility and inclusivity"
-        type="checkbox"
-        checked={challengeItems.includes("accessibility and inclusivity")}
-        onChange={handleCheckboxChange}
-      />
-      <Form.Check
-        inline
-        label="Packaging and Portability"
-        name="packaging and portability"
-        type="checkbox"
-        checked={challengeItems.includes("packaging and portability")}
-        onChange={handleCheckboxChange}
-      />
+      {challenges.map((challItem) => {
+        return (
+          <Form.Check
+            inline
+            label={challItem}
+            name={challItem.toLowerCase()}
+            type="checkbox"
+            checked={challengeItems.includes(challItem.toLowerCase())}
+            onChange={handleCheckboxChange}
+          />
+        );
+      })}
     </Col>
   );
 }
