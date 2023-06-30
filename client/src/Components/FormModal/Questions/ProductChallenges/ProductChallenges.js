@@ -6,6 +6,13 @@ import BeautyAndPersonalCare from "./BeautyAndPersonalCare/BeautyAndPersonalCare
 import HomeAndKitchenAppliances from "./HomeAndKitchenAppliances/HomeAndKitchenAppliances";
 import HealthAndFitness from "./HealthAndFitness/HealthAndFitness";
 import AutomotiveAndVehicleAccessories from "./AutomotiveAndVehicleAccessories/AutomotiveAndVehicleAccessories";
+import FurnitureAndHomeDecor from "./FurnitureAndHomeDecor/FurnitureAndHomeDecor";
+import BooksAndMedia from "./BooksAndMedia/BooksAndMedia";
+import FoodAndBeverages from "./FoodAndBeverages/FoodAndBeverages";
+import BabyAndKidsProducts from "./BabyAndKidsProducts/BabyAndKidsProducts";
+import PetSupplies from "./PetSupplies/PetSupplies";
+import OfficeSuppliesAndStationery from "./OfficeSuppliesAndStationery/OfficeSuppliesAndStationery";
+import ToolsAndHomeImprovement from "./ToolsAndHomeImprovement/ToolsAndHomeImprovement";
 
 export default function ProductChallenges(props) {
   let challengeOptions;
@@ -58,6 +65,65 @@ export default function ProductChallenges(props) {
           setChallengeValues={props.setChallengeValues}
         />
       );
+      break;
+    case "Furniture and Home Decor":
+      challengeOptions = (
+        <FurnitureAndHomeDecor
+          challengeValues={props.challengeValues}
+          setChallengeValues={props.setChallengeValues}
+        />
+      );
+      break;
+    case "Books and Media":
+      challengeOptions = (
+        <BooksAndMedia
+          challengeValues={props.challengeValues}
+          setChallengeValues={props.setChallengeValues}
+        />
+      );
+      break;
+    case "Food and Beverages":
+      challengeOptions = (
+        <FoodAndBeverages
+          challengeValues={props.challengeValues}
+          setChallengeValues={props.setChallengeValues}
+        />
+      );
+      break;
+    case "Baby and Kids Products":
+      challengeOptions = (
+        <BabyAndKidsProducts
+          challengeValues={props.challengeValues}
+          setChallengeValues={props.setChallengeValues}
+        />
+      );
+      break;
+    case "Pet Supplies":
+      challengeOptions = (
+        <PetSupplies
+          challengeValues={props.challengeValues}
+          setChallengeValues={props.setChallengeValues}
+        />
+      );
+      break;
+    case "Office Supplies and Stationery":
+      challengeOptions = (
+        <OfficeSuppliesAndStationery
+          challengeValues={props.challengeValues}
+          setChallengeValues={props.setChallengeValues}
+        />
+      );
+      break;
+    case "Tools and Home Improvement":
+      challengeOptions = (
+        <ToolsAndHomeImprovement
+          challengeValues={props.challengeValues}
+          setChallengeValues={props.setChallengeValues}
+        />
+      );
+      break;
+    case "Travel and Luggage":
+      challengeOptions = "";
       break;
     default:
       break;
