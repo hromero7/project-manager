@@ -17,7 +17,6 @@ import TravelAndLuggage from "./TravelAndLuggage/TravelAndLuggage";
 
 export default function ProductChallenges(props) {
   let challengeOptions;
-  console.log(`props: `, props);
   switch (props.question2) {
     case "Electronics":
       challengeOptions = (
@@ -132,6 +131,7 @@ export default function ProductChallenges(props) {
       );
       break;
     default:
+      challengeOptions = <h3>Please select a category</h3>;
       break;
   }
 
