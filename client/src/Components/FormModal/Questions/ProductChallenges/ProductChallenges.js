@@ -13,6 +13,7 @@ import BabyAndKidsProducts from "./BabyAndKidsProducts/BabyAndKidsProducts";
 import PetSupplies from "./PetSupplies/PetSupplies";
 import OfficeSuppliesAndStationery from "./OfficeSuppliesAndStationery/OfficeSuppliesAndStationery";
 import ToolsAndHomeImprovement from "./ToolsAndHomeImprovement/ToolsAndHomeImprovement";
+import TravelAndLuggage from "./TravelAndLuggage/TravelAndLuggage";
 
 export default function ProductChallenges(props) {
   let challengeOptions;
@@ -123,7 +124,12 @@ export default function ProductChallenges(props) {
       );
       break;
     case "Travel and Luggage":
-      challengeOptions = "";
+      challengeOptions = (
+        <TravelAndLuggage
+          challengeValues={props.challengeValues}
+          setChallengeValues={props.setChallengeValues}
+        />
+      );
       break;
     default:
       break;

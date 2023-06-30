@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Col, Form } from "react-bootstrap";
 
-export default function ToysAndGames(props) {
+export default function TravelAndLuggage(props) {
   const [challengeItems, setChallengeItems] = useState([]);
   let challenges = [
     "Durability and Security",
