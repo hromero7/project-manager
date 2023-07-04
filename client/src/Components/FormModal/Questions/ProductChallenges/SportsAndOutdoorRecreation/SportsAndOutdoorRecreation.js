@@ -29,10 +29,11 @@ export default function SportsAndOutdoorRecreation(props) {
   };
   return (
     <Col>
-      {challenges.map((challItem) => {
+      {challenges.map((challItem, index) => {
         return (
           <Form.Check
             inline
+            key={index}
             label={challItem}
             name={challItem.toLowerCase()}
             type="checkbox"
