@@ -1,77 +1,83 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Form } from "react-bootstrap";
 
 export default function UniqueFeatures(props) {
+  const [uniqueFeature, setUniqueFeature] = useState([]);
+  let feature = [
+    "Performance",
+    "Design",
+    "Functionality",
+    "Quality and Durability",
+    "Innovation",
+    "User Experience",
+    "Value for Money",
+    // "Other",
+  ];
+
+  useEffect(() => {
+    props.setUniqueFeatures(uniqueFeature);
+  });
+
+  const handleCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+    const updatedFeatures = [...uniqueFeature];
+
+    if (checked) {
+      updatedFeatures.push(name);
+    } else {
+      const index = updatedFeatures.indexOf(name);
+      if (index !== -1) {
+        updatedFeatures.splice(index, 1);
+      }
+    }
+
+    setUniqueFeature(updatedFeatures);
+
+    props.setProductValues((prevProductValues) => ({
+      ...prevProductValues,
+      question3: updatedFeatures,
+    }));
+  };
+
+  // const handleCheckboxChange = (event) => {
+  //   const { name, checked } = event.target;
+
+  //   if (checked) {
+  //     setUniqueFeature((prevFeatureItems) => [...prevFeatureItems, name]);
+  //   } else {
+  //     setUniqueFeature((prevFeatureItems) =>
+  //       prevFeatureItems.filter((item) => item !== name)
+  //     );
+  //   }
+
+  //   props.setProductValues((prevProductValues) => ({
+  //     ...prevProductValues,
+  //     question3: {
+  //       ...prevProductValues.question3,
+  //       [name]: name,
+  //     },
+  //   }));
+  // };
+
   return (
     <Col>
       <Form.Group className="mb-3" controlId="formTaskTitle">
         <Form.Label>
           What are the unique features or benefits of your product?
         </Form.Label>
-        <Form.Check
-          inline
-          label="Performance"
-          name="performance"
-          type="checkbox"
-          checked={props.uniqueFeatures.performance}
-          onChange={props.handleCheck}
-        />
-        <Form.Check
-          inline
-          label="Design"
-          name="design"
-          type="checkbox"
-          checked={props.uniqueFeatures.design}
-          onChange={props.handleCheck}
-        />
-        <Form.Check
-          inline
-          label="Functionality"
-          name="functionality"
-          checked={props.uniqueFeatures.functionality}
-          type="checkbox"
-          onChange={props.handleCheck}
-        />
-        <Form.Check
-          inline
-          label="Quality and Durability"
-          name="qualityAndDurability"
-          checked={props.uniqueFeatures.qualityAndDurability}
-          type="checkbox"
-          onChange={props.handleCheck}
-        />
-        <Form.Check
-          inline
-          label="Innovation"
-          name="innovation"
-          checked={props.uniqueFeatures.innovation}
-          type="checkbox"
-          onChange={props.handleCheck}
-        />
-        <Form.Check
-          inline
-          label="Eco-Friendliness"
-          name="ecoFriendliness"
-          checked={props.uniqueFeatures.ecoFriendliness}
-          type="checkbox"
-          onChange={props.handleCheck}
-        />
-        <Form.Check
-          inline
-          label="User Experience"
-          name="userExperience"
-          checked={props.uniqueFeatures.userExperience}
-          type="checkbox"
-          onChange={props.handleCheck}
-        />
-        <Form.Check
-          inline
-          label="Value for Money"
-          name="valueForMoney"
-          checked={props.checkboxValues.valueForMoney}
-          type="checkbox"
-          onChange={props.handleCheck}
-        />
+        {feature.map((featureItem, index) => {
+          return (
+            <Form.Check
+              inline
+              key={index}
+              label={featureItem}
+              name={featureItem.toLowerCase()}
+              type="checkbox"
+              checked={props.checkboxValues[featureItem.toLowerCase()]}
+              onChange={handleCheckboxChange}
+            />
+          );
+        })}
         <Form.Check
           inline
           label="Other:"

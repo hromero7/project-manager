@@ -23,28 +23,9 @@ const FormModal = (props) => {
     "Please make a selection"
   );
   const [challengeValues, setChallengeValues] = useState([]);
-  const [checkboxValues, setCheckboxValues] = useState({
-    performance: false,
-    design: false,
-    functionality: false,
-    qualityAndDurability: false,
-    innovation: false,
-    ecoFriendliness: false,
-    userExperience: false,
-    valueForMoney: false,
-    other: false,
-  });
+  const [uniqueFeatures, setUniqueFeatures] = useState([]);
+  const [checkboxValues, setCheckboxValues] = useState({});
   const [otherCheck, setOtherCheck] = useState(false);
-  const [uniqueFeatures, setUniqueFeatures] = useState({
-    performance: false,
-    design: false,
-    functionality: false,
-    qualityAndDurability: false,
-    innovation: false,
-    ecoFriendliness: false,
-    userExperience: false,
-    otherInput: "",
-  });
   const [productValues, setProductValues] = useState({
     question1: "",
     question2: categorySelection,
@@ -63,6 +44,8 @@ const FormModal = (props) => {
       ...prevValues,
       question4: challengeValues,
     }));
+
+    setUniqueFeatures();
   }, [challengeValues]);
 
   const handleCategorySelection = (value) => {
@@ -89,24 +72,18 @@ const FormModal = (props) => {
 
   const handleCheck = (e) => {
     const { name, checked } = e.target;
+
     setCheckboxValues((prevCheckboxValues) => ({
       ...prevCheckboxValues,
       [name]: checked,
     }));
-    if (checked) {
-      setUniqueFeatures((prevUniqueFeatures) => ({
-        ...prevUniqueFeatures,
-        [name]: true,
-      }));
-    } else {
-      setUniqueFeatures((prevUniqueFeatures) => ({
-        ...prevUniqueFeatures,
-        [name]: false,
-      }));
-    }
+
     setProductValues((prevProductValues) => ({
       ...prevProductValues,
-      question3: uniqueFeatures,
+      question3: {
+        ...prevProductValues.question3,
+        [name]: checked,
+      },
     }));
   };
 
@@ -134,6 +111,7 @@ const FormModal = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const sendQuestions = await AIRoute.sendQuestions(productValues, props);
+
     console.log(`sendQuestions: `, sendQuestions);
   };
 
@@ -175,6 +153,7 @@ const FormModal = (props) => {
                   <UniqueFeatures
                     uniqueFeatures={uniqueFeatures}
                     setUniqueFeatures={setUniqueFeatures}
+                    setProductValues={setProductValues}
                     handleCheck={handleCheck}
                     checkboxValues={checkboxValues}
                     setCheckboxValues={setCheckboxValues}
