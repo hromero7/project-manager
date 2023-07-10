@@ -13,4 +13,14 @@ export default {
         return console.log(`err:`, err);
       });
   },
+  chatAPIRequest: () => {
+    return axios
+      .post(`/api/oai/completions`, {})
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        return console.log(err);
+      });
+  },
 };

@@ -5,7 +5,7 @@ export default function ProductName(props) {
   return (
     <Col>
       <Form.Group className="mb-3" controlId="formTaskTitle">
-        <Form.Label>What is the name product?</Form.Label>
+        <Form.Label>What is the products name?</Form.Label>
         <Form.Control
           name="question1"
           value={props.productValues.question1}

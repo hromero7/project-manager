@@ -70,4 +70,5 @@ module.exports = {
       }
     }
   },
+  chatGPTRequest: async (req, res) => {},
 };
