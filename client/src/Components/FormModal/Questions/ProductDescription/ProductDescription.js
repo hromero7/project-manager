@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Col, Form } from "react-bootstrap";
 
-export default function UniqueFeatures(props) {
+export default function ProductDescription(props) {
   return (
     <Col>
       <Form.Group className="mb-3" controlId="formTaskTitle">
-        <Form.Label>What makes this unique?</Form.Label>
+        <Form.Label>Description</Form.Label>
         <Form.Control
-          name="uniqueFeatures"
-          value={props.productValues.uniqueFeatures}
+          name="productDescription"
+          value={props.productValues.productDescription}
           onChange={props.handleFormData}
           autoComplete="off"
           required

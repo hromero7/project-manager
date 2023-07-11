@@ -7,8 +7,8 @@ export default function ProductName(props) {
       <Form.Group className="mb-3" controlId="formTaskTitle">
         <Form.Label>What is the products name?</Form.Label>
         <Form.Control
-          name="question1"
-          value={props.productValues.question1}
+          name="productName"
+          value={props.productValues.productName}
           onChange={props.handleFormData}
           autoComplete="off"
           required

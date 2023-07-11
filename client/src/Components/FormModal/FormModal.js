@@ -13,24 +13,21 @@ import { AuthContext } from "../../Context/AuthContext";
 import AIRoute from "../../Utils/AIAPI";
 import "./FormModal.css";
 import ProductName from "./Questions/ProductName/ProductName";
-import ProductCategory from "./Questions/ProductCategory/ProductCategory";
+import ProductDescription from "./Questions/ProductDescription/ProductDescription";
 import UniqueFeatures from "./Questions/UniqueFeatures/UniqueFeatures";
 import ProductChallenges from "./Questions/ProductChallenges/ProductChallenges";
 
 const FormModal = (props) => {
   const [open, setOpen] = useState(false);
-  const [categorySelection, setCategorySelection] = useState(
-    "Please make a selection"
-  );
+
   const [challengeValues, setChallengeValues] = useState([]);
   const [uniqueFeatures, setUniqueFeatures] = useState([]);
   const [checkboxValues, setCheckboxValues] = useState({});
-  const [otherCheck, setOtherCheck] = useState(false);
   const [productValues, setProductValues] = useState({
-    question1: "",
-    question2: categorySelection,
-    question3: uniqueFeatures,
-    question4: challengeValues,
+    productName: "",
+    productDescription: "",
+    uniqueFeatures: "",
+    question4: "",
     question5: "",
     question6: "",
     question7: "",
@@ -48,13 +45,13 @@ const FormModal = (props) => {
     setUniqueFeatures();
   }, [challengeValues]);
 
-  const handleCategorySelection = (value) => {
-    setCategorySelection(value);
-    setProductValues((prevProductValues) => ({
-      ...prevProductValues,
-      question2: value,
-    }));
-  };
+  // const handleCategorySelection = (value) => {
+  //   setCategorySelection(value);
+  //   setProductValues((prevProductValues) => ({
+  //     ...prevProductValues,
+  //     question2: value,
+  //   }));
+  // };
 
   const handleOpen = () => {
     setOpen(true);
@@ -87,27 +84,6 @@ const FormModal = (props) => {
     }));
   };
 
-  const handleOtherCheck = (e) => {
-    setCheckboxValues({
-      ...checkboxValues,
-      other: e.target.checked,
-    });
-    if (!e.target.checked) {
-      setUniqueFeatures({
-        ...uniqueFeatures,
-        otherInput: "",
-      });
-    }
-    setOtherCheck(e.target.checked);
-  };
-
-  const handleOtherForm = (e) => {
-    setUniqueFeatures({
-      ...uniqueFeatures,
-      otherInput: e.target.value,
-    });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const sendQuestions = await AIRoute.sendQuestions(productValues, props);
@@ -137,35 +113,24 @@ const FormModal = (props) => {
               <Form onSubmit={handleSubmit}>
                 <Row>
                   <ProductName
-                    productValues={productValues.question1}
+                    productValues={productValues.productName}
                     handleFormData={handleFormData}
                   />
                 </Row>
                 <Row>
-                  <ProductCategory
-                    categorySelection={categorySelection}
-                    handleCategorySelection={handleCategorySelection}
+                  <ProductDescription
                     productValues={productValues}
                     handleFormData={handleFormData}
                   />
                 </Row>
                 <Row>
                   <UniqueFeatures
-                    uniqueFeatures={uniqueFeatures}
-                    setUniqueFeatures={setUniqueFeatures}
-                    setProductValues={setProductValues}
-                    handleCheck={handleCheck}
-                    checkboxValues={checkboxValues}
-                    setCheckboxValues={setCheckboxValues}
-                    handleOtherCheck={handleOtherCheck}
-                    handleOtherForm={handleOtherForm}
-                    setOtherCheck={setOtherCheck}
-                    otherCheck={otherCheck}
+                    productValues={productValues}
+                    handleFormData={handleFormData}
                   />
                 </Row>
                 <Row>
                   <ProductChallenges
-                    question2={productValues.question2}
                     productValues={productValues}
                     handleFormData={handleFormData}
                     challengeValues={challengeValues}
