@@ -1,14 +1,13 @@
 import React from "react";
 import { Col, Form } from "react-bootstrap";
-
-export default function ProductDescription(props) {
+export default function BrandSocials(props) {
   return (
     <Col>
       <Form.Group className="mb-3" controlId="formTaskTitle">
-        <Form.Label>Description</Form.Label>
+        <Form.Label>Brand Social & Marketing Links</Form.Label>
         <Form.Control
-          name="productDescription"
-          value={props.productValues.productDescription}
+          name="brandName"
+          value={props.productValues.brandSocials}
           onChange={props.handleFormData}
           autoComplete="off"
           required

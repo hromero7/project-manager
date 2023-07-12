@@ -3,8 +3,7 @@ import { Container, Row, Col, Modal, Form, Button } from "react-bootstrap";
 import { AuthContext } from "../../Context/AuthContext";
 import AIRoute from "../../Utils/AIAPI";
 import "./FormModal.css";
-import ProductName from "./Questions/ProductName/ProductName";
-import ProductDescription from "./Questions/ProductDescription/ProductDescription";
+import BrandName from "./Questions/BrandName/BrandName";
 import UniqueFeatures from "./Questions/UniqueFeatures/UniqueFeatures";
 import ProductChallenges from "./Questions/ProductChallenges/ProductChallenges";
 import BrandPersonality from "./Questions/BrandPersonality/BrandPersonality";
@@ -13,20 +12,30 @@ import ProductResearch from "./Questions/ProductResearch/ProductResearch";
 import CallToAction from "./Questions/CallToAction/CallToAction";
 import DistributionChannels from "./Questions/DistributionChannels/DistributionChannels";
 import Competitors from "./Questions/Competitors/Competitors";
+import BrandWebsite from "./Questions/BrandWebsite/BrandWebsite";
+import BrandDescription from "./Questions/BrandDescription/BrandDescription";
+import BrandSocials from "./Questions/BrandSocials/BrandSocials";
+import ShortTerm from "./Questions/ShortTerm/ShortTerm";
+import LongTerm from "./Questions/LongTerm/LongTerm";
+import Credibility from "./Questions/Credibility/Credibility";
+import BrandVoice from "./Questions/BrandVoice/BrandVoice";
+import ExcludeTerms from "./Questions/ExcludeTerms/ExcludeTerms";
 
 const FormModal = (props) => {
   const [open, setOpen] = useState(false);
   const [productValues, setProductValues] = useState({
-    productName: "",
-    productDescription: "",
-    uniqueFeatures: "",
-    productChallenges: "",
+    brandName: "",
+    brandWebsite: "",
+    brandSocials: "",
+    brandDescription: "",
     brandPersonality: "",
-    productVision: "",
-    productResearch: "",
+    shortTerm: "",
+    longTerm: "",
+    credibility: "",
     callToAction: "",
-    distrobutionChannels: "",
-    competitors: "",
+    targetAudience: "",
+    brandVoice: "",
+    excludeTerms: "",
   });
 
   const handleOpen = () => {
@@ -70,19 +79,25 @@ const FormModal = (props) => {
             <Row className="questionForm">
               <Form onSubmit={handleSubmit}>
                 <Row>
-                  <ProductName
+                  <BrandName
                     productValues={productValues}
                     handleFormData={handleFormData}
                   />
                 </Row>
                 <Row>
-                  <ProductDescription
+                  <BrandWebsite
                     productValues={productValues}
                     handleFormData={handleFormData}
                   />
                 </Row>
                 <Row>
-                  <UniqueFeatures
+                  <BrandSocials
+                    productValues={productValues}
+                    handleFormData={handleFormData}
+                  />
+                </Row>
+                <Row>
+                  <BrandDescription
                     productValues={productValues}
                     handleFormData={handleFormData}
                   />
@@ -101,31 +116,31 @@ const FormModal = (props) => {
                 </Row>
 
                 <Row>
-                  <ProductVision
+                  <ShortTerm
                     productValues={productValues}
                     handleFormData={handleFormData}
                   />
                 </Row>
                 <Row>
-                  <ProductResearch
+                  <LongTerm
                     productValues={productValues}
                     handleFormData={handleFormData}
                   />
                 </Row>
                 <Row>
-                  <CallToAction
+                  <Credibility
                     productValues={productValues}
                     handleFormData={handleFormData}
                   />
                 </Row>
                 <Row>
-                  <DistributionChannels
+                  <BrandVoice
                     productValues={productValues}
                     handleFormData={handleFormData}
                   />
                 </Row>
                 <Row>
-                  <Competitors
+                  <ExcludeTerms
                     productValues={productValues}
                     handleFormData={handleFormData}
                   />

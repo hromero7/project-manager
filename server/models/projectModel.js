@@ -56,25 +56,25 @@ const ProjectSchema = new Schema({
   },
   questions: [
     {
-      productName: {
+      brandName: {
         type: String,
         maxLength: 100,
         trim: true,
         required: true,
       },
-      productDescription: {
+      brandWebsite: {
         type: String,
         maxLength: 100,
         trim: true,
         required: true,
       },
-      uniqueFeatures: {
+      brandSocials: {
         type: String,
         maxLength: 100,
         trim: true,
         required: true,
       },
-      productChallenges: {
+      brandDescription: {
         type: String,
         maxLength: 100,
         trim: true,
@@ -86,19 +86,19 @@ const ProjectSchema = new Schema({
         trim: true,
         required: true,
       },
-      productVision: {
+      shortTerm: {
         type: String,
         maxLength: 100,
         trim: true,
         required: true,
       },
-      productResearch: {
+      longTerm: {
         type: String,
         maxLength: 100,
         trim: true,
         required: true,
       },
-      callToAction: {
+      credibility: {
         type: String,
         maxLength: 100,
         trim: true,

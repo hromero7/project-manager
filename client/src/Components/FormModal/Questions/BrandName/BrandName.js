@@ -1,14 +1,14 @@
 import React from "react";
 import { Col, Form } from "react-bootstrap";
 
-export default function ProductName(props) {
+export default function BrandName(props) {
   return (
     <Col>
       <Form.Group className="mb-3" controlId="formTaskTitle">
-        <Form.Label>What is the products name?</Form.Label>
+        <Form.Label>Brand name:</Form.Label>
         <Form.Control
-          name="productName"
-          value={props.productValues.productName}
+          name="brandName"
+          value={props.productValues.brandName}
           onChange={props.handleFormData}
           autoComplete="off"
           required
