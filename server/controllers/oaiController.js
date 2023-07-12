@@ -37,16 +37,16 @@ module.exports = {
       } else if (checkIfExists[0].questions.length === 0) {
         let newQuestions = {
           projectId: req.body.projectId.toString(),
-          question1: req.body.questions.question1,
-          question2: req.body.questions.question2,
-          question3: req.body.questions.question3,
-          question4: req.body.questions.question4,
-          question5: req.body.questions.question5,
-          question6: req.body.questions.question6,
-          question7: req.body.questions.question7,
-          question8: req.body.questions.question8,
-          question9: req.body.questions.question9,
-          question10: req.body.questions.question10,
+          brandName: req.body.questions.brandName,
+          brandWebsite: req.body.questions.brandWebsite,
+          brandSocials: req.body.questions.brandSocials,
+          brandDescription: req.body.questions.brandDescription,
+          targetAudience: req.body.questions.targetAudience,
+          shortTerm: req.body.questions.shortTerm,
+          longTerm: req.body.questions.longTerm,
+          credibility: req.body.questions.credibility,
+          brandVoice: req.body.questions.brandVoice,
+          excludeTerms: req.body.questions.excludeTerms,
         };
 
         project.questions.push(newQuestions);

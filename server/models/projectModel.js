@@ -58,61 +58,51 @@ const ProjectSchema = new Schema({
     {
       brandName: {
         type: String,
-        maxLength: 100,
         trim: true,
         required: true,
       },
       brandWebsite: {
         type: String,
-        maxLength: 100,
         trim: true,
         required: true,
       },
       brandSocials: {
         type: String,
-        maxLength: 100,
         trim: true,
         required: true,
       },
       brandDescription: {
         type: String,
-        maxLength: 100,
-        trim: true,
-        required: true,
-      },
-      brandPersonality: {
-        type: String,
-        maxLength: 200,
         trim: true,
         required: true,
       },
       shortTerm: {
         type: String,
-        maxLength: 100,
         trim: true,
         required: true,
       },
       longTerm: {
         type: String,
-        maxLength: 100,
         trim: true,
         required: true,
       },
       credibility: {
         type: String,
-        maxLength: 100,
         trim: true,
         required: true,
       },
-      distrobutionChannels: {
+      targetAudience: {
         type: String,
-        maxLength: 100,
         trim: true,
         required: true,
       },
-      competitors: {
+      brandVoice: {
         type: String,
-        maxLength: 100,
+        trim: true,
+        required: true,
+      },
+      excludeTerms: {
+        type: String,
         trim: true,
         required: true,
       },

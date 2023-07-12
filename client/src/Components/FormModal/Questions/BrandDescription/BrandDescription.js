@@ -10,7 +10,7 @@ export default function BrandDescription(props) {
           serve?
         </Form.Label>
         <Form.Control
-          name="productDescription"
+          name="brandDescription"
           value={props.productValues.brandDescription}
           onChange={props.handleFormData}
           autoComplete="off"

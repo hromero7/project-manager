@@ -7,7 +7,7 @@ export default function LongTerm(props) {
       <Form.Group className="mb-3" controlId="formTaskTitle">
         <Form.Label>What are your long term goals?:</Form.Label>
         <Form.Control
-          name="shortTerm"
+          name="longTerm"
           value={props.productValues.longTerm}
           onChange={props.handleFormData}
           autoComplete="off"

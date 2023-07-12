@@ -10,7 +10,7 @@ export default function ExcludeTerms(props) {
           brand copy?
         </Form.Label>
         <Form.Control
-          name="brandName"
+          name="excludeTerms"
           value={props.productValues.excludeTerms}
           onChange={props.handleFormData}
           autoComplete="off"

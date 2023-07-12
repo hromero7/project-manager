@@ -10,7 +10,7 @@ export default function Credibility(props) {
           in this area? What kind of results have you generated in the past?
         </Form.Label>
         <Form.Control
-          name="shortTerm"
+          name="credibility"
           value={props.productValues.credibility}
           onChange={props.handleFormData}
           autoComplete="off"

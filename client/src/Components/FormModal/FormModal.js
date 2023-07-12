@@ -4,39 +4,20 @@ import { AuthContext } from "../../Context/AuthContext";
 import AIRoute from "../../Utils/AIAPI";
 import "./FormModal.css";
 import BrandName from "./Questions/BrandName/BrandName";
-import UniqueFeatures from "./Questions/UniqueFeatures/UniqueFeatures";
-import ProductChallenges from "./Questions/ProductChallenges/ProductChallenges";
 import BrandPersonality from "./Questions/BrandPersonality/BrandPersonality";
-import ProductVision from "./Questions/ProductVision/ProductVision";
-import ProductResearch from "./Questions/ProductResearch/ProductResearch";
-import CallToAction from "./Questions/CallToAction/CallToAction";
-import DistributionChannels from "./Questions/DistributionChannels/DistributionChannels";
-import Competitors from "./Questions/Competitors/Competitors";
 import BrandWebsite from "./Questions/BrandWebsite/BrandWebsite";
-import BrandDescription from "./Questions/BrandDescription/BrandDescription";
 import BrandSocials from "./Questions/BrandSocials/BrandSocials";
 import ShortTerm from "./Questions/ShortTerm/ShortTerm";
 import LongTerm from "./Questions/LongTerm/LongTerm";
 import Credibility from "./Questions/Credibility/Credibility";
 import BrandVoice from "./Questions/BrandVoice/BrandVoice";
 import ExcludeTerms from "./Questions/ExcludeTerms/ExcludeTerms";
+import TargetAudience from "./Questions/TargetAudience/TargetAudience";
+import BrandDescription from "./Questions/BrandDescription/BrandDescription";
 
 const FormModal = (props) => {
   const [open, setOpen] = useState(false);
-  const [productValues, setProductValues] = useState({
-    brandName: "",
-    brandWebsite: "",
-    brandSocials: "",
-    brandDescription: "",
-    brandPersonality: "",
-    shortTerm: "",
-    longTerm: "",
-    credibility: "",
-    callToAction: "",
-    targetAudience: "",
-    brandVoice: "",
-    excludeTerms: "",
-  });
+  const [productValues, setProductValues] = useState({});
 
   const handleOpen = () => {
     setOpen(true);
@@ -96,25 +77,20 @@ const FormModal = (props) => {
                     handleFormData={handleFormData}
                   />
                 </Row>
+
                 <Row>
                   <BrandDescription
                     productValues={productValues}
                     handleFormData={handleFormData}
                   />
                 </Row>
-                <Row>
-                  <ProductChallenges
-                    productValues={productValues}
-                    handleFormData={handleFormData}
-                  />
-                </Row>
-                <Row>
-                  <BrandPersonality
-                    productValues={productValues}
-                    handleFormData={handleFormData}
-                  />
-                </Row>
 
+                <Row>
+                  <TargetAudience
+                    productValues={productValues}
+                    handleFormData={handleFormData}
+                  />
+                </Row>
                 <Row>
                   <ShortTerm
                     productValues={productValues}
