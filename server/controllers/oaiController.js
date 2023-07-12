@@ -11,7 +11,8 @@ module.exports = {
     });
   },
   sendQs: async (req, res) => {
-    const project = await db.Project.findById(req.body.data.projectId);
+    console.log(`req.body: `, req.body);
+    const project = await db.Project.findById(req.body.projectId);
     if (!project) {
       return res
         .status(404)
@@ -19,10 +20,10 @@ module.exports = {
     } else {
       const checkIfExists = await db.Project.find(
         {
-          _id: req.body.data.projectId,
+          _id: req.body.projectId,
         },
         {
-          questions: { $elemMatch: { projectId: req.body.data.projectId } },
+          questions: { $elemMatch: { projectId: req.body.projectId } },
         }
       );
       if (checkIfExists[0].questions.length === 1) {
@@ -35,17 +36,17 @@ module.exports = {
         });
       } else if (checkIfExists[0].questions.length === 0) {
         let newQuestions = {
-          projectId: req.body.data.projectId.toString(),
-          question1: req.body.data.questions.question1,
-          question2: req.body.data.questions.question2,
-          question3: req.body.data.questions.question3,
-          question4: req.body.data.questions.question4,
-          question5: req.body.data.questions.question5,
-          question6: req.body.data.questions.question6,
-          question7: req.body.data.questions.question7,
-          question8: req.body.data.questions.question8,
-          question9: req.body.data.questions.question9,
-          question10: req.body.data.questions.question10,
+          projectId: req.body.projectId.toString(),
+          question1: req.body.questions.question1,
+          question2: req.body.questions.question2,
+          question3: req.body.questions.question3,
+          question4: req.body.questions.question4,
+          question5: req.body.questions.question5,
+          question6: req.body.questions.question6,
+          question7: req.body.questions.question7,
+          question8: req.body.questions.question8,
+          question9: req.body.questions.question9,
+          question10: req.body.questions.question10,
         };
 
         project.questions.push(newQuestions);

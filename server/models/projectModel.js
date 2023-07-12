@@ -56,55 +56,61 @@ const ProjectSchema = new Schema({
   },
   questions: [
     {
-      question1: {
+      productName: {
         type: String,
         maxLength: 100,
         trim: true,
         required: true,
       },
-      question2: {
+      productDescription: {
         type: String,
         maxLength: 100,
         trim: true,
         required: true,
       },
-      question3: {
-        type: [String],
+      uniqueFeatures: {
+        type: String,
+        maxLength: 100,
+        trim: true,
+        required: true,
       },
-      question4: {
-        type: [String],
+      productChallenges: {
+        type: String,
+        maxLength: 100,
+        trim: true,
+        required: true,
       },
-      question5: {
+      brandPersonality: {
         type: String,
         maxLength: 200,
         trim: true,
         required: true,
       },
-      question6: {
+      productVision: {
         type: String,
         maxLength: 100,
         trim: true,
         required: true,
       },
-      question7: {
+      productResearch: {
         type: String,
         maxLength: 100,
         trim: true,
         required: true,
       },
-      question8: {
+      callToAction: {
         type: String,
         maxLength: 100,
         trim: true,
         required: true,
       },
-      question9: {
+      distrobutionChannels: {
         type: String,
         maxLength: 100,
         trim: true,
         required: true,
       },
-      question10: {
+      competitors: {
         type: String,
         maxLength: 100,
         trim: true,

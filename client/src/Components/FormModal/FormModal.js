@@ -1,14 +1,5 @@
-import React, { useContext, useState, useEffect } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Modal,
-  Form,
-  Button,
-  Dropdown,
-  Alert,
-} from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { Container, Row, Col, Modal, Form, Button } from "react-bootstrap";
 import { AuthContext } from "../../Context/AuthContext";
 import AIRoute from "../../Utils/AIAPI";
 import "./FormModal.css";
@@ -16,33 +7,27 @@ import ProductName from "./Questions/ProductName/ProductName";
 import ProductDescription from "./Questions/ProductDescription/ProductDescription";
 import UniqueFeatures from "./Questions/UniqueFeatures/UniqueFeatures";
 import ProductChallenges from "./Questions/ProductChallenges/ProductChallenges";
+import BrandPersonality from "./Questions/BrandPersonality/BrandPersonality";
+import ProductVision from "./Questions/ProductVision/ProductVision";
+import ProductResearch from "./Questions/ProductResearch/ProductResearch";
+import CallToAction from "./Questions/CallToAction/CallToAction";
+import DistributionChannels from "./Questions/DistributionChannels/DistributionChannels";
+import Competitors from "./Questions/Competitors/Competitors";
 
 const FormModal = (props) => {
   const [open, setOpen] = useState(false);
-
-  const [challengeValues, setChallengeValues] = useState([]);
-  const [uniqueFeatures, setUniqueFeatures] = useState([]);
-  const [checkboxValues, setCheckboxValues] = useState({});
   const [productValues, setProductValues] = useState({
     productName: "",
     productDescription: "",
     uniqueFeatures: "",
     productChallenges: "",
-    question5: "",
-    question6: "",
-    question7: "",
-    question8: "",
-    question9: "",
-    question10: "",
+    brandPersonality: "",
+    productVision: "",
+    productResearch: "",
+    callToAction: "",
+    distrobutionChannels: "",
+    competitors: "",
   });
-
-  // const handleCategorySelection = (value) => {
-  //   setCategorySelection(value);
-  //   setProductValues((prevProductValues) => ({
-  //     ...prevProductValues,
-  //     question2: value,
-  //   }));
-  // };
 
   const handleOpen = () => {
     setOpen(true);
@@ -74,7 +59,6 @@ const FormModal = (props) => {
             <Col>
               <h1
                 onClick={() => {
-                  console.log(`uniqueFeatures: `, uniqueFeatures);
                   console.log(`productValues: `, productValues);
                 }}
               >
@@ -87,7 +71,7 @@ const FormModal = (props) => {
               <Form onSubmit={handleSubmit}>
                 <Row>
                   <ProductName
-                    productValues={productValues.productName}
+                    productValues={productValues}
                     handleFormData={handleFormData}
                   />
                 </Row>
@@ -107,129 +91,44 @@ const FormModal = (props) => {
                   <ProductChallenges
                     productValues={productValues}
                     handleFormData={handleFormData}
-                    challengeValues={challengeValues}
-                    setChallengeValues={setChallengeValues}
                   />
                 </Row>
                 <Row>
-                  <Col>
-                    <Form.Group className="mb-3" controlId="formTaskTitle">
-                      <Form.Label>
-                        What is your brand personality or tone of voice?
-                      </Form.Label>
-                      <Form.Control
-                        name="question5"
-                        value={productValues.question5}
-                        onChange={handleFormData}
-                        autoComplete="off"
-                        required
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Please provide a response.
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
+                  <BrandPersonality
+                    productValues={productValues}
+                    handleFormData={handleFormData}
+                  />
                 </Row>
 
                 <Row>
-                  <Col>
-                    <Form.Group className="mb-3" controlId="formTaskTitle">
-                      <Form.Label>
-                        How do you envision your product being used or
-                        integrated into customers' lives?
-                      </Form.Label>
-                      <Form.Control
-                        name="question6"
-                        value={productValues.question6}
-                        onChange={handleFormData}
-                        autoComplete="off"
-                        required
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Please provide a response.
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
+                  <ProductVision
+                    productValues={productValues}
+                    handleFormData={handleFormData}
+                  />
                 </Row>
                 <Row>
-                  <Col>
-                    <Form.Group className="mb-3" controlId="formTaskTitle">
-                      <Form.Label>
-                        Have you conducted any market research or gathered
-                        customer feedback?
-                      </Form.Label>
-                      <Form.Control
-                        name="question7"
-                        value={productValues.question7}
-                        onChange={handleFormData}
-                        autoComplete="off"
-                        required
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Please provide a response.
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
+                  <ProductResearch
+                    productValues={productValues}
+                    handleFormData={handleFormData}
+                  />
                 </Row>
                 <Row>
-                  <Col>
-                    <Form.Group className="mb-3" controlId="formTaskTitle">
-                      <Form.Label>
-                        Are there any specific messages or call-to-actions you
-                        want to convey?
-                      </Form.Label>
-                      <Form.Control
-                        name="question8"
-                        value={productValues.question8}
-                        onChange={handleFormData}
-                        autoComplete="off"
-                        required
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Please provide a response.
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
+                  <CallToAction
+                    productValues={productValues}
+                    handleFormData={handleFormData}
+                  />
                 </Row>
                 <Row>
-                  <Col>
-                    <Form.Group className="mb-3" controlId="formTaskTitle">
-                      <Form.Label>
-                        What are the distribution channels or mediums you plan
-                        to use?
-                      </Form.Label>
-                      <Form.Control
-                        name="question9"
-                        value={productValues.question9}
-                        onChange={handleFormData}
-                        autoComplete="off"
-                        required
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Please provide a response.
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
+                  <DistributionChannels
+                    productValues={productValues}
+                    handleFormData={handleFormData}
+                  />
                 </Row>
                 <Row>
-                  <Col>
-                    <Form.Group className="mb-3" controlId="formTaskTitle">
-                      <Form.Label>
-                        Do you have any specific competitors or benchmark
-                        products?
-                      </Form.Label>
-                      <Form.Control
-                        name="question10"
-                        value={productValues.question10}
-                        onChange={handleFormData}
-                        autoComplete="off"
-                        required
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Please provide a response.
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
+                  <Competitors
+                    productValues={productValues}
+                    handleFormData={handleFormData}
+                  />
                 </Row>
                 <Button type="submit">Submit</Button>
               </Form>

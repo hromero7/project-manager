@@ -4,7 +4,8 @@ export default {
   sendQuestions: (questions, props) => {
     return axios
       .post(`/api/oai/sendQs/`, {
-        data: { questions: questions, projectId: props.projectId },
+        questions: questions,
+        projectId: props.projectId,
       })
       .then((res) => {
         return res.data;
