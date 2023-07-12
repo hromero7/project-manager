@@ -27,7 +27,7 @@ const FormModal = (props) => {
     productName: "",
     productDescription: "",
     uniqueFeatures: "",
-    question4: "",
+    productChallenges: "",
     question5: "",
     question6: "",
     question7: "",
@@ -35,15 +35,6 @@ const FormModal = (props) => {
     question9: "",
     question10: "",
   });
-
-  useEffect(() => {
-    setProductValues((prevValues) => ({
-      ...prevValues,
-      question4: challengeValues,
-    }));
-
-    setUniqueFeatures();
-  }, [challengeValues]);
 
   // const handleCategorySelection = (value) => {
   //   setCategorySelection(value);
@@ -65,23 +56,6 @@ const FormModal = (props) => {
 
   const handleFormData = (e) => {
     setProductValues({ ...productValues, [e.target.name]: e.target.value });
-  };
-
-  const handleCheck = (e) => {
-    const { name, checked } = e.target;
-
-    setCheckboxValues((prevCheckboxValues) => ({
-      ...prevCheckboxValues,
-      [name]: checked,
-    }));
-
-    setProductValues((prevProductValues) => ({
-      ...prevProductValues,
-      question3: {
-        ...prevProductValues.question3,
-        [name]: checked,
-      },
-    }));
   };
 
   const handleSubmit = async (e) => {
