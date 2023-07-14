@@ -67,7 +67,7 @@ const ProjectSchema = new Schema({
         required: true,
       },
       brandSocials: {
-        type: String,
+        type: [String],
         trim: true,
         required: true,
       },
