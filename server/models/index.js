@@ -5,5 +5,5 @@ const Project = require("./projectModel");
 module.exports = {
   Alert,
   User,
-  Project
+  Project,
 };

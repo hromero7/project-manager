@@ -38,6 +38,7 @@ module.exports = {
     // console.log(req.body);
     let { title } = req.body;
     const user = await db.User.findById(req.user.id);
+
     if (!user)
       return res
         .status(404)
@@ -48,6 +49,7 @@ module.exports = {
         userId: user.id,
         members: { id: user.id, username: user.username, email: user.email },
       });
+
       newProject.save((err, project) => {
         if (err)
           return res.status(500).json({

@@ -54,6 +54,60 @@ const ProjectSchema = new Schema({
     type: String,
     default: Date.now(),
   },
+  questions: [
+    {
+      brandName: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+      brandWebsite: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+      brandSocials: {
+        type: [String],
+        trim: true,
+        required: true,
+      },
+      brandDescription: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+      shortTerm: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+      longTerm: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+      credibility: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+      targetAudience: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+      brandVoice: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+      excludeTerms: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+    },
+  ],
   tasks: [
     {
       id: {
